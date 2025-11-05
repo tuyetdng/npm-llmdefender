@@ -82,11 +82,11 @@ def main():
 
 
     t0 = time.time()
-    out = adapter.generate(prompt, max_new_tokens=256)
+    out = adapter.generate(prompt, max_new_tokens=2048)
     t1 = time.time()
 
     print("Time (s):", t1 - t0)
-    print("Raw output:\n", out[:2000])
+    print("Raw output:\n")
 
     try:
         data = json.loads(out)
