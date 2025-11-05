@@ -1,6 +1,8 @@
 # test_deepseek.py
+import re
 import sys
 from pathlib import Path
+from typing import Any, Dict, Optional, Type
 import time, json
 
 project_root = Path(__file__).parent.parent
@@ -13,12 +15,59 @@ except ImportError as e:
     print(f"Import error: {e}")
     sys.exit(1)
 
+def _safe_repair_json(text: str) -> Optional[Dict[str, Any]]:
+    """Safely repair common JSON issues."""
+    res = text
+    
+    # Remove trailing commas
+    res = re.sub(r',\s*}', '}', res)
+    res = re.sub(r',\s*]', ']', res)
+    
+    # Add quotes for keys if missing
+    res = re.sub(r'(?<!["\'])\b(\w+)\s*:', r'"\1":', res)
+    
+    # Replace single quotes around key
+    res = re.sub(r"'(\w+)'\s*:", r'"\1":', res)
+    
+    # Replace single quotes around simple string values
+    res = re.sub(r":\s*'([^']*?)'\s*([,}])", r': "\1"\2', res)
+    
+    # Remove comments
+    res = re.sub(r'//.*?$', '', res, flags=re.MULTILINE)
+    res = re.sub(r'/\*.*?\*/', '', res, flags=re.DOTALL)
+
+    try:
+        return json.loads(res)
+    except json.JSONDecodeError:
+        return None
+
+
+def _extract_from_markdown(text: str) -> Optional[Dict[str, Any]]:
+    """Extract JSON from markdown code blocks."""
+    patterns = [
+        r"```json\s*(\{[\s\S]*?\})\s*```",                              # json
+        r"```(?:javascript|js|ts|typescript)\s*(\{[\s\S]*?\})\s*```",   # javascript
+        r"```\s*(\{[\s\S]*?\})\s*```",                                  # no label
+        r"(\{(?:[^{}]|(?:\{[^{}]*\}))*\})"                              # Inline JSON
+    ]
+    
+    for pattern in patterns:
+        matches = re.findall(pattern, text, re.DOTALL | re.IGNORECASE)
+        for match in matches:
+            cleaned_text = match.strip()
+            try:
+                return json.loads(cleaned_text)
+            except json.JSONDecodeError:
+                res = _safe_repair_json(cleaned_text)
+                if res:
+                    return res
+    return None
 
 def main():
     config = {
         "torch_dtype": "float16",   
         "device_map": "auto",
-        "max_new_tokens": 2048,
+        "max_new_tokens": 4096,
         "temperature": 0.0,
         "top_k": 50,
         "top_p": 0.95,
@@ -82,17 +131,17 @@ def main():
 
 
     t0 = time.time()
-    out = adapter.generate(prompt, max_new_tokens=2048)
+    out = adapter.generate(prompt, max_new_tokens=4096)
     t1 = time.time()
 
     print("Time (s):", t1 - t0)
-    print("Raw output:\n")
+    print("Raw output:\n", out[:2000])
 
-    try:
-        data = json.loads(out)
+    data = _extract_from_markdown(out)
+    if data:
         print("Parsed JSON:", json.dumps(data, indent=2))
-    except Exception as e:
-        print("Failed to parse JSON:", e)
+    else:
+        print("Failed to extract JSON from model output")
 
 if __name__ == "__main__":
     main()

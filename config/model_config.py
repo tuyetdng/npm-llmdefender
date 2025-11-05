@@ -18,7 +18,8 @@ class ModelConfig(BaseModel):
     model_version: str = Field(default="v1.0.0")
     
     # Generation Parameters
-    max_new_tokens: int = Field(default=2048, ge=256, le=4096)  # Max token for llm response
+    # max_new_tokens: int = Field(default=2048, ge=256, le=4096)  # Max token for llm response
+    max_new_tokens: int = Field(default=2048, ge=256, le=8192)
     temperature: float = Field(default=0.1, ge=0.0, le=2.0)
     top_p: float = Field(default=0.9, ge=0.1, le=1.0)
     top_k: int = Field(default=50, ge=1, le=100)
