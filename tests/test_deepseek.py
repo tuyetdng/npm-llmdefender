@@ -18,7 +18,7 @@ def main():
     config = {
         "torch_dtype": "float16",   
         "device_map": "auto",
-        "max_new_tokens": 256,
+        "max_new_tokens": 2048,
         "temperature": 0.0,
         "top_k": 50,
         "top_p": 0.95,
