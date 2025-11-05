@@ -70,7 +70,7 @@ class DeepSeekAdapter:
                 self.load_model()
 
             cfg = {
-                "max_new_tokens": max_new_tokens or self.config.get("max_new_tokens", 512),
+                "max_new_tokens": max_new_tokens or self.config.get("max_new_tokens", 2048),
                 "temperature": self.config.get("temperature", 0.1),
                 "top_k": self.config.get("top_k", 50),
                 "top_p": self.config.get("top_p", 0.95),

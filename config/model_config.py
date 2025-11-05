@@ -18,7 +18,7 @@ class ModelConfig(BaseModel):
     model_version: str = Field(default="v1.0.0")
     
     # Generation Parameters
-    max_new_tokens: int = Field(default=1024, ge=256, le=4096)  # Max token for llm response
+    max_new_tokens: int = Field(default=2048, ge=256, le=4096)  # Max token for llm response
     temperature: float = Field(default=0.1, ge=0.0, le=2.0)
     top_p: float = Field(default=0.9, ge=0.1, le=1.0)
     top_k: int = Field(default=50, ge=1, le=100)
@@ -62,7 +62,7 @@ class ExperimentalSetups:
     def get_structural_analysis_config() -> ModelConfig:
         return ModelConfig(
             temperature=0.1,                                # Low for consistent structural analysis
-            max_new_tokens=512,
+            max_new_tokens=2048,
             sampling_strategy=SamplingStrategy.NUCLEUS
         )
     
@@ -70,7 +70,7 @@ class ExperimentalSetups:
     def get_semantic_analysis_config() -> ModelConfig:
         return ModelConfig(
             temperature=0.3,                                # Slightly higher for creative semantic code analysis
-            max_new_tokens=1024,
+            max_new_tokens=2048,
             sampling_strategy=SamplingStrategy.NUCLEUS
         )
     
@@ -78,7 +78,7 @@ class ExperimentalSetups:
     def get_behavior_chain_config() -> ModelConfig:
         return ModelConfig(
             temperature=0.2,                                # Balanced for reasoning
-            max_new_tokens=1536,
+            max_new_tokens=2048,
             sampling_strategy=SamplingStrategy.NUCLEUS
         )
 
