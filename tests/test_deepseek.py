@@ -27,17 +27,18 @@ def main():
 
     adapter = DeepSeekAdapter(config=config)
 
-    prompt = (
-        "You are a security analyst. "
-        "Given the following package info and a short snippet of code, "
-        "extract the package's semantic behavior in JSON with keys: "
-        "package_name, behaviors (list), suspicious_patterns (list), evidence (dict), confidence (0-1). "
-        "Return valid JSON only.\n\n"
-        "===PACKAGE.JSON===\n"
-        '{"name": "example", "version":"1.0.0"}\n\n'
-        "===FILE: index.js===\n"
-        "console.log('hello world');\n"
-    )
+    prompt = """You are a security analyst.
+                Given the following package info and a short snippet of code,
+                extract the package's semantic behavior in JSON with keys:
+                package_name, behaviors (list), suspicious_patterns (list),
+                evidence (dict), confidence (0-1). Return valid JSON only.
+
+                ===PACKAGE.JSON===
+                {"name": "example", "version":"1.0.0"}
+
+                ===FILE: index.js===
+                console.log('hello world');
+            """
 
     t0 = time.time()
     out = adapter.generate(prompt, max_new_tokens=256)

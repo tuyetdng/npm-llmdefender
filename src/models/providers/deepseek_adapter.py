@@ -47,35 +47,53 @@ class DeepSeekAdapter:
         # Chat template helper
         if use_chat_template and hasattr(self.tokenizer, "apply_chat_template"):
             messages = [{"role":"user","content": prompt}]
-            inputs = self.tokenizer.apply_chat_template(messages, add_generation_prompt=add_generation_prompt, return_tensors="pt")
+            text = self.tokenizer.apply_chat_template(
+                messages, 
+                add_generation_prompt=add_generation_prompt, 
+                tokenize=False  
+            )
+            inputs = self.tokenizer(text, return_tensors="pt")
         else:
             inputs = self.tokenizer(prompt, return_tensors="pt")
-        return inputs.to(self.model.device)
+            
+        result = {}
+        for key, tensor_value in inputs.items():
+            tensor_on_gpu = tensor_value.to(self.model.device)
+            result[key] = tensor_on_gpu
+        
+        return result
 
     
     def generate(self, prompt: str, max_new_tokens: Optional[int] = None) -> str:
-        if not self._loaded:
-            self.load_model()
+        try:
+            if not self._loaded:
+                self.load_model()
 
-        cfg = {
-            "max_new_tokens": max_new_tokens or self.config.get("max_new_tokens", 512),
-            "temperature": self.config.get("temperature", 0.1),
-            "top_k": self.config.get("top_k", 50),
-            "top_p": self.config.get("top_p", 0.95),
-            "do_sample": self.config.get("do_sample", False),
-        }
+            cfg = {
+                "max_new_tokens": max_new_tokens or self.config.get("max_new_tokens", 512),
+                "temperature": self.config.get("temperature", 0.1),
+                "top_k": self.config.get("top_k", 50),
+                "top_p": self.config.get("top_p", 0.95),
+                "do_sample": self.config.get("do_sample", False),
+            }
 
-        inputs = self.prepare_inputs(prompt)
-        with torch.no_grad():
-            outputs = self.model.generate(
-                **inputs,
-                **cfg,
-                eos_token_id=getattr(self.tokenizer, "eos_token_id", None),
-                pad_token_id=getattr(self.tokenizer, "pad_token_id", self.tokenizer.eos_token_id)
-            )
+            inputs = self.prepare_inputs(prompt)
+            with torch.no_grad():
+                outputs = self.model.generate(
+                    **inputs,
+                    **cfg,
+                    eos_token_id=getattr(self.tokenizer, "eos_token_id", None),
+                    pad_token_id=getattr(self.tokenizer, "pad_token_id", self.tokenizer.eos_token_id)
+                )
 
-        text = self.tokenizer.decode(outputs[0], skip_special_tokens=True)
+            text = self.tokenizer.decode(outputs[0], skip_special_tokens=True)
 
-        if text.startswith(prompt):
-            text = text[len(prompt):].strip()
-        return text
+            if text.startswith(prompt):
+                text = text[len(prompt):].strip()
+            elif prompt in text:
+                text = text.split(prompt, 1)[-1].strip()
+                
+            return text
+        except Exception as e:
+            logger.error(f"Generation failed: {e}")
+            return f"ERROR: {str(e)}"
