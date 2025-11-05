@@ -1,17 +1,22 @@
 # test_deepseek.py
 import sys
 from pathlib import Path
-
-from models.providers.deepseek_adapter import DeepSeekAdapter
 import time, json
 
-sys.path.append(str(Path(__file__).resolve().parent.parent / "src"))
+project_root = Path(__file__).parent.parent
+sys.path.insert(0, str(project_root))
+
+try:
+    from src.models.providers.deepseek_adapter import DeepSeekAdapter
+    print("Successfully imported deepseek_adapter\n")
+except ImportError as e:
+    print(f"Import error: {e}")
+    sys.exit(1)
 
 
 def main():
-    # cấu hình (tuỳ chỉnh nếu cần)
     config = {
-        "torch_dtype": "float16",   # nếu GPU hỗ trợ fp16
+        "torch_dtype": "float16",   
         "device_map": "auto",
         "max_new_tokens": 256,
         "temperature": 0.0,
