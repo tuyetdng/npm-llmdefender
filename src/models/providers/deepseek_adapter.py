@@ -7,8 +7,11 @@ from transformers import AutoTokenizer, AutoModelForCausalLM
 from typing import Optional, Dict, Any
 from pydantic import BaseModel
 import logging
+from pathlib import Path
+
 
 logger = logging.getLogger(__name__)
+
 
 class DeepSeekAdapter:
     def __init__(self, model_name = "deepseek-ai/deepseek-coder-6.7b-instruct", config: Optional[Dict[str, Any]] = None):

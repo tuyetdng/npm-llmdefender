@@ -1,6 +1,12 @@
 # test_deepseek.py
-from deepseek_adapter import DeepSeekAdapter
+import sys
+from pathlib import Path
+
+from models.providers.deepseek_adapter import DeepSeekAdapter
 import time, json
+
+sys.path.append(str(Path(__file__).resolve().parent.parent / "src"))
+
 
 def main():
     # cấu hình (tuỳ chỉnh nếu cần)
