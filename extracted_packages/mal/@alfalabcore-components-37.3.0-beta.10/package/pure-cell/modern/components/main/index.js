@@ -1,0 +1,18 @@
+export { M as Main } from '../../component-64aa9764.js';
+import 'react';
+import 'react-merge-refs';
+import 'classnames';
+import '../../../../comment/modern';
+import '@alfalab/hooks';
+import '../addon/component.js';
+import '../amount/component.js';
+import '../../../../amount/modern';
+import '../../../../typography/modern';
+import '../amount-title/component.js';
+import '../category/component.js';
+import '../footer/component.js';
+import '../footer-button/component.js';
+import '../../../../button/modern';
+import '../graphics/component.js';
+import '../../getDataTestId-7d6c8fa8.js';
+import '../footer-text/component.js';

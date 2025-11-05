@@ -1,0 +1,53 @@
+:root {
+
+    /* Hard */
+
+    /* Up */
+
+    /* Hard up */
+}
+:root {
+    --gap-xs: 8px;
+    --gap-s: 12px;
+    --gap-m: 16px;
+}
+:root {
+    --font-family-system: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Helvetica,
+        sans-serif;
+}
+:root {
+
+    /* sizes */
+
+    /* paddings */
+    --side-panel-s-header-paddings: var(--gap-xs) var(--gap-xs) var(--gap-m);
+
+    /* scroll */
+
+    /* desktop */
+    --side-panel-s-header-desktop-content-paddings: var(--gap-s) var(--gap-m) 0 0;
+    --side-panel-s-header-desktop-font-size: 22px;
+    --side-panel-s-header-desktop-line-height: 26px;
+    --side-panel-header-desktop-font-weight: bold;
+    --side-panel-header-desktop-font-family: var(--font-family-system);
+
+    /* mobile */
+}
+.content {
+    font-weight: var(--side-panel-header-desktop-font-weight);
+    font-family: var(--side-panel-header-desktop-font-family);
+}
+.s .content {
+    padding: var(--side-panel-s-header-desktop-content-paddings);
+    font-size: var(--side-panel-s-header-desktop-font-size);
+    line-height: var(--side-panel-s-header-desktop-line-height);
+}
+.s {
+    padding: var(--side-panel-s-header-paddings)
+}
+.s:not(.hasContent) {
+        padding-bottom: 0;
+    }
+.sticky {
+    top: 0;
+}

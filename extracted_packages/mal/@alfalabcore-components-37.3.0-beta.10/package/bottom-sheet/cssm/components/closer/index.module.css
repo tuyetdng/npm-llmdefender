@@ -1,0 +1,30 @@
+:root {
+    --color-light-graphic-primary: #0b1f35;
+    --color-light-bg-primary-inverted-alpha-3: rgba(11, 31, 53, 0.03);
+}
+:root {
+
+    /* Hard */
+
+    /* Up */
+
+    /* Hard up */
+}
+:root {
+    --bottom-sheet-closer-bg-color: var(--color-light-bg-primary-inverted-alpha-3);
+}
+.closer {
+    width: 32px;
+    height: 32px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    color: var(--color-light-graphic-primary);
+}
+.button {
+    background: var(--bottom-sheet-closer-bg-color);
+    -webkit-backdrop-filter: blur(10px);
+            backdrop-filter: blur(10px);
+    border-radius: 50px;
+}

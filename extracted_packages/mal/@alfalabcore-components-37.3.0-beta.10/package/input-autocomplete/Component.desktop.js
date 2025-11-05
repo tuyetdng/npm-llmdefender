@@ -1,0 +1,25 @@
+var tslib_es6 = require('./tslib.es6-73246b1c.js');
+var React = require('react');
+var coreComponentsSelect = require('../select');
+var autocompleteField_Component = require('./autocomplete-field/Component.js');
+require('react-merge-refs');
+require('classnames');
+require('../input');
+
+function _interopDefaultCompat (e) { return e && typeof e === 'object' && 'default' in e ? e : { default: e }; }
+
+var React__default = /*#__PURE__*/_interopDefaultCompat(React);
+
+var InputAutocompleteDesktop = React.forwardRef(function (_a, ref) {
+    var _b = _a.OptionsList, OptionsList = _b === void 0 ? coreComponentsSelect.OptionsList : _b, _c = _a.Optgroup, Optgroup = _c === void 0 ? coreComponentsSelect.Optgroup : _c, _d = _a.Option, Option = _d === void 0 ? coreComponentsSelect.Option : _d, Input = _a.Input, _e = _a.inputProps, inputProps = _e === void 0 ? {} : _e, onInput = _a.onInput, value = _a.value, success = _a.success, readOnly = _a.readOnly, _f = _a.closeOnSelect, closeOnSelect = _f === void 0 ? false : _f, options = _a.options, restProps = tslib_es6.__rest(_a, ["OptionsList", "Optgroup", "Option", "Input", "inputProps", "onInput", "value", "success", "readOnly", "closeOnSelect", "options"]);
+    return (React__default.default.createElement(coreComponentsSelect.BaseSelect, tslib_es6.__assign({ ref: ref, autocomplete: true, options: options, closeOnSelect: closeOnSelect, Option: Option, Field: autocompleteField_Component.AutocompleteField, fieldProps: {
+            Input: Input,
+            onInput: onInput,
+            value: value,
+            inputProps: inputProps,
+            readOnly: readOnly,
+            success: success,
+        }, Optgroup: Optgroup, OptionsList: OptionsList }, restProps)));
+});
+
+exports.InputAutocompleteDesktop = InputAutocompleteDesktop;

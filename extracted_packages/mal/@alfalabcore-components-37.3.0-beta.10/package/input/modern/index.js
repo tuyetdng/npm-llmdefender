@@ -1,0 +1,11 @@
+export { Input } from './Component.js';
+import 'react';
+import 'react-merge-refs';
+import 'classnames';
+import '../../button/modern';
+import '../../form-control/modern';
+import '../../badge/modern';
+import '@alfalab/hooks';
+import '@alfalab/icons-glyph/CrossCircleMIcon';
+import '@alfalab/icons-glyph/CheckmarkCircleMIcon';
+import '@alfalab/icons-glyph/ExclamationCircleMIcon';

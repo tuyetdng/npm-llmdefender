@@ -1,0 +1,10 @@
+export { CountriesSelect } from './component.js';
+import 'react';
+import '../../../../select/modern';
+import '../flag-icon/component.js';
+import 'classnames';
+import '../select-field/component.js';
+import 'react-merge-refs';
+import '@alfalab/hooks';
+import '@alfalab/icons-glyph/WorldMagnifierMIcon';
+import '../flag-icon/flagSprite.js';

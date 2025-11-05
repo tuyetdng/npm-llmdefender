@@ -1,0 +1,16 @@
+:root {
+    --color-light-graphic-tertiary: #b6bcc3;
+}
+:root {
+
+    /* Hard */
+
+    /* Up */
+
+    /* Hard up */
+}
+.circle {
+    fill: transparent;
+    stroke: var(--color-light-graphic-tertiary);
+    stroke-width: 2px;
+}

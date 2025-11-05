@@ -1,0 +1,16 @@
+export { CalendarInputResponsive as CalendarInput } from './Component.responsive.js';
+export { DATE_FORMAT, DATE_MASK, IS_BROWSER, NATIVE_DATE_FORMAT, SUPPORTS_INPUT_TYPE_DATE, formatDate, isInputDateSupported, isValidInputValue, parseDateString } from './utils.js';
+import 'react';
+import '@alfalab/hooks';
+import './components/calendar-input/Component.js';
+import 'react-merge-refs';
+import 'classnames';
+import '../../calendar/modern';
+import '../../date-input/modern';
+import '../../popover/modern';
+import '@alfalab/icons-glyph/CalendarMIcon';
+import 'date-fns/format';
+import 'date-fns/isSameDay';
+import 'date-fns/parse';
+import './Component.desktop.js';
+import './Component.mobile.js';

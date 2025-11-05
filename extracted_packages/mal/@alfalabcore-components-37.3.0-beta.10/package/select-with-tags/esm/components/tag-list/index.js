@@ -1,0 +1,10 @@
+export { TagList } from './component.js';
+import 'react';
+import 'classnames';
+import '../../../../form-control/esm';
+import '@alfalab/hooks';
+import '../tag/component.js';
+import '../../../../tag/esm';
+import '@alfalab/icons-glyph/CrossCompactMIcon';
+import '../../tslib.es6-411b8c4a.js';
+import '../../utils/calculate-collapse-size.js';

@@ -1,0 +1,20 @@
+/* hash: st8ll */
+:root {
+    --color-light-border-primary: #dbdee1;
+}
+:root {
+
+    /* Hard */
+
+    /* Up */
+
+    /* Hard up */
+}
+:root {
+    --divider-color: var(--color-light-border-primary);
+}
+.divider__component_1bs2b {
+    border: none;
+    border-bottom: 1px solid var(--divider-color);
+    margin: 0;
+}

@@ -1,0 +1,12 @@
+import { FC, MouseEvent } from 'react';
+type OverlimitProps = {
+    duration?: number;
+    buttonRetryText: string;
+    hasFatalError: boolean;
+    title: string;
+    text: string;
+    onOverlimitCountdownFinished: () => void;
+    onOverlimitRepeatSms: (event: MouseEvent) => void;
+};
+declare const Overlimit: FC<OverlimitProps>;
+export { OverlimitProps, Overlimit };

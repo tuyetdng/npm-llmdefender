@@ -1,0 +1,29 @@
+:root {
+
+    /* Hard */
+
+    /* Up */
+
+    /* Hard up */
+}
+:root {
+    --gap-m: 16px;
+}
+:root {
+
+    /* sizes */
+
+    /* paddings */
+
+    /* scroll */
+
+    /* desktop */
+
+    /* mobile */
+}
+.content {
+    padding: 0 var(--gap-m)
+}
+.content:last-child {
+        padding-bottom: var(--gap-m);
+    }

@@ -1,0 +1,12 @@
+var react = require('react');
+var hooks = require('@alfalab/hooks');
+
+/* eslint-disable @typescript-eslint/no-explicit-any */
+var KeyboardFocusable = function (_a) {
+    var children = _a.children;
+    var targetRef = react.useRef(null);
+    var focused = hooks.useFocus(targetRef, 'keyboard')[0];
+    return children(targetRef, focused);
+};
+
+exports.KeyboardFocusable = KeyboardFocusable;

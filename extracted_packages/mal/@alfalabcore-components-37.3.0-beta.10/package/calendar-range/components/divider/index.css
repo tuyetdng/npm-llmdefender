@@ -1,0 +1,75 @@
+/* hash: 4tn7w */
+:root {
+    --color-light-graphic-primary: #0b1f35;
+}
+:root {
+
+    /* Hard */
+
+    /* Up */
+
+    /* Hard up */
+}
+:root {
+    --gap-xs: 8px;
+}
+:root {
+    --size-s-height: 48px;
+    --size-m-height: 56px;
+    --size-l-height: 64px;
+    --size-xl-height: 72px;
+}
+:root {
+
+    /* Кнопки выбора месяцев и годов */
+
+    /* Шапка */
+
+    /* День */
+
+    /* today */
+
+    /* highlighted */
+
+    /* holidays */
+
+    /* range */
+
+    /* selected */
+
+    /* disabled */
+
+    /* marker */
+}
+.calendar-range__component_eslzr {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 16px;
+    margin: 0 var(--gap-xs)
+}
+.calendar-range__component_eslzr:after {
+        content: '';
+        display: block;
+        width: 100%;
+        height: 1px;
+        background-color: var(--color-light-graphic-primary);
+    }
+.calendar-range__outer_eslzr {
+    position: relative;
+
+    /* FormControl .above height + margin-bottom */
+    top: 24px;
+}
+.calendar-range__s_eslzr {
+    height: var(--size-s-height);
+}
+.calendar-range__m_eslzr {
+    height: var(--size-m-height);
+}
+.calendar-range__l_eslzr {
+    height: var(--size-l-height);
+}
+.calendar-range__xl_eslzr {
+    height: var(--size-xl-height);
+}

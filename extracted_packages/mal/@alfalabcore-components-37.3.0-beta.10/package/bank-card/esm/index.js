@@ -1,0 +1,10 @@
+export { BankCard } from './Component.js';
+import 'react';
+import 'classnames';
+import '../../masked-input/esm';
+import '@alfalab/icons-glyph/CameraMIcon';
+import '@alfalab/icons-logotype/AlfaBankLIcon';
+import '@alfalab/icons-logotype/MastercardLIcon';
+import '@alfalab/icons-logotype/MirXxlIcon';
+import '@alfalab/icons-logotype/VisaXxlIcon';
+import './utils.js';

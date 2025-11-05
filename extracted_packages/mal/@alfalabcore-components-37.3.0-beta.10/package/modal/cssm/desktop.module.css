@@ -1,0 +1,61 @@
+:root {
+
+    /* Hard */
+
+    /* Up */
+
+    /* Hard up */
+}
+:root {
+    --gap-3xl: 40px;
+}
+:root {
+    --border-radius-l: 12px;
+}
+:root {
+    --modal-border-radius: var(--border-radius-l);
+    --modal-vertical-padding: var(--gap-3xl);
+
+    /* sizes */
+    --modal-s-width: 500px;
+    --modal-m-width: 600px;
+    --modal-l-width: 800px;
+    --modal-xl-width: 1140px;
+
+    /* paddings */
+
+    /* scroll */
+
+    /* desktop */
+
+    /* mobile */
+}
+.wrapper {
+    padding-top: var(--modal-vertical-padding);
+    padding-bottom: var(--modal-vertical-padding);
+}
+.component {
+    width: 100%;
+    max-width: 100%;
+    border-radius: var(--modal-border-radius);
+}
+.fullscreen {
+    padding-top: 0;
+    padding-bottom: 0
+}
+.fullscreen .component {
+        flex: 1;
+        border-radius: 0;
+    }
+.s {
+    width: var(--modal-s-width);
+}
+.m {
+    width: var(--modal-m-width);
+}
+.l {
+    width: var(--modal-l-width);
+}
+.xl {
+    width: var(--modal-xl-width);
+}

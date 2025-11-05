@@ -1,0 +1,12 @@
+export { PickerButtonDesktop } from './Component.js';
+import 'react';
+import 'classnames';
+import '../../select/modern';
+import './field/Component.js';
+import '../../button/modern';
+import '@alfalab/icons-glyph/ChevronDownCompactSIcon';
+import '@alfalab/icons-glyph/ChevronDownMIcon';
+import '@alfalab/icons-glyph/MoreMIcon';
+import '@alfalab/icons-glyph/MoreSIcon';
+import './option/Component.js';
+import './utils/index.js';

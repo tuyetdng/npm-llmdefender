@@ -1,0 +1,30 @@
+/* hash: gnki9 */
+:root {
+
+    /* Hard */
+
+    /* Up */
+
+    /* Hard up */
+}
+:root {
+    --gap-m: 16px;
+}
+:root {
+
+    /* sizes */
+
+    /* paddings */
+
+    /* scroll */
+
+    /* desktop */
+
+    /* mobile */
+}
+.modal__content_1pvc0 {
+    padding: 0 var(--gap-m)
+}
+.modal__content_1pvc0:last-child {
+        padding-bottom: var(--gap-m);
+    }

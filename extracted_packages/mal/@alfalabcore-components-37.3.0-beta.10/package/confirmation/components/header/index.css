@@ -1,0 +1,51 @@
+/* hash: 1tq6j */
+:root {
+
+    /* Hard */
+
+    /* Up */
+
+    /* Hard up */
+}
+:root {
+    --gap-xl: 24px;
+}
+:root {
+    --font-family-system: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Helvetica,
+        sans-serif;
+}
+:root {
+    /* desktop */
+    --confirmation-header-desktop-font-size: 22px;
+    --confirmation-header-desktop-line-height: 26px;
+    --confirmation-header-desktop-font-weight: bold;
+    --confirmation-header-desktop-font-family: var(--font-family-system);
+
+    /* mobile */
+    --confirmation-header-mobile-font-size: 18px;
+    --confirmation-header-mobile-line-height: 22px;
+    --confirmation-header-mobile-font-weight: bold;
+    --confirmation-header-mobile-font-family: var(--font-family-system);
+
+    /* text */
+
+    /* header */
+    --confirmation-header-font-feature-settings: normal
+}
+.confirmation__header_46n9r.confirmation__header_46n9r {
+    margin-bottom: var(--gap-xl);
+}
+.confirmation__typography_46n9r.confirmation__typography_46n9r {
+    font-feature-settings: var(--confirmation-header-font-feature-settings);
+    font-size: var(--confirmation-header-desktop-font-size);
+    line-height: var(--confirmation-header-desktop-line-height);
+    font-weight: var(--confirmation-header-desktop-font-weight);
+    font-family: var(--confirmation-header-desktop-font-family);
+}
+.confirmation__typographyMobile_46n9r.confirmation__typographyMobile_46n9r {
+    font-feature-settings: var(--confirmation-header-font-feature-settings);
+    font-size: var(--confirmation-header-mobile-font-size);
+    line-height: var(--confirmation-header-mobile-line-height);
+    font-weight: var(--confirmation-header-mobile-font-weight);
+    font-family: var(--confirmation-header-mobile-font-family);
+}

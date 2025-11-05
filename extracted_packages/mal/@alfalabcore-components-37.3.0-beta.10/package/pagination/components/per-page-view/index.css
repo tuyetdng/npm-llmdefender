@@ -1,0 +1,16 @@
+/* hash: 396bw */
+:root {
+
+    /* Hard */
+
+    /* Up */
+
+    /* Hard up */
+}
+:root {
+    --gap-m: 16px;
+}
+.pagination__component_3em4x {
+    display: block;
+    margin: 0 var(--gap-m);
+}

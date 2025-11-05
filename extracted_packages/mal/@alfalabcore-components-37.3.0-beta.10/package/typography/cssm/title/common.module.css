@@ -1,0 +1,13 @@
+.component {
+    margin: 0;
+    padding: 0
+}
+.component.bold {
+        font-weight: bold;
+    }
+.component.medium {
+        font-weight: 500;
+    }
+.component.regular {
+        font-weight: normal;
+    }

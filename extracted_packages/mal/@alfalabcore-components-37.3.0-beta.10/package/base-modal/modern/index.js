@@ -1,0 +1,13 @@
+export { BaseModal, BaseModalContext } from './Component.js';
+export { getScrollbarSize, handleContainer, hasScrollbar, isScrolledToBottom, isScrolledToTop, restoreContainerStyles } from './utils.js';
+import 'react';
+import 'react-focus-lock';
+import 'react-merge-refs';
+import 'react-transition-group';
+import '@juggle/resize-observer';
+import 'classnames';
+import '../../backdrop/modern';
+import '../../portal/modern';
+import '../../stack/modern';
+import './matches-polyfill.js';
+import '../../global-store/modern';

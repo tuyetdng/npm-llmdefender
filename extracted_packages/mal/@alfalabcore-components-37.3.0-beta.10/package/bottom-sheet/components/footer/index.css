@@ -1,0 +1,32 @@
+/* hash: 1gejx */
+:root {
+    --color-light-bg-primary: #fff;
+    --color-light-border-primary: #dbdee1;
+}
+:root {
+
+    /* Hard */
+
+    /* Up */
+
+    /* Hard up */
+}
+:root {
+    --gap-m: 16px;
+}
+:root {
+    --bottom-sheet-footer-border-top: 1px solid var(--color-light-border-primary);
+    --bottom-sheet-footer-background-color: var(--color-light-bg-primary);
+}
+.bottom-sheet__footer_1mk8h {
+    padding: var(--gap-m) var(--gap-m);
+    background-color: var(--color-light-bg-primary);
+}
+.bottom-sheet__sticky_1mk8h {
+    position: sticky;
+    bottom: 0;
+}
+.bottom-sheet__highlighted_1mk8h {
+    border-top: var(--bottom-sheet-footer-border-top);
+    background-color: var(--bottom-sheet-footer-background-color);
+}

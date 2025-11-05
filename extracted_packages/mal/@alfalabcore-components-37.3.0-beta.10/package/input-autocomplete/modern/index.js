@@ -1,0 +1,14 @@
+export { InputAutocompleteDesktop as InputAutocomplete } from './Component.desktop.js';
+export { InputAutocompleteResponsive } from './Component.responsive.js';
+import 'react';
+import '../../select/modern';
+import './autocomplete-field/Component.js';
+import 'react-merge-refs';
+import 'classnames';
+import '../../input/modern';
+import '@alfalab/hooks';
+import './Component.mobile.js';
+import 'lodash.throttle';
+import '../../button/modern';
+import './autocomplete-mobile-field/Component.js';
+import '../../form-control/modern';

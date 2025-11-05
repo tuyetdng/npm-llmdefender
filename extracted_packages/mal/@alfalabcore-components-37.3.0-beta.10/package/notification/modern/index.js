@@ -1,0 +1,10 @@
+export { Notification } from './Component.js';
+import 'react';
+import 'react-merge-refs';
+import 'react-swipeable';
+import 'classnames';
+import 'element-closest';
+import '../../portal/modern';
+import '../../stack/modern';
+import '../../toast-plate/modern';
+import './utils/index.js';

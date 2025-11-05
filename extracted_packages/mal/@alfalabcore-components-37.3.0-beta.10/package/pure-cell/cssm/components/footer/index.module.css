@@ -1,0 +1,22 @@
+:root {
+
+    /* Hard */
+
+    /* Up */
+
+    /* Hard up */
+}
+:root {
+    --gap-xs: 8px;
+}
+.component {
+    grid-column: 1/3;
+    display: grid;
+    grid-row-gap: var(--gap-xs)
+}
+.component.none {
+        margin-top: 0;
+    }
+.component.default {
+        margin-top: var(--gap-xs);
+    }

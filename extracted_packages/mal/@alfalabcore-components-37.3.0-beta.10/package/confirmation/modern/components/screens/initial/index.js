@@ -1,0 +1,13 @@
+export { Initial } from './component.js';
+import 'react';
+import 'classnames';
+import '../../../../../button/modern';
+import '../../../../../code-input/modern';
+import '../../../../../link/modern';
+import '../../../../../typography/modern';
+import '@alfalab/hooks';
+import '../../../context.js';
+import '../../header/component.js';
+import '../../../countdown-section-e6fd8508.js';
+import '../../../../../loader/modern';
+import '../../../utils.js';

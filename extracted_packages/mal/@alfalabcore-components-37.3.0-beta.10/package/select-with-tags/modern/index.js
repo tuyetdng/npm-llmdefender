@@ -1,0 +1,12 @@
+export { SelectWithTags } from './component.js';
+import 'react';
+import '../../select/modern';
+import './components/tag-list/component.js';
+import 'classnames';
+import '../../form-control/modern';
+import '@alfalab/hooks';
+import './components/tag/component.js';
+import '../../tag/modern';
+import '@alfalab/icons-glyph/CrossCompactMIcon';
+import './utils/match.js';
+import './utils/calculate-collapse-size.js';

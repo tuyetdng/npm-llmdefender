@@ -1,0 +1,34 @@
+{
+  "package_id": "PKG7D085439",
+  "package_name": "@0x000000000000000/util",
+  "version": "0.1.0",
+  "dependencies": {},
+  "dev_dependencies": {},
+  "peer_dependencies": {},
+  "scripts": {},
+  "readme_content": null,
+  "entry_point_code": null,
+  "install_script_content": null,
+  "file_structure": [
+    "package.json",
+    "util.d.ts",
+    "util.js",
+    "util_bg.js",
+    "util_bg.wasm"
+  ],
+  "has_native_code": false,
+  "package_json_raw": {
+    "name": "@0x000000000000000/util",
+    "version": "0.1.0",
+    "files": [
+      "util_bg.wasm",
+      "util.js",
+      "util_bg.js",
+      "util.d.ts"
+    ],
+    "module": "util.js",
+    "types": "util.d.ts",
+    "sideEffects": false
+  },
+  "label": "malicious"
+}

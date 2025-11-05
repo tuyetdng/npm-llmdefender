@@ -1,0 +1,54 @@
+/* hash: qwwkx */
+:root {
+    --color-light-text-primary: #0b1f35;
+}
+:root {
+
+    /* Hard */
+
+    /* Up */
+
+    /* Hard up */
+}
+:root {
+    --gap-2xl: 32px;
+}
+:root {
+    --font-family-system: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Helvetica,
+        sans-serif;
+}
+:root {
+    /* desktop */
+
+    /* mobile */
+
+    /* text */
+    --confirmation-text-font-size: 16px;
+    --confirmation-text-line-height: 24px;
+    --confirmation-text-font-weight: 400;
+    --confirmation-text-font-family: var(--font-family-system);
+    --confirmation-text-color: var(--color-light-text-primary)
+
+    /* header */
+}
+.confirmation__component_1n8wj {
+    display: flex;
+    flex-direction: column;
+}
+.confirmation__typographyTheme_1n8wj.confirmation__typographyTheme_1n8wj {
+    font-size: var(--confirmation-text-font-size);
+    line-height: var(--confirmation-text-line-height);
+    font-weight: var(--confirmation-text-font-weight);
+    font-family: var(--confirmation-text-font-family);
+    color: var(--confirmation-text-color);
+}
+.confirmation__left_1n8wj {
+    align-items: flex-start;
+}
+.confirmation__center_1n8wj {
+    align-items: center;
+    text-align: center;
+}
+.confirmation__button_1n8wj {
+    margin-top: var(--gap-2xl);
+}

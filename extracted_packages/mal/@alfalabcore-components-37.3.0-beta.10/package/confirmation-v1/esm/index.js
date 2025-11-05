@@ -1,0 +1,15 @@
+export { ConfirmationV1 as Confirmation, ConfirmationV1 } from './component.js';
+export { Countdown, formatMsAsMinutes } from './components/countdown/component.js';
+export { SignConfirmation } from './components/sign-confirmation/component.js';
+export { CountdownLoader } from './components/countdown-loader/component.js';
+export { Overlimit } from './components/overlimit/component.js';
+import 'react';
+import 'classnames';
+import '../../button/esm';
+import '../../link/esm';
+import '@alfalab/hooks';
+import '@alfalab/utils';
+import '../../loader/esm';
+import './components/code-input/component.js';
+import '@alfalab/icons-glyph/CrossCircleMIcon';
+import './components/code-input/utils.js';

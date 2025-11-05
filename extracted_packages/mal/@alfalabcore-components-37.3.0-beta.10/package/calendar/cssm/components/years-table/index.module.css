@@ -1,0 +1,101 @@
+:root {
+
+    /* Hard */
+
+    /* Up */
+
+    /* Hard up */
+}
+:root {
+    --gap-2xs: 4px;
+    --gap-xs: 8px;
+}
+:root {
+    --calendar-inner-width: 280px;
+    --calendar-mobile-inner-width: 256px;
+    --calendar-inner-third-part-width: calc(var(--calendar-inner-width) / 3);
+    --calendar-mobile-inner-half-width: calc(var(--calendar-mobile-inner-width) / 2);
+
+    /* Кнопки выбора месяцев и годов */
+    --calendar-select-button-gap: calc(var(--gap-xs) / 3);
+    --calendar-mobile-select-button-gap: calc(var(--gap-2xs) / 2);
+    --calendar-mobile-select-button-width: calc(
+        var(--calendar-mobile-inner-half-width) - var(--calendar-mobile-select-button-gap)
+    );
+    --calendar-select-button-width: calc(
+        var(--calendar-inner-third-part-width) - var(--calendar-select-button-gap)
+    );
+
+    /* Шапка */
+
+    /* День */
+
+    /* today */
+
+    /* highlighted */
+
+    /* holidays */
+
+    /* range */
+
+    /* selected */
+
+    /* disabled */
+
+    /* marker */
+}
+:global(.cc-calendar) .yearsTable {
+        overflow: auto;
+        overflow-x: hidden;
+        width: 100%
+    }
+:global(.cc-calendar) .yearsTable.responsive {
+            justify-content: space-between
+        }
+:global(.cc-calendar) .yearsTable.responsive .inner {
+                left: auto;
+            }
+:global(.cc-calendar) .yearsTable.responsive .button {
+                width: 33%;
+                margin-right: 0;
+            }
+:global(.cc-calendar) .inner {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: flex-start;
+        position: relative;
+
+        /* (width - inner-width) / 2 */
+        left: 32px;
+        overflow: hidden
+    }
+@media (max-width: 374px) {
+:global(.cc-calendar) .inner {
+            left: 16px
+    }
+        }
+:global(.cc-calendar) .button {
+        width: var(--calendar-select-button-width);
+        margin-right: var(--gap-2xs);
+        margin-bottom: var(--gap-xs)
+    }
+:global(.cc-calendar) .button:nth-child(3n) {
+            margin-right: 0;
+        }
+@media (max-width: 374px) {
+:global(.cc-calendar) .button {
+            width: var(--calendar-mobile-select-button-width)
+    }
+
+            :global(.cc-calendar) .button:nth-child(3n) {
+                margin-right: var(--gap-2xs);
+            }
+
+            :global(.cc-calendar) .button:nth-child(2n) {
+                margin-right: 0;
+            }
+:global(.cc-calendar) .button {
+
+            height: 36px
+    }
+        }

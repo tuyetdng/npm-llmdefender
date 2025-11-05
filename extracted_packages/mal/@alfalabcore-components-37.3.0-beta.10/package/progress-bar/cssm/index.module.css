@@ -1,0 +1,94 @@
+:root {
+    --color-light-graphic-accent: #ef3124;
+    --color-light-graphic-attention: #e58933;
+    --color-light-graphic-link: #007aff;
+    --color-light-graphic-negative: #f15045;
+    --color-light-graphic-positive: #2fc26e;
+    --color-light-graphic-primary: #0b1f35;
+    --color-light-graphic-secondary: #6d7986;
+    --color-light-graphic-tertiary: #b6bcc3;
+    --color-light-bg-primary-inverted-alpha-10: rgba(11, 31, 53, 0.1);
+}
+:root {
+
+    /* Hard */
+
+    /* Up */
+
+    /* Hard up */
+}
+:root {
+    --border-radius-s: 4px;
+    --border-radius-m: 8px;
+}
+:root {
+    /* bg */
+    --progressbar-bg-color: var(--color-light-bg-primary-inverted-alpha-10);
+
+    /* positive */
+    --progressbar-positive-color: var(--color-light-graphic-positive);
+
+    /* negative */
+    --progressbar-negative-color: var(--color-light-graphic-negative);
+
+    /* attention */
+    --progressbar-attention-color: var(--color-light-graphic-attention);
+
+    /* link */
+    --progressbar-link-color: var(--color-light-graphic-link);
+
+    /* tertiary */
+    --progressbar-tertiary-color: var(--color-light-graphic-tertiary);
+
+    /* secondary */
+    --progressbar-secondary-color: var(--color-light-graphic-secondary);
+
+    /* primary */
+    --progressbar-primary-color: var(--color-light-graphic-primary);
+
+    /* accent */
+    --progressbar-accent-color: var(--color-light-graphic-accent);
+}
+.container {
+    background: var(--progressbar-bg-color);
+
+    display: flex;
+    overflow: hidden
+}
+.container.s {
+        border-radius: var(--border-radius-s);
+        height: 4px;
+    }
+.container.m {
+        border-radius: var(--border-radius-m);
+        height: 8px;
+    }
+.filled {
+    border-radius: inherit;
+    width: 100%;
+    transition: transform 0.4s ease
+}
+.filled.positive {
+        background: var(--progressbar-positive-color);
+    }
+.filled.negative {
+        background: var(--progressbar-negative-color);
+    }
+.filled.attention {
+        background: var(--progressbar-attention-color);
+    }
+.filled.link {
+        background: var(--progressbar-link-color);
+    }
+.filled.tertiary {
+        background: var(--progressbar-tertiary-color);
+    }
+.filled.secondary {
+        background: var(--progressbar-secondary-color);
+    }
+.filled.primary {
+        background: var(--progressbar-primary-color);
+    }
+.filled.accent {
+        background: var(--progressbar-accent-color);
+    }

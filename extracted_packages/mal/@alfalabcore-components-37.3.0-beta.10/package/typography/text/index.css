@@ -1,0 +1,78 @@
+/* hash: meju9 */
+:root {
+
+    /* Hard */
+
+    /* Up */
+
+    /* Hard up */
+}
+:root {
+    --gap-s: 12px;
+}
+:root {
+    --text-paragraph-margin-bottom: 0 0 var(--gap-s);
+}
+.typography__paragraph_9xfoj {
+    margin: 0;
+    padding: 0;
+}
+.typography__paragraphWithMargins_9xfoj {
+    padding: 0;
+    margin: var(--text-paragraph-margin-bottom);
+}
+.typography__primary-large_9xfoj {
+    font-size: 18px;
+    line-height: 24px;
+    font-weight: 400;
+}
+.typography__primary-medium_9xfoj {
+    font-size: 16px;
+    line-height: 24px;
+    font-weight: 400;
+}
+.typography__primary-small_9xfoj {
+    font-size: 14px;
+    line-height: 20px;
+    font-weight: 400;
+}
+.typography__secondary-large_9xfoj {
+    font-size: 13px;
+    line-height: 16px;
+    font-weight: 400;
+}
+.typography__secondary-medium_9xfoj {
+    font-size: 12px;
+    line-height: 16px;
+    font-weight: 400;
+}
+.typography__secondary-small_9xfoj {
+    font-size: 11px;
+    line-height: 16px;
+    font-weight: 400;
+}
+.typography__component_9xfoj {
+    font-size: 16px;
+    line-height: 20px;
+    font-weight: 400;
+}
+.typography__caps_9xfoj {
+    font-size: 12px;
+    line-height: 16px;
+    font-weight: 500;
+    letter-spacing: 1.25px;
+    text-transform: uppercase;
+}
+.typography__bold_9xfoj {
+    font-weight: bold;
+}
+.typography__medium_9xfoj {
+    font-weight: 500;
+}
+.typography__regular_9xfoj {
+    font-weight: normal;
+}
+.typography__monospace_9xfoj {
+    font-feature-settings: "tnum";
+    font-variant-numeric: tabular-nums;
+}

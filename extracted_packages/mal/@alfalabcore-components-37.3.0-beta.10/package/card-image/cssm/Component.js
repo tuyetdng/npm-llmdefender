@@ -1,0 +1,36 @@
+var React = require('react');
+var cn = require('classnames');
+var styles = require('./index.module.css');
+
+function _interopDefaultCompat (e) { return e && typeof e === 'object' && 'default' in e ? e : { default: e }; }
+
+var React__default = /*#__PURE__*/_interopDefaultCompat(React);
+var cn__default = /*#__PURE__*/_interopDefaultCompat(cn);
+var styles__default = /*#__PURE__*/_interopDefaultCompat(styles);
+
+var ASPECT_RATIO = 0.63;
+var DEFAULT_WIDTH = 280;
+var DEFAULT_BASE_URL = 'https://online.alfabank.ru/cards-images/cards/';
+var CardImage = function (_a) {
+    var cardId = _a.cardId, _b = _a.layers, layers = _b === void 0 ? 'BACKGROUND,CARD_NUMBER,CARD_HOLDER,PAY_PASS,CHIP,LOGO,PAYMENT_SYSTEM,RESERVED_1,RESERVED_2,VALID_DATE' : _b, _c = _a.width, width = _c === void 0 ? DEFAULT_WIDTH : _c, _d = _a.baseUrl, baseUrl = _d === void 0 ? DEFAULT_BASE_URL : _d, _e = _a.rounded, rounded = _e === void 0 ? true : _e, alt = _a.alt, id = _a.id, dataTestId = _a.dataTestId, onLoad = _a.onLoad, className = _a.className;
+    var _f = React.useState(false), loaded = _f[0], setLoaded = _f[1];
+    var image = React.useRef(null);
+    var height = width * ASPECT_RATIO;
+    var handleLoadedImage = React.useCallback(function () {
+        setLoaded(true);
+        if (onLoad) {
+            onLoad();
+        }
+    }, [onLoad]);
+    var cardImageUrl = "".concat(baseUrl).concat(cardId, "/images?layers=").concat(layers, "&width=").concat(width);
+    var cardImageUrl2x = "".concat(baseUrl).concat(cardId, "/images?layers=").concat(layers, "&width=").concat(width * 2);
+    return (React__default.default.createElement("div", { className: cn__default.default(styles__default.default.cardImage, rounded && styles__default.default.rounded, loaded && styles__default.default.loaded, className), style: {
+            width: width,
+            height: height,
+        }, id: id, "data-test-id": dataTestId }, cardId && (React__default.default.createElement("img", { ref: image, className: styles__default.default.image, width: width, height: height, src: cardImageUrl, srcSet: "".concat(cardImageUrl2x, " 2x"), alt: alt, role: 'presentation', onLoad: handleLoadedImage }))));
+};
+
+exports.ASPECT_RATIO = ASPECT_RATIO;
+exports.CardImage = CardImage;
+exports.DEFAULT_BASE_URL = DEFAULT_BASE_URL;
+exports.DEFAULT_WIDTH = DEFAULT_WIDTH;

@@ -1,0 +1,11 @@
+export { InputAutocompleteMobile } from './Component.mobile.js';
+import 'react';
+import 'react-merge-refs';
+import 'classnames';
+import 'lodash.throttle';
+import '../../button/modern';
+import '../../input/modern';
+import '../../select/modern';
+import './autocomplete-mobile-field/Component.js';
+import '../../form-control/modern';
+import '@alfalab/hooks';

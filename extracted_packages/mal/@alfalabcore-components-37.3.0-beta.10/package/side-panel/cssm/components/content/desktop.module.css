@@ -1,0 +1,30 @@
+:root {
+
+    /* Hard */
+
+    /* Up */
+
+    /* Hard up */
+}
+:root {
+    --gap-2xl: 32px;
+}
+:root {
+
+    /* sizes */
+
+    /* paddings */
+    --side-panel-s-content-paddings: 0 56px;
+
+    /* scroll */
+
+    /* desktop */
+
+    /* mobile */
+}
+.s {
+    padding: var(--side-panel-s-content-paddings)
+}
+.s:last-child {
+        padding-bottom: var(--gap-2xl);
+    }

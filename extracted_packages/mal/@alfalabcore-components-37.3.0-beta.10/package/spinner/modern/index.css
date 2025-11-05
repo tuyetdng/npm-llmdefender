@@ -1,0 +1,44 @@
+/* hash: 8jjnh */
+:root {
+
+    /* Hard */
+
+    /* Up */
+
+    /* Hard up */
+}
+:root {
+    --spinner-display-visible: inline-block;
+    --spinner-animation-duration: 0.8s;
+    --spinner-animation-timing-function: linear;
+}
+.spinner__spinner_3xla8 {
+    display: none;
+    animation: spinner__spin_animation_3xla8 var(--spinner-animation-duration) infinite
+        var(--spinner-animation-timing-function);
+}
+.spinner__visible_3xla8 {
+    display: var(--spinner-display-visible);
+    vertical-align: middle;
+}
+.spinner__xs_3xla8 {
+    width: 18px;
+    height: 18px;
+}
+.spinner__s_3xla8 {
+    width: 24px;
+    height: 24px;
+}
+.spinner__m_3xla8 {
+    width: 48px;
+    height: 48px;
+}
+@keyframes spinner__spin_animation_3xla8 {
+    from {
+        transform: rotate(0);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}

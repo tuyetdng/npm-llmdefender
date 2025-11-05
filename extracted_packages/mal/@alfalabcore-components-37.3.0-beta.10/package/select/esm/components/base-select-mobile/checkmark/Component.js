@@ -1,0 +1,20 @@
+import React from 'react';
+import cn from 'classnames';
+import { Badge } from '../../../../../badge/esm';
+import { CheckmarkCircleMIcon } from '@alfalab/icons-glyph/CheckmarkCircleMIcon';
+import { CheckmarkMIcon } from '@alfalab/icons-glyph/CheckmarkMIcon';
+
+var styles = {"checkmark":"select__checkmark_6kgqw","selected":"select__selected_6kgqw","displayIcon":"select__displayIcon_6kgqw","displayBadge":"select__displayBadge_6kgqw"};
+require('./index.css');
+
+var Checkmark = function (_a) {
+    var _b;
+    var selected = _a.selected, className = _a.className;
+    return (React.createElement("div", { className: cn(styles.checkmark, className, (_b = {},
+            _b[styles.selected] = selected,
+            _b)) },
+        React.createElement(CheckmarkMIcon, { className: styles.displayIcon }),
+        React.createElement(Badge, { className: styles.displayBadge, view: 'icon', size: 'm', iconColor: 'positive', content: React.createElement(CheckmarkCircleMIcon, null) })));
+};
+
+export { Checkmark };

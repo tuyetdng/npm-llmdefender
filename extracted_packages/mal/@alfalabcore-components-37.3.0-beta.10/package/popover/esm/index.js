@@ -1,0 +1,10 @@
+export { Popover } from './Component.js';
+import 'react';
+import 'react-merge-refs';
+import 'react-popper';
+import 'react-transition-group';
+import '@juggle/resize-observer';
+import 'classnames';
+import 'popper-max-size-modifier';
+import '../../portal/esm';
+import '../../stack/esm';

@@ -1,0 +1,17 @@
+:root {
+
+    /* Hard */
+
+    /* Up */
+
+    /* Hard up */
+}
+.component {
+    flex-basis: 100%;
+    display: grid;
+    grid-template-columns: 1fr auto
+}
+.component.horizontal {
+        /* for button */
+        align-self: stretch;
+    }

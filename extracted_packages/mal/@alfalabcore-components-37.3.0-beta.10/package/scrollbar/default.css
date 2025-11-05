@@ -1,0 +1,23 @@
+/* hash: o5h3j */
+:root {
+    --color-light-graphic-primary-alpha-30: rgba(11, 31, 53, 0.3);
+    --color-light-graphic-primary-alpha-60: rgba(11, 31, 53, 0.6);
+}
+:root {
+
+    /* Hard */
+
+    /* Up */
+
+    /* Hard up */
+}
+:root {
+    --scrollbar-background-color: var(--color-light-graphic-primary-alpha-30);
+    --scrollbar-background-color-active: var(--color-light-graphic-primary-alpha-60);
+}
+.scrollbar__component_2g06a .scrollbar:before {
+            background-color: var(--scrollbar-background-color);
+        }
+.scrollbar__component_2g06a.dragging .track .scrollbar.visible:before {
+            background-color: var(--scrollbar-background-color-active);
+        }

@@ -1,0 +1,43 @@
+/* hash: 1ldpz */
+:root {
+
+    /* Hard */
+
+    /* Up */
+
+    /* Hard up */
+}
+:root {
+    --gap-s: 12px;
+    --gap-m: 16px;
+    --gap-xl: 24px;
+    --gap-2xl: 32px;
+}
+.pass-code__component_14tfk {
+    width: 240px;
+    height: 292px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(4, 1fr);
+    grid-column-gap: var(--gap-xl);
+    grid-row-gap: var(--gap-s);
+    margin: 0 auto
+}
+.pass-code__component_14tfk .pass-code__digit_14tfk.pass-code__digit_14tfk {
+        font-size: 36px;
+        line-height: 1;
+    }
+@media screen and (min-width: 360px) {
+    .pass-code__component_14tfk {
+        width: 292px;
+        height: 352px;
+        grid-column-gap: var(--gap-2xl);
+        grid-row-gap: var(--gap-m);
+    }
+}
+@media screen and (min-width: 390px) {
+    .pass-code__component_14tfk {
+        width: 322px;
+        height: 392px;
+    }
+}

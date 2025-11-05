@@ -1,0 +1,10 @@
+import 'react';
+import 'react-merge-refs';
+import '@juggle/resize-observer';
+import 'classnames';
+import 'downshift';
+import '../../../../popover/modern';
+import '@alfalab/hooks';
+export { B as BaseSelect } from '../../Component-1d36bace.js';
+import '../native-select/Component.js';
+import '../../utils.js';

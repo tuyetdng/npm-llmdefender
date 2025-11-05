@@ -1,0 +1,38 @@
+/* hash: yly9z */
+:root {
+    --color-light-text-secondary: rgba(11, 31, 53, 0.7);
+}
+:root {
+
+    /* Hard */
+
+    /* Up */
+
+    /* Hard up */
+}
+:root {
+    --gap-xs: 8px;
+}
+:root {
+    --text-secondary-color: var(--color-light-text-secondary);
+}
+.intl-phone-input__component_1eate {
+    position: static;
+    display: flex;
+    min-width: initial;
+    height: 100%;
+}
+.intl-phone-input__option_1eate {
+    display: flex;
+    align-items: flex-start;
+}
+.intl-phone-input__flag_1eate {
+    flex-shrink: 0;
+    margin-right: var(--gap-xs);
+}
+.intl-phone-input__countryName_1eate {
+    margin-right: var(--gap-xs);
+}
+.intl-phone-input__dialCode_1eate {
+    color: var(--text-secondary-color);
+}

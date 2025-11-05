@@ -1,0 +1,58 @@
+/* hash: x9ajt */
+:root {
+    --color-light-border-link: #007aff;
+    --color-light-graphic-secondary: #6d7986;
+}
+:root {
+
+    /* Hard */
+
+    /* Up */
+
+    /* Hard up */
+}
+:root {
+    --gap-2xs: 4px;
+    --gap-s: 12px;
+    --gap-m: 16px;
+}
+:root {
+    --focus-color: var(--color-light-border-link);
+    --disabled-cursor: not-allowed;
+}
+.intl-phone-input__component_1vosh {
+    height: 100%;
+    cursor: pointer;
+    outline: none;
+    position: relative;
+}
+.intl-phone-input__flagIconContainer_1vosh {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 24px;
+    height: 24px;
+    margin-right: var(--gap-2xs);
+}
+.intl-phone-input__emptyCountryIcon_1vosh {
+    color: var(--color-light-graphic-secondary);
+}
+.intl-phone-input__disabled_1vosh {
+    cursor: var(--disabled-cursor);
+}
+.intl-phone-input__inner_1vosh {
+    position: relative;
+    display: flex;
+    align-items: center;
+    height: 100%;
+    padding-left: var(--gap-s);
+    outline: none;
+}
+.intl-phone-input__l_1vosh .intl-phone-input__inner_1vosh,
+.intl-phone-input__xl_1vosh .intl-phone-input__inner_1vosh {
+    padding-left: var(--gap-m);
+}
+.intl-phone-input__focusVisible_1vosh {
+    outline: 2px solid var(--focus-color);
+    outline-offset: 2px;
+}

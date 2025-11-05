@@ -1,0 +1,10 @@
+export { Toast } from './component.js';
+import 'react';
+import 'react-merge-refs';
+import 'react-transition-group';
+import 'classnames';
+import '../../popover/modern';
+import '../../portal/modern';
+import '../../stack/modern';
+import '../../toast-plate/modern';
+import '@alfalab/hooks';

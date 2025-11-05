@@ -1,0 +1,76 @@
+:root {
+    --color-light-graphic-accent: #ef3124;
+    --color-light-graphic-attention: #e58933;
+    --color-light-graphic-link: #007aff;
+    --color-light-graphic-negative: #f15045;
+    --color-light-graphic-positive: #2fc26e;
+    --color-light-graphic-primary: #0b1f35;
+    --color-light-graphic-secondary: #6d7986;
+    --color-light-graphic-tertiary: #b6bcc3;
+    --color-light-specialbg-nulled: rgba(255, 255, 255, 0);
+    --color-light-bg-primary-inverted-alpha-10: rgba(11, 31, 53, 0.1);
+}
+:root {
+
+    /* Hard */
+
+    /* Up */
+
+    /* Hard up */
+}
+:root {
+    --border-radius-m: 8px;
+}
+.container {
+    background: var(--color-light-bg-primary-inverted-alpha-10);
+    display: flex;
+    overflow: hidden;
+    border-radius: var(--border-radius-m);
+    height: 8px;
+    position: relative;
+}
+.hatch {
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    border-radius: inherit;
+    width: 100%;
+    transition: transform 0.4s ease;
+    background: repeating-linear-gradient(
+        -45deg,
+        var(--color-light-graphic-tertiary) 6px 10px,
+        var(--color-light-specialbg-nulled) 10px 18px
+    );
+}
+.filled {
+    position: relative;
+    border-radius: inherit;
+    width: 100%;
+    transition: transform 0.4s ease;
+    z-index: 1;
+}
+.positive {
+    background: var(--color-light-graphic-positive);
+}
+.attention {
+    background: var(--color-light-graphic-attention);
+}
+.negative {
+    background: var(--color-light-graphic-negative);
+}
+.link {
+    background: var(--color-light-graphic-link);
+}
+.tertiary {
+    background: var(--color-light-graphic-tertiary);
+}
+.secondary {
+    background: var(--color-light-graphic-secondary);
+}
+.primary {
+    background: var(--color-light-graphic-primary);
+}
+.accent {
+    background: var(--color-light-graphic-accent);
+}

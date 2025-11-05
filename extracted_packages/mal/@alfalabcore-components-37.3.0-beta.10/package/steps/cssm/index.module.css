@@ -1,0 +1,17 @@
+:root {
+
+    /* Hard */
+
+    /* Up */
+
+    /* Hard up */
+}
+.component {
+    display: flex;
+    align-items: center;
+    flex-direction: row
+}
+.component.vertical {
+        flex-direction: column;
+        align-items: flex-start;
+    }

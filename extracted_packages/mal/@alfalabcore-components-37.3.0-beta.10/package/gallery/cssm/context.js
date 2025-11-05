@@ -1,0 +1,25 @@
+var React = require('react');
+
+var mockFn = function () { return undefined; };
+// eslint-disable-next-line @typescript-eslint/no-redeclare
+var GalleryContext = React.createContext({
+    singleSlide: false,
+    currentSlideIndex: 0,
+    images: [],
+    imagesMeta: [],
+    fullScreen: false,
+    initialSlide: 0,
+    setFullScreen: mockFn,
+    setImageMeta: mockFn,
+    slideTo: mockFn,
+    slideNext: mockFn,
+    slidePrev: mockFn,
+    getSwiper: mockFn,
+    setSwiper: mockFn,
+    onClose: mockFn,
+    setCurrentSlideIndex: mockFn,
+    getCurrentImage: mockFn,
+    getCurrentImageMeta: mockFn,
+});
+
+exports.GalleryContext = GalleryContext;

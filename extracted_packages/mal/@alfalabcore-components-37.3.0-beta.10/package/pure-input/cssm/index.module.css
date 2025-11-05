@@ -1,0 +1,194 @@
+:root {
+    --color-light-border-link: #007aff;
+    --color-light-graphic-primary: #0b1f35;
+    --color-light-specialbg-secondary-transparent: rgba(11, 31, 53, 0.05);
+    --color-light-specialbg-tertiary-transparent: rgba(11, 31, 53, 0.1);
+    --color-light-text-primary: #0b1f35;
+    --color-light-text-secondary: rgba(11, 31, 53, 0.7);
+    --color-light-text-tertiary: rgba(11, 31, 53, 0.3);
+}
+:root {
+
+    /* Hard */
+
+    /* Up */
+
+    /* Hard up */
+}
+:root {
+    --gap-s: 12px;
+    --gap-m: 16px;
+}
+:root {
+    --focus-color: var(--color-light-border-link);
+    --disabled-cursor: not-allowed;
+    --size-s-height: 48px;
+    --size-m-height: 56px;
+    --size-l-height: 64px;
+    --size-xl-height: 72px;
+}
+:root {
+    --input-color: var(--color-light-text-primary);
+    --input-placeholder-color: var(--color-light-text-secondary);
+    --input-focus-placeholder-color: var(--color-light-text-tertiary);
+    --input-with-label-placeholder-color: var(--color-light-text-tertiary);
+    --input-caret-color: var(--input-color);
+
+    /* disabled */
+    --input-disabled-color: var(--color-light-text-secondary);
+
+    /* read-only */
+    --input-read-only-color: var(--color-light-text-secondary);
+
+    /* error */
+    --input-error-color: var(--color-light-text-primary);
+
+    /* display */
+
+    /* управляет видимостью иконки ошибки, если она стоит рядом с другой иконкой */
+}
+.input {
+    color: var(--input-color);
+    caret-color: var(--input-caret-color);
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+.input:-webkit-autofill {
+    -webkit-text-fill-color: var(--input-color);
+}
+.input::placeholder {
+    color: var(--input-placeholder-color);
+}
+.hasInnerLabel::placeholder {
+    color: var(--input-with-label-placeholder-color);
+}
+.clearIcon {
+    color: var(--color-light-graphic-primary);
+}
+/* READ-ONLY STATE */
+.input:read-only {
+    color: var(--input-read-only-color)
+}
+.input:read-only:focus::placeholder {
+        color: var(--input-placeholder-color);
+    }
+/* DISABLED STATE */
+.input:disabled {
+    color: var(--input-disabled-color);
+    -webkit-text-fill-color: var(--input-disabled-color);
+}
+/* FOCUS STATE */
+.input:focus::placeholder {
+    color: var(--input-focus-placeholder-color);
+}
+/* ERROR STATE */
+.error {
+    color: var(--input-error-color);
+    caret-color: var(--input-error-color);
+}
+:root {
+    --form-control-border-bottom: 0;
+    --form-control-bg-color: var(--color-light-specialbg-tertiary-transparent);
+
+    /* disabled */
+    --form-control-disabled-bg-color: var(--color-light-specialbg-secondary-transparent);
+    --form-control-disabled-border-bottom: 0;
+
+    /* focus */
+    --form-control-focus-border-bottom: 0;
+
+    /* hover */
+    --form-control-hover-bg-color: var(--color-light-specialbg-secondary-transparent);
+
+    /* error */
+
+    /* height */
+    --form-control-s-min-height: var(--size-s-height);
+    --form-control-m-min-height: var(--size-m-height);
+    --form-control-l-min-height: var(--size-l-height);
+    --form-control-xl-min-height: var(--size-xl-height);
+    --form-control-border-radius: 4px 4px 0 0;
+
+    /* paddings */
+    --form-control-paddings: 0 var(--gap-s);
+    --form-control-xl-paddings: 0 var(--gap-m);
+
+    /* disabled */
+
+    /* font */
+
+    /* border-radius */
+}
+.component {
+    font-size: 16px;
+    line-height: 20px;
+    font-weight: 400;
+
+    display: inline-flex;
+    box-sizing: border-box;
+    color: var(--input-color);
+    background-color: var(--form-control-bg-color);
+    border-radius: var(--form-control-border-radius);
+    transition: background 0.2s ease, box-shadow 0.2s ease, border 0.2s ease, color 0.2s ease;
+    border: none;
+    margin: 0;
+    padding: var(--form-control-paddings);
+    padding-top: 1px;
+    border-bottom: var(--form-control-border-bottom);
+    outline: none;
+    text-overflow: ellipsis;
+    -webkit-appearance: none;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+.component::placeholder {
+    text-overflow: ellipsis;
+    color: var(--input-placeholder-color);
+    transition: color 0.2s ease;
+}
+.block {
+    width: 100%;
+}
+/* SIZE */
+.s {
+    height: var(--form-control-s-min-height);
+}
+.m {
+    height: var(--form-control-m-min-height);
+}
+.l {
+    height: var(--form-control-l-min-height);
+    padding: var(--form-control-paddings);
+    padding-top: 1px;
+}
+.xl {
+    height: var(--form-control-xl-min-height);
+    padding: var(--form-control-xl-paddings);
+    padding-top: 1px;
+}
+/* DISABLED STATE */
+.component:disabled {
+    cursor: var(--disabled-cursor);
+    color: var(--input-disabled-color);
+    border-bottom: var(--form-control-disabled-border-bottom);
+    background-color: var(--form-control-disabled-bg-color);
+}
+/* FOCUS STATE */
+.component:not(:disabled):focus {
+    border-bottom: var(--form-control-focus-border-bottom)
+}
+.component:not(:disabled):focus::placeholder {
+        color: var(--input-focus-placeholder-color);
+    }
+.focusVisible {
+    outline: 2px solid var(--focus-color);
+    outline-offset: 2px;
+}
+/* HOVER STATE */
+.component:not(:disabled):hover {
+    background-color: var(--form-control-hover-bg-color);
+}
+/* IE hide clear */
+.component::-ms-clear {
+    display: none;
+    width: 0;
+    height: 0;
+}

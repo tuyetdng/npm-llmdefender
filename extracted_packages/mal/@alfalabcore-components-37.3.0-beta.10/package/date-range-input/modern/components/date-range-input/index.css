@@ -1,0 +1,64 @@
+/* hash: sllqa */
+:root {
+
+    /* Hard */
+
+    /* Up */
+
+    /* Hard up */
+}
+:root {
+    --gap-m: 16px;
+}
+:root {
+    --border-radius-m: 8px;
+}
+:root {
+    --calendar-width: 344px;
+
+    /* Кнопки выбора месяцев и годов */
+
+    /* Шапка */
+
+    /* День */
+
+    /* today */
+
+    /* highlighted */
+
+    /* holidays */
+
+    /* range */
+
+    /* selected */
+
+    /* disabled */
+
+    /* marker */
+}
+:root {
+    --calendar-popover-border-radius: var(--border-radius-m);
+}
+.date-range-input__component_qy3ed {
+    display: inline-block;
+    outline: none;
+    position: relative;
+}
+.date-range-input__calendarContainer_qy3ed {
+    display: inline-block;
+    box-sizing: border-box;
+    border-radius: var(--calendar-popover-border-radius)
+}
+@media (max-width: 374px) {
+.date-range-input__calendarContainer_qy3ed {
+        width: 100%;
+        min-width: 288px
+}
+    }
+.date-range-input__calendarResponsive_qy3ed {
+    width: var(--calendar-width);
+    padding: 0 var(--gap-m);
+}
+.date-range-input__block_qy3ed {
+    width: 100%;
+}

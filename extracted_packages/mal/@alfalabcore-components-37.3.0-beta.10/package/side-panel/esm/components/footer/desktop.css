@@ -1,0 +1,32 @@
+/* hash: 6yvp1 */
+:root {
+
+    /* Hard */
+
+    /* Up */
+
+    /* Hard up */
+}
+:root {
+    --gap-xl: 24px;
+    --gap-2xl: 32px;
+}
+:root {
+
+    /* sizes */
+
+    /* paddings */
+    --side-panel-s-footer-paddings: var(--gap-xl) 56px var(--gap-2xl);
+
+    /* scroll */
+
+    /* desktop */
+
+    /* mobile */
+}
+.side-panel__sticky_1len3 {
+    bottom: 0;
+}
+.side-panel__s_1len3 {
+    padding: var(--side-panel-s-footer-paddings);
+}

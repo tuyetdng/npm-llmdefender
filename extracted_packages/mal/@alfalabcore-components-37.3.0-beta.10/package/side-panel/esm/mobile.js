@@ -1,0 +1,15 @@
+export { SidePanelMobile } from './Component.mobile.js';
+import 'react';
+import 'classnames';
+import '../../base-modal/esm';
+import './components/content/Component.mobile.js';
+import './components/content/Component.js';
+import './components/footer/Component.mobile.js';
+import './components/footer/Component.js';
+import './components/header/Component.mobile.js';
+import '@alfalab/icons-glyph/CrossMIcon';
+import './components/closer/Component.js';
+import '../../icon-button/esm';
+import './components/header/Component.js';
+import './tslib.es6-46a2fd0f.js';
+import './Context.js';

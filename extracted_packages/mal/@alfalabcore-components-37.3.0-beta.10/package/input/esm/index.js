@@ -1,0 +1,11 @@
+export { Input } from './Component.js';
+import 'react';
+import 'react-merge-refs';
+import 'classnames';
+import '../../button/esm';
+import '../../form-control/esm';
+import '../../badge/esm';
+import '@alfalab/hooks';
+import '@alfalab/icons-glyph/CrossCircleMIcon';
+import '@alfalab/icons-glyph/CheckmarkCircleMIcon';
+import '@alfalab/icons-glyph/ExclamationCircleMIcon';

@@ -1,0 +1,27 @@
+:root {
+
+    /* Hard */
+
+    /* Up */
+
+    /* Hard up */
+}
+:root {
+
+    /* sizes */
+    --side-panel-s-width: 500px;
+
+    /* paddings */
+
+    /* scroll */
+
+    /* desktop */
+
+    /* mobile */
+}
+.s {
+    width: var(--side-panel-s-width);
+}
+.hidden {
+    overflow-x: hidden;
+}

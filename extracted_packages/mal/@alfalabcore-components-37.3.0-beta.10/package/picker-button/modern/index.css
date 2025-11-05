@@ -1,0 +1,36 @@
+/* hash: 1b2r3 */
+:root {
+
+    /* Hard */
+
+    /* Up */
+
+    /* Hard up */
+}
+:root {
+    --gap-2xs: 4px;
+    --gap-xs: 8px;
+    --gap-m: 16px;
+}
+:root {
+    --border-radius-m: 8px;
+}
+.picker-button__container_1haon {
+    min-width: auto;
+}
+.cc-picker-button.picker-button__optionsPopover_1haon {
+        padding: var(--gap-2xs) 0
+    }
+.cc-picker-button.picker-button__optionsPopover_1haon.picker-button__sideGap_1haon {
+            padding: 0 var(--gap-xs);
+        }
+.cc-picker-button .picker-button__optionsListContainer_1haon {
+        border-radius: var(--border-radius-m);
+    }
+.cc-picker-button .picker-button__option_1haon {
+        padding: 0 var(--gap-m)
+    }
+.cc-picker-button .picker-button__option_1haon:before {
+            /* Удаляем разделители у опций выпадающего списка. */
+            display: none;
+        }

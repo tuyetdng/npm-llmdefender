@@ -1,0 +1,108 @@
+/* hash: wqkd6 */
+:root {
+    --color-light-bg-primary: #fff;
+    --color-light-border-primary: #dbdee1;
+    --color-light-text-primary: #0b1f35;
+    --color-light-text-secondary: rgba(11, 31, 53, 0.7);
+}
+:root {
+
+    /* Hard */
+
+    /* Up */
+
+    /* Hard up */
+}
+:root {
+    --gap-xs: 8px;
+    --gap-m: 16px;
+    --gap-2xl: 32px;
+}
+:root {
+
+    /* Кнопки выбора месяцев и годов */
+
+    /* Шапка */
+
+    /* День */
+    --calendar-day-size: 40px;
+
+    /* today */
+
+    /* highlighted */
+
+    /* holidays */
+
+    /* range */
+
+    /* selected */
+
+    /* disabled */
+
+    /* marker */
+}
+:root {
+    --modal-header-background: var(--color-light-bg-primary);
+
+    /* sizes */
+
+    /* paddings */
+
+    /* scroll */
+
+    /* desktop */
+
+    /* mobile */
+}
+.calendar__wrapper_nsqhb {
+    background: var(--color-light-bg-primary);
+}
+.calendar__withZIndex_nsqhb {
+    z-index: 2;
+}
+.calendar__calendar_nsqhb th {
+    border-bottom: 1px solid var(--color-light-border-primary);
+}
+.calendar__dayNames_nsqhb {
+    padding: 0 var(--gap-m);
+    width: 100%;
+    position: sticky;
+    border-bottom: 1px solid var(--color-light-border-primary);
+    background: var(--modal-header-background);
+    top: 0;
+    height: 32px
+}
+.calendar__dayNames_nsqhb.calendar__withHeader_nsqhb {
+        top: 48px;
+    }
+.calendar__dayNames_nsqhb th {
+    height: 100%;
+}
+.calendar__month_nsqhb {
+    font-style: normal;
+    font-weight: 700;
+    font-size: 12px;
+    line-height: 16px;
+    letter-spacing: 1.25px;
+    text-transform: uppercase;
+    color: var(--color-light-text-primary);
+    margin-bottom: var(--gap-xs);
+}
+.calendar__daysTable_nsqhb {
+    display: flex;
+    flex-direction: column;
+    margin-top: var(--gap-2xl);
+}
+.calendar__dayName_nsqhb {
+    font-size: 14px;
+    line-height: 20px;
+    font-weight: 400;
+
+    height: var(--calendar-day-size);
+    color: var(--color-light-text-secondary)
+}
+@media (max-width: 374px) {
+.calendar__dayName_nsqhb {
+        height: 36px
+}
+    }

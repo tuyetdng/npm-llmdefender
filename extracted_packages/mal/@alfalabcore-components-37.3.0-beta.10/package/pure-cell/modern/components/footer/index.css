@@ -1,0 +1,23 @@
+/* hash: 19cfh */
+:root {
+
+    /* Hard */
+
+    /* Up */
+
+    /* Hard up */
+}
+:root {
+    --gap-xs: 8px;
+}
+.pure-cell__component_3hz1g {
+    grid-column: 1/3;
+    display: grid;
+    grid-row-gap: var(--gap-xs)
+}
+.pure-cell__component_3hz1g.pure-cell__none_3hz1g {
+        margin-top: 0;
+    }
+.pure-cell__component_3hz1g.pure-cell__default_3hz1g {
+        margin-top: var(--gap-xs);
+    }

@@ -1,0 +1,130 @@
+/* hash: 1omci */
+:root {
+    --color-light-bg-primary-inverted: #0b1f35;
+    --color-light-graphic-negative: #f15045;
+    --color-light-graphic-secondary-inverted: #b6bcc3;
+    --color-light-specialbg-tertiary-transparent-inverted: rgba(255, 255, 255, 0.2);
+    --color-light-text-primary-inverted: #fff;
+    --color-light-text-secondary-inverted: rgba(255, 255, 255, 0.7);
+    --color-static-text-accent: #ef3124;
+}
+:root {
+
+    /* Hard */
+
+    /* Up */
+
+    /* Hard up */
+}
+:root {
+    --form-control-inverted-border-bottom: 0;
+    --form-control-inverted-bg-color: var(--color-light-specialbg-tertiary-transparent-inverted);
+    --form-control-inverted-color: var(--color-light-text-primary-inverted);
+    --form-control-inverted-label-color: var(--color-light-text-secondary-inverted);
+    --form-control-inverted-hint-color: var(--color-light-text-secondary-inverted);
+
+    /* disabled */
+    --form-control-inverted-disabled-bg-color: var(
+        --color-light-specialbg-secondary-transparent-inverted
+    );
+    --form-control-inverted-disabled-border-bottom: 0;
+    --form-control-inverted-disabled-color: var(--color-light-text-secondary-inverted);
+    --form-control-inverted-disabled-filled-label-color: var(
+        --form-control-inverted-disabled-color
+    );
+    --form-control-inverted-disabled-shadow: none;
+
+    /* focus */
+    --form-control-inverted-focus-shadow: inset 0 0 0 2px
+        var(--color-light-graphic-secondary-inverted);
+    --form-control-inverted-focus-error-shadow: inset 0 0 0 2px var(--color-light-graphic-negative);
+    --form-control-inverted-focus-border-bottom: 0;
+    --form-control-inverted-focus-bg-color: var(--color-light-bg-primary-inverted);
+
+    /* hover */
+    --form-control-inverted-hover-bg-color: var(
+        --color-light-specialbg-secondary-transparent-inverted
+    );
+
+    /* error */
+    --form-control-inverted-error-color: var(--color-static-text-accent);
+    --form-control-inverted-error-label-color: var(--color-light-text-secondary-inverted);
+    --form-control-inverted-error-shadow: inset 0 0 0 2px var(--color-light-graphic-negative);
+    --form-control-inverted-error-disabled-shadow: var(--form-control-inverted-error-shadow);
+    --form-control-inverted-error-border-bottom: 0;
+    --form-control-inverted-error-bg-color: var(
+        --color-light-specialbg-secondary-transparent-inverted
+    );
+
+    /* height */
+
+    /* paddings */
+
+    /* disabled */
+
+    /* font */
+
+    /* border-radius */
+}
+.form-control__component_1sors {
+    color: var(--form-control-inverted-color);
+}
+.form-control__inner_1sors {
+    background-color: var(--form-control-inverted-bg-color);
+}
+/* Нижняя граница */
+.form-control__inner_1sors:before {
+    border-bottom: var(--form-control-inverted-border-bottom);
+}
+.form-control__label_1sors {
+    color: var(--form-control-inverted-label-color);
+}
+.form-control__hint_1sors {
+    color: var(--form-control-inverted-hint-color);
+}
+/* DISABLED STATE */
+.form-control__disabled_1sors {
+    background-color: var(--form-control-inverted-disabled-bg-color);
+    color: var(--form-control-inverted-disabled-color);
+    box-shadow: var(--form-control-inverted-disabled-shadow);
+}
+.form-control__disabled_1sors.form-control__hasError_1sors {
+    box-shadow: var(--form-control-inverted-error-disabled-shadow);
+    background-color: var(--form-control-inverted-disabled-bg-color);
+}
+.form-control__disabled_1sors:before {
+    border-bottom: var(--form-control-inverted-disabled-border-bottom);
+}
+.form-control__disabled_1sors.form-control__filled_1sors .form-control__label_1sors {
+    color: var(--form-control-inverted-disabled-filled-label-color);
+}
+/* HOVER STATE */
+.form-control__inner_1sors:not(.form-control__disabled_1sors):hover {
+    background-color: var(--form-control-inverted-hover-bg-color);
+}
+/* FOCUS STATE */
+.form-control__focused_1sors:not(.form-control__disabled_1sors):not(.form-control__hasError_1sors):before {
+    border-bottom: var(--form-control-inverted-focus-border-bottom);
+}
+.form-control__focused_1sors.form-control__inner_1sors,
+.form-control__focused_1sors.form-control__inner_1sors:hover {
+    background-color: var(--form-control-inverted-focus-bg-color);
+    box-shadow: var(--form-control-inverted-focus-shadow)
+}
+.form-control__focused_1sors.form-control__inner_1sors.form-control__hasError_1sors, .form-control__focused_1sors.form-control__inner_1sors:hover.form-control__hasError_1sors {
+        box-shadow: var(--form-control-inverted-focus-error-shadow);
+    }
+/* ERROR STATE */
+.form-control__error_1sors {
+    color: var(--form-control-inverted-error-color);
+}
+.form-control__hasError_1sors .form-control__label_1sors {
+    color: var(--form-control-inverted-error-label-color);
+}
+.form-control__hasError_1sors:before {
+    border-bottom: var(--form-control-inverted-error-border-bottom);
+}
+.form-control__hasError_1sors {
+    box-shadow: var(--form-control-inverted-error-shadow);
+    background-color: var(--form-control-inverted-error-bg-color);
+}

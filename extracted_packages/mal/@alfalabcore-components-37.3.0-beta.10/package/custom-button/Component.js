@@ -1,0 +1,73 @@
+var React = require('react');
+var cn = require('classnames');
+var coreComponentsButton = require('../button');
+
+function _interopDefaultCompat (e) { return e && typeof e === 'object' && 'default' in e ? e : { default: e }; }
+
+var React__default = /*#__PURE__*/_interopDefaultCompat(React);
+var cn__default = /*#__PURE__*/_interopDefaultCompat(cn);
+
+/******************************************************************************
+Copyright (c) Microsoft Corporation.
+
+Permission to use, copy, modify, and/or distribute this software for any
+purpose with or without fee is hereby granted.
+
+THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH
+REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY
+AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT,
+INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM
+LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR
+OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
+PERFORMANCE OF THIS SOFTWARE.
+***************************************************************************** */
+var __assign = function () {
+    __assign = Object.assign || function __assign(t) {
+        for (var s, i = 1, n = arguments.length; i < n; i++) {
+            s = arguments[i];
+            for (var p in s)
+                if (Object.prototype.hasOwnProperty.call(s, p))
+                    t[p] = s[p];
+        }
+        return t;
+    };
+    return __assign.apply(this, arguments);
+};
+function __rest(s, e) {
+    var t = {};
+    for (var p in s)
+        if (Object.prototype.hasOwnProperty.call(s, p) && e.indexOf(p) < 0)
+            t[p] = s[p];
+    if (s != null && typeof Object.getOwnPropertySymbols === "function")
+        for (var i = 0, p = Object.getOwnPropertySymbols(s); i < p.length; i++) {
+            if (e.indexOf(p[i]) < 0 && Object.prototype.propertyIsEnumerable.call(s, p[i]))
+                t[p[i]] = s[p[i]];
+        }
+    return t;
+}
+
+var styles = {"customButton":"custom-button__customButton_z7axf","white":"custom-button__white_z7axf","black":"custom-button__black_z7axf","darkening":"custom-button__darkening_z7axf","lightening":"custom-button__lightening_z7axf","customLoading":"custom-button__customLoading_z7axf"};
+require('./index.css');
+
+var DEFAULT_BUTTON_COLOR = '#FF45C3';
+var DEFAULT_CONTENT_COLOR = 'white';
+var CustomButton = React__default.default.forwardRef(function (_a, ref) {
+    var _b;
+    var children = _a.children, className = _a.className, loading = _a.loading, _c = _a.backgroundColor, backgroundColor = _c === void 0 ? DEFAULT_BUTTON_COLOR : _c, _d = _a.contentColor, contentColor = _d === void 0 ? DEFAULT_CONTENT_COLOR : _d, _e = _a.stateType, stateType = _e === void 0 ? 'darkening' : _e, restProps = __rest(_a, ["children", "className", "loading", "backgroundColor", "contentColor", "stateType"]);
+    var buttonProps = __assign({ style: { background: backgroundColor } }, restProps);
+    var buttonClassName = cn__default.default(styles.customButton, className, styles[contentColor], styles[stateType], (_b = {},
+        _b[styles.customLoading] = loading,
+        _b));
+    return (React__default.default.createElement(coreComponentsButton.Button, __assign({}, buttonProps, { view: 'primary', ref: ref, className: buttonClassName, loading: loading }), children));
+});
+/**
+ * Для отображения в сторибуке
+ */
+CustomButton.defaultProps = {
+    size: 'm',
+    block: false,
+    loading: false,
+    nowrap: false,
+};
+
+exports.CustomButton = CustomButton;

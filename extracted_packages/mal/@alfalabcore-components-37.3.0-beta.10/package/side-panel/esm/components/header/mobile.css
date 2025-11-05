@@ -1,0 +1,46 @@
+/* hash: 1cnxb */
+:root {
+
+    /* Hard */
+
+    /* Up */
+
+    /* Hard up */
+}
+:root {
+    --gap-xs: 8px;
+    --gap-s: 12px;
+    --gap-m: 16px;
+}
+:root {
+    --font-family-system: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Helvetica,
+        sans-serif;
+}
+:root {
+
+    /* sizes */
+
+    /* paddings */
+
+    /* scroll */
+
+    /* desktop */
+
+    /* mobile */
+    --side-panel-header-mobile-content-paddings: var(--gap-s) var(--gap-xs) var(--gap-s)
+        var(--gap-m);
+    --side-panel-header-mobile-font-size: 18px;
+    --side-panel-header-mobile-line-height: 24px;
+    --side-panel-header-mobile-font-family: var(--font-family-system);
+    --side-panel-header-mobile-font-weight: bold;
+}
+.side-panel__sticky_18zx5 {
+    top: 0;
+}
+.side-panel__content_18zx5 {
+    font-size: var(--side-panel-header-mobile-font-size);
+    line-height: var(--side-panel-header-mobile-line-height);
+    font-family: var(--side-panel-header-mobile-font-family);
+    font-weight: var(--side-panel-header-mobile-font-weight);
+    padding: var(--side-panel-header-mobile-content-paddings);
+}

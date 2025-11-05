@@ -1,0 +1,15 @@
+:root {
+
+    /* Hard */
+
+    /* Up */
+
+    /* Hard up */
+}
+:root {
+    --gap-3xs: 2px;
+}
+.component {
+    padding: var(--gap-3xs) 0;
+    display: flex;
+}

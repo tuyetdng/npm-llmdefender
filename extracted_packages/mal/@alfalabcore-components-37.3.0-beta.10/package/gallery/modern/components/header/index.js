@@ -1,0 +1,15 @@
+export { Header } from './Component.js';
+import 'react';
+import '../../context.js';
+import '../header-info-block/Component.js';
+import '../../../../typography/modern';
+import '../../../../icon-button/modern';
+import '../../../../tooltip/modern';
+import '@alfalab/icons-glyph/ArrowsInwardMIcon';
+import '@alfalab/icons-glyph/ArrowsOutwardMIcon';
+import '@alfalab/icons-glyph/CrossMIcon';
+import '@alfalab/icons-glyph/PointerDownMIcon';
+import '../../utils/utils.js';
+import '../../utils/constants.js';
+import './buttons.js';
+import '../../utils/split-filename.js';

@@ -1,0 +1,25 @@
+/* hash: p8ifb */
+:root {
+
+    /* Hard */
+
+    /* Up */
+
+    /* Hard up */
+}
+:root {
+    --gap-s: 12px;
+}
+.picker-button__container_9x8t0 {
+    display: flex;
+    align-items: center;
+}
+.picker-button__icon_9x8t0 {
+    display: flex;
+    margin-right: var(--gap-s);
+}
+.picker-button__content_9x8t0 {
+    overflow: hidden;
+    flex: 1;
+    text-overflow: ellipsis;
+}

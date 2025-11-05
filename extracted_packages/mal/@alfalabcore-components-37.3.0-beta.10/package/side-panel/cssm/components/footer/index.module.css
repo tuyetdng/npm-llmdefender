@@ -1,0 +1,41 @@
+:root {
+    --color-light-bg-primary: #fff;
+    --color-light-border-primary: #dbdee1;
+}
+:root {
+
+    /* Hard */
+
+    /* Up */
+
+    /* Hard up */
+}
+:root {
+    --side-panel-footer-background: var(--color-light-bg-primary);
+
+    /* sizes */
+
+    /* paddings */
+
+    /* scroll */
+    --side-panel-footer-highlight-background: var(--color-light-bg-primary);
+    --side-panel-footer-highlight-box-shadow: 0 -1px 0 0 var(--color-light-border-primary);
+
+    /* desktop */
+
+    /* mobile */
+}
+.footer {
+    width: 100%;
+    box-sizing: border-box;
+    transition: box-shadow 0.2s ease, background 0.2s ease;
+}
+.sticky {
+    background: var(--side-panel-footer-background);
+    position: sticky;
+    z-index: 1;
+}
+.highlighted {
+    background: var(--side-panel-footer-highlight-background);
+    box-shadow: var(--side-panel-footer-highlight-box-shadow);
+}

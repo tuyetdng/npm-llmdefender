@@ -1,0 +1,27 @@
+:root {
+
+    /* Hard */
+
+    /* Up */
+
+    /* Hard up */
+}
+:root {
+
+    /* sizes */
+
+    /* paddings */
+
+    /* scroll */
+
+    /* desktop */
+
+    /* mobile */
+}
+.content {
+    box-sizing: border-box;
+    width: 100%;
+}
+.flex {
+    flex: 1;
+}

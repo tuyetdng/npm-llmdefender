@@ -1,0 +1,33 @@
+/* hash: 104mf */
+:root {
+
+    /* Hard */
+
+    /* Up */
+
+    /* Hard up */
+}
+.space__spaceContainer_cnkv3 {
+    display: inline-flex;
+}
+.space__spaceContainerFullWidth_cnkv3 {
+    width: 100%;
+}
+.space__vertical_cnkv3 {
+    flex-direction: column;
+}
+.space__center_cnkv3 {
+    align-items: center;
+}
+.space__start_cnkv3 {
+    align-items: flex-start;
+}
+.space__end_cnkv3 {
+    align-items: flex-end;
+}
+.space__spaceItemFullWidth_cnkv3 {
+    width: 100%;
+}
+.space__spaceItem_cnkv3:empty {
+    display: none;
+}

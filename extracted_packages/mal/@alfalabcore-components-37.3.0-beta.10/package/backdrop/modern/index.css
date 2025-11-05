@@ -1,0 +1,47 @@
+/* hash: 1onr7 */
+:root {
+    --color-light-bg-overlay: rgba(0, 0, 0, 0.6);
+}
+:root {
+
+    /* Hard */
+
+    /* Up */
+
+    /* Hard up */
+}
+:root {
+    --backdrop-visible-background: var(--color-light-bg-overlay);
+    --backdrop-hidden-background: transparent;
+}
+.backdrop__backdrop_1vo9n {
+    z-index: -1;
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    top: 0;
+    left: 0;
+    -webkit-tap-highlight-color: transparent; /* убирает хайлайт */
+}
+.backdrop__appear_1vo9n,
+.backdrop__enter_1vo9n {
+    background-color: var(--backdrop-hidden-background);
+}
+.backdrop__appearActive_1vo9n,
+.backdrop__enterActive_1vo9n,
+.backdrop__appearDone_1vo9n,
+.backdrop__enterDone_1vo9n {
+    background-color: var(--backdrop-visible-background);
+    transition: background-color 200ms ease-in;
+}
+.backdrop__exit_1vo9n {
+    background-color: var(--backdrop-visible-background);
+}
+.backdrop__exitActive_1vo9n,
+.backdrop__exitDone_1vo9n {
+    background-color: var(--backdrop-hidden-background);
+    transition: background-color 200ms ease-out;
+}
+.backdrop__invisible_1vo9n {
+    opacity: 0;
+}

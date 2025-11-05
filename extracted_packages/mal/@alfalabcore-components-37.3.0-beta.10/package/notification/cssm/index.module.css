@@ -1,0 +1,61 @@
+:root {
+
+    /* Hard */
+
+    /* Up */
+
+    /* Hard up */
+}
+:root {
+    --gap-xs: 8px;
+    --gap-s: 12px;
+    --gap-xl: 24px;
+    --gap-4xl: 48px;
+    --gap-s-neg: -12px;
+}
+:root {
+    --notification-desktop-content-width: 278px;
+}
+.notificationComponent {
+    visibility: hidden;
+    position: fixed;
+    right: var(--gap-s);
+    transform: translate(0, -500px);
+    display: inline-flex;
+    width: calc(100% - var(--gap-xl));
+    max-width: calc(100vw - var(--gap-xl));
+    -webkit-user-select: none;
+            user-select: none;
+    transition: transform 0.4s ease-out
+}
+@media screen and (min-width: 600px) {
+.notificationComponent {
+        right: var(--gap-4xl);
+        width: auto;
+        transform: translate(calc(100% + var(--gap-4xl)), 0)
+}
+    }
+.notificationComponent.isVisible {
+        visibility: visible;
+        transform: translate(0, 0);
+    }
+.notificationComponent.isClosing {
+        transition: transform 0.1s ease-out;
+        transform: translate(100vw, 0)
+    }
+@media screen and (min-width: 600px) {
+.notificationComponent.isClosing {
+            transform: translate(calc(100% + var(--gap-4xl)), 0)
+    }
+        }
+@media screen and (min-width: 600px) {
+.toastContent {
+        width: var(--notification-desktop-content-width)
+}
+    }
+.actionSection {
+    min-width: 104px;
+    min-height: 48px;
+    padding: 0 var(--gap-xs);
+    margin: var(--gap-s-neg) 0;
+}

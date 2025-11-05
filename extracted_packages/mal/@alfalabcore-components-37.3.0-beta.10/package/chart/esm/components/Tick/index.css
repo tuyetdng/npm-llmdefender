@@ -1,0 +1,27 @@
+/* hash: 4c7i4 */
+:root {
+    --color-dark-bg-primary: #0b1f35;
+    --color-light-text-primary: #0b1f35;
+}
+:root {
+
+    /* Hard */
+
+    /* Up */
+
+    /* Hard up */
+}
+.chart__tickText_1p75j {
+    fill: var(--color-light-text-primary);
+    font-size: 16px;
+    line-height: 24px;
+    font-weight: 400;
+}
+.chart__circle_1p75j {
+    opacity: 0.3;
+    fill: var(--color-dark-bg-primary);
+}
+.chart__circle_1p75j {
+    opacity: 0.3;
+    fill: var(--color-dark-bg-primary);
+}

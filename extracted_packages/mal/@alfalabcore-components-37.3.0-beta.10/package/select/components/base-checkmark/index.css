@@ -1,0 +1,32 @@
+/* hash: eje86 */
+:root {
+
+    /* Hard */
+
+    /* Up */
+
+    /* Hard up */
+}
+:root {
+
+    /* options list */
+
+    /* option */
+
+    /* checkmark */
+
+    /* optgroup */
+}
+.select__checkmark_wzibi {
+    flex-shrink: 0;
+    box-sizing: border-box;
+}
+.select__single_wzibi {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0
+}
+.select__single_wzibi.select__selected_wzibi {
+        opacity: 1;
+    }

@@ -1,0 +1,42 @@
+/* hash: 72tl9 */
+:root {
+
+    /* Hard */
+
+    /* Up */
+
+    /* Hard up */
+}
+:root {
+
+    /* options list */
+
+    /* option */
+
+    /* checkmark */
+    --select-mobile-checkmark-display-icon: block;
+    --select-mobile-checkmark-display-badge: none;
+
+    /* optgroup */
+}
+.select__checkmark_6kgqw {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    opacity: 0
+}
+.select__checkmark_6kgqw:first-child {
+        display: none;
+    }
+.select__checkmark_6kgqw.select__selected_6kgqw {
+        opacity: 1;
+    }
+.select__displayIcon_6kgqw {
+    display: var(--select-mobile-checkmark-display-icon);
+}
+.select__displayBadge_6kgqw {
+    display: var(--select-mobile-checkmark-display-badge);
+}

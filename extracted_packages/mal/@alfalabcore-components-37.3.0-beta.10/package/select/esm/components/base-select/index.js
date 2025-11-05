@@ -1,0 +1,11 @@
+export { B as BaseSelect } from '../../Component-31f76563.js';
+import 'react';
+import 'react-merge-refs';
+import '@juggle/resize-observer';
+import 'classnames';
+import 'downshift';
+import '../../../../popover/esm';
+import '@alfalab/hooks';
+import '../native-select/Component.js';
+import '../../tslib.es6-0bbcaa10.js';
+import '../../utils.js';

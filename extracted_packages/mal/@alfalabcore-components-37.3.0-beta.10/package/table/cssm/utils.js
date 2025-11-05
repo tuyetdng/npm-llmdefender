@@ -1,0 +1,12 @@
+var React = require('react');
+
+function _interopDefaultCompat (e) { return e && typeof e === 'object' && 'default' in e ? e : { default: e }; }
+
+var React__default = /*#__PURE__*/_interopDefaultCompat(React);
+
+function isChildInstanceOf(child, Component) {
+    // мы не можем полагаться на child.type === Component, см. https://github.com/gaearon/react-hot-loader/issues/304
+    return child.type === React__default.default.createElement(Component).type;
+}
+
+exports.isChildInstanceOf = isChildInstanceOf;

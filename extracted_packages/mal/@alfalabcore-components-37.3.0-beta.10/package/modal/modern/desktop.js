@@ -1,0 +1,15 @@
+export { ModalDesktop } from './Component.desktop.js';
+import 'react';
+import './components/closer/Component.js';
+import 'classnames';
+import '../../icon-button/modern';
+import '@alfalab/icons-glyph/CrossHeavyMIcon';
+import '../../base-modal/modern';
+import './components/content/Component.js';
+import './ResponsiveContext.js';
+import './components/footer/Component.js';
+import './components/header/Component.js';
+import '@alfalab/icons-glyph/CrossMIcon';
+import './Component.js';
+import 'react-merge-refs';
+import './Context.js';

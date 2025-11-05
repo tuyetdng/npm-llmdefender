@@ -1,0 +1,126 @@
+/* hash: 11vos */
+:root {
+    --color-light-graphic-primary-inverted: #fff;
+    --color-light-text-negative: #d91d0b;
+    --color-light-text-primary-inverted: #fff;
+    --color-light-text-secondary: rgba(11, 31, 53, 0.7);
+    --color-light-text-secondary-inverted: rgba(255, 255, 255, 0.7);
+    --color-light-text-tertiary-inverted: rgba(255, 255, 255, 0.4);
+}
+:root {
+
+    /* Hard */
+
+    /* Up */
+
+    /* Hard up */
+}
+:root {
+    --input-inverted-color: var(--color-light-text-primary-inverted);
+    --input-inverted-placeholder-color: var(--color-light-text-secondary-inverted);
+    --input-inverted-focus-placeholder-color: var(--color-light-text-tertiary-inverted);
+    --input-inverted-with-label-placeholder-color: var(--color-light-text-tertiary-inverted);
+    --input-inverted-caret-color: var(--input-inverted-color);
+
+    /* disabled */
+    --input-inverted-disabled-color: var(--color-light-text-secondary-inverted);
+
+    /* read-only */
+    --input-inverted-read-only-color: var(--color-light-text-secondary-inverted);
+
+    /* error */
+    --input-inverted-error-color: var(--color-light-text-primary-inverted);
+
+    /* display */
+
+    /* управляет видимостью иконки ошибки, если она стоит рядом с другой иконкой */
+}
+.textarea__input_1guwx {
+    color: var(--input-inverted-color);
+    caret-color: var(--input-inverted-caret-color);
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+.textarea__input_1guwx:-webkit-autofill {
+    -webkit-text-fill-color: var(--input-inverted-color);
+}
+.textarea__input_1guwx::placeholder {
+    color: var(--input-inverted-placeholder-color);
+}
+.textarea__hasInnerLabel_1guwx::placeholder {
+    color: var(--input-inverted-with-label-placeholder-color);
+}
+.textarea__clearIcon_1guwx {
+    color: var(--color-light-graphic-primary-inverted);
+}
+/* READ-ONLY STATE */
+.textarea__input_1guwx:read-only {
+    color: var(--input-inverted-read-only-color)
+}
+.textarea__input_1guwx:read-only:focus::placeholder {
+        color: var(--input-inverted-placeholder-color);
+    }
+/* DISABLED STATE */
+.textarea__input_1guwx:disabled {
+    color: var(--input-inverted-disabled-color);
+    -webkit-text-fill-color: var(--input-inverted-disabled-color);
+}
+/* FOCUS STATE */
+.textarea__input_1guwx:focus::placeholder {
+    color: var(--input-inverted-focus-placeholder-color);
+}
+/* ERROR STATE */
+.textarea__error_1guwx {
+    color: var(--input-inverted-error-color);
+    caret-color: var(--input-inverted-error-color);
+}
+:root {
+    --form-control-hint-color: var(--color-light-text-secondary);
+
+    /* disabled */
+
+    /* focus */
+
+    /* hover */
+
+    /* error */
+    --form-control-error-color: var(--color-light-text-negative);
+
+    /* height */
+
+    /* paddings */
+
+    /* disabled */
+
+    /* font */
+
+    /* border-radius */
+}
+.textarea__textarea_1guwx {
+    color: var(--input-inverted-color);
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+.textarea__textarea_1guwx::placeholder {
+    color: var(--input-inverted-placeholder-color);
+}
+.textarea__hasInnerLabel_1guwx::placeholder {
+    color: var(--input-inverted-with-label-placeholder-color);
+}
+/* DISABLED STATE */
+.textarea__textarea_1guwx:disabled {
+    color: var(--input-inverted-disabled-color);
+    -webkit-text-fill-color: var(--input-inverted-disabled-color);
+}
+/* READ-ONLY STATE */
+.textarea__textarea_1guwx:read-only {
+    color: var(--input-inverted-read-only-color);
+}
+/* FOCUS STATE */
+.textarea__textarea_1guwx:focus::placeholder {
+    color: var(--input-inverted-focus-placeholder-color);
+}
+.textarea__hint_1guwx {
+    color: var(--form-control-hint-color);
+}
+.textarea__error_1guwx {
+    color: var(--form-control-error-color);
+}

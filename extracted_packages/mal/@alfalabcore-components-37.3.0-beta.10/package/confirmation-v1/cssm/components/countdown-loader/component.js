@@ -1,0 +1,24 @@
+var React = require('react');
+var styles = require('./index.module.css');
+
+function _interopDefaultCompat (e) { return e && typeof e === 'object' && 'default' in e ? e : { default: e }; }
+
+var React__default = /*#__PURE__*/_interopDefaultCompat(React);
+var styles__default = /*#__PURE__*/_interopDefaultCompat(styles);
+
+var SIZE = 16;
+var STROKE_WIDTH = 2;
+var CENTER = SIZE / 2;
+var RADIUS = CENTER - STROKE_WIDTH / 2;
+/** Длина окружности */
+var CIRCUMFERENCE = Math.PI * RADIUS * 2;
+var CountdownLoader = function (_a) {
+    var progress = _a.progress, className = _a.className;
+    var value = Math.min(progress, 1);
+    var strokeDasharray = CIRCUMFERENCE.toFixed(2);
+    var strokeDashoffset = (value * CIRCUMFERENCE).toFixed(2);
+    return (React__default.default.createElement("svg", { width: SIZE, height: SIZE, viewBox: "0 0 ".concat(SIZE, " ").concat(SIZE), className: className },
+        React__default.default.createElement("circle", { cx: CENTER, cy: CENTER, r: RADIUS, strokeDasharray: strokeDasharray, strokeDashoffset: strokeDashoffset, transform: "rotate(-90 ".concat(CENTER, " ").concat(CENTER, ")"), className: styles__default.default.circle })));
+};
+
+exports.CountdownLoader = CountdownLoader;

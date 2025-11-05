@@ -1,0 +1,31 @@
+:root {
+    --color-light-text-negative: #d91d0b;
+}
+:root {
+
+    /* Hard */
+
+    /* Up */
+
+    /* Hard up */
+}
+:root {
+    --gap-xs: 8px;
+}
+:root {
+    --pass-code-max-width: 500px;
+}
+.component {
+    max-width: var(--pass-code-max-width);
+    margin: var(--gap-xs) 0;
+}
+.error {
+    font-size: 16px;
+    line-height: 24px;
+    font-weight: 400;
+
+    display: flex;
+    justify-content: center;
+    min-height: 24px;
+    color: var(--color-light-text-negative);
+}

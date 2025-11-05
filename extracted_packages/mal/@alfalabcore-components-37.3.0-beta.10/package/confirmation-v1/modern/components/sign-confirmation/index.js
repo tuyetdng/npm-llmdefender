@@ -1,0 +1,12 @@
+export { SignConfirmation } from './component.js';
+import 'react';
+import 'classnames';
+import '../../../../link/modern';
+import '../../../../loader/modern';
+import '../code-input/component.js';
+import '@alfalab/hooks';
+import '../countdown/component.js';
+import '../../../../button/modern';
+import '@alfalab/utils';
+import '../countdown-loader/component.js';
+import '../code-input/utils.js';

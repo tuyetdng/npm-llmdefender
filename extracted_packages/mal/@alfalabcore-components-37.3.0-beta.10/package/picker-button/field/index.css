@@ -1,0 +1,28 @@
+/* hash: 1oqny */
+:root {
+
+    /* Hard */
+
+    /* Up */
+
+    /* Hard up */
+}
+:root {
+    --gap-2xs: 4px;
+}
+:root {
+    --arrow-transform: rotate(180deg);
+}
+.picker-button__iconContainer_1043d {
+    display: flex;
+    transition: transform 0.15s ease-in-out;
+}
+.picker-button__addonsContainer_1043d {
+    display: flex
+}
+.picker-button__addonsContainer_1043d.picker-button__showControlIcon_1043d {
+        margin-right: var(--gap-2xs);
+    }
+.picker-button__open_1043d {
+    transform: var(--arrow-transform);
+}

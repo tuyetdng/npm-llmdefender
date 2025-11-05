@@ -1,0 +1,46 @@
+/* hash: sbc9w */
+:root {
+    --color-light-text-secondary: rgba(11, 31, 53, 0.7);
+}
+:root {
+
+    /* Hard */
+
+    /* Up */
+
+    /* Hard up */
+}
+:root {
+    --gap-s: 12px;
+    --gap-m: 16px;
+    --gap-xl: 24px;
+}
+:root {
+
+    /* options list */
+    --select-options-list-empty-placeholder-color: var(--color-light-text-secondary);
+
+    /* option */
+
+    /* checkmark */
+
+    /* optgroup */
+}
+.select__optionsList_t5awo {
+    overflow: auto;
+    width: 100%;
+    outline: none;
+    box-sizing: border-box;
+}
+.select__scrollable_t5awo {
+    overflow: auto;
+    width: 100%;
+}
+.select__emptyPlaceholder_t5awo {
+    padding: var(--gap-m) var(--gap-s);
+    color: var(--select-options-list-empty-placeholder-color);
+}
+.select__l_t5awo .select__emptyPlaceholder_t5awo,
+.select__xl_t5awo .select__emptyPlaceholder_t5awo {
+    padding: var(--gap-xl) var(--gap-m);
+}

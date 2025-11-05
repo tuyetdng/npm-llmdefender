@@ -1,0 +1,20 @@
+var React = require('react');
+var cn = require('classnames');
+var styles = require('./index.module.css');
+
+function _interopDefaultCompat (e) { return e && typeof e === 'object' && 'default' in e ? e : { default: e }; }
+
+var React__default = /*#__PURE__*/_interopDefaultCompat(React);
+var cn__default = /*#__PURE__*/_interopDefaultCompat(cn);
+var styles__default = /*#__PURE__*/_interopDefaultCompat(styles);
+
+var Skeleton = function (_a) {
+    var _b;
+    var visible = _a.visible, _c = _a.animate, animate = _c === void 0 ? true : _c, className = _a.className, dataTestId = _a.dataTestId, children = _a.children;
+    if (visible) {
+        return (React__default.default.createElement("div", { className: cn__default.default(styles__default.default.component, (_b = {}, _b[styles__default.default.animate] = animate, _b), className), "data-test-id": dataTestId }, children));
+    }
+    return (React__default.default.createElement("div", { "data-test-id": dataTestId, className: className }, children));
+};
+
+exports.Skeleton = Skeleton;

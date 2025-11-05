@@ -1,0 +1,18 @@
+/* hash: 18uy4 */
+:root {
+    --color-light-graphic-primary: #0b1f35;
+}
+:root {
+
+    /* Hard */
+
+    /* Up */
+
+    /* Hard up */
+}
+:root {
+    --spinner-default-color: var(--color-light-graphic-primary);
+}
+.spinner__component_15ktg {
+    color: var(--spinner-default-color);
+}

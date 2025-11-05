@@ -1,0 +1,211 @@
+:root {
+    --color-light-bg-tertiary: #e7e9eb;
+    --color-light-graphic-negative: #f15045;
+    --color-light-graphic-positive: #2fc26e;
+    --color-light-graphic-primary: #0b1f35;
+    --color-light-graphic-primary-inverted: #fff;
+    --color-light-graphic-secondary: #6d7986;
+    --color-light-graphic-tertiary: #b6bcc3;
+}
+:root {
+
+    /* Hard */
+
+    /* Up */
+
+    /* Hard up */
+}
+:root {
+    --font-family-system: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Helvetica,
+        sans-serif;
+}
+:root {
+    /* bg */
+    --circular-progress-bar-bg-color: var(--color-light-bg-tertiary);
+
+    /* positive */
+    --circular-progress-bar-positive-color: var(--color-light-graphic-positive);
+
+    /* negative */
+    --circular-progress-bar-negative-color: var(--color-light-graphic-negative);
+
+    /* theme */
+    --circular-progress-bar-font-family: var(--font-family-system);
+    --circular-progress-bar-font-weight: 600;
+}
+.component {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.svg {
+    display: block;
+    width: 100%;
+}
+.title,
+.subtitle {
+    overflow: hidden;
+    word-break: break-word;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    margin: 0 6px;
+}
+.subtitle {
+    max-height: 40px;
+}
+.labelWrapper {
+    text-align: center;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100%;
+    transform: translate(-50%, -50%)
+}
+.labelWrapper.label {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+.typography {
+    font-feature-settings: 'ss01';
+    font-weight: var(--circular-progress-bar-font-weight);
+    font-family: var(--circular-progress-bar-font-family);
+}
+.xxl {
+    width: 144px;
+    height: 144px
+}
+.xxl .labelWrapper {
+        max-width: 128px;
+    }
+.xxl .title {
+        max-height: 32px;
+    }
+.xl {
+    width: 128px;
+    height: 128px
+}
+.xl .labelWrapper {
+        max-width: 108px;
+    }
+.xl .title {
+        max-height: 32px;
+    }
+.l {
+    width: 80px;
+    height: 80px
+}
+.l .labelWrapper {
+        max-width: 64px;
+    }
+.l .title {
+        max-height: 24px;
+    }
+.m {
+    width: 64px;
+    height: 64px
+}
+.m .labelWrapper {
+        max-width: 48px;
+    }
+.m .title {
+        max-height: 16px;
+        margin: 0;
+    }
+.s {
+    width: 48px;
+    height: 48px
+}
+.s .labelWrapper {
+        max-width: 40px;
+    }
+.s .title {
+        max-height: 16px;
+        margin: 0;
+    }
+.xs {
+    width: 24px;
+    height: 24px
+}
+.xs .labelWrapper {
+        max-width: 24px;
+    }
+.backgroundCircle,
+.progressCircle {
+    width: 100%;
+    height: 100%;
+    fill: transparent;
+}
+.positive {
+    stroke: var(--circular-progress-bar-positive-color);
+}
+.negative {
+    stroke: var(--circular-progress-bar-negative-color);
+}
+.backgroundCircle {
+    stroke: var(--circular-progress-bar-bg-color)
+}
+.backgroundCircle.stroke {
+        stroke: transparent;
+    }
+.progressCircle {
+    stroke-linecap: round
+}
+.progressCircle.bg-positive {
+        fill: var(--circular-progress-bar-positive-color);
+    }
+.progressCircle.bg-negative {
+        fill: var(--circular-progress-bar-negative-color);
+    }
+.iconWrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center
+}
+.iconWrapper.xxl {
+        max-width: 64px;
+        max-height: 64px;
+    }
+.iconWrapper.xl {
+        max-width: 64px;
+        max-height: 64px;
+    }
+.iconWrapper.l {
+        max-width: 48px;
+        max-height: 48px;
+    }
+.iconWrapper.m {
+        max-width: 36px;
+        max-height: 36px;
+    }
+.iconWrapper.s {
+        max-width: 24px;
+        max-height: 24px;
+    }
+.iconWrapper.xs {
+        max-width: 16px;
+        max-height: 16px;
+    }
+.iconWrapper.icon-tertiary {
+        color: var(--color-light-graphic-tertiary);
+    }
+.iconWrapper.icon-positive {
+        color: var(--color-light-graphic-positive);
+    }
+.iconWrapper.icon-negative {
+        color: var(--color-light-graphic-negative);
+    }
+.iconWrapper.icon-primary-inverted {
+        color: var(--color-light-graphic-primary-inverted);
+    }
+.iconWrapper.icon-primary {
+        color: var(--color-light-graphic-primary);
+    }
+.iconWrapper.icon-secondary {
+        color: var(--color-light-graphic-secondary);
+    }
+.icon {
+    width: 100%;
+    height: 100%;
+}

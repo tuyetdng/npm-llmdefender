@@ -1,0 +1,26 @@
+/* hash: 392bu */
+:root {
+    --color-light-text-primary: #0b1f35;
+}
+:root {
+
+    /* Hard */
+
+    /* Up */
+
+    /* Hard up */
+}
+.chart__coreChart_sapp3 .recharts-line path {
+        transition: d 0.2s ease-out;
+    }
+.chart__coreChart_sapp3 .recharts-text tspan {
+        fill: var(--color-light-text-primary);
+        font-size: 16px;
+        line-height: 22px;
+    }
+.chart__bar_sapp3 {
+    transition: opacity 0.2s ease-out, d 0.2s ease-out;
+}
+.chart__unfocused_sapp3 {
+    opacity: 0.3;
+}

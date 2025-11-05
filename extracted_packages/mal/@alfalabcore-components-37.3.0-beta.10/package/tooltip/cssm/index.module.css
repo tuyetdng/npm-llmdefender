@@ -1,0 +1,49 @@
+:root {
+
+    /* Hard */
+
+    /* Up */
+
+    /* Hard up */
+}
+:root {
+    --gap-xs: 8px;
+    --gap-m: 16px;
+}
+:root {
+    --border-radius-m: 8px;
+}
+:root {
+    --disabled-cursor: not-allowed;
+}
+:root {
+    --tooltip-max-width: 368px;
+}
+.component {
+    font-size: 14px;
+    line-height: 20px;
+    font-weight: 400;
+    padding: var(--gap-m);
+    max-width: var(--tooltip-max-width);
+}
+.popper {
+    border-radius: var(--border-radius-m);
+}
+.hint .component {
+    font-size: 13px;
+    line-height: 16px;
+    font-weight: 400;
+    padding: var(--gap-xs);
+}
+.target {
+    cursor: pointer;
+    width: max-content;
+    position: relative
+}
+.target .overlap {
+        cursor: var(--disabled-cursor);
+        position: absolute;
+        height: 100%;
+        width: 100%;
+        z-index: 2;
+    }

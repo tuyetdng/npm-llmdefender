@@ -1,0 +1,16 @@
+:root {
+
+    /* Hard */
+
+    /* Up */
+
+    /* Hard up */
+}
+.component {
+    min-height: 48px;
+}
+.title {
+    font-size: 16px;
+    line-height: 24px;
+    font-weight: 700;
+}

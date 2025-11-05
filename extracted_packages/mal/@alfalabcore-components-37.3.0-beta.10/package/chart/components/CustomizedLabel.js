@@ -1,0 +1,16 @@
+var React = require('react');
+var hooks_usePathBar_index = require('../hooks/usePathBar/index.js');
+require('../hooks/usePathBar/utils/getRadius.js');
+
+function _interopDefaultCompat (e) { return e && typeof e === 'object' && 'default' in e ? e : { default: e }; }
+
+var React__default = /*#__PURE__*/_interopDefaultCompat(React);
+
+var CustomizedLabel = function (_a) {
+    var x = _a.x, y = _a.y, value = _a.value, offset = _a.offset, radius = _a.radius, height = _a.height, width = _a.width, formatter = _a.formatter;
+    var initHeight = hooks_usePathBar_index.usePathBar({ radius: radius, height: height })[0];
+    return (React__default.default.createElement("text", { x: x + width / 2, y: y + height - (initHeight + offset), width: width, height: initHeight, textAnchor: 'middle' },
+        React__default.default.createElement("tspan", { x: x + width / 2 }, formatter ? formatter(value) : value)));
+};
+
+exports.CustomizedLabel = CustomizedLabel;

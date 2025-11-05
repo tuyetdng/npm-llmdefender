@@ -1,0 +1,27 @@
+:root {
+    --color-light-bg-primary: #fff;
+    --color-light-border-secondary: #e7e9eb;
+    --color-light-text-primary: #0b1f35;
+}
+:root {
+
+    /* Hard */
+
+    /* Up */
+
+    /* Hard up */
+}
+:root {
+    /* default */
+
+    /* inverted */
+    --toast-plate-inverted-color: var(--color-light-text-primary);
+    --toast-plate-inverted-bg-color: var(--color-light-bg-primary);
+}
+.component {
+    color: var(--toast-plate-inverted-color);
+    background-color: var(--toast-plate-inverted-bg-color);
+}
+.closeButtonWrapper:before {
+        background-color: var(--color-light-border-secondary);
+    }

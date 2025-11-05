@@ -1,0 +1,16 @@
+export { SidePanelDesktop } from './Component.desktop.js';
+import 'react';
+import 'react-merge-refs';
+import 'classnames';
+import '../../drawer/modern';
+import './components/content/Component.desktop.js';
+import './components/content/Component.js';
+import '../../base-modal/modern';
+import './components/footer/Component.desktop.js';
+import './components/footer/Component.js';
+import './components/header/Component.desktop.js';
+import '@alfalab/icons-glyph/CrossHeavyMIcon';
+import './components/closer/Component.js';
+import '../../icon-button/modern';
+import './components/header/Component.js';
+import './Context.js';

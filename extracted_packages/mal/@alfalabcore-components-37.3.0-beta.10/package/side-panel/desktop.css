@@ -1,0 +1,28 @@
+/* hash: 13r3h */
+:root {
+
+    /* Hard */
+
+    /* Up */
+
+    /* Hard up */
+}
+:root {
+
+    /* sizes */
+    --side-panel-s-width: 500px;
+
+    /* paddings */
+
+    /* scroll */
+
+    /* desktop */
+
+    /* mobile */
+}
+.side-panel__s_5fjgk {
+    width: var(--side-panel-s-width);
+}
+.side-panel__hidden_5fjgk {
+    overflow-x: hidden;
+}

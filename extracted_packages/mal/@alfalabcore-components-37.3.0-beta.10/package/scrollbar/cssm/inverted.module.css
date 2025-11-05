@@ -1,0 +1,23 @@
+:root {
+    --color-light-graphic-primary-inverted-alpha-30: rgba(255, 255, 255, 0.3);
+}
+:root {
+
+    /* Hard */
+
+    /* Up */
+
+    /* Hard up */
+}
+:root {
+    --scrollbar-inverted-background-color: var(--color-light-graphic-primary-inverted-alpha-30);
+    --scrollbar-inverted-background-color-active: var(
+        --color-light-graphic-primary-inverted-alpha-60
+    );
+}
+.component :global(.scrollbar):before {
+            background-color: var(--scrollbar-inverted-background-color);
+        }
+.component:global(.dragging .track) :global(.scrollbar.visible):before {
+            background-color: var(--scrollbar-inverted-background-color-active);
+        }

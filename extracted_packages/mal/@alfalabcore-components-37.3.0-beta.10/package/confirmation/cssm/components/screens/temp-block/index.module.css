@@ -1,0 +1,57 @@
+:root {
+    --color-light-text-primary: #0b1f35;
+}
+:root {
+
+    /* Hard */
+
+    /* Up */
+
+    /* Hard up */
+}
+:root {
+    --gap-xs: 8px;
+}
+:root {
+    --font-family-system: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Helvetica,
+        sans-serif;
+}
+:root {
+    /* desktop */
+
+    /* mobile */
+
+    /* text */
+    --confirmation-text-font-size: 16px;
+    --confirmation-text-line-height: 24px;
+    --confirmation-text-font-weight: 400;
+    --confirmation-text-font-family: var(--font-family-system);
+    --confirmation-text-color: var(--color-light-text-primary)
+
+    /* header */
+}
+.component {
+    display: flex;
+    flex-direction: column;
+}
+.center {
+    align-items: center;
+    text-align: center;
+}
+.typographyTheme.typographyTheme {
+    font-size: var(--confirmation-text-font-size);
+    line-height: var(--confirmation-text-line-height);
+    font-weight: var(--confirmation-text-font-weight);
+    font-family: var(--confirmation-text-font-family);
+    color: var(--confirmation-text-color);
+}
+.description.description {
+    margin-bottom: var(--gap-xs);
+}
+.countdownWrap {
+    display: flex;
+    align-items: center;
+}
+.loader {
+    margin-right: var(--gap-xs);
+}

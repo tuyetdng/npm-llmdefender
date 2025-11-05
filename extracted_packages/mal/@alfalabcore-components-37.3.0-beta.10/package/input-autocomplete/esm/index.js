@@ -1,0 +1,15 @@
+export { InputAutocompleteDesktop as InputAutocomplete } from './Component.desktop.js';
+export { InputAutocompleteResponsive } from './Component.responsive.js';
+import 'react';
+import '../../select/esm';
+import './autocomplete-field/Component.js';
+import 'react-merge-refs';
+import 'classnames';
+import '../../input/esm';
+import '@alfalab/hooks';
+import './Component.mobile.js';
+import 'lodash.throttle';
+import '../../button/esm';
+import './autocomplete-mobile-field/Component.js';
+import '../../form-control/esm';
+import './tslib.es6-c603502c.js';

@@ -1,0 +1,41 @@
+/* hash: 1xvp8 */
+:root {
+    --color-light-graphic-quaternary: #dbdee1;
+}
+:root {
+
+    /* Hard */
+
+    /* Up */
+
+    /* Hard up */
+}
+:root {
+    --gap-xs: 8px;
+}
+.table__component_5ojpo {
+    position: relative;
+    width: 100%;
+    box-sizing: border-box
+}
+.table__component_5ojpo th:not(:last-child):not(:empty):after {
+        transition: opacity 0.2s;
+        position: absolute;
+        content: '';
+        display: block;
+
+        width: 1px;
+        right: 0;
+        top: var(--gap-xs);
+        bottom: var(--gap-xs);
+        background-color: var(--color-light-graphic-quaternary);
+    }
+.table__component_5ojpo th:after {
+        opacity: 0;
+    }
+.table__component_5ojpo:hover th:after {
+        opacity: 1;
+    }
+.table__row_5ojpo {
+    height: 72px;
+}

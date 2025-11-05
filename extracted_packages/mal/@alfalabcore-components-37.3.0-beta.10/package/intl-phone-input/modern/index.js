@@ -1,0 +1,17 @@
+export { IntlPhoneInput } from './component.js';
+import 'react';
+import 'classnames';
+import '../../input-autocomplete/modern';
+import '@alfalab/icons-glyph/WorldMagnifierMIcon';
+import '@alfalab/utils';
+import 'react-merge-refs';
+import '@alfalab/hooks';
+import './components/flag-icon/component.js';
+import './components/select/component.js';
+import '../../select/modern';
+import './components/select-field/component.js';
+import './utils/calculateCaretPos.js';
+import './utils/format-phone-with-unclearable-country-code.js';
+import './utils/preparePasteData.js';
+import './useCaretAvoidCountryCode.js';
+import './components/flag-icon/flagSprite.js';

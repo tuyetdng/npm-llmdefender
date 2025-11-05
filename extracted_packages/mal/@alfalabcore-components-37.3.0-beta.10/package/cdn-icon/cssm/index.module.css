@@ -1,0 +1,17 @@
+:root {
+
+    /* Hard */
+
+    /* Up */
+
+    /* Hard up */
+}
+.component {
+    display: inline-flex;
+}
+.component svg {
+    fill: currentColor;
+}
+.component path {
+    fill: inherit;
+}

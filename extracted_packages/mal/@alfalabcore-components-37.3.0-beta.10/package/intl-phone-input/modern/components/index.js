@@ -1,0 +1,10 @@
+export { EMPTY_COUNTRY_SELECT_FIELD, SelectField } from './select-field/component.js';
+export { FlagIcon } from './flag-icon/component.js';
+export { CountriesSelect } from './select/component.js';
+import 'react';
+import 'react-merge-refs';
+import 'classnames';
+import '@alfalab/hooks';
+import '@alfalab/icons-glyph/WorldMagnifierMIcon';
+import '../../../select/modern';
+import './flag-icon/flagSprite.js';

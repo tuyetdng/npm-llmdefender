@@ -1,0 +1,98 @@
+:root {
+    --color-light-border-link: #007aff;
+}
+:root {
+
+    /* Hard */
+
+    /* Up */
+
+    /* Hard up */
+}
+:root {
+    --gap-2xs: 4px;
+    --gap-xs: 8px;
+    --gap-s: 12px;
+    --gap-m: 16px;
+}
+:root {
+    --focus-color: var(--color-light-border-link);
+}
+.component {
+    text-align: unset;
+
+    /** line-height наследуется. Если его не обнулить, то все иконки внутри будут иметь неверный размер */
+    line-height: 0;
+    box-sizing: border-box;
+}
+.horizontal {
+    display: flex;
+    width: 100%
+}
+.horizontal > section:not(:last-child) {
+        margin-right: var(--gap-m);
+    }
+.vertical {
+    display: flex;
+    align-items: center;
+    flex-direction: column
+}
+.vertical > section:not(:last-child) {
+        margin-bottom: var(--gap-s);
+    }
+.button {
+    font-family: inherit;
+    background: none;
+    border: 0;
+    border-radius: 0;
+    cursor: pointer;
+    transition: opacity 0.15s ease-in-out;
+    padding: 0
+}
+.button:hover {
+        opacity: 0.8;
+    }
+.button:active {
+        opacity: 0.6;
+    }
+.link {
+    text-decoration: none;
+    color: inherit;
+    cursor: pointer;
+    transition: opacity 0.15s ease-in-out
+}
+.link:hover {
+        opacity: 0.8;
+    }
+.link:active {
+        opacity: 0.6;
+    }
+.none {
+    padding: 0;
+}
+.airy {
+    padding: var(--gap-m) 0;
+}
+.defaultPadding {
+    padding: var(--gap-s) 0;
+}
+.compact {
+    padding: var(--gap-xs) 0;
+}
+.tiny {
+    padding: var(--gap-2xs) 0;
+}
+.left {
+    padding-left: var(--gap-m);
+}
+.right {
+    padding-right: var(--gap-m);
+}
+.both {
+    padding-right: var(--gap-m);
+    padding-left: var(--gap-m);
+}
+.focused {
+    outline: 2px solid var(--focus-color);
+    outline-offset: 2px;
+}

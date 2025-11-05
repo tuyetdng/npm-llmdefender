@@ -1,0 +1,16 @@
+export { DateRangeInputResponsive as DateRangeInput } from './Component.responsive.js';
+import 'react';
+import '@alfalab/hooks';
+import './components/date-range-input/Component.js';
+import 'react-merge-refs';
+import 'classnames';
+import 'date-fns/isValid';
+import '../../calendar/modern';
+import '../../icon-button/modern';
+import '../../input/modern';
+import '../../popover/modern';
+import '@alfalab/icons-glyph/CalendarMIcon';
+import 'date-fns/parse';
+import './Component.desktop.js';
+import './utils/format.js';
+import './Component.mobile.js';

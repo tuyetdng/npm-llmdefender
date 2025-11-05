@@ -1,0 +1,30 @@
+/* hash: 102jk */
+:root {
+
+    /* Hard */
+
+    /* Up */
+
+    /* Hard up */
+}
+:root {
+    --gap-m: 16px;
+}
+:root {
+
+    /* sizes */
+
+    /* paddings */
+
+    /* scroll */
+
+    /* desktop */
+
+    /* mobile */
+}
+.side-panel__content_1ecix {
+    padding: 0 var(--gap-m)
+}
+.side-panel__content_1ecix:last-child {
+        padding-bottom: var(--gap-m);
+    }

@@ -1,0 +1,62 @@
+:root {
+    --color-light-bg-primary: #fff;
+    --color-light-bg-secondary-inverted: #233549;
+    --color-light-graphic-primary: #0b1f35;
+    --color-light-graphic-primary-inverted: #fff;
+    --color-light-text-primary-inverted: #fff;
+    --color-light-bg-primary-shade-7: rgb(237, 237, 237);
+    --color-light-bg-primary-shade-15: rgb(217, 217, 217);
+}
+:root {
+
+    /* Hard */
+
+    /* Up */
+
+    /* Hard up */
+}
+:root {
+    /* primary */
+    --action-button-inverted-primary-base-color: var(--color-light-text-primary-inverted);
+    --action-button-inverted-primary-base-icon-color: var(--color-light-graphic-primary);
+    --action-button-inverted-primary-base-bg-color: var(--color-light-bg-primary);
+    --action-button-inverted-primary-hover-color: var(--color-light-bg-primary-shade-7);
+    --action-button-inverted-primary-active-color: var(--color-light-bg-primary-shade-15);
+
+    /* secondary */
+    --action-button-inverted-secondary-base-color: var(--color-light-text-primary-inverted);
+    --action-button-inverted-secondary-base-icon-color: var(--color-light-graphic-primary-inverted);
+    --action-button-inverted-secondary-base-bg-color: var(--color-light-bg-secondary-inverted);
+    --action-button-inverted-secondary-hover-color: var(
+        --color-light-bg-secondary-inverted-tint-15
+    );
+    --action-button-inverted-secondary-active-color: var(
+        --color-light-bg-secondary-inverted-tint-20
+    );
+}
+.primary {
+    color: var(--action-button-inverted-primary-base-color)
+}
+.primary .iconWrapper {
+        color: var(--action-button-inverted-primary-base-icon-color);
+        background-color: var(--action-button-inverted-primary-base-bg-color);
+    }
+.primary:hover .iconWrapper {
+        background-color: var(--action-button-inverted-primary-hover-color);
+    }
+.primary:active .iconWrapper {
+        background-color: var(--action-button-inverted-primary-active-color);
+    }
+.secondary {
+    color: var(--action-button-inverted-secondary-base-color)
+}
+.secondary .iconWrapper {
+        color: var(--action-button-inverted-secondary-base-icon-color);
+        background-color: var(--action-button-inverted-secondary-base-bg-color);
+    }
+.secondary:hover .iconWrapper {
+        background-color: var(--action-button-inverted-secondary-hover-color);
+    }
+.secondary:active .iconWrapper {
+        background-color: var(--action-button-inverted-secondary-active-color);
+    }

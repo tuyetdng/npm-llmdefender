@@ -1,0 +1,98 @@
+/* hash: 1esc9 */
+:root {
+    --color-light-bg-overlay: rgba(0, 0, 0, 0.6);
+}
+:root {
+
+    /* Hard */
+
+    /* Up */
+
+    /* Hard up */
+}
+:root {
+    --backdrop-visible-background: var(--color-light-bg-overlay);
+    --backdrop-hidden-background: transparent;
+}
+:root {
+    --drawer-width: 500px;
+}
+.drawer__component_1ezay {
+    position: fixed;
+    top: 0;
+    height: 100%;
+    width: var(--drawer-width);
+    flex: 1;
+    overflow: auto;
+    will-change: transform;
+}
+.drawer__rightPlacement_1ezay {
+    right: 0;
+    align-self: flex-end;
+}
+.drawer__leftPlacement_1ezay {
+    left: 0;
+    align-self: flex-start;
+}
+.drawer__content_1ezay {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+.drawer__simplebar_1ezay {
+    height: 100vh;
+}
+/* enter */
+.drawer__enterRight_1ezay {
+    transform: translateX(100%);
+}
+.drawer__enterLeft_1ezay {
+    transform: translateX(-100%);
+}
+.drawer__contentEnter_1ezay {
+    opacity: 0;
+}
+.drawer__backdropEnter_1ezay {
+    background-color: var(--backdrop-hidden-background);
+}
+.drawer__enterActive_1ezay {
+    transition: transform 0.3s ease-in-out;
+    transform: translateX(0);
+}
+.drawer__backdropEnterActive_1ezay,
+.drawer__backdropEnterDone_1ezay {
+    transition: background 0.3s ease-in-out;
+    background-color: var(--backdrop-visible-background);
+}
+.drawer__contentEnterActive_1ezay {
+    transition: opacity 0.2s ease-in-out 0.3s;
+    opacity: 1;
+}
+/* exit */
+.drawer__exit_1ezay {
+    transform: translateX(0);
+}
+.drawer__backdropExit_1ezay {
+    background-color: var(--backdrop-visible-background);
+}
+.drawer__contentExit_1ezay {
+    opacity: 1;
+}
+.drawer__exitActiveRight_1ezay {
+    transition: transform 0.25s ease-in-out 0.1s;
+    transform: translateX(100%);
+}
+.drawer__exitActiveLeft_1ezay {
+    transition: transform 0.25s ease-in-out 0.1s;
+    transform: translateX(-100%);
+}
+.drawer__backdropExitActive_1ezay,
+.drawer__backdropExitDone_1ezay {
+    transition: background 0.25s ease-in-out 0.1s;
+    background-color: var(--backdrop-hidden-background);
+}
+.drawer__contentExitActive_1ezay {
+    opacity: 0;
+    transition: opacity 0.12s ease-in-out;
+}

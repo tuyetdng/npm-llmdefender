@@ -1,0 +1,52 @@
+import { ReactNode } from 'react';
+import { BaseModalProps } from "../../base-modal";
+type ModalDesktopProps = BaseModalProps & {
+    /**
+     * Ширина модального окна
+     * @default "m"
+     */
+    size?: 's' | 'm' | 'l' | 'xl' | 'fullscreen';
+    /**
+     * Растягивает модальное окно на весь экран
+     * @deprecated Используйте размер fullscreen
+     */
+    fullscreen?: boolean;
+    /**
+     * Фиксирует позицию модального окна после открытия,
+     * предотвращая скачки, если контент внутри будет меняться
+     */
+    fixedPosition?: boolean;
+    /**
+     * Управление наличием закрывающего крестика
+     * @default false
+     */
+    hasCloser?: boolean;
+};
+type ModalMobileProps = Omit<ModalDesktopProps, 'size' | 'fixedPosition' | 'fullscreen'>;
+type ModalResponsiveProps = ModalDesktopProps & {
+    /**
+     * Контрольная точка, с нее начинается desktop версия
+     * @default 1024
+     */
+    breakpoint?: number;
+};
+type View = 'desktop' | 'mobile';
+type TResponsiveModalContext = {
+    view: View;
+    size: NonNullable<ModalDesktopProps['size']>;
+};
+type ContentProps = {
+    /**
+     * Контент
+     */
+    children?: ReactNode;
+    /**
+     * Дополнительный класс
+     */
+    className?: string;
+    /**
+     * Растягивает контент на всю высоту
+     */
+    flex?: boolean;
+};
+export { ModalDesktopProps, ModalMobileProps, ModalResponsiveProps, View, TResponsiveModalContext, ContentProps };

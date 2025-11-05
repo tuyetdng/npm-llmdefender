@@ -1,0 +1,23 @@
+var PORTAL_CONTAINER_ATTRIBUTE = 'alfa-portal-container';
+function createPortalContainer() {
+    var portalContainer = document.createElement('div');
+    portalContainer.setAttribute(PORTAL_CONTAINER_ATTRIBUTE, '');
+    document.body.appendChild(portalContainer);
+    return portalContainer;
+}
+var getDefaultPortalContainer = function () {
+    return document.querySelector("[".concat(PORTAL_CONTAINER_ATTRIBUTE, "]")) || createPortalContainer();
+};
+function setRef(ref, value) {
+    if (typeof ref === 'function') {
+        ref(value);
+    }
+    else if (ref) {
+        // eslint-disable-next-line no-param-reassign
+        ref.current = value;
+    }
+}
+
+exports.PORTAL_CONTAINER_ATTRIBUTE = PORTAL_CONTAINER_ATTRIBUTE;
+exports.getDefaultPortalContainer = getDefaultPortalContainer;
+exports.setRef = setRef;

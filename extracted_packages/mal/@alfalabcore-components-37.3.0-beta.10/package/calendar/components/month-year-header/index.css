@@ -1,0 +1,78 @@
+/* hash: 49wbc */
+:root {
+
+    /* Hard */
+
+    /* Up */
+
+    /* Hard up */
+}
+:root {
+    --gap-xs: 8px;
+}
+:root {
+    --border-radius-s: 4px;
+}
+:root {
+
+    /* Кнопки выбора месяцев и годов */
+
+    /* Шапка */
+
+    /* День */
+
+    /* today */
+
+    /* highlighted */
+
+    /* holidays */
+
+    /* range */
+
+    /* selected */
+
+    /* disabled */
+
+    /* marker */
+}
+.calendar__component_u8097 {
+    position: relative;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.cc-calendar .calendar__button_u8097 {
+        border-radius: var(--border-radius-s);
+    }
+.calendar__month_u8097 {
+    flex-basis: 65%
+}
+@media (max-width: 374px) {
+.calendar__month_u8097 {
+        flex-grow: 1
+}
+    }
+.calendar__year_u8097 {
+    flex-basis: 35%;
+    margin-left: var(--gap-xs)
+}
+@media (max-width: 374px) {
+.calendar__year_u8097 {
+        width: 90px
+}
+    }
+.calendar__buttonContent_u8097 {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.calendar__upDownIcon_u8097 {
+    margin-left: var(--gap-xs)
+}
+@media (max-width: 374px) {
+.calendar__upDownIcon_u8097 {
+        margin-left: auto
+}
+    }

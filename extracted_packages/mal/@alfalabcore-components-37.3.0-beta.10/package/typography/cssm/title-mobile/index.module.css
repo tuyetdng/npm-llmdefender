@@ -1,0 +1,72 @@
+:root {
+
+    /* Hard */
+
+    /* Up */
+
+    /* Hard up */
+}
+:root {
+    --font-family-styrene: 'Styrene UI', system-ui, -apple-system, 'Segoe UI', Roboto,
+        'Helvetica Neue', Helvetica, sans-serif;
+}
+.styrene-xlarge {
+    font-size: 34px;
+    line-height: 40px;
+    font-weight: 500;
+    font-feature-settings: 'ss01';
+    font-family: var(--font-family-styrene);
+}
+.styrene-large {
+    font-size: 30px;
+    line-height: 36px;
+    font-weight: 500;
+    font-feature-settings: 'ss01';
+    font-family: var(--font-family-styrene);
+}
+.styrene-medium {
+    font-size: 26px;
+    line-height: 32px;
+    font-weight: 500;
+    font-feature-settings: 'ss01';
+    font-family: var(--font-family-styrene);
+}
+.styrene-small {
+    font-size: 20px;
+    line-height: 28px;
+    font-weight: 500;
+    font-feature-settings: 'ss01';
+    font-family: var(--font-family-styrene);
+}
+.styrene-xsmall {
+    font-size: 16px;
+    line-height: 20px;
+    font-weight: 500;
+    font-feature-settings: 'ss01';
+    font-family: var(--font-family-styrene);
+}
+.system-xlarge {
+    font-size: 34px;
+    line-height: 40px;
+    font-weight: 600;
+}
+.system-large {
+    font-size: 30px;
+    line-height: 36px;
+    font-weight: 600;
+}
+.system-medium {
+    font-size: 26px;
+    line-height: 32px;
+    font-weight: 600;
+}
+.system-small {
+    font-size: 20px;
+    line-height: 28px;
+    font-weight: 600;
+}
+.system-xsmall {
+    font-size: 16px;
+    line-height: 20px;
+    font-weight: 600;
+}

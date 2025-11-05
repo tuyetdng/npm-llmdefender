@@ -1,0 +1,34 @@
+:root {
+
+    /* Hard */
+
+    /* Up */
+
+    /* Hard up */
+}
+:root {
+    --calendar-width: 344px;
+
+    /* Кнопки выбора месяцев и годов */
+
+    /* Шапка */
+
+    /* День */
+
+    /* today */
+
+    /* highlighted */
+
+    /* holidays */
+
+    /* range */
+
+    /* selected */
+
+    /* disabled */
+
+    /* marker */
+}
+.calendarWidth {
+    width: var(--calendar-width);
+}

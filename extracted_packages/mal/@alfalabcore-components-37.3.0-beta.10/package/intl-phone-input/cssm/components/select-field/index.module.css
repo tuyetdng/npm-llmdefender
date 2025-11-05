@@ -1,0 +1,57 @@
+:root {
+    --color-light-border-link: #007aff;
+    --color-light-graphic-secondary: #6d7986;
+}
+:root {
+
+    /* Hard */
+
+    /* Up */
+
+    /* Hard up */
+}
+:root {
+    --gap-2xs: 4px;
+    --gap-s: 12px;
+    --gap-m: 16px;
+}
+:root {
+    --focus-color: var(--color-light-border-link);
+    --disabled-cursor: not-allowed;
+}
+.component {
+    height: 100%;
+    cursor: pointer;
+    outline: none;
+    position: relative;
+}
+.flagIconContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 24px;
+    height: 24px;
+    margin-right: var(--gap-2xs);
+}
+.emptyCountryIcon {
+    color: var(--color-light-graphic-secondary);
+}
+.disabled {
+    cursor: var(--disabled-cursor);
+}
+.inner {
+    position: relative;
+    display: flex;
+    align-items: center;
+    height: 100%;
+    padding-left: var(--gap-s);
+    outline: none;
+}
+.l .inner,
+.xl .inner {
+    padding-left: var(--gap-m);
+}
+.focusVisible {
+    outline: 2px solid var(--focus-color);
+    outline-offset: 2px;
+}

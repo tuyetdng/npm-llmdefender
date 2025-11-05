@@ -1,0 +1,151 @@
+/* hash: 1ibih */
+:root {
+    --color-black: #000;
+    --color-black-60: rgba(0, 0, 0, 0.6);
+}
+:root {
+
+    /* Hard */
+
+    /* Up */
+
+    /* Hard up */
+}
+:root {
+    --gap-2xs: 4px;
+    --gap-s: 12px;
+    --gap-l: 20px;
+}
+:root {
+    --font-family-styrene: 'Styrene UI', system-ui, -apple-system, 'Segoe UI', Roboto,
+        'Helvetica Neue', Helvetica, sans-serif;
+}
+:root {
+    --border-radius-l: 12px;
+}
+.bank-card__component_yf95n {
+    /* TODO: как это будет собираться и работать в webView */
+    --form-control-border-radius: 0;
+    --form-control-border-bottom: 1px solid var(--color-black-60);
+    --form-control-bg-color: transparent;
+
+    /* focus */
+    --form-control-focus-border-bottom: 1px solid var(--color-black);
+    --form-control-focus-shadow: transparent;
+
+    /* hover */
+    --form-control-hover-bg-color: transparent;
+    --form-control-focus-bg-color: transparent;
+    --form-control-font-family: var(--font-family-styrene);
+
+    position: relative;
+    max-width: 343px;
+
+    font-family: var(--font-family-styrene);
+}
+.bank-card__aspectRatioContainer_yf95n {
+    /* Эталонный размер 343x216 */
+    padding-bottom: 63%;
+}
+.bank-card__content_yf95n {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    padding-left: var(--gap-l);
+    padding-right: var(--gap-l);
+    border-radius: var(--border-radius-l);
+    box-sizing: border-box;
+}
+.bank-card__label_yf95n {
+    left: 0;
+    transform: translateY(-1px);
+    color: var(--color-black-60);
+    font-size: 20px;
+    line-height: 24px
+}
+@media (max-width: 360px) {
+.bank-card__label_yf95n {
+        font-size: 16px
+}
+    }
+.bank-card__focused_yf95n .bank-card__label_yf95n,
+.bank-card__filled_yf95n .bank-card__label_yf95n {
+    color: var(--color-black);
+    transform: translateY(-19px) scale(0.6)
+}
+@media (max-width: 360px) {
+.bank-card__focused_yf95n .bank-card__label_yf95n,
+.bank-card__filled_yf95n .bank-card__label_yf95n {
+        transform: translateY(-22px) scale(0.75)
+}
+    }
+.bank-card__focused_yf95n:before {
+    transform: scale(1) !important;
+}
+.bank-card__input_yf95n {
+    font-size: 20px;
+    line-height: 24px;
+    font-weight: 400;
+    font-feature-settings: 'ss01';
+    font-family: var(--font-family-styrene);
+
+    color: var(--color-black);
+    caret-color: var(--color-black);
+
+    /* TODO: обсудить с дизайнером, почему инпут не соответствует дизайн-системе, либо уменьшить каскад в form-control */
+    padding-left: 0 !important;
+    padding-bottom: var(--gap-2xs) !important
+}
+@media (max-width: 360px) {
+.bank-card__input_yf95n {
+        font-size: 16px
+}
+    }
+.bank-card__bankLogo_yf95n {
+    position: absolute;
+    top: 20px;
+    left: 20px
+}
+.bank-card__bankLogo_yf95n svg {
+        max-height: 32px;
+        width: auto;
+        display: block
+    }
+.bank-card__bankLogo_yf95n svg g {
+            fill: var(--color-black);
+        }
+.bank-card__brandLogo_yf95n {
+    position: absolute;
+    bottom: 20px;
+    right: 20px
+}
+.bank-card__brandLogo_yf95n svg {
+        display: block;
+        fill: var(--color-black);
+    }
+.bank-card__usePhoto_yf95n {
+    display: block;
+    margin: 0;
+    padding: 0;
+    text-decoration: none;
+    background-color: transparent;
+    border: 0;
+    box-shadow: none;
+    -webkit-user-select: none;
+            user-select: none;
+    cursor: pointer;
+    outline: none;
+    margin-bottom: var(--gap-2xs);
+    align-self: flex-end;
+
+    /* В макете иконка прилегает к правому краю поля, а по дизайн-системе там должен быть отступ */
+    margin-right: calc(var(--gap-s) * -1)
+}
+.bank-card__usePhoto_yf95n svg {
+        fill: var(--color-black);
+        display: block;
+    }

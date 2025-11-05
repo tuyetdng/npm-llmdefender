@@ -1,0 +1,84 @@
+var tslib_es6 = require('./tslib.es6-f2655c2c.js');
+var React = require('react');
+var coreComponentsSelect = require('../select');
+var components_tagList_component = require('./components/tag-list/component.js');
+require('classnames');
+require('../tag');
+require('@alfalab/icons-glyph/CrossCompactMIcon');
+var utils_match = require('./utils/match.js');
+require('../form-control');
+require('@alfalab/hooks');
+require('./utils/calculate-collapse-size.js');
+require('./components/tag/component.js');
+
+function _interopDefaultCompat (e) { return e && typeof e === 'object' && 'default' in e ? e : { default: e }; }
+
+var React__default = /*#__PURE__*/_interopDefaultCompat(React);
+
+var SelectWithTags = React.forwardRef(function (_a, ref) {
+    var _b = _a.OptionsList, OptionsList = _b === void 0 ? coreComponentsSelect.OptionsList : _b, _c = _a.Optgroup, Optgroup = _c === void 0 ? coreComponentsSelect.Optgroup : _c, _d = _a.Option, Option = _d === void 0 ? coreComponentsSelect.Option : _d, _e = _a.Arrow, Arrow = _e === void 0 ? coreComponentsSelect.Arrow : _e, value = _a.value, selected = _a.selected, _f = _a.size, size = _f === void 0 ? 'xl' : _f, onOpen = _a.onOpen, onInput = _a.onInput, onChange = _a.onChange, options = _a.options, _g = _a.autocomplete, autocomplete = _g === void 0 ? true : _g, match = _a.match, _h = _a.allowUnselect, allowUnselect = _h === void 0 ? true : _h, _j = _a.collapseTagList, collapseTagList = _j === void 0 ? false : _j, _k = _a.moveInputToNewLine, moveInputToNewLine = _k === void 0 ? true : _k, transformCollapsedTagText = _a.transformCollapsedTagText, transformTagText = _a.transformTagText, Tag = _a.Tag, restProps = tslib_es6.__rest(_a, ["OptionsList", "Optgroup", "Option", "Arrow", "value", "selected", "size", "onOpen", "onInput", "onChange", "options", "autocomplete", "match", "allowUnselect", "collapseTagList", "moveInputToNewLine", "transformCollapsedTagText", "transformTagText", "Tag"]);
+    var controlled = Boolean(selected);
+    var _l = React.useState(selected || []), selectedTags = _l[0], setSelectedTags = _l[1];
+    var _m = React.useState(false), isPopoverOpen = _m[0], setPopoverOpen = _m[1];
+    var updatePopover = React.useRef(function () { return null; });
+    var resetValue = React.useCallback(function () {
+        var event = { target: { value: '' } };
+        onInput(event);
+    }, [onInput]);
+    var handleUpdatePopover = React.useCallback(function () {
+        if (updatePopover && updatePopover.current) {
+            updatePopover.current();
+        }
+    }, []);
+    var handleDeleteTag = React.useCallback(function (deletedKey) {
+        var tags = selected || selectedTags;
+        tags = tags.filter(function (tag) {
+            var key = typeof tag === 'string' ? tag : tag.key;
+            return deletedKey !== key;
+        });
+        if (onChange) {
+            onChange({ selectedMultiple: tags });
+        }
+        if (!controlled) {
+            setSelectedTags(tags);
+        }
+    }, [controlled, onChange, selected, selectedTags]);
+    var handleChange = React.useCallback(function (_a) {
+        var selectedMultiple = _a.selectedMultiple, name = _a.name, initiator = _a.initiator;
+        if (onChange) {
+            onChange({ selectedMultiple: selectedMultiple, name: name, initiator: initiator });
+        }
+        if (!controlled) {
+            setSelectedTags(selectedMultiple);
+        }
+        if (value) {
+            resetValue();
+        }
+    }, [onChange, controlled, value, resetValue]);
+    var handleOpen = React.useCallback(function (payload) {
+        var open = payload.open;
+        if (!open && value) {
+            resetValue();
+        }
+        setPopoverOpen(open);
+        if (onOpen)
+            onOpen(payload);
+    }, [onOpen, resetValue, value]);
+    var filteredOptions = utils_match.filterOptions(options, value, match);
+    var isAutocomplete = autocomplete || Boolean(match);
+    return (React__default.default.createElement(coreComponentsSelect.BaseSelect, tslib_es6.__assign({}, restProps, { ref: ref, Option: Option, Field: components_tagList_component.TagList, Optgroup: Optgroup, OptionsList: OptionsList, Arrow: Arrow, multiple: true, updatePopover: updatePopover, allowUnselect: allowUnselect, showEmptyOptionsList: true, fieldProps: {
+            value: value,
+            autocomplete: isAutocomplete,
+            onInput: onInput,
+            handleDeleteTag: handleDeleteTag,
+            Tag: Tag,
+            collapseTagList: collapseTagList,
+            moveInputToNewLine: moveInputToNewLine,
+            transformCollapsedTagText: transformCollapsedTagText,
+            transformTagText: transformTagText,
+            handleUpdatePopover: handleUpdatePopover,
+            isPopoverOpen: isPopoverOpen,
+        }, selected: selected || selectedTags, autocomplete: isAutocomplete, size: size, options: filteredOptions, onChange: handleChange, onOpen: handleOpen })));
+});
+
+exports.SelectWithTags = SelectWithTags;

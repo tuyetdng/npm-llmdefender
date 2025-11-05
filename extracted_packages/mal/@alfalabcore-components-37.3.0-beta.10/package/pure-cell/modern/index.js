@@ -1,0 +1,18 @@
+export { P as PureCell } from './component-64aa9764.js';
+import 'react';
+import 'react-merge-refs';
+import 'classnames';
+import '../../comment/modern';
+import '@alfalab/hooks';
+import './components/addon/component.js';
+import './components/amount/component.js';
+import '../../amount/modern';
+import '../../typography/modern';
+import './components/amount-title/component.js';
+import './components/category/component.js';
+import './components/footer/component.js';
+import './components/footer-button/component.js';
+import '../../button/modern';
+import './components/graphics/component.js';
+import './getDataTestId-7d6c8fa8.js';
+import './components/footer-text/component.js';

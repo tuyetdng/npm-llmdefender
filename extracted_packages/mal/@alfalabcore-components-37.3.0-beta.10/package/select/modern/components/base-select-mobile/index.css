@@ -1,0 +1,68 @@
+/* hash: 199vk */
+:root {
+
+    /* Hard */
+
+    /* Up */
+
+    /* Hard up */
+}
+:root {
+    --gap-2xs: 4px;
+    --gap-xs: 8px;
+    --gap-m: 16px;
+    --gap-l: 20px;
+}
+:root {
+
+    /* options list */
+    --select-options-list-offset: var(--gap-2xs);
+
+    /* option */
+
+    /* checkmark */
+
+    /* optgroup */
+}
+.select__component_1pba6 {
+    width: max-content;
+    position: relative;
+    outline: 0;
+}
+.select__popoverInner_1pba6 {
+    padding-top: var(--select-options-list-offset);
+    padding-bottom: var(--select-options-list-offset);
+    box-shadow: none;
+    border: none;
+    background: transparent;
+    border-radius: 0;
+    position: relative;
+}
+.select__sheet_1pba6 {
+    overflow: hidden;
+}
+.select__sheetContent_1pba6 {
+    padding: 0;
+}
+.select__sheetContainer_1pba6 {
+    padding: 0;
+}
+.select__block_1pba6 {
+    width: 100%;
+}
+/* width: max-content; fix for IE */
+@media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
+    .select__component_1pba6 {
+        float: left;
+        clear: left;
+    }
+}
+.select__option_1pba6 {
+    padding: var(--gap-2xs) var(--gap-l) var(--gap-2xs) var(--gap-m)
+}
+.select__option_1pba6:before {
+        display: none;
+    }
+.select__optionGroup_1pba6 {
+    padding: var(--gap-m) var(--gap-m) var(--gap-xs);
+}

@@ -1,0 +1,30 @@
+:root {
+
+    /* Hard */
+
+    /* Up */
+
+    /* Hard up */
+}
+:root {
+    --gap-3xs: 2px;
+}
+.component {
+    display: flex;
+    flex-direction: column;
+    align-self: center;
+
+    /* can use /r/n */
+    white-space: pre-line
+}
+.component.vertical {
+        grid-row-gap: var(--gap-3xs);
+        justify-content: center;
+        align-items: center;
+
+        /* for button */
+        text-align: center;
+    }
+.component.reverse {
+        flex-direction: column-reverse;
+    }

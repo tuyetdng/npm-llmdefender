@@ -1,0 +1,33 @@
+/* hash: 1b0bu */
+:root {
+
+    /* Hard */
+
+    /* Up */
+
+    /* Hard up */
+}
+:root {
+    --amount-major-part-font-weight: bold;
+    --amount-minor-part-font-weight: normal;
+    --amount-minor-part-opacity: 0.6;
+}
+.amount__component_1fiju {
+    white-space: nowrap;
+}
+.amount__transparentMinor_1fiju {
+    opacity: 0.6;
+}
+.amount__bold_1fiju {
+    font-weight: bold;
+}
+.amount__normalMinor_1fiju {
+    font-weight: normal;
+}
+.amount__defaultStyles_1fiju {
+    font-weight: var(--amount-major-part-font-weight);
+}
+.amount__defaultMinor_1fiju {
+    opacity: var(--amount-minor-part-opacity);
+    font-weight: var(--amount-minor-part-font-weight);
+}

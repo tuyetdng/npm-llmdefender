@@ -1,0 +1,32 @@
+/* hash: 1p2mm */
+:root {
+    --color-light-graphic-secondary: #6d7986;
+}
+:root {
+
+    /* Hard */
+
+    /* Up */
+
+    /* Hard up */
+}
+:root {
+    --gap-s: 12px;
+}
+.intl-phone-input__addons_ldvui {
+    padding-left: 0;
+}
+.intl-phone-input__l_ldvui .intl-phone-input__addons_ldvui, .intl-phone-input__xl_ldvui .intl-phone-input__addons_ldvui {
+        padding-left: 0;
+    }
+.intl-phone-input__flagIconWrapper_ldvui {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 24px;
+    height: 24px;
+    margin-left: var(--gap-s);
+}
+.intl-phone-input__emptyCountryIcon_ldvui {
+    color: var(--color-light-graphic-secondary);
+}

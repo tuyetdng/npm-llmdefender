@@ -1,0 +1,45 @@
+/* hash: 1e1s5 */
+:root {
+
+    /* Hard */
+
+    /* Up */
+
+    /* Hard up */
+}
+:root {
+    --gap-3xs: 2px;
+    --gap-m: 16px;
+}
+.pure-cell__horizontal_e7qoj {
+    padding: var(--gap-3xs) 0;
+}
+.pure-cell__rowLimit1_e7qoj {
+    -webkit-line-clamp: 1;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    word-break: break-all;
+}
+.pure-cell__rowLimit2_e7qoj {
+    -webkit-line-clamp: 2;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    word-break: break-all;
+}
+.pure-cell__component_e7qoj {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    margin: var(--gap-3xs) 0;
+    word-break: break-word;
+}
+.pure-cell__component_e7qoj .pure-cell__vertical_e7qoj {
+        justify-content: center;
+    }
+.pure-cell__title_e7qoj + .pure-cell__value_e7qoj {
+    margin-left: var(--gap-m);
+    flex-shrink: 0;
+}
