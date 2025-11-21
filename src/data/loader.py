@@ -13,7 +13,8 @@ from datetime import datetime
 
 from tqdm import tqdm
 
-from .models import PackageProfile, BehaviorCategory
+from .models import PackageProfile
+from enums.behavior_category import BehaviorCategory
 
 logger = logging.getLogger(__name__)
 logging.basicConfig(
@@ -204,7 +205,7 @@ class DatasetLoader:
         self,
         source_dir: str,
         cache_dir: str = "./cache",
-        mal_folder: str = "malicious",
+        mal_folder: str = "mal",
         ben_folder: str = "ben",
         extract_dir: str = "./extracted_packages"
     ):
@@ -235,6 +236,11 @@ class DatasetLoader:
         self.extract_dir.mkdir(parents=True, exist_ok=True)
         
         self.cache_dir.mkdir(exist_ok=True)
+        
+        # print(f"   DEBUG PATHS:")
+        # print(f"   Current dir: {Path.cwd()}")
+        # print(f"   source_dir : '{source_dir}'")
+        # print(f"   self.mal_source: {self.mal_source.absolute()}")
         
         if not self.data_dir.exists():
             raise FileNotFoundError(f"Source directory does not exist: {self.data_dir}")

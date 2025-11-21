@@ -1,3 +1,4 @@
+#src/data/models.py:
 import math
 import re
 from pydantic import BaseModel, Field, computed_field, field_validator, model_validator
@@ -7,6 +8,9 @@ from datetime import datetime
 import uuid
 import logging
 
+from enums.behavior_category import BehaviorCategory
+from enums.severity import Severity
+
 logger = logging.getLogger(__name__)
 logging.basicConfig(
     level=logging.INFO,
@@ -15,28 +19,7 @@ logging.basicConfig(
 
 
 # Define PackageProfile, Behavior, DetectionResult Pydantic models
-
-class BehaviorCategory(str, Enum):
-    """Canonical behavior categories matching consolidated pattern set, focused on observable actions in the npm ecosystem."""
-    CREDENTIAL_THEFT = "credential_theft"  
-    SENSITIVE_DATA_COLLECTION = "sensitive_data_collection"   
-    CRYPTO_HIJACKING = "crypto_hijacking"              
-    NETWORK_EXFILTRATION = "network_exfiltration"      
-    CODE_EXECUTION = "code_execution"
-    DEPENDENCY_INJECTION = "dependency_injection" 
-    SUPPLY_CHAIN_PROPAGATION = "supply_chain_propagation"
-    REPOSITORY_MANIPULATION = "repository_manipulation"              
-    PRIVILEGE_ESCALATION = "privilege_escalation"
-    PERSISTENCE = "persistence"
-    SENSITIVE_FILE_ACCESS = "sensitive_file_access"     
-    OBFUSCATION = "obfuscation"
-    ANTI_DEBUGGING = "anti_debugging"                   # checks for debugger (debugger keyword, inspector)
-    ANTI_ANALYSIS = "anti_analysis"                     # broader (checks for sandboxes, VMs, honeypots)
-    RESOURCE_ABUSE = "resource_abuse"
-    TYPOSQUATTING = "typosquatting"
-    UNKNOWN = "unknown"                                 # Fallback for unclassified behaviors
-    
-    
+   
 class PackageProfile(BaseModel):
     """NPM package representation for security analysis pipeline."""
     package_id:  str = Field(default_factory=lambda: f"PKG{uuid.uuid4().hex[:8].upper()}")
@@ -125,8 +108,8 @@ class Behavior(BaseModel):
         le=1.0,
         description="Model confidence in behavior extraction (used for weighted scoring)"
     )
-    severity: Literal["critical", "high", "medium", "low", "info"] = Field(
-        default="medium",
+    severity: Severity = Field(
+        default=Severity.MEDIUM,
         description="Risk severity for prioritization"
     )
     semantic_embedding: Optional[List[float]] = Field(

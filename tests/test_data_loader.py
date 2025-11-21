@@ -24,7 +24,7 @@ def main():
     print("SIMPLE DATASET LOADER TEST")
     print("="*40)
     
-    DATASET_PATH = "./dataset/TestDataset" 
+    DATASET_PATH = "./dataset" 
     CACHE_PATH = "./test_cache"
     EXTRACT_PATH = "./extracted_packages" 
     NUM_PACKAGES = 4 

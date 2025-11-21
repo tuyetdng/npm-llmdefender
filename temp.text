@@ -1,0 +1,172 @@
+(venv_llm) PS C:\PROJECT_BUILDING\CAPSTONE\LLMDefender_core\npm-llmdefender> python -m tests.test_structural_analyser
+Imports successful
+Structural Analysis Test
+2025-11-21 18:29:40,730 - data.loader - INFO - DatasetLoader initialized:
+2025-11-21 18:29:40,730 - data.loader - INFO -   Source: dataset
+2025-11-21 18:29:40,730 - data.loader - INFO -   Cache: cache
+2025-11-21 18:29:40,730 - data.loader - INFO -   Extracted: extracted_packages
+Loading packages...
+2025-11-21 18:29:40,730 - data.loader - INFO - Loading from cache: cache\dataset\mal_packages_cache.pkl
+2025-11-21 18:29:40,731 - data.loader - INFO - Loaded 4 malicious packages from cache
+Loaded 4 packages
+   1. @0x000000000000000/util
+   2. @aaakca/myf
+   3. @alfalab/core-components
+   4. @anemone95/evil
+============================================================
+RUNNING STRUCTURAL ANALYSIS
+============================================================
+
+ Package 1/4: @0x000000000000000/util
+--------------------------------------------------
+2025-11-21 18:29:40,731 - analysis.structural_analysis - INFO - Running structural analysis on @0x000000000000000/util
+2025-11-21 18:29:40,732 - analysis.structural_analysis - INFO - Structural analysis complete: 0 risk(s) found
+No risks found
+Analysis completed for @0x000000000000000/util
+
+ Package 2/4: @aaakca/myf
+--------------------------------------------------
+2025-11-21 18:29:40,732 - analysis.structural_analysis - INFO - Running structural analysis on @aaakca/myf
+2025-11-21 18:29:40,733 - analysis.structural_analysis - INFO - Structural analysis complete: 1 risk(s) found
+ Found 1 risks:
+    install_hook_present
+     Severity: medium
+     Evidence: preinstall script found...
+     Confidence: 0.5
+     Category: install_hook
+Analysis completed for @aaakca/myf
+
+ Package 3/4: @alfalab/core-components
+--------------------------------------------------
+2025-11-21 18:29:40,733 - analysis.structural_analysis - INFO - Running structural analysis on @alfalab/core-components
+2025-11-21 18:29:40,733 - analysis.structural_analysis - INFO - Structural analysis complete: 26 risk(s) found
+ Found 26 risks:
+    install_hook_present
+     Severity: medium
+     Evidence: postinstall script found...
+     Confidence: 0.5
+     Category: install_hook
+    potential_dependency_confusion
+     Severity: medium
+     Evidence: Scoped package '@alfalab/core-components' depends on non-scoped package 'classna...
+     Confidence: 0.5
+     Category: supply_chain_attack
+    potential_dependency_confusion
+     Severity: medium
+     Evidence: Scoped package '@alfalab/core-components' depends on non-scoped package 'compute...
+     Confidence: 0.5
+     Category: supply_chain_attack
+    .......
+Analysis completed for @alfalab/core-components
+
+ Package 4/4: @anemone95/evil
+--------------------------------------------------
+2025-11-21 18:29:40,740 - analysis.structural_analysis - INFO - Running structural analysis on @anemone95/evil
+2025-11-21 18:29:40,742 - analysis.structural_analysis - INFO - Structural analysis complete: 2 risk(s) found
+ Found 2 risks:
+    potential_dependency_confusion
+     Severity: medium
+     Evidence: Scoped package '@anemone95/evil' depends on non-scoped package 'child_process'...
+     Confidence: 0.5
+     Category: supply_chain_attack
+    suspicious_dependency
+     Severity: high
+     Evidence: Package depends on 'child_process' which can execute system commands...
+     Confidence: 0.7
+     Category: system_capability
+Analysis completed for @anemone95/evil
+
+============================================================
+LLM CONTEXT SUMMARY
+============================================================
+ @0x000000000000000/util: No structural risks detected
+
+ @aaakca/myf:
+   - Total risks: 1
+   - High/Critical: 0
+   - install_hook_present: preinstall script found...
+
+ @alfalab/core-components:
+   - Total risks: 26
+   - High/Critical: 0
+   - install_hook_present: postinstall script found...
+   - potential_dependency_confusion: Scoped package '@alfalab/core-components' depends on non-sco...
+   - potential_dependency_confusion: Scoped package '@alfalab/core-components' depends on non-sco...
+
+ @anemone95/evil:
+   - Total risks: 2
+   - High/Critical: 1
+   - potential_dependency_confusion: Scoped package '@anemone95/evil' depends on non-scoped packa...
+   - suspicious_dependency: Package depends on 'child_process' which can execute system ...
+
+
+============================================================
+FINAL SUMMARY
+============================================================
+Packages analyzed: 4
+Packages with risks: 3
+   - potential_dependency_confusion: Scoped package '@anemone95/evil' depends on non-scoped packa...
+   - suspicious_dependency: Package depends on 'child_process' which can execute system ...
+
+
+============================================================
+FINAL SUMMARY
+============================================================
+Packages analyzed: 4
+Packages with risks: 3
+Total risks found: 29
+
+Structural Analysis completed successfully!
+(venv_llm) PS C:\PROJECT_BUILDING\CAPSTONE\LLMDefender_core\npm-llmdefender>
+
+
+
+
+
+
+
+
+
+
+   - potential_dependency_confusion: Scoped package '@anemone95/evil' depends on non-scoped packa...
+   - suspicious_dependency: Package depends on 'child_process' which can execute system ...
+
+
+============================================================
+FINAL SUMMARY
+============================================================
+Packages analyzed: 4
+Packages with risks: 3
+Total risks found: 29
+
+Structural Analysis completed successfully!
+(venv_llm) PS C:\PROJECT_BUILDING\CAPSTONE\LLMDefender_core\npm-llmdefender>
+
+
+
+
+
+   - potential_dependency_confusion: Scoped package '@anemone95/evil' depends on non-scoped packa...
+   - suspicious_dependency: Package depends on 'child_process' which can execute system ...
+
+
+============================================================
+FINAL SUMMARY
+============================================================
+Packages analyzed: 4
+Packages with risks: 3
+Total risks found: 29
+
+============================================================
+FINAL SUMMARY
+============================================================
+Packages analyzed: 4
+Packages with risks: 3
+Packages analyzed: 4
+Packages with risks: 3
+Total risks found: 29
+
+Structural Analysis completed successfully!
+(venv_llm) PS C:\PROJECT_BUILDING\CAPSTONE\LLMDefender_core\npm-llmdefender>
+
+để phục vụ co bước tiếp theo
