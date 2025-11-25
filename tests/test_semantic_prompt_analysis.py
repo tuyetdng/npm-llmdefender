@@ -151,10 +151,3 @@ def run_semantic_analysis():
 def main():
     print("Semantic Analysis Test...")
     print("=" * 60)
-    
-    run_semantic_analysis()
-
-if __name__ == "__main__":
-    main()
-
-    
