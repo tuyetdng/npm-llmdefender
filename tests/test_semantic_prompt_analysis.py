@@ -1,7 +1,7 @@
 """
 TEST SEMANTIC PROMPT ANALYSIS
 """
-from datetime import time
+import time
 import json
 import sys
 from pathlib import Path
@@ -10,7 +10,6 @@ import re
 import sys
 from typing import Any, Dict, Optional
 from logs.logging_config import setup_logger
-from models.prompts.templates.semantic_prompt_analysis import SemanticPromptAnalysis
 
 logger = setup_logger()
 
@@ -19,6 +18,7 @@ src_path = project_root / "src"
 sys.path.insert(0, str(src_path))
 
 try:
+    from models.prompts.templates.semantic_prompt_analysis import SemanticPromptAnalysis
     from models.providers.deepseek_adapter import DeepSeekAdapter
     from data.loader import DatasetLoader
     from data.models import PackageProfile
@@ -89,7 +89,7 @@ def run_semantic_analysis():
             use_cache = True,
             force_refresh = False,
             show_progress= True,
-            limit=2
+            limit=3
         )
     print(f"Loaded {len(packages)} packages")
     
@@ -138,9 +138,8 @@ def run_semantic_analysis():
         t0 = time.time()
         output = adapter.generate(final_prompt, max_new_tokens=4096)
         t1 = time.time()
-        
         print("Time (s):", t1 - t0)
-        print("Raw output:\n", output[:2000])
+        print("Raw output:\n", output)
         
 
         data = _extract_from_markdown(output)
@@ -148,15 +147,6 @@ def run_semantic_analysis():
             print("Parsed JSON:", json.dumps(data, indent=2))
         else:
             print("Failed to extract JSON from model output")
-        
-        print(f"\n{'='*60}")
-        print("SUMMARY")
-        print(f"{'='*60}")
-        for result in results:
-            print(f"Package: {result['package']}")
-            print(f"  Structural risks: {result['structural_risks']}")
-            print(f"  Semantic behaviors: {result['semantic_behaviors']}")
-            print()
 
 def main():
     print("Semantic Analysis Test...")

@@ -80,10 +80,12 @@ def generate_llm_context(results):
         if risks:
             risk_count = len(risks)
             high_risks = [r for r in risks if r.severity.value in ['high', 'critical']]
+            all_categories = list(set([risk.category.value for risk in risks]))
             
             context_parts.append(f" {package_name}:")
             context_parts.append(f"   - Total risks: {risk_count}")
             context_parts.append(f"   - High/Critical: {len(high_risks)}")
+            context_parts.append(f"   - Categories: {', '.join(sorted(all_categories))}")
             
             for risk in risks[:3]:
                 context_parts.append(f"   - {risk.risk_type}: {risk.evidence[:60]}...")
