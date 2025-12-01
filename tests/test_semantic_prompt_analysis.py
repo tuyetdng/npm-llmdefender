@@ -10,8 +10,14 @@ import re
 import sys
 from typing import Any, Dict, Optional
 from logs.logging_config import setup_logger
+from config.csv_logger_config import CSVLoggerConfig
+
 
 logger = setup_logger()
+csv_logger = CSVLoggerConfig(
+    output_dir="./experiment_results",
+    prompt_version="v1.0"
+)
 
 project_root = Path(__file__).resolve().parent.parent
 src_path = project_root / "src"
@@ -110,17 +116,19 @@ def run_semantic_analysis():
     results = []
     
     for i, package in enumerate(test_packages, 1):
-        print(f"\n{'='*60}")
-        print(f" Package {i}/{len(test_packages)}: {package.package_name}")
-        print(f"{'='*60}")
+        print(f"\n Package {i}/{len(test_packages)}: {package.package_name}")
+        print("-" * 50)
+        print(f"Analyzing package {i}/{len(test_packages)}: {package.package_name}")
         
-        print("Running structural analysis...")
-        structural_analyzer = StructuralAnalyzer(package)
-        structural_risks = structural_analyzer.run_all()
+        analyzer = StructuralAnalyzer(package)
         
-        print(f"Found {len(structural_risks)} structural risks")
-        for risk in structural_risks:
-            print(f"  - {risk.risk_type}: {risk.severity.value}")
+        risks = analyzer.run_all()
+        
+        csv_logger.log_structural_anlyser(
+            package_name=package.package_name,
+            version=package.version,
+            findings=risks
+        )
         
         # Run semantic analysis
         print("Running semantic analysis...")
@@ -145,9 +153,28 @@ def run_semantic_analysis():
         data = _extract_from_markdown(output)
         if data:
             print("Parsed JSON:", json.dumps(data, indent=2))
+            csv_logger.log_semantic_analysis(
+                package_name=package.package_name,
+                version=package.version,
+                raw_response=output,
+                parsed_json=data
+            )
         else:
             print("Failed to extract JSON from model output")
+            csv_logger.log_model_failure(
+                package_name=package.package_name,
+                version=package.version,
+                response=output,
+                failure_type="json_parsing_error"
+            )
 
 def main():
     print("Semantic Analysis Test...")
     print("=" * 60)
+    
+    run_semantic_analysis()
+
+if __name__ == "__main__":
+    main()
+
+    

@@ -43,70 +43,57 @@ class DeepSeekAdapter:
         self._loaded = True
         print("Model loaded successfully!")
         
-    # def prepare_inputs(self, prompt: str, use_chat_template: bool = True, add_generation_prompt: bool = True):
-    #     # Chat template helper
-    #     if use_chat_template and hasattr(self.tokenizer, "apply_chat_template"):
-    #         messages = [{"role":"user","content": prompt}]
-    #         text = self.tokenizer.apply_chat_template(
-    #             messages, 
-    #             add_generation_prompt=add_generation_prompt, 
-    #             tokenize=False  
-    #         )
-    #         inputs = self.tokenizer(text, return_tensors="pt")
-    #     else:
-    #         inputs = self.tokenizer(prompt, return_tensors="pt")
+    def prepare_inputs(self, prompt: str, use_chat_template: bool = True, add_generation_prompt: bool = True):
+        # Chat template helper
+        if use_chat_template and hasattr(self.tokenizer, "apply_chat_template"):
+            messages = [{"role":"user","content": prompt}]
+            text = self.tokenizer.apply_chat_template(
+                messages, 
+                add_generation_prompt=add_generation_prompt, 
+                tokenize=False  
+            )
+            inputs = self.tokenizer(text, return_tensors="pt")
+        else:
+            inputs = self.tokenizer(prompt, return_tensors="pt")
             
-    #     result = {}
-    #     for key, tensor_value in inputs.items():
-    #         tensor_on_gpu = tensor_value.to(self.model.device)
-    #         result[key] = tensor_on_gpu
+        result = {}
+        for key, tensor_value in inputs.items():
+            tensor_on_gpu = tensor_value.to(self.model.device)
+            result[key] = tensor_on_gpu
         
-    #     return result
+        return result
 
     
-    def generate(self,
-                 system: str,
-                 user: str,
-                 instructions: str,
-                 max_new_tokens: Optional[int] = None) -> str:
+    def generate(self, prompt: str, max_new_tokens: Optional[int] = None) -> str:
         try:
             if not self._loaded:
                 self.load_model()
 
-            messages = [
-                        {"role": "system", "content": system},
-                        {"role": "user", "content": user + "\n\n" + instructions}
-                    ]
-            text = self.tokenizer.apply_chat_template(messages, add_generation_prompt=True, tokenize=False)
-            
-            inputs = self.tokenizer(text, return_tensors="pt").to(self.model.device)
-            
-            
             cfg = {
                 "max_new_tokens": max_new_tokens or self.config.get("max_new_tokens", 2048),
                 "temperature": self.config.get("temperature", 0.1),
                 "top_k": self.config.get("top_k", 50),
                 "top_p": self.config.get("top_p", 0.95),
                 "do_sample": self.config.get("do_sample", False),
-                "eos_token_id": self.tokenizer.eos_token_id,
-                "pad_token_id": self.tokenizer.eos_token_id
             }
 
+            inputs = self.prepare_inputs(prompt)
             with torch.no_grad():
                 outputs = self.model.generate(
                     **inputs,
-                    **cfg
+                    **cfg,
+                    eos_token_id=getattr(self.tokenizer, "eos_token_id", None),
+                    pad_token_id=getattr(self.tokenizer, "pad_token_id", self.tokenizer.eos_token_id)
                 )
 
-            full_text = self.tokenizer.decode(outputs[0], skip_special_tokens=False)
+            text = self.tokenizer.decode(outputs[0], skip_special_tokens=True)
 
-            parts = full_text.split("### Response:")
-            if len(parts) > 1:
-                res = parts[-1].replace("<|EOT|>", "").strip()
-            elif messages in text:
-                res = full_text.strip()
+            if text.startswith(prompt):
+                text = text[len(prompt):].strip()
+            elif prompt in text:
+                text = text.split(prompt, 1)[-1].strip()
                 
-            return res
+            return text
         except Exception as e:
             logger.error(f"Generation failed: {e}")
             return f"ERROR: {str(e)}"

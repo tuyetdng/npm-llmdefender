@@ -4,9 +4,14 @@ STRUCTURAL ANALYSIS TEST
 
 import sys
 from pathlib import Path
+from config.csv_logger_config import CSVLoggerConfig
 from logs.logging_config import setup_logger
 
 logger = setup_logger()
+csv_logger = CSVLoggerConfig(
+    output_dir="./experiment_results",
+    prompt_version="v1.0"
+)
 
 project_root = Path(__file__).resolve().parent.parent
 src_path = project_root / "src"
@@ -30,36 +35,42 @@ def run_structural_analysis(packages):
     print("=" * 60)
     print("RUNNING STRUCTURAL ANALYSIS")
     print("=" * 60)
-    logger.info("RUNNING STRUCTURAL ANALYSIS")
     
     all_results = []
     
     for i, package in enumerate(packages, 1):
         print(f"\n Package {i}/{len(packages)}: {package.package_name}")
         print("-" * 50)
-        logger.info(f"Analyzing package {i}/{len(packages)}: {package.package_name}")
+        print(f"Analyzing package {i}/{len(packages)}: {package.package_name}")
         
         analyzer = StructuralAnalyzer(package)
         
         risks = analyzer.run_all()
         
+        csv_logger.log_structural_anlyser(
+            package_name=package.package_name,
+            version=package.version,
+            findings=risks
+        )
+        
         if risks:
-            logger.info(f" Found {len(risks)} risks:")
+            print(f" Found {len(risks)} risks:")
             for risk in risks:
-                logger.info(f"    {risk.risk_type}")
-                logger.info(f"     Severity: {risk.severity.value}")
-                logger.info(f"     Evidence: {risk.evidence[:80]}...")
-                logger.info(f"     Confidence: {risk.confidence}")
-                logger.info(f"     Category: {risk.category.value}")
+                print(f"    {risk.risk_type}")
+                print(f"     Severity: {risk.severity.value}")
+                print(f"     Evidence: {risk.evidence[:80]}...")
+                print(f"     Confidence: {risk.confidence}")
+                print(f"     Category: {risk.category.value}")
         else:
-            logger.info("No risks found")
+            print("No risks found")
         
         all_results.append({
             'package': package.package_name,
+            'version': package.version,
             'risks': risks
         })
         
-        logger.info(f"Analysis completed for {package.package_name}")
+        print(f"Analysis completed for {package.package_name}")
     
     return all_results
 
@@ -69,7 +80,6 @@ def generate_llm_context(results):
     print("\n" + "=" * 60)
     print("LLM CONTEXT SUMMARY")
     print("=" * 60)
-    logger.info("LLM CONTEXT SUMMARY")
     
     context_parts = []
     
@@ -107,7 +117,7 @@ def main():
             extract_dir="./extracted_packages"
         )
         
-        logger.info("Loading packages...")
+        print("Loading packages...")
         packages = loader.load_malicious_packages(
             use_cache = True,
             force_refresh = False,
@@ -117,19 +127,16 @@ def main():
         
         if not packages:
             print("No packages loaded!")
-            logger.warning("No packages loaded!")
             return 1
             
         packages = packages[:4]
         print(f"Loaded {len(packages)} packages")
-        logger.info(f"Loaded {len(packages)} packages")
         
         for i, pkg in enumerate(packages, 1):
             logger.info(f"   {i}. {pkg.package_name}")
         
     except Exception as e:
         print(f"Error loading packages: {e}")
-        logger.error(f"Error loading packages: {e}")
         import traceback
         traceback.print_exc()
         return 1
@@ -139,18 +146,18 @@ def main():
     llm_context = generate_llm_context(results)
     logger.info(llm_context)
     
-    logger.info("\n" + "=" * 60)
-    logger.info("FINAL SUMMARY")
-    logger.info("=" * 60)
+    print("\n" + "=" * 60)
+    print("FINAL SUMMARY")
+    print("=" * 60)
     
     total_risks = sum(len(result['risks']) for result in results)
     packages_with_risks = sum(1 for result in results if result['risks'])
     
-    logger.info(f"Packages analyzed: {len(packages)}")
-    logger.info(f"Packages with risks: {packages_with_risks}")
-    logger.info(f"Total risks found: {total_risks}")
+    print(f"Packages analyzed: {len(packages)}")
+    print(f"Packages with risks: {packages_with_risks}")
+    print(f"Total risks found: {total_risks}")
     
-    logger.info("Structural Analysis completed successfully!")
+    print("Structural Analysis completed successfully!")
     
     return 0
 
