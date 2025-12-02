@@ -163,8 +163,3 @@ class SemanticPromptAnalysis:
             "user": self._get_user_message(),
             "instructions": self._get_instructions()  #
         }
-        
-        
-
-
-        
