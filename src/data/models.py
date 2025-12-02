@@ -8,8 +8,8 @@ from datetime import datetime
 import uuid
 import logging
 
-from enums.behavior_category import BehaviorCategory
-from enums.severity import Severity
+from src.enums.behavior_category import BehaviorCategory
+from src.enums.severity import Severity
 
 logger = logging.getLogger(__name__)
 logging.basicConfig(

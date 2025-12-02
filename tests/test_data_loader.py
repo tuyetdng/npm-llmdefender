@@ -74,7 +74,7 @@ def main():
     
     try:
         loader = DatasetLoader(
-            source_dir="./dataset/TestDataset",
+            source_dir="./dataset",
             cache_dir=CACHE_PATH, 
             extract_dir=EXTRACT_PATH,
             mal_folder=mal_folder_name,  

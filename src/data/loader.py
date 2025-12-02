@@ -13,8 +13,9 @@ from datetime import datetime
 
 from tqdm import tqdm
 
-from .models import PackageProfile
-from enums.behavior_category import BehaviorCategory
+from src.data.models import PackageProfile
+from src.enums.behavior_category import BehaviorCategory
+from src.enums.severity import Severity
 
 logger = logging.getLogger(__name__)
 logging.basicConfig(
