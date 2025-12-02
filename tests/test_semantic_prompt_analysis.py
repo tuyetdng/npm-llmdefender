@@ -132,7 +132,7 @@ def run_semantic_analysis():
         
         # Run semantic analysis
         print("Running semantic analysis...")
-        semantic_analyzer = SemanticPromptAnalysis(package, structural_risks)
+        semantic_analyzer = SemanticPromptAnalysis(package, risks)
         prompt_parts = semantic_analyzer.build_prompt()
         
         final_prompt = f"""

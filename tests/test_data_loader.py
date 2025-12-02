@@ -27,7 +27,7 @@ def main():
     DATASET_PATH = "./dataset" 
     CACHE_PATH = "./test_cache"
     EXTRACT_PATH = "./extracted_packages" 
-    NUM_PACKAGES = 4 
+    NUM_PACKAGES = 10 
     
     print(f"\nConfiguration:")
     print(f"Dataset: {DATASET_PATH}")
