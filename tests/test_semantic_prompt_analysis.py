@@ -92,10 +92,10 @@ def run_semantic_analysis():
             extract_dir="./extracted_packages"
         )
     packages = loader.load_malicious_packages(
-            use_cache = True,
+            use_cache = False,
             force_refresh = False,
             show_progress= True,
-            limit=3
+            limit=10
         )
     print(f"Loaded {len(packages)} packages")
     

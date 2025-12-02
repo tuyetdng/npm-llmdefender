@@ -119,17 +119,17 @@ def main():
         
         print("Loading packages...")
         packages = loader.load_malicious_packages(
-            use_cache = True,
+            use_cache = False,
             force_refresh = False,
             show_progress= True,
-            limit=4
+            limit=10
         )
         
         if not packages:
             print("No packages loaded!")
             return 1
             
-        packages = packages[:4]
+        packages = packages[:10]
         print(f"Loaded {len(packages)} packages")
         
         for i, pkg in enumerate(packages, 1):
