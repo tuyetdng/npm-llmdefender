@@ -8,5 +8,6 @@ venv_llm/
 .ipynb_checkpoints/
 .vscode/
 .idea/
+extracted_packages/
 .DS_Store
 Thumbs.db
