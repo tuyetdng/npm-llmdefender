@@ -1,4 +1,3 @@
-#src/models/prompts/templates/semantic_prompt_analysis.py
 """
 SEMANTIC ANALYSIS PROMPT TEMPLATES
 """
@@ -70,8 +69,7 @@ class SemanticPromptAnalysis:
     def _get_system_message(self) -> str:
         """System messages for the prompt."""        
         return (
-            "You are a cybersecurity expert specialized in analyzing NPM packages for malicious behavior."
-            "Your task is to review the provided code snippets and structural analysis context of open-source npm packages to identify potential malicious behaviors.\n\n"
+            "You are a JavaScript cybersecurity analyst, your task is to review open-source dependencies in client and server-side JavaScript code for potentially malicious behavior or sabotage."
             "for malicious behavior, supply chain attacks, and other security risks. "
             "Do NOT flag standard minified code or third-party library usage alone."
             "FILL THE JSON SKELETON BELOW based ONLY on the provided files."

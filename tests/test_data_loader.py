@@ -27,7 +27,7 @@ def main():
     DATASET_PATH = "./dataset" 
     CACHE_PATH = "./test_cache"
     EXTRACT_PATH = "./extracted_packages" 
-    NUM_PACKAGES = 10 
+    NUM_PACKAGES = 20 
     
     print(f"\nConfiguration:")
     print(f"Dataset: {DATASET_PATH}")
@@ -45,6 +45,7 @@ def main():
     ben_folder_name = "ben" 
     
     mal_folder = dataset_path / mal_folder_name
+    ben_folder = dataset_path / ben_folder_name
     
     if not dataset_path.exists():
         print(f"Dataset not found: {dataset_path}")
@@ -56,10 +57,16 @@ def main():
         print(f"Malicious packages folder not found: {mal_folder}")
         sys.exit(1)
     
+    if not ben_folder.exists():
+        print(f"Benign packages folder not found: {ben_folder}")
+        sys.exit(1)
+    
     print(f"Malicious folder exists: {mal_folder}")
+    print(f"Benign folder exists: {ben_folder}")
     
     tarballs = list(mal_folder.glob("*.tar.gz")) + list(mal_folder.glob("*.tgz"))
-    extracted = [d for d in mal_folder.iterdir() if d.is_dir()]
+    tarballs += list(ben_folder.glob("*.tar.gz")) + list(ben_folder.glob("*.tgz"))
+    extracted = [d for d in mal_folder.iterdir() if d.is_dir()] + [d for d in ben_folder.iterdir() if d.is_dir()]
     
     print(f"Found {len(tarballs)} tarball files")
     print(f"Found {len(extracted)} extracted directories")

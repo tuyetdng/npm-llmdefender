@@ -181,6 +181,7 @@ class DatasetMetadata:
     cache_exists: bool
     extracted_exists: bool
     cache_timestamp: Optional[datetime] = None
+    # extraction_timestamp: Optional[datetime] = None
 
     def __str__(self) -> str:
         status = "CACHED" if self.cache_exists else "NOT CACHED"
@@ -249,6 +250,9 @@ class DatasetLoader:
         if not self.mal_source.exists():
             raise FileNotFoundError(f"Malicious folder does not exist: {self.mal_source}")   
          
+        if not self.ben_source.exists():
+            raise FileNotFoundError(f"Benign folder does not exist: {self.ben_source}")
+        
         logger.info(f"DatasetLoader initialized:")
         logger.info(f"  Source: {self.data_dir}")
         logger.info(f"  Cache: {self.cache_dir}")
@@ -295,6 +299,72 @@ class DatasetLoader:
             logger.info(f"Using existing extracted packages in {extracted_path}")
             
         return extracted_path
+    
+    def load_packages(
+        self,
+        use_cache: bool = True,
+        force_refresh: bool = False,
+        show_progress: bool = True,
+        limit: Optional[int] = None,
+        balanced_experiment_test_only: bool = False
+    ) -> List[PackageProfile]:
+        """
+        Load ALL packages (both malicious and benign).
+        
+        Args:
+            use_cache: If True, use cached data if available
+            force_refresh: If True, skip cache and reload from disk
+            show_progress: Show progress bar during loading
+            limit: Maximum number of packages to load TOTAL (not per class)
+            balanced: If True, load equal number of malicious and benign packages
+            
+        Returns:
+            List of PackageProfile objects with correct labels
+        """
+        cache_path = self.dataset_cache / "all_packages_cache.pkl"
+
+        if use_cache and cache_path.exists() and not force_refresh:
+            logger.info(f"Loading all packages from cache: {cache_path}")
+            try:
+                packages = self._load_cache(cache_path)
+                if limit:
+                    packages = packages[:limit]
+                logger.info(f"Loaded {len(packages)} packages from cache")
+                return packages
+            except Exception as e:
+                logger.warning(f"Cache load failed: {e}, reloading from disk...")
+                force_refresh = True
+        
+        # Load malicious packages
+        malicious_packages = self.load_malicious_packages(
+            use_cache=use_cache,
+            force_refresh=force_refresh,
+            show_progress=False,
+            limit=None if not balanced_experiment_test_only else (limit // 2 if limit else None)
+        )
+        
+        # Load benign packages
+        benign_packages = self.load_benign_packages(
+            use_cache=use_cache,
+            force_refresh=force_refresh,
+            show_progress=False,
+            limit=None if not balanced_experiment_test_only else (limit // 2 if limit else None)
+        )
+        
+        # Combine
+        all_packages = malicious_packages + benign_packages
+        
+        if limit and len(all_packages) > limit:
+            all_packages = all_packages[:limit]
+        
+        logger.info(f"Loaded {len(all_packages)} total packages:")
+        logger.info(f"  - Malicious: {len(malicious_packages)}")
+        logger.info(f"  - Benign: {len(benign_packages)}")
+        
+        if use_cache and all_packages:
+            self._save_cache(all_packages, cache_path)
+        
+        return all_packages
         
         
     def load_malicious_packages(
@@ -347,6 +417,56 @@ class DatasetLoader:
         logger.info(f"Loaded {len(packages)} malicious packages successfully")
         return packages
     
+    def load_benign_packages(
+        self,
+        use_cache: bool = True,
+        force_refresh: bool = False,
+        show_progress: bool = True,
+        limit: Optional[int] = None
+    ) -> List[PackageProfile]:
+        """
+        Load ALL packages for training phase.
+
+        Args:
+            use_cache: If True, use cached data if available
+            force_refresh: If True, skip cache and reload from disk
+            show_progress: Show progress bar during loading
+            limit: Maximum number of packages to load
+
+        Returns:
+            List of PackageProfile objects
+        """
+        cache_path = self.dataset_cache / "ben_packages_cache.pkl"
+
+        if use_cache and cache_path.exists() and not force_refresh:
+            logger.info(f"Loading from cache: {cache_path}")
+            try:
+                packages = self._load_cache(cache_path)
+                if limit:
+                    packages = packages[:limit]
+                logger.info(f"Loaded {len(packages)} packages from cache")
+                return packages
+            except Exception as e:
+                logger.warning(f"Cache load failed with error: {e}, reloading from disk...")
+                force_refresh = True
+
+        extracted_path = self.ensure_extracted("benign", use_cache=use_cache, show_progress=show_progress)
+        
+        logger.info(f"Loading  packages from: {extracted_path}...")
+
+        packages = self._load_packages_from_folder(
+            folder_path=extracted_path,
+            label="benign",
+            limit=limit,
+            show_progress=show_progress
+        )
+
+        if use_cache and packages:
+            self._save_cache(packages, cache_path)
+
+        logger.info(f"Loaded {len(packages)} benign packages successfully")
+        return packages
+    
     def stream_malicious_packages(
         self, 
         use_cache: bool = True,
@@ -356,13 +476,12 @@ class DatasetLoader:
         Stream malicious packages one by one without full loading.
 
         Yields:
-            PackageProfile objects labeled as malicious
+            PackageProfile objects labeled as 
         """
         extracted_path = self.ensure_extracted("malicious", use_cache=use_cache, show_progress=show_progress)
-        
         package_dirs = sorted([d for d in extracted_path.iterdir() if d.is_dir()])
         
-        logger.info(f"Streaming {len(package_dirs)} malicious packages...")
+        logger.info(f"Streaming {len(package_dirs)}  packages...")
         
         iterable = tqdm(package_dirs, desc="Streaming packages") if show_progress else package_dirs
         
@@ -375,6 +494,34 @@ class DatasetLoader:
                 logger.warning(f"Error loading package {pkg_dir}: {e}")
                 continue
     
+    def stream_benign_packages(
+        self, 
+        use_cache: bool = True,
+        show_progress: bool = True
+    ) -> Iterator[PackageProfile]:
+        """
+        Stream benign packages one by one without full loading.
+
+        Yields:
+            PackageProfile objects labeled as 
+        """
+        extracted_path = self.ensure_extracted("benign", use_cache=use_cache, show_progress=show_progress)
+        package_dirs = sorted([d for d in extracted_path.iterdir() if d.is_dir()])
+        
+        logger.info(f"Streaming {len(package_dirs)}  packages...")
+        
+        iterable = tqdm(package_dirs, desc="Streaming packages") if show_progress else package_dirs
+        
+        for pkg_dir in iterable:
+            try:
+                package = self._load_single_package(pkg_dir, label="benign")
+                if package:
+                    yield package
+            except Exception as e:
+                logger.warning(f"Error loading package {pkg_dir}: {e}")
+                continue
+    
+    # HELPER METHODS
     
     def get_dataset_metadata(self) -> DatasetMetadata:
         """
@@ -398,10 +545,17 @@ class DatasetLoader:
         cache_timestamp = datetime.fromtimestamp(cache_path.stat().st_mtime) if cache_exists else None
 
         mal_extracted_exists = (self.mal_extracted / EXTRACTION_MARKER).exists()
+        ben_extracted_exists = (self.ben_extracted / EXTRACTION_MARKER).exists()
         extraction_timestamp = None
         if mal_extracted_exists:
             marker_file = self.mal_extracted / EXTRACTION_MARKER
             extraction_timestamp = datetime.fromtimestamp(marker_file.stat().st_mtime)
+            
+        if ben_extracted_exists:
+            marker_file = self.ben_extracted / EXTRACTION_MARKER
+            ben_extraction_time = datetime.fromtimestamp(marker_file.stat().st_mtime)
+            if extraction_timestamp is None or ben_extraction_time > extraction_timestamp:
+                extraction_timestamp = ben_extraction_time
         
         return DatasetMetadata(
             total_packages=total_packages,
@@ -409,13 +563,12 @@ class DatasetLoader:
             benign_count=len(ben_tarballs),
             avg_size_mb=avg_size_mb,
             cache_exists=cache_exists,
-            extracted_exists=mal_extracted_exists,
+            extracted_exists=mal_extracted_exists or ben_extracted_exists,
             cache_timestamp=cache_timestamp,
-            extraction_timestamp=extraction_timestamp
         )
         
     
-    def validate_dataset(self, sample_size: int = 10) -> Dict[str, Any]:
+    def validate_dataset(self, sample_size: int = 20) -> Dict[str, Any]:
         """
         Validate dataset structure and extraction.
         """
@@ -423,23 +576,47 @@ class DatasetLoader:
         
         try:
             extracted_path = self.ensure_extracted("malicious", use_cache=True, show_progress=False)
+            extracted_path_ben = self.ensure_extracted("benign", use_cache=True, show_progress=False)
         except Exception as e:
             return {
                 "valid": False,
                 "error": f"Extraction failed: {e}"
             }
         
-        all_dirs = [d for d in extracted_path.iterdir() if d.is_dir()]
-        package_dirs = sorted(all_dirs)[:sample_size]
-
-        if not package_dirs:
+        mal_dirs = [d for d in extracted_path.iterdir() if d.is_dir()]
+        ben_dirs = [d for d in extracted_path_ben.iterdir() if d.is_dir()]
+    
+        total_mal = len(mal_dirs)
+        total_ben = len(ben_dirs)
+        total_available = total_mal + total_ben
+        
+        if total_available == 0:
             return {
                 "valid": False,
                 "error": "No extracted packages found"
             }
         
+        if total_available <= sample_size:
+            package_dirs = mal_dirs + ben_dirs
+        else:
+            mal_ratio = total_mal / total_available
+            mal_sample_size = max(1, int(sample_size * mal_ratio)) 
+            ben_sample_size = max(1, sample_size - mal_sample_size)
+            
+            mal_sample_size = min(mal_sample_size, total_mal)
+            ben_sample_size = min(ben_sample_size, total_ben)
+            
+            package_dirs = mal_dirs[:mal_sample_size] + ben_dirs[:ben_sample_size]
+        
+        logger.info(f"Sampling {len([d for d in package_dirs if d.parent.name == 'mal'])} malicious "
+                    f"and {len([d for d in package_dirs if d.parent.name == 'ben'])} benign packages "
+                    f"(Total available: {total_mal} mal, {total_ben} ben)")
+        
+            
         issues = []
         valid_count = 0
+        mal_valid = 0
+        ben_valid = 0
         
         for pkg_dir in package_dirs:
             package_subdir = pkg_dir / "package"
@@ -468,16 +645,27 @@ class DatasetLoader:
                 continue
                 
             valid_count += 1
-        
+            if pkg_dir.parent.name == "mal":
+                mal_valid += 1
+            else:
+                ben_valid += 1
+            
         is_valid = valid_count >= max(1, len(package_dirs) * 0.8)       # At least 80% valid
         status = "VALID" if is_valid else "INVALID"
         
         logger.info(f"{status}: {valid_count}/{len(package_dirs)} packages valid")
+        logger.info(f"  - Malicious: {mal_valid}/{len([d for d in package_dirs if d.parent.name == 'mal'])} valid")
+        logger.info(f"  - Benign: {ben_valid}/{len([d for d in package_dirs if d.parent.name == 'ben'])} valid")
         
         return {
             "valid": is_valid,
             "total_checked": len(package_dirs),
+            "total_available": total_available,
+            "malicious_available": total_mal,
+            "benign_available": total_ben,
             "valid_count": valid_count,
+            "malicious_valid": mal_valid,
+            "benign_valid": ben_valid,
             "invalid_count": len(issues),
             "issues": issues
         }
