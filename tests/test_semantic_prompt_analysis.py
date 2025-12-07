@@ -16,7 +16,7 @@ from config.csv_logger_config import CSVLoggerConfig
 logger = setup_logger()
 csv_logger = CSVLoggerConfig(
     output_dir="./experiment_results",
-    prompt_version="v1.0"
+    prompt_version="v2.0"
 )
 
 project_root = Path(__file__).resolve().parent.parent

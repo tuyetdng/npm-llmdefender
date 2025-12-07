@@ -70,12 +70,12 @@ class SemanticPromptAnalysis:
     def _get_system_message(self) -> str:
         """System messages for the prompt."""        
         return (
-            "You are a cybersecurity expert specialized in analyzing NPM packages for malicious behavior."
-            "Your task is to review the provided code snippets and structural analysis context of open-source npm packages to identify potential malicious behaviors.\n\n"
+            "You are a JavaScript cybersecurity analyst, your task is to review open-source dependencies in client and server-side JavaScript code for potentially malicious behavior or sabotage."
             "for malicious behavior, supply chain attacks, and other security risks. "
             "Do NOT flag standard minified code or third-party library usage alone."
             "FILL THE JSON SKELETON BELOW based ONLY on the provided files."
         )
+
         
     
     def _get_user_message(self) -> str:
@@ -124,23 +124,30 @@ class SemanticPromptAnalysis:
         output_schema = {
             "behaviors": [
                 {
-                    "id": "beh_001",
                     "category": categories[0], 
                     "summary": "Brief description of malicious intent",
                     "details": "Specific technical evidence",
-                    "confidence": 0.95
+                    "confidence": "0.0 to 1.0",
+                    "evidence_apis": ["example.api.call"],
+                    "evidence_files": ["example/file/path"],
+                    "evidence_domains": [],
+                    "evidence_commands": [],
+                    "evidence_env_vars": []
                 }
             ],
             "risk_vector": categories[:2]
         }
+
 
         return f"""
             INSTRUCTIONS:
             1. Analyze the provided code snippets and structural analysis context.
             2. Identify any potential malicious behaviors, supply chain attacks, or security risks.
             3. For each identified behavior, classify it into one of the following categories: {', '.join(categories)}.
-            4. Provide a brief explanation for each identified behavior.
+            4. Provide a brief explanation for each identified behavior (short ver).
             5. Assign confidence scores based on evidence clarity.
+            6. DO NOT include 'behavior_id' field in your response - IDs will be generated automatically.
+            7. Include evidence arrays (evidence_apis, evidence_files, etc.) even if empty.
 
             ANALYSIS PRINCIPLES:
             1. Context-Aware: Interpret code within package context (dependencies, scripts, structure)
@@ -148,11 +155,13 @@ class SemanticPromptAnalysis:
             3. Intent-Focused: Describe malicious INTENT, not just implementation mechanics
             4. Conservative Confidence: Lower confidence for ambiguous evidence
             6. The "confidence" field is a float in [0,1] summarizing aggregated confidence.
+            7. The 'risk_vector' field should contain a list of UNIQUE behavior categories found in this package. Include each category only ONCE, even if multiple behaviors share the same category.
             
             OUTPUT REQUIREMENTS:
             - Use EXACTLY this JSON schema: {json.dumps(output_schema, indent=2)}
             - Categories must be from: {', '.join(categories)}
             - Each behavior needs concrete evidence
+            - DO NOT include 'behavior_id' in your JSON response
             - Output ONLY JSON, no other text
             """
 

@@ -8,6 +8,7 @@ import os
 from pathlib import Path
 import sys
 from typing import Dict, List, Optional
+import uuid
 
 project_root = Path(__file__).resolve().parent.parent
 src_path = project_root / "src"
@@ -24,8 +25,8 @@ class CSVLoggerConfig:
     def __init__(self, output_dir: str, prompt_version: str):
         self.output_dir = output_dir
         self.prompt_version = prompt_version
-        
         os.makedirs(output_dir, exist_ok=True)
+        self.behavior_counter = {}
         
     def log_structural_anlyser(self, package_name: str, version: str, findings: List[StructuralAnalysisFinding]):
         """
@@ -70,6 +71,11 @@ class CSVLoggerConfig:
         
         if parsed_json:
             behaviors = parsed_json.get('behaviors', [])
+            
+            for i, behavior in enumerate(behaviors):
+                if 'id' not in behavior:
+                    behavior['id'] = f"BR{uuid.uuid4().hex[:8].upper()}"
+                    
             row = {
                 'package_name': package_name,
                 'version': version,
@@ -93,6 +99,10 @@ class CSVLoggerConfig:
         """Log individual behavior for granular analysis"""
         timestamp = datetime.now().isoformat()
         
+        behavior_id = behavior.get('id')
+        if not behavior_id:
+            behavior_id = f"BR{uuid.uuid4().hex[:8].upper()}"
+        
         details = behavior.get('details', {})
         if isinstance(details, str):
             details_str = details
@@ -107,7 +117,7 @@ class CSVLoggerConfig:
             'package_name': package_name,
             'version': version,
             'timestamp': timestamp,
-            'behavior_id': behavior.get('id', 'unknown'),
+            'behavior_id': behavior_id,
             'category': behavior.get('category', 'unknown'),
             'summary': behavior.get('summary', '')[:200],
             'details': details_str[:1000],
