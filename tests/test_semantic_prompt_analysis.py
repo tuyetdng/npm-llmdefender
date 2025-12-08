@@ -22,6 +22,7 @@ csv_logger = CSVLoggerConfig(
 project_root = Path(__file__).resolve().parent.parent
 src_path = project_root / "src"
 sys.path.insert(0, str(src_path))
+NUM_PACKAGES = 20 
 
 try:
     from models.prompts.templates.semantic_prompt_analysis import SemanticPromptAnalysis
@@ -91,13 +92,24 @@ def run_semantic_analysis():
             source_dir="./dataset",
             extract_dir="./extracted_packages"
         )
-    packages = loader.load_malicious_packages(
-            use_cache = False,
-            force_refresh = False,
-            show_progress= True,
-            limit=10
+    
+    print(f"\n Loading {NUM_PACKAGES} packages (balanced)...")
+    packages = loader.load_packages(
+            use_cache=False, 
+            limit=NUM_PACKAGES,
+            balanced_experiment_test_only=True 
         )
-    print(f"Loaded {len(packages)} packages")
+        
+    if not packages:
+            print(" No packages loaded!")
+            return 1
+        
+    mal_count = sum(1 for p in packages if p.label == "malicious")
+    ben_count = sum(1 for p in packages if p.label == "benign")
+        
+    print(f" Loaded {len(packages)} packages:")
+    print(f"    Malicious: {mal_count}")
+    print(f"    Benign: {ben_count}")
     
     test_packages = packages
     
