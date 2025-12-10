@@ -282,18 +282,19 @@ def update_dashboard(severity_filter, selected_categories):
     )
     
     confidence_data = filtered_df[filtered_df['avg_confidence'] > 0]
-    
+
     if not confidence_data.empty:
         fig6 = make_subplots(
             rows=2, cols=2,
             subplot_titles=(
                 'Confidence Distribution',  
-                'Confidence vs Risk Count',
+                'Cumulative Distribution',
                 'Confidence by Severity',
-                'Cumulative Distribution'
+                'Confidence vs Risk Count'
             )
         )
-        
+
+        # 1) Histogram – row1 col1
         fig6.add_trace(
             go.Histogram(
                 x=confidence_data['avg_confidence'],
@@ -303,7 +304,50 @@ def update_dashboard(severity_filter, selected_categories):
             ),
             row=1, col=1
         )
-        
+
+        # 2) ECDF – moved to row1 col2
+        values = np.sort(confidence_data['avg_confidence'])
+        n = len(values)
+        ecdf_y = np.arange(1, n + 1) / n
+
+        fig6.add_trace(
+            go.Scatter(
+                x=values,
+                y=ecdf_y,
+                mode='lines',
+                line=dict(color='red', width=2),
+                name='ECDF'
+            ),
+            row=1, col=2
+        )
+
+        # ECDF percentiles (50/75/90/95)
+        percentiles = [50, 75, 90, 95]
+        for p in percentiles:
+            percentile_value = np.percentile(values, p)
+            fig6.add_vline(
+                x=percentile_value,
+                line_width=1,
+                line_dash="dash",
+                line_color="gray",
+                row=1, col=2
+            )
+
+        # 3) Boxplots by severity – row2 col1
+        severities = ['high', 'medium', 'low', 'none']
+        for severity in severities:
+            subset = confidence_data[confidence_data['max_severity'] == severity]
+            if not subset.empty:
+                fig6.add_trace(
+                    go.Box(
+                        y=subset['avg_confidence'],
+                        name=severity,
+                        boxpoints='outliers'
+                    ),
+                    row=2, col=1
+                )
+
+        # 4) Scatter Confidence vs Risk Count – moved to row2 col2
         fig6.add_trace(
             go.Scatter(
                 x=confidence_data['risk_count'],
@@ -318,54 +362,15 @@ def update_dashboard(severity_filter, selected_categories):
                 text=confidence_data['package_name'],
                 name='Packages'
             ),
-            row=1, col=2
-        )
-        
-        severities = ['high', 'medium', 'low', 'none']
-        for severity in severities:
-            subset = confidence_data[confidence_data['max_severity'] == severity]
-            if not subset.empty:
-                fig6.add_trace(
-                    go.Box(
-                        y=subset['avg_confidence'],
-                        name=severity,
-                        boxpoints='outliers'
-                    ),
-                    row=2, col=1
-                )
-        
-        # ECDF
-        values = np.sort(confidence_data['avg_confidence'])
-        n = len(values)
-        ecdf_y = np.arange(1, n + 1) / n
-        
-        fig6.add_trace(
-            go.Scatter(
-                x=values,
-                y=ecdf_y,
-                mode='lines',
-                line=dict(color='red', width=2),
-                name='ECDF'
-            ),
             row=2, col=2
         )
-        
-        percentiles = [50, 75, 90, 95]
-        for p in percentiles:
-            percentile_value = np.percentile(values, p)
-            fig6.add_vline(
-                x=percentile_value,
-                line_width=1,
-                line_dash="dash",
-                line_color="gray",
-                row=2, col=2
-            )
-        
+
         fig6.update_layout(
             height=800,
             showlegend=False,
             title_text="Confidence Score Analysis"
         )
+
     else:
         fig6 = go.Figure()
         fig6.add_annotation(

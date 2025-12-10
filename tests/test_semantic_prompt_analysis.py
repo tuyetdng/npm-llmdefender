@@ -22,7 +22,7 @@ csv_logger = CSVLoggerConfig(
 project_root = Path(__file__).resolve().parent.parent
 src_path = project_root / "src"
 sys.path.insert(0, str(src_path))
-NUM_PACKAGES = 20 
+NUM_PACKAGES = 130 
 
 try:
     from models.prompts.templates.semantic_prompt_analysis import SemanticPromptAnalysis
@@ -93,11 +93,11 @@ def run_semantic_analysis():
             extract_dir="./extracted_packages"
         )
     
-    print(f"\n Loading {NUM_PACKAGES} packages (balanced)...")
+    print(f"\n Loading {NUM_PACKAGES} packages...")
     packages = loader.load_packages(
             use_cache=False, 
             limit=NUM_PACKAGES,
-            balanced_experiment_test_only=True 
+            balanced_experiment_test_only=False 
         )
         
     if not packages:
