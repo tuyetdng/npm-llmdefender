@@ -1,0 +1,194 @@
+package_name,version,timestamp,model_name,prompt_version,verdict,confidence,chain_score,is_coherent_chain,legitimacy_score,is_justified,explanation,chain_narrative,justification_reasoning,raw_response,parsed_json
+@aaakca/myf,1.0.14,2025-12-16T01:22:17.941124,DeepSeek-Coder-6.7B-Instruct,v2.0,SUSPICIOUS,0.3,0.3,False,0.3,False,The package might be doing something that is not justified by its purpose or functionality.,The behaviors do not form a coherent attack chain.,The package does not seem to have a clear purpose or functionality.,"### Response:
+Based on the provided information, the package name ""@aaakca/myf"" does not seem to have a clear purpose or functionality. The detected behaviors suggest that the package is involved in a preinstall script that writes to a file and executes a script from a public uploads directory. 
+
+STEP 1: BEHAVIOR CHAIN ANALYSIS
+The behaviors do not form a coherent attack chain. They are isolated and do not seem to follow a specific pattern or chain of events. The chain score is therefore set to 0.3.
+
+STEP 2: CONTEXT LEGITIMACY CHECK
+The package name ""@aaakca/myf"" does not seem to have a clear purpose or functionality. The detected behaviors do not seem to be justified by the package's stated purpose. Therefore, the legitimacy score is set to 0.3.
+
+STEP 3: CALIBRATION
+Combining the chain score of 0.3 and the legitimacy score of 0.3, the calibrated confidence is set to 0.3. This suggests a medium level of confidence in the verdict, indicating that the package might be doing something tha","{""chain_analysis"": {""is_coherent_chain"": false, ""chain_narrative"": ""The behaviors do not form a coherent attack chain."", ""chain_score"": 0.3}, ""legitimacy_check"": {""is_justified"": false, ""reasoning"": ""The package does not seem to have a clear purpose or functionality."", ""legitimacy_score"": 0.3}, ""final_verification"": {""verdict"": ""SUSPICIOUS"", ""calibrated_confidence"": 0.3, ""explanation"": ""The package might be doing something that is not justified by its purpose or functionality.""}}"
+@alfalab/core-components,37.3.0-beta.10,2025-12-16T01:22:29.459462,DeepSeek-Coder-6.7B-Instruct,v2.0,SUSPICIOUS,0.7,0.3,False,0.4,False,"The package name and behaviors do not match the package's stated purpose, but the potential for dependency confusion is present.",The behaviors are isolated and do not form a coherent attack chain.,The package name and behaviors do not match the package's stated purpose.,"### Response:
+Based on the provided information, the package '@alfalab/core-components' seems to be a utility package with no stated purpose. The behaviors it presents are related to the installation of the package and the potential for dependency confusion. 
+
+Here's how I would analyze this:
+
+```json
+{
+  ""chain_analysis"": {
+    ""is_coherent_chain"": false,
+    ""chain_narrative"": ""The behaviors are isolated and do not form a coherent attack chain."",
+    ""chain_score"": 0.3
+  },
+  ""legitimacy_check"": {
+    ""is_justified"": false,
+    ""reasoning"": ""The package name and behaviors do not match the package's stated purpose."",
+    ""legitimacy_score"": 0.4
+  },
+  ""final_verification"": {
+    ""verdict"": ""SUSPICIOUS"",
+    ""calibrated_confidence"": 0.7,
+    ""explanation"": ""The package name and behaviors do not match the package's stated purpose, but the potential for dependency confusion is present.""
+  }
+}
+```
+
+In the chain analysis, I have given a score of 0.3 as the behaviors are isolated and do not","{""chain_analysis"": {""is_coherent_chain"": false, ""chain_narrative"": ""The behaviors are isolated and do not form a coherent attack chain."", ""chain_score"": 0.3}, ""legitimacy_check"": {""is_justified"": false, ""reasoning"": ""The package name and behaviors do not match the package's stated purpose."", ""legitimacy_score"": 0.4}, ""final_verification"": {""verdict"": ""SUSPICIOUS"", ""calibrated_confidence"": 0.7, ""explanation"": ""The package name and behaviors do not match the package's stated purpose, but the potential for dependency confusion is present.""}}"
+@anemone95/evil,1.0.9,2025-12-16T01:22:51.243747,DeepSeek-Coder-6.7B-Instruct,v2.0,SUSPICIOUS,0.7,0.7,True,0.7,True,"The calibrated risk score is 0.7, which is above the threshold for medium confidence. Therefore, the final verdict is 'SUSPICIOUS'.","The behaviors seem to form a partial chain, but it's not clear if they form a 'Kill Chain' (Recon -> Weaponization -> Actions on Objectives).","The package name and the behaviors suggest that it's a malicious package. The package name '@anemone95/evil' is a clear indication of malicious intent. The behaviors also seem to be related to credential theft, sensitive data collection, local code execution, and system reconnaissance, which are common indicators of malicious behavior.","### Response:
+Based on the provided information, the package '@anemone95/evil' seems to be a malicious package. Let's analyze it based on the provided instructions.
+
+STEP 1: BEHAVIOR CHAIN ANALYSIS
+The behaviors seem to be related to system commands execution, which is a common behavior in malware. They seem to form a chain, but it's not clear if they form a 'Kill Chain' (Recon -> Weaponization -> Actions on Objectives). However, the chain score can be set to 0.7, assuming that they form a partial chain.
+
+STEP 2: CONTEXT LEGITIMACY CHECK
+The package name and the behaviors suggest that it's a malicious package. The package name '@anemone95/evil' is a clear indication of malicious intent. The behaviors also seem to be related to credential theft, sensitive data collection, local code execution, and system reconnaissance, which are common indicators of malicious behavior. Therefore, the legitimacy score can be set to 0.7.
+
+STEP 3: CALIBRATION
+By combining the chain score of 0.7 and the le","{""chain_analysis"": {""is_coherent_chain"": true, ""chain_narrative"": ""The behaviors seem to form a partial chain, but it's not clear if they form a 'Kill Chain' (Recon -> Weaponization -> Actions on Objectives)."", ""chain_score"": 0.7}, ""legitimacy_check"": {""is_justified"": true, ""reasoning"": ""The package name and the behaviors suggest that it's a malicious package. The package name '@anemone95/evil' is a clear indication of malicious intent. The behaviors also seem to be related to credential theft, sensitive data collection, local code execution, and system reconnaissance, which are common indicators of malicious behavior."", ""legitimacy_score"": 0.7}, ""final_verification"": {""verdict"": ""SUSPICIOUS"", ""calibrated_confidence"": 0.7, ""explanation"": ""The calibrated risk score is 0.7, which is above the threshold for medium confidence. Therefore, the final verdict is 'SUSPICIOUS'.""}}"
+@actions/core,1.10.1,2025-12-16T01:23:07.011979,DeepSeek-Coder-6.7B-Instruct,v2.0,SUSPICIOUS,0.5,0.5,True,0.4,False,"The chain score and legitimacy score are medium, indicating a low level of confidence in the verdict. The package is not justifying its actions based on its stated purpose.",The behaviors form a partial chain: Sensitive Data Collection -> Supply Chain Propagation -> Obfuscation,"The package '@actions/core' is a core lib for GitHub actions, but it collects sensitive input data and depends on a non-scoped package 'uuid', which could potentially lead to supply chain attacks if the non-scoped package is malicious.","### Response:
+Based on the provided information, here is the analysis:
+
+```json
+{
+  ""chain_analysis"": {
+    ""is_coherent_chain"": true,
+    ""chain_narrative"": ""The behaviors form a partial chain: Sensitive Data Collection -> Supply Chain Propagation -> Obfuscation"",
+    ""chain_score"": 0.5
+  },
+  ""legitimacy_check"": {
+    ""is_justified"": false,
+    ""reasoning"": ""The package '@actions/core' is a core lib for GitHub actions, but it collects sensitive input data and depends on a non-scoped package 'uuid', which could potentially lead to supply chain attacks if the non-scoped package is malicious."",
+    ""legitimacy_score"": 0.4
+  },
+  ""final_verification"": {
+    ""verdict"": ""SUSPICIOUS"",
+    ""calibrated_confidence"": 0.5,
+    ""explanation"": ""The chain score and legitimacy score are medium, indicating a low level of confidence in the verdict. The package is not justifying its actions based on its stated purpose.""
+  }
+}
+```
+
+In the behavior chain analysis, the behaviors form a partial chain: Sens","{""chain_analysis"": {""is_coherent_chain"": true, ""chain_narrative"": ""The behaviors form a partial chain: Sensitive Data Collection -> Supply Chain Propagation -> Obfuscation"", ""chain_score"": 0.5}, ""legitimacy_check"": {""is_justified"": false, ""reasoning"": ""The package '@actions/core' is a core lib for GitHub actions, but it collects sensitive input data and depends on a non-scoped package 'uuid', which could potentially lead to supply chain attacks if the non-scoped package is malicious."", ""legitimacy_score"": 0.4}, ""final_verification"": {""verdict"": ""SUSPICIOUS"", ""calibrated_confidence"": 0.5, ""explanation"": ""The chain score and legitimacy score are medium, indicating a low level of confidence in the verdict. The package is not justifying its actions based on its stated purpose.""}}"
+@alifd/next,1.26.24,2025-12-16T01:23:18.576372,DeepSeek-Coder-6.7B-Instruct,v2.0,SUSPICIOUS,0.7,0.3,False,0.4,False,"The chain score and legitimacy score suggest that the package might be involved in a potential attack, but the specifics are not clear. Further investigation is recommended.",The detected behaviors do not form a coherent attack chain.,"The detected behaviors do not seem to be justified by the package's stated purpose. The package is a component library for web built on React, but the behaviors suggest dependency injection of non-scoped packages, which is not typical for a React-based package.","### Response:
+Based on the provided information, here is the analysis:
+
+```json
+{
+  ""chain_analysis"": {
+    ""is_coherent_chain"": false,
+    ""chain_narrative"": ""The detected behaviors do not form a coherent attack chain."",
+    ""chain_score"": 0.3
+  },
+  ""legitimacy_check"": {
+    ""is_justified"": false,
+    ""reasoning"": ""The detected behaviors do not seem to be justified by the package's stated purpose. The package is a component library for web built on React, but the behaviors suggest dependency injection of non-scoped packages, which is not typical for a React-based package."",
+    ""legitimacy_score"": 0.4
+  },
+  ""final_verification"": {
+    ""verdict"": ""SUSPICIOUS"",
+    ""calibrated_confidence"": 0.7,
+    ""explanation"": ""The chain score and legitimacy score suggest that the package might be involved in a potential attack, but the specifics are not clear. Further investigation is recommended.""
+  }
+}
+```
+
+In the chain analysis, the behaviors do not form a coherent attack chain, so the chain sc","{""chain_analysis"": {""is_coherent_chain"": false, ""chain_narrative"": ""The detected behaviors do not form a coherent attack chain."", ""chain_score"": 0.3}, ""legitimacy_check"": {""is_justified"": false, ""reasoning"": ""The detected behaviors do not seem to be justified by the package's stated purpose. The package is a component library for web built on React, but the behaviors suggest dependency injection of non-scoped packages, which is not typical for a React-based package."", ""legitimacy_score"": 0.4}, ""final_verification"": {""verdict"": ""SUSPICIOUS"", ""calibrated_confidence"": 0.7, ""explanation"": ""The chain score and legitimacy score suggest that the package might be involved in a potential attack, but the specifics are not clear. Further investigation is recommended.""}}"
+@ampproject/remapping,2.2.1,2025-12-16T01:23:31.172052,DeepSeek-Coder-6.7B-Instruct,v2.0,SUSPICIOUS,0.75,0.7,True,0.8,True,"The chain score of 0.7 indicates a high likelihood of a supply chain attack, but the legitimacy score of 0.8 suggests that the package's purpose is reasonably justified by the actions it's performing. Therefore, the final verdict is SUSPICIOUS, with a calibrated confidence level of 0.75.",The detected behaviors form a chain: Obfuscation -> Network Call -> File Write,"The package '@ampproject/remapping' is a tool for remapping sourcemaps, which is a legitimate use of obfuscation","### Response:
+Based on the provided information, here is the analysis:
+
+```json
+{
+  ""chain_analysis"": {
+    ""is_coherent_chain"": true,
+    ""chain_narrative"": ""The detected behaviors form a chain: Obfuscation -> Network Call -> File Write"",
+    ""chain_score"": 0.7
+  },
+  ""legitimacy_check"": {
+    ""is_justified"": true,
+    ""reasoning"": ""The package '@ampproject/remapping' is a tool for remapping sourcemaps, which is a legitimate use of obfuscation"",
+    ""legitimacy_score"": 0.8
+  },
+  ""final_verification"": {
+    ""verdict"": ""SUSPICIOUS"",
+    ""calibrated_confidence"": 0.75,
+    ""explanation"": ""The chain score of 0.7 indicates a high likelihood of a supply chain attack, but the legitimacy score of 0.8 suggests that the package's purpose is reasonably justified by the actions it's performing. Therefore, the final verdict is SUSPICIOUS, with a calibrated confidence level of 0.75.""
+  }
+}
+```
+
+In this analysis, the chain score of 0.7 indicates a high likelihood of a supply chain attack, as the beh","{""chain_analysis"": {""is_coherent_chain"": true, ""chain_narrative"": ""The detected behaviors form a chain: Obfuscation -> Network Call -> File Write"", ""chain_score"": 0.7}, ""legitimacy_check"": {""is_justified"": true, ""reasoning"": ""The package '@ampproject/remapping' is a tool for remapping sourcemaps, which is a legitimate use of obfuscation"", ""legitimacy_score"": 0.8}, ""final_verification"": {""verdict"": ""SUSPICIOUS"", ""calibrated_confidence"": 0.75, ""explanation"": ""The chain score of 0.7 indicates a high likelihood of a supply chain attack, but the legitimacy score of 0.8 suggests that the package's purpose is reasonably justified by the actions it's performing. Therefore, the final verdict is SUSPICIOUS, with a calibrated confidence level of 0.75.""}}"
+@angular/cdk,16.2.5,2025-12-16T01:23:43.181147,DeepSeek-Coder-6.7B-Instruct,v2.0,BENIGN,0.66,0.0,False,1.0,True,"Based on the legitimacy check, the package '@angular/cdk' is used for creating UI components that adhere to Material Design guidelines. The chain analysis did not detect any attack chain. Therefore, the package is considered benign.",No attack chain detected,The package '@angular/cdk' is used for creating UI components that adhere to Material Design guidelines. It does not seem to be used for any malicious activities.,"### Response:
+Based on the provided information, the package '@angular/cdk' is a tool for developing components for Angular Material. The package description and keywords suggest that it is used for creating UI components that adhere to Material Design guidelines.
+
+The detected behaviors are none, indicating that there are no suspicious activities or behaviors associated with this package. Therefore, the chain analysis and legitimacy check are not applicable for this case.
+
+Here is the JSON output:
+
+```json
+{
+  ""chain_analysis"": {
+    ""is_coherent_chain"": false,
+    ""chain_narrative"": ""No attack chain detected"",
+    ""chain_score"": 0.0
+  },
+  ""legitimacy_check"": {
+    ""is_justified"": true,
+    ""reasoning"": ""The package '@angular/cdk' is used for creating UI components that adhere to Material Design guidelines. It does not seem to be used for any malicious activities."",
+    ""legitimacy_score"": 1.0
+  },
+  ""final_verification"": {
+    ""verdict"": ""BENIGN"",
+    ""calibrated_confidence"": 0.66,
+","{""chain_analysis"": {""is_coherent_chain"": false, ""chain_narrative"": ""No attack chain detected"", ""chain_score"": 0.0}, ""legitimacy_check"": {""is_justified"": true, ""reasoning"": ""The package '@angular/cdk' is used for creating UI components that adhere to Material Design guidelines. It does not seem to be used for any malicious activities."", ""legitimacy_score"": 1.0}, ""final_verification"": {""verdict"": ""BENIGN"", ""calibrated_confidence"": 0.66, ""explanation"": ""Based on the legitimacy check, the package '@angular/cdk' is used for creating UI components that adhere to Material Design guidelines. The chain analysis did not detect any attack chain. Therefore, the package is considered benign.""}}"
+@angular/common,16.2.6,2025-12-16T01:23:52.465150,DeepSeek-Coder-6.7B-Instruct,v2.0,BENIGN,0.5,0.0,False,1.0,True,"Based on the provided information, the package '@angular/common' does not seem to have any suspicious behaviors. Therefore, it is considered benign.",,The package '@angular/common' is commonly needed for Angular development and does not seem to need any unusual behaviors.,"### Response:
+Based on the provided information, the package '@angular/common' does not seem to have any suspicious behaviors. Therefore, the chain analysis and legitimacy check can be skipped. The final verification can be set as follows:
+
+```json
+{
+  ""chain_analysis"": {
+    ""is_coherent_chain"": false,
+    ""chain_narrative"": """",
+    ""chain_score"": 0.0
+  },
+  ""legitimacy_check"": {
+    ""is_justified"": true,
+    ""reasoning"": ""The package '@angular/common' is commonly needed for Angular development and does not seem to need any unusual behaviors."",
+    ""legitimacy_score"": 1.0
+  },
+  ""final_verification"": {
+    ""verdict"": ""BENIGN"",
+    ""calibrated_confidence"": 0.5,
+    ""explanation"": ""Based on the provided information, the package '@angular/common' does not seem to have any suspicious behaviors. Therefore, it is considered benign.""
+  }
+}
+```
+
+Please note that this is a hypothetical analysis and the actual results may vary based on the actual behaviors of the package and the context in whic","{""chain_analysis"": {""is_coherent_chain"": false, ""chain_narrative"": """", ""chain_score"": 0.0}, ""legitimacy_check"": {""is_justified"": true, ""reasoning"": ""The package '@angular/common' is commonly needed for Angular development and does not seem to need any unusual behaviors."", ""legitimacy_score"": 1.0}, ""final_verification"": {""verdict"": ""BENIGN"", ""calibrated_confidence"": 0.5, ""explanation"": ""Based on the provided information, the package '@angular/common' does not seem to have any suspicious behaviors. Therefore, it is considered benign.""}}"
+@angular/compiler-cli,16.2.6,2025-12-16T01:24:04.791505,DeepSeek-Coder-6.7B-Instruct,v2.0,SUSPICIOUS,0.5,0.3,False,0.4,False,"The chain score and legitimacy score suggest that the package might be performing behaviors that are not justified by its stated purpose. However, further investigation is needed to confirm these behaviors.",The behaviors are isolated and do not form a coherent attack chain.,The package '@angular/compiler-cli' is not reasonably expected to perform the behaviors of dependency injection of non-scoped packages and propagation of malicious packages.,"### Response:
+Based on the provided information, here is the analysis:
+
+```json
+{
+  ""chain_analysis"": {
+    ""is_coherent_chain"": false,
+    ""chain_narrative"": ""The behaviors are isolated and do not form a coherent attack chain."",
+    ""chain_score"": 0.3
+  },
+  ""legitimacy_check"": {
+    ""is_justified"": false,
+    ""reasoning"": ""The package '@angular/compiler-cli' is not reasonably expected to perform the behaviors of dependency injection of non-scoped packages and propagation of malicious packages."",
+    ""legitimacy_score"": 0.4
+  },
+  ""final_verification"": {
+    ""verdict"": ""SUSPICIOUS"",
+    ""calibrated_confidence"": 0.5,
+    ""explanation"": ""The chain score and legitimacy score suggest that the package might be performing behaviors that are not justified by its stated purpose. However, further investigation is needed to confirm these behaviors.""
+  }
+}
+```
+
+In the chain analysis, the behaviors are isolated and do not form a coherent attack chain. The chain score is 0.3.
+
+In the legitimacy ch","{""chain_analysis"": {""is_coherent_chain"": false, ""chain_narrative"": ""The behaviors are isolated and do not form a coherent attack chain."", ""chain_score"": 0.3}, ""legitimacy_check"": {""is_justified"": false, ""reasoning"": ""The package '@angular/compiler-cli' is not reasonably expected to perform the behaviors of dependency injection of non-scoped packages and propagation of malicious packages."", ""legitimacy_score"": 0.4}, ""final_verification"": {""verdict"": ""SUSPICIOUS"", ""calibrated_confidence"": 0.5, ""explanation"": ""The chain score and legitimacy score suggest that the package might be performing behaviors that are not justified by its stated purpose. However, further investigation is needed to confirm these behaviors.""}}"

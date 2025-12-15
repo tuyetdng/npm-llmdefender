@@ -1,0 +1,36 @@
+{
+  "package_name": "@anemone95/evil",
+  "version": "1.0.9",
+  "label": "malicious",
+  "semantic_findings_summary": {
+    "num_behaviors": 4,
+    "risk_vector": [
+      "credential_theft",
+      "sensitive_data_collection",
+      "local_code_execution",
+      "system_reconnaissance"
+    ]
+  },
+  "verification_result": {
+    "chain_analysis": {
+      "is_coherent_chain": true,
+      "chain_narrative": "The behaviors seem to form a partial chain, but it's not clear if they form a 'Kill Chain' (Recon -> Weaponization -> Actions on Objectives).",
+      "chain_score": 0.7
+    },
+    "legitimacy_check": {
+      "is_justified": true,
+      "reasoning": "The package name and the behaviors suggest that it's a malicious package. The package name '@anemone95/evil' is a clear indication of malicious intent. The behaviors also seem to be related to credential theft, sensitive data collection, local code execution, and system reconnaissance, which are common indicators of malicious behavior.",
+      "legitimacy_score": 0.7
+    },
+    "final_verification": {
+      "verdict": "SUSPICIOUS",
+      "calibrated_confidence": 0.7,
+      "explanation": "The calibrated risk score is 0.7, which is above the threshold for medium confidence. Therefore, the final verdict is 'SUSPICIOUS'."
+    }
+  },
+  "analysis_metadata": {
+    "model": "deepseek-coder-6.7b",
+    "stage": "v2.0"
+  },
+  "created_at": "2025-12-16T01:22:51.243575"
+}
