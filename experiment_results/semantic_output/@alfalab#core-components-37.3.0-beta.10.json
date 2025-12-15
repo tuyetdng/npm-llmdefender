@@ -2,7 +2,26 @@
   "package_name": "@alfalab/core-components",
   "version": "37.3.0-beta.10",
   "label": "malicious",
-  "behaviors": [],
+  "behaviors": [
+    {
+      "category": "install_hook",
+      "summary": "Postinstall script found",
+      "details": "A postinstall script is found in the package metadata. This script may contain malicious code that is run after the package is installed.",
+      "confidence": 0.8,
+      "evidence_files": [
+        "package.json"
+      ]
+    },
+    {
+      "category": "supply_chain_propagation",
+      "summary": "Potential dependency confusion",
+      "details": "The package depends on non-scoped packages like 'classnames', 'compute-scroll-into-view', 'date-fns', 'downshift', 'element-closest', 'intersection-observer', 'libphonenumber-js', 'lodash.debounce', 'nouislider', 'popper-max-size-modifier', 'react-canvas-pattern-lock', 'react-div-100vh', 'react-focus-lock', 'react-merge-refs', 'react-popper', 'react-swipeable', 'react-textarea-autosize', 'react-transition-group', 'react-virtual', 'react-virtuoso', 'recharts', 'simplebar', 'swiper', 'text-mask-core', 'ui-primitives'.",
+      "confidence": 0.8,
+      "evidence_files": [
+        "package.json"
+      ]
+    }
+  ],
   "risk_vector": [
     "install_hook",
     "supply_chain_propagation"
@@ -11,5 +30,5 @@
     "model": "deepseek-coder-6.7b",
     "stage": "v2.0"
   },
-  "created_at": "2025-12-15T14:29:15.236541"
+  "created_at": "2025-12-15T16:20:28.708370"
 }

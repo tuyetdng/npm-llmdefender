@@ -2,7 +2,41 @@
   "package_name": "@actions/core",
   "version": "1.10.1",
   "label": "benign",
-  "behaviors": [],
+  "behaviors": [
+    {
+      "category": "sensitive_data_collection",
+      "summary": "The code collects sensitive input data from the user",
+      "details": "The code uses the getInput function to collect sensitive input data from the user. The input data is not properly sanitized and could potentially be logged or exposed.",
+      "confidence": 0.8,
+      "evidence_apis": [],
+      "evidence_files": [],
+      "evidence_domains": [],
+      "evidence_commands": [],
+      "evidence_env_vars": []
+    },
+    {
+      "category": "supply_chain_propagation",
+      "summary": "The code depends on non-scoped package 'uuid'",
+      "details": "The package '@actions/core' depends on non-scoped package 'uuid'. This could potentially lead to supply chain attacks if the non-scoped package is malicious.",
+      "confidence": 0.7,
+      "evidence_apis": [],
+      "evidence_files": [],
+      "evidence_domains": [],
+      "evidence_commands": [],
+      "evidence_env_vars": []
+    },
+    {
+      "category": "obfuscation",
+      "summary": "Obfuscation pattern 'IIFE obfuscation wrapper' found",
+      "details": "The code uses an obfuscation pattern known as 'IIFE obfuscation wrapper' which could potentially hide malicious code.",
+      "confidence": 0.6,
+      "evidence_apis": [],
+      "evidence_files": [],
+      "evidence_domains": [],
+      "evidence_commands": [],
+      "evidence_env_vars": []
+    }
+  ],
   "risk_vector": [
     "sensitive_data_collection",
     "supply_chain_propagation",
@@ -12,5 +46,5 @@
     "model": "deepseek-coder-6.7b",
     "stage": "v2.0"
   },
-  "created_at": "2025-12-15T14:31:42.133975"
+  "created_at": "2025-12-15T16:22:56.872576"
 }

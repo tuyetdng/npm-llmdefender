@@ -2,7 +2,41 @@
   "package_name": "@angular/compiler-cli",
   "version": "16.2.6",
   "label": "benign",
-  "behaviors": [],
+  "behaviors": [
+    {
+      "category": "dependency_injection",
+      "summary": "Dependency injection of non-scoped packages",
+      "details": "The Angular compiler-cli package is depending on non-scoped packages like reflect-metadata, chokidar, convert-source-map, semver, tslib, and yargs. This could potentially lead to dependency confusion and potential security risks.",
+      "confidence": 0.8,
+      "evidence_apis": [],
+      "evidence_files": [],
+      "evidence_domains": [],
+      "evidence_commands": [],
+      "evidence_env_vars": []
+    },
+    {
+      "category": "supply_chain_propagation",
+      "summary": "Propagation of malicious packages",
+      "details": "The Angular compiler-cli package is depending on packages that could potentially propagate malicious code or attacks. This could lead to supply chain attacks.",
+      "confidence": 0.8,
+      "evidence_apis": [],
+      "evidence_files": [],
+      "evidence_domains": [],
+      "evidence_commands": [],
+      "evidence_env_vars": []
+    },
+    {
+      "category": "executable_binary",
+      "summary": "Package defines 'bin' scripts",
+      "details": "The Angular compiler-cli package defines 'bin' scripts which may execute arbitrary code. This could lead to potential malicious behavior.",
+      "confidence": 0.7,
+      "evidence_apis": [],
+      "evidence_files": [],
+      "evidence_domains": [],
+      "evidence_commands": [],
+      "evidence_env_vars": []
+    }
+  ],
   "risk_vector": [
     "dependency_injection",
     "supply_chain_propagation",
@@ -12,5 +46,5 @@
     "model": "deepseek-coder-6.7b",
     "stage": "v2.0"
   },
-  "created_at": "2025-12-15T14:32:34.160313"
+  "created_at": "2025-12-15T16:23:48.768704"
 }

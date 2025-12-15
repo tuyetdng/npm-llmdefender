@@ -2,7 +2,32 @@
   "package_name": "@att-bit/duc.components.cardshell",
   "version": "10.0.2",
   "label": "malicious",
-  "behaviors": [],
+  "behaviors": [
+    {
+      "category": "supply_chain_attack",
+      "summary": "The package appears to be part of a supply chain attack as it has a preinstall script that runs a test.js file.",
+      "details": "The package has a preinstall script that runs a test.js file. This could potentially be a part of a supply chain attack or malicious behavior.",
+      "confidence": 0.8,
+      "evidence_apis": [],
+      "evidence_files": [
+        "test.js"
+      ],
+      "evidence_domains": [],
+      "evidence_commands": [],
+      "evidence_env_vars": []
+    },
+    {
+      "category": "suspicious_behavior",
+      "summary": "The package exports a function that returns a string 'ICH Package Test'.",
+      "details": "The entry point code exports a function that returns a string 'ICH Package Test'. This could indicate that the package is used for testing or verification purposes.",
+      "confidence": 0.6,
+      "evidence_apis": [],
+      "evidence_files": [],
+      "evidence_domains": [],
+      "evidence_commands": [],
+      "evidence_env_vars": []
+    }
+  ],
   "risk_vector": [
     "supply_chain_attack",
     "suspicious_behavior"
@@ -11,5 +36,5 @@
     "model": "deepseek-coder-6.7b",
     "stage": "v2.0"
   },
-  "created_at": "2025-12-15T14:31:19.208881"
+  "created_at": "2025-12-15T16:22:34.647874"
 }
