@@ -52,7 +52,10 @@ class Behavior(BaseModel):
     - Key: This represents ONE semantic unit of suspicious activity.
     - Multiple behaviors per package form a "risk vector".
     """
-    behavior_id: str = Field(default_factory=lambda: f"BR{uuid.uuid4().hex[:8].upper()}")
+    behavior_id: str = Field(
+        default_factory=lambda: f"BR{uuid.uuid4().hex[:8].upper()}",
+        alias="id"
+    )
     category: BehaviorCategory   
     summary: str = Field(..., min_length=10, max_length=500)
     details: str = Field(..., min_length=20, max_length=2000)
