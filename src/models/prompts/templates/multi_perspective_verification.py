@@ -2,9 +2,13 @@
 VERIFICATION PROMPT TEMPLATES
 """
 
+from datetime import datetime
 import json
+import os
 from typing import Dict, List, Any
 from data.models import PackageProfile
+
+VERIFICATION_OUTPUT_DIR = "./experiment_results/verification_output"
 
 class VerificationPromptAnalysis:
     """
@@ -21,6 +25,35 @@ class VerificationPromptAnalysis:
         """
         self.package = package_profile
         self.semantic_findings = semantic_findings
+        
+    def save_verification_result(self, parsed_data: dict, version_tag: str):
+        """Save verification analysis result to disk."""
+        os.makedirs(VERIFICATION_OUTPUT_DIR, exist_ok=True)
+        
+        result = {
+            "package_name": self.package.package_name,
+            "version": self.package.version,
+            "label": self.package.label,
+            "semantic_findings_summary": {
+                "num_behaviors": len(self.semantic_findings.get("behaviors", [])),
+                "risk_vector": self.semantic_findings.get("risk_vector", [])
+            },
+            "verification_result": parsed_data,
+            "analysis_metadata": {
+                "model": "deepseek-coder-6.7b",
+                "stage": version_tag
+            },
+            "created_at": datetime.now().isoformat()
+        }
+        
+        safe_name = f"{self.package.package_name.replace('/', '#')}-{self.package.version}.json"
+        file_path = os.path.join(VERIFICATION_OUTPUT_DIR, safe_name)
+        
+        with open(file_path, 'w', encoding='utf-8') as f:
+            json.dump(result, f, indent=2, ensure_ascii=False)
+        
+        return file_path
+
 
     def _format_package_intent(self) -> str:
         """
@@ -83,19 +116,19 @@ class VerificationPromptAnalysis:
     def _get_instructions(self) -> str:
         output_schema = {
             "chain_analysis": {
-                "is_coherent_chain": True,
-                "chain_narrative": "Step 1 (Install Hook) -> Step 2 (Download Payload) -> Step 3 (Execute)",
-                "chain_score": 0.95  # 1.0 = Perfect Attack Chain
+                "is_coherent_chain": "<boolean>",
+                "chain_narrative": "<string: short describe the attack flow if exists>",
+                "chain_score": "<float 0.0-1.0: 1.0=perfect attack chain, 0.0=isolated behaviors>"
             },
             "legitimacy_check": {
-                "is_justified": False,
-                "reasoning": "A simple color logger does NOT need access to /etc/shadow or network sockets.",
-                "legitimacy_score": 0.1  # 1.0 = Completely Legitimate/Safe, 0.0 = Totally Unjustified
+                "is_justified": "<boolean>",
+                "reasoning":"<string: short explain if behaviors match package purpose>",
+                "legitimacy_score": "<float 0.0-1.0: 1.0=completely legitimate, 0.0=totally unjustified>"
             },
             "final_verification": {
-                "verdict": "MALICIOUS", # MALICIOUS, SUSPICIOUS, BENIGN
-                "calibrated_confidence": 0.92,
-                "explanation": "High confidence due to clear Kill Chain and lack of business justification."
+                "verdict": "<string: MALICIOUS | SUSPICIOUS | BENIGN>",
+                "calibrated_confidence": "<float 0.0-1.0>",
+                "explanation": "<string: summary reasoning for verdict>"
             }
         }
 
@@ -105,21 +138,30 @@ class VerificationPromptAnalysis:
         STEP 1: BEHAVIOR CHAIN ANALYSIS
         - Examine the list of behaviors. 
         - Look for Causal Dependencies: Does Behavior A facilitate Behavior B? (e.g., Obfuscation -> Network Call -> File Write).
-        - If behaviors are isolated/random, the chain score is LOW/MEDIUM.
-        - If behaviors form a 'Kill Chain' (Recon -> Weaponization -> Actions on Objectives), the chain score is HIGH.
+        - If behaviors are isolated/random, the chain score is LOW (0.0-0.3).
+        - If behaviors form a partial chain, the score is MEDIUM (0.4-0.6).
+        - If behaviors form a 'Kill Chain' (Recon -> Weaponization -> Actions on Objectives), the chain score is HIGH (0.7-1.0).
         
         STEP 2: CONTEXT LEGITIMACY CHECK
         - Compare the 'Target Package Identity' (Description/Name) vs 'Detected Behaviors'.
         - Ask: "Does a package named '{self.package.package_name}' reasonably need to perform these actions?"
-        - Example: A 'deployment-tool' needing 'child_process' is HIGH LEGITIMACY (Score ~0.9).
-        - Example: A 'icon-pack' needing 'network sockets' is LOW LEGITIMACY (Score ~0.1).
+        - Example: A 'deployment-tool' needing 'child_process' is HIGH legitimacy (Score ~0.7-1.0)).
+        - Example: A 'icon-pack' needing 'network sockets' is LOW legitimacy (Score ~0.4-0.6).
+        - Example: An 'icon-pack' opening network sockets → LOW legitimacy (0.0-0.3)
         
         STEP 3: CALIBRATION
-        - Combine both insights to form a final verdict.
+        - Combine both chain_score and legitimacy_score to form final verdict:
+        * Low chain_score + Low legitimacy → MALICIOUS (high confidence)
+        * High chain_score + Low legitimacy → MALICIOUS (very high confidence)
+        * Low chain_score + High legitimacy → BENIGN (medium confidence)
+        * Medium scores on both → SUSPICIOUS (low-medium confidence)
         
         OUTPUT FORMAT:
-        - Return ONLY JSON matching this schema: 
-        {json.dumps(output_schema, indent=2)}
+        - Return ONLY valid JSON matching this schema structure (replace all <...> placeholders with actual values):
+         {json.dumps(output_schema, indent=2)}
+        - Calculate scores based on YOUR ACTUAL ANALYSIS of the provided code
+        - Ensure all float values are between 0.0 and 1.0
+        - Verdict must be exactly one of: MALICIOUS, SUSPICIOUS, BENIGN
         """
 
     def build_prompt(self) -> Dict[str, str]:

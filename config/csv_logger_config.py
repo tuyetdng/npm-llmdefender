@@ -145,6 +145,41 @@ class CSVLoggerConfig:
         }
         self._append_to_csv('model_failures.csv', row)
         
+    def log_verification_analysis(self, package_name: str, version: str, parsed_json: Dict, raw_response: str):
+        """
+        Logs Verification
+        """
+        timestamp = datetime.now().isoformat()
+
+        chain_data = parsed_json.get('chain_analysis', {})
+        legitimacy_data = parsed_json.get('legitimacy_check', {})
+        final_data = parsed_json.get('final_verification', {})
+        
+        row = {
+            'package_name': package_name,
+            'version': version,
+            'timestamp': timestamp,
+            'model_name': 'DeepSeek-Coder-6.7B-Instruct',
+            'prompt_version': self.prompt_version,
+            
+            'verdict': final_data.get('verdict', 'UNKNOWN'),
+            'confidence': final_data.get('calibrated_confidence', 0.0),
+            
+            'chain_score': chain_data.get('chain_score', 0.0),
+            'is_coherent_chain': chain_data.get('is_coherent_chain', False),
+            
+            'legitimacy_score': legitimacy_data.get('legitimacy_score', 0.0),
+            'is_justified': legitimacy_data.get('is_justified', False),
+            
+            'explanation': final_data.get('explanation', '')[:1000], # Cắt ngắn nếu quá dài
+            'chain_narrative': chain_data.get('chain_narrative', '')[:500],
+            'justification_reasoning': legitimacy_data.get('reasoning', '')[:500],
+            "raw_response": raw_response[:1000],
+            'parsed_json': json.dumps(parsed_json)
+        }
+        
+        self._append_to_csv('verification_analysis.csv', row)
+        
     def _extract_error_reason(self, response: str) -> str:
         response_lower = response.lower()
     
