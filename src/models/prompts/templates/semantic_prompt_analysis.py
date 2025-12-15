@@ -3,7 +3,11 @@
 SEMANTIC ANALYSIS PROMPT TEMPLATES
 """
 
+<<<<<<< HEAD
 from datetime import datetime
+=======
+from datetime import datetime 
+>>>>>>> 2bae3ef16d962e99704e2e9f888b61b9a774e948
 import os
 import json
 import re
@@ -34,7 +38,11 @@ class SemanticPromptAnalysis:
         self.structural_risks = structural_risks
 
     def save_parsed_output(self, parsed_data: dict, version_tag: str):
+<<<<<<< HEAD
         """Save raw parsed data directly to JSON """
+=======
+        """Save raw parsed data directly to JSON"""
+>>>>>>> 2bae3ef16d962e99704e2e9f888b61b9a774e948
         os.makedirs(SEMANTIC_OUTPUT_DIR, exist_ok=True)
         
         result = {

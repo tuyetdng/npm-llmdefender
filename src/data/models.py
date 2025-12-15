@@ -128,6 +128,7 @@ class Behavior(BaseModel):
     
     model_config = {
         'use_enum_values': True
+        # 'populate_by_name': True
     }                      # Keep enum objects, not strings
         
     # @field_validator('package_name')

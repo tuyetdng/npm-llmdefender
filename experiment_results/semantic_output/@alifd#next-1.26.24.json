@@ -1,0 +1,27 @@
+{
+  "package_name": "@alifd/next",
+  "version": "1.26.24",
+  "label": "benign",
+  "behaviors": [
+    {
+      "category": "dependency_injection",
+      "summary": "Dependency injection of non-scoped packages",
+      "details": "Scoped package '@alifd/next' depends on non-scoped packages such as 'babel-runtime', 'big.js', 'classnames', 'dayjs', 'hoist-non-react-statics', 'lodash.clonedeep', 'prop-types', 'react-lifecycles-compat', 'react-transition-group', 'resize-observer-polyfill', 'shallow-element-equals'. This could potentially lead to dependency confusion and potential security risks.",
+      "confidence": 0.8,
+      "evidence_apis": [],
+      "evidence_files": [],
+      "evidence_domains": [],
+      "evidence_commands": [],
+      "evidence_env_vars": []
+    }
+  ],
+  "risk_vector": [
+    "dependency_injection",
+    "supply_chain_propagation"
+  ],
+  "analysis_metadata": {
+    "model": "deepseek-coder-6.7b",
+    "stage": "v2.0"
+  },
+  "created_at": "2025-12-15T16:23:08.716633"
+}

@@ -1,0 +1,12 @@
+{
+  "package_name": "@angular/cdk",
+  "version": "16.2.5",
+  "label": "benign",
+  "behaviors": [],
+  "risk_vector": [],
+  "analysis_metadata": {
+    "model": "deepseek-coder-6.7b",
+    "stage": "v2.0"
+  },
+  "created_at": "2025-12-15T16:23:24.213779"
+}
