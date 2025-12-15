@@ -244,7 +244,7 @@ class StructuralAnalyzer:
         entry_code = self.package_profile.entry_point_code
         
         obfuscation_patterns = [
-        # Obfuscation wrapper (NEW)
+        # Obfuscation wrapper 
         (r'\(\s*function\s*\([^)]*\)\s*\{[^}]*\}\s*\)\s*\(', 'IIFE obfuscation wrapper', 0.5),
 
         # Encoding

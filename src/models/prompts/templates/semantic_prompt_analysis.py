@@ -3,14 +3,18 @@
 SEMANTIC ANALYSIS PROMPT TEMPLATES
 """
 
-
+import os
 import json
 import re
 from typing import Dict, List
 from analysis.structural_analysis import StructuralAnalysisFinding
-from data.models import PackageProfile
+from data.models import PackageProfile, SemanticAnalysisResult, Behavior
 from enums.behavior_category import BehaviorCategory
 from enums.severity import Severity
+from logs.logging_config import setup_logger
+logger = setup_logger()
+
+SEMANTIC_OUTPUT_DIR = "./experiment_results/semantic_output"
 
 
 class SemanticPromptAnalysis:
@@ -27,6 +31,39 @@ class SemanticPromptAnalysis:
     def __init__(self, package_profile: PackageProfile, structural_risks: List[StructuralAnalysisFinding]):
         self.package = package_profile
         self.structural_risks = structural_risks
+
+    def save_parsed_output(self, parsed_data: dict, version_tag: str):
+        """
+        Save the semantic analysis results to a JSON file.
+
+        """
+        os.makedirs(SEMANTIC_OUTPUT_DIR, exist_ok=True)
+        behavior_list = []
+        for b in parsed_data.get("behaviors", []):
+            try:
+                behavior_list.append(Behavior(**b))
+            except Exception as e:
+                logger.warning(f"Skipping invalid data: {e}")
+        
+        result_obj = SemanticAnalysisResult(
+            package_name=self.package.package_name,
+            version=self.package.version,
+            label=self.package.label,
+            behaviors=behavior_list,
+            risk_vector=parsed_data.get("risk_vector", []),
+            analysis_metadata={
+                "model": "deepseek-coder-6.7b",
+                "stage": version_tag
+            }
+        )
+        safe_name = f"{self.package.package_name.replace('/', '#')}-{self.package.version}.json"
+        file_path = os.path.join(SEMANTIC_OUTPUT_DIR, safe_name)
+
+        with open(file_path, 'w', encoding='utf-8') as f:
+            f.write(result_obj.model_dump_json(indent=2))
+            
+        return file_path
+
         
     def _format_structural_context(self) -> str:
         """Format structural analysis findings (prioritize suspicious ones from structural analysis)."""

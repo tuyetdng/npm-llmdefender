@@ -13,16 +13,17 @@ from logs.logging_config import setup_logger
 from config.csv_logger_config import CSVLoggerConfig
 
 
+VERSION_TAG = "v2.0"
 logger = setup_logger()
 csv_logger = CSVLoggerConfig(
     output_dir="./experiment_results",
-    prompt_version="v2.0"
+    prompt_version=VERSION_TAG
 )
 
 project_root = Path(__file__).resolve().parent.parent
 src_path = project_root / "src"
 sys.path.insert(0, str(src_path))
-NUM_PACKAGES = 130 
+NUM_PACKAGES = 20 
 
 try:
     from models.prompts.templates.semantic_prompt_analysis import SemanticPromptAnalysis
@@ -95,9 +96,9 @@ def run_semantic_analysis():
     
     print(f"\n Loading {NUM_PACKAGES} packages...")
     packages = loader.load_packages(
-            use_cache=False, 
+            use_cache=True, 
             limit=NUM_PACKAGES,
-            balanced_experiment_test_only=False 
+            balanced_experiment_test_only=True 
         )
         
     if not packages:
@@ -165,6 +166,21 @@ def run_semantic_analysis():
         data = _extract_from_markdown(output)
         if data:
             print("Parsed JSON:", json.dumps(data, indent=2))
+            # csv_logger.log_semantic_analysis(
+            #     package_name=package.package_name,
+            #     version=package.version,
+            #     raw_response=output,
+            #     parsed_json=data
+            # )
+            try:
+                output_path = semantic_analyzer.save_parsed_output(
+                    parsed_data=data,
+                    version_tag=VERSION_TAG
+                )
+                logger.info(f"Semantic result saved to {output_path}")
+            except Exception as e:
+                logger.error(f"Failed to save semantic result: {e}")
+
             csv_logger.log_semantic_analysis(
                 package_name=package.package_name,
                 version=package.version,

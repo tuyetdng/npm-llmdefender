@@ -1,5 +1,0 @@
-import { FC } from 'react';
-import { TitleProps } from "./component";
-declare const Title: FC<TitleProps>;
-export { Title };
-export type { TitleProps };

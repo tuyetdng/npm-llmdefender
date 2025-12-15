@@ -54,7 +54,6 @@ class Behavior(BaseModel):
     """
     behavior_id: str = Field(default_factory=lambda: f"BR{uuid.uuid4().hex[:8].upper()}")
     category: BehaviorCategory   
-    package_name: str
     summary: str = Field(..., min_length=10, max_length=500)
     details: str = Field(..., min_length=20, max_length=2000)
     
@@ -125,16 +124,16 @@ class Behavior(BaseModel):
     created_at: datetime = Field(default_factory=datetime.now)
     
     model_config = {
-        'use_enum_values': False
+        'use_enum_values': True
     }                      # Keep enum objects, not strings
         
-    @field_validator('package_name')
-    def validate_package_name(cls, v):
-        if not v or not v.strip():
-            raise ValueError("Package name cannot be empty")
-        if not re.match(r'^@[a-z0-9-~][a-z0-9-._~]*/[a-z0-9-~][a-z0-9-._~]*$|^[a-z0-9-~][a-z0-9-._~]*$', v):
-            raise ValueError(f"Invalid npm package name format: {v}")
-        return v.strip()
+    # @field_validator('package_name')
+    # def validate_package_name(cls, v):
+    #     if not v or not v.strip():
+    #         raise ValueError("Package name cannot be empty")
+    #     if not re.match(r'^@[a-z0-9-~][a-z0-9-._~]*/[a-z0-9-~][a-z0-9-._~]*$|^[a-z0-9-~][a-z0-9-._~]*$', v):
+    #         raise ValueError(f"Invalid npm package name format: {v}")
+    #     return v.strip()
     
     @field_validator('evidence_domains')
     def validate_domains(cls, v):
@@ -301,6 +300,34 @@ class Behavior(BaseModel):
         return evidence_score >= 2
         
 
+class SemanticAnalysisResult(BaseModel):
+    """
+    WRAPPER MODEL (Structure of the JSON file saved to disk)
+    Contains Metadata + List of Behaviors.
+    """
+    package_name: str
+    version: str
+    label: Optional[str] = None
+    
+    behaviors: List[Behavior] = Field(default_factory=list)
+    risk_vector: List[str] = Field(default_factory=list)
+    
+    analysis_metadata: Dict[str, Any] = Field(default_factory=dict)
+    created_at: str = Field(default_factory=lambda: datetime.now().isoformat())
+
+    model_config = {
+        'use_enum_values': True
+    }
+    
+    @field_validator('package_name')
+    def validate_package_name(cls, v):
+        if not v or not v.strip():
+            raise ValueError("Package name cannot be empty")
+        if not re.match(r'^@[a-z0-9-~][a-z0-9-._~]*/[a-z0-9-~][a-z0-9-._~]*$|^[a-z0-9-~][a-z0-9-._~]*$', v):
+            raise ValueError(f"Invalid npm package name format: {v}")
+        return v.strip()
+    
+    
 class DetectionResult(BaseModel):
     """Final classification output with confidence calibration and explainability."""
     package_name: str

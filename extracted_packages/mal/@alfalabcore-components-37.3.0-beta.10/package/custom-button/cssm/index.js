@@ -1,9 +1,0 @@
-var Component = require('./Component.js');
-require('react');
-require('classnames');
-require('../../button/cssm');
-require('./index.module.css');
-
-
-
-exports.CustomButton = Component.CustomButton;
