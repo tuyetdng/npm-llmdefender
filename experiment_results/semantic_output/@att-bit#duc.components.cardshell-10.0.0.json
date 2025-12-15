@@ -1,0 +1,15 @@
+{
+  "package_name": "@att-bit/duc.components.cardshell",
+  "version": "10.0.0",
+  "label": "malicious",
+  "behaviors": [],
+  "risk_vector": [
+    "install_hook",
+    "network_exfiltration"
+  ],
+  "analysis_metadata": {
+    "model": "deepseek-coder-6.7b",
+    "stage": "v2.0"
+  },
+  "created_at": "2025-12-15T14:30:19.501377"
+}
