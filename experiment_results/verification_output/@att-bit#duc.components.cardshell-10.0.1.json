@@ -1,0 +1,38 @@
+{
+  "package_name": "@att-bit/duc.components.cardshell",
+  "version": "10.0.1",
+  "label": "malicious",
+  "semantic_findings_summary": {
+    "num_behaviors": 6,
+    "risk_vector": [
+      "credential_theft",
+      "sensitive_data_collection",
+      "network_exfiltration",
+      "remote_code_execution",
+      "supply_chain_attack",
+      "install_hook"
+    ]
+  },
+  "verification_result": {
+    "chain_analysis": {
+      "is_coherent_chain": true,
+      "chain_narrative": "Recon -> Weaponization -> Actions on Objectives",
+      "chain_score": 0.6
+    },
+    "legitimacy_check": {
+      "is_justified": true,
+      "reasoning": "The package's purpose aligns with the detected behaviors",
+      "legitimacy_score": 0.7
+    },
+    "final_verification": {
+      "verdict": "SUSPICIOUS",
+      "calibrated_confidence": 0.85,
+      "explanation": "The package is performing actions that could potentially be part of a supply chain attack, but the legitimacy of these actions aligns with the package's purpose"
+    }
+  },
+  "analysis_metadata": {
+    "model": "deepseek-coder-6.7b",
+    "stage": "v2.0"
+  },
+  "created_at": "2025-12-20T20:12:36.299200"
+}

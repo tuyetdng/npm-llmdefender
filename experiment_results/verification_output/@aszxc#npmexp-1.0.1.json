@@ -1,0 +1,33 @@
+{
+  "package_name": "@aszxc/npmexp",
+  "version": "1.0.1",
+  "label": "malicious",
+  "semantic_findings_summary": {
+    "num_behaviors": 1,
+    "risk_vector": [
+      "backdoor_installation"
+    ]
+  },
+  "verification_result": {
+    "chain_analysis": {
+      "is_coherent_chain": true,
+      "chain_narrative": "The detected behaviors form a coherent attack chain: Backdoor installation via preinstall script -> Establishing a reverse shell connection to a remote server",
+      "chain_score": 0.7
+    },
+    "legitimacy_check": {
+      "is_justified": false,
+      "reasoning": "The package name suggests a utility package, but the behaviors suggest a potential backdoor installation, which is not justified by the package's stated purpose.",
+      "legitimacy_score": 0.4
+    },
+    "final_verification": {
+      "verdict": "SUSPICIOUS",
+      "calibrated_confidence": 0.55,
+      "explanation": "The chain score of 0.7 indicates a high likelihood of a threat, but the legitimacy score of 0.4 suggests that the package's purpose may not be adequately justified by the behaviors."
+    }
+  },
+  "analysis_metadata": {
+    "model": "deepseek-coder-6.7b",
+    "stage": "v2.0"
+  },
+  "created_at": "2025-12-20T20:12:02.089457"
+}
