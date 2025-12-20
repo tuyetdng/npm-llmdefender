@@ -15,24 +15,24 @@
   },
   "verification_result": {
     "chain_analysis": {
-      "is_coherent_chain": true,
-      "chain_narrative": "Recon -> Weaponization -> Actions on Objectives",
-      "chain_score": 0.6
+      "is_coherent_chain": false,
+      "chain_narrative": "The behaviors seem to be related to credential theft, sensitive data collection, network exfiltration, remote code execution, and supply chain attacks. They are not strongly connected.",
+      "chain_score": 0.4
     },
     "legitimacy_check": {
-      "is_justified": true,
-      "reasoning": "The package's purpose aligns with the detected behaviors",
-      "legitimacy_score": 0.7
+      "is_justified": false,
+      "reasoning": "The package name and description suggest that it's a testing tool. However, the behaviors seem to be related to potential security issues.",
+      "legitimacy_score": 0.4
     },
     "final_verification": {
       "verdict": "SUSPICIOUS",
-      "calibrated_confidence": 0.85,
-      "explanation": "The package is performing actions that could potentially be part of a supply chain attack, but the legitimacy of these actions aligns with the package's purpose"
+      "calibrated_confidence": 0.4,
+      "explanation": "The chain score is 0.4, which is below the MEDIUM threshold. The legitimacy score is 0.4, which is also below the MEDIUM threshold. The calibrated confidence could be 0.5 * 0.4 * 0.4 = 0.4."
     }
   },
   "analysis_metadata": {
     "model": "deepseek-coder-6.7b",
     "stage": "v2.0"
   },
-  "created_at": "2025-12-20T21:00:14.404073"
+  "created_at": "2025-12-20T21:23:12.665994"
 }

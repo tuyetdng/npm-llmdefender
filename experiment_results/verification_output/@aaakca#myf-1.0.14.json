@@ -12,22 +12,22 @@
     "chain_analysis": {
       "is_coherent_chain": false,
       "chain_narrative": "The behaviors do not form a coherent attack chain.",
-      "chain_score": 0.3
+      "chain_score": 0.4
     },
     "legitimacy_check": {
       "is_justified": false,
-      "reasoning": "The package does not seem to have a clear purpose or functionality.",
-      "legitimacy_score": 0.3
+      "reasoning": "The behavior is not expected for a package named '@aaakca/myf'.",
+      "legitimacy_score": 0.4
     },
     "final_verification": {
       "verdict": "SUSPICIOUS",
-      "calibrated_confidence": 0.3,
-      "explanation": "The package might be doing something that is not justified by its purpose or functionality."
+      "calibrated_confidence": 0.6,
+      "explanation": "The chain score is medium indicating a partial chain, but the legitimacy score is low indicating that the behaviors are not justified by the package's stated purpose. Therefore, the verdict is SUSPICIOUS."
     }
   },
   "analysis_metadata": {
     "model": "deepseek-coder-6.7b",
     "stage": "v2.0"
   },
-  "created_at": "2025-12-20T20:58:21.939651"
+  "created_at": "2025-12-20T21:19:16.541352"
 }

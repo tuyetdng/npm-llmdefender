@@ -11,24 +11,24 @@
   },
   "verification_result": {
     "chain_analysis": {
-      "is_coherent_chain": false,
-      "chain_narrative": "The detected behaviors do not form a coherent attack chain.",
-      "chain_score": 0.3
+      "is_coherent_chain": true,
+      "chain_narrative": "The detected behaviors suggest a potential attack chain where non-scoped packages are injected into the '@alifd/next' package, potentially leading to dependency confusion and potential security risks.",
+      "chain_score": 0.9
     },
     "legitimacy_check": {
       "is_justified": false,
-      "reasoning": "The detected behaviors do not seem to be justified by the package's stated purpose. The package is a component library for web built on React, but the behaviors suggest dependency injection of non-scoped packages, which is not typical for a React-based package.",
-      "legitimacy_score": 0.4
+      "reasoning": "The detected behaviors do not align with the stated purpose of the package, which is to provide a configurable component library for web built on React.",
+      "legitimacy_score": 0.6
     },
     "final_verification": {
-      "verdict": "SUSPICIOUS",
-      "calibrated_confidence": 0.7,
-      "explanation": "The chain score and legitimacy score suggest that the package might be involved in a potential attack, but the specifics are not clear. Further investigation is recommended."
+      "verdict": "MALICIOUS",
+      "calibrated_confidence": 0.9,
+      "explanation": "The high chain score and low legitimacy score indicate a potential threat. The behaviors suggest a potential attack chain and do not align with the package's stated purpose."
     }
   },
   "analysis_metadata": {
     "model": "deepseek-coder-6.7b",
     "stage": "v2.0"
   },
-  "created_at": "2025-12-20T21:00:54.940602"
+  "created_at": "2025-12-20T21:23:46.404304"
 }

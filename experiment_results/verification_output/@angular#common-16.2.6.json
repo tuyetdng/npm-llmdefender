@@ -9,23 +9,23 @@
   "verification_result": {
     "chain_analysis": {
       "is_coherent_chain": false,
-      "chain_narrative": "",
+      "chain_narrative": "No attack chain detected",
       "chain_score": 0.0
     },
     "legitimacy_check": {
       "is_justified": true,
-      "reasoning": "The package '@angular/common' is commonly needed for Angular development and does not seem to need any unusual behaviors.",
+      "reasoning": "No behaviors detected, therefore they are expected for this package",
       "legitimacy_score": 1.0
     },
     "final_verification": {
       "verdict": "BENIGN",
-      "calibrated_confidence": 0.5,
-      "explanation": "Based on the provided information, the package '@angular/common' does not seem to have any suspicious behaviors. Therefore, it is considered benign."
+      "calibrated_confidence": 0.7,
+      "explanation": "Behaviors are normal and expected for this type of tool, regardless of chain"
     }
   },
   "analysis_metadata": {
     "model": "deepseek-coder-6.7b",
     "stage": "v2.0"
   },
-  "created_at": "2025-12-20T21:01:29.346890"
+  "created_at": "2025-12-20T21:24:17.357396"
 }

@@ -12,23 +12,23 @@
   "verification_result": {
     "chain_analysis": {
       "is_coherent_chain": false,
-      "chain_narrative": "The behaviors are isolated and do not form a coherent attack chain.",
-      "chain_score": 0.3
+      "chain_narrative": "No clear attack chain detected.",
+      "chain_score": 0.5
     },
     "legitimacy_check": {
       "is_justified": false,
-      "reasoning": "The package name and behaviors do not match the package's stated purpose.",
-      "legitimacy_score": 0.4
+      "reasoning": "The behaviors detected are not expected for a package named '@alfalab/core-components'.",
+      "legitimacy_score": 0.5
     },
     "final_verification": {
       "verdict": "SUSPICIOUS",
-      "calibrated_confidence": 0.7,
-      "explanation": "The package name and behaviors do not match the package's stated purpose, but the potential for dependency confusion is present."
+      "calibrated_confidence": 0.5,
+      "explanation": "The package is a utility package with no stated purpose. The behaviors detected are related to the installation of the package and the potential dependency confusion, which are not expected for this type of package. Therefore, the verdict is SUSPICIOUS."
     }
   },
   "analysis_metadata": {
     "model": "deepseek-coder-6.7b",
     "stage": "v2.0"
   },
-  "created_at": "2025-12-20T20:58:33.664946"
+  "created_at": "2025-12-20T21:19:26.920888"
 }
