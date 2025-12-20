@@ -138,23 +138,36 @@ class VerificationPromptAnalysis:
         STEP 1: BEHAVIOR CHAIN ANALYSIS
         - Examine the list of behaviors. 
         - Look for Causal Dependencies: Does Behavior A facilitate Behavior B? (e.g., Obfuscation -> Network Call -> File Write).
-        - If behaviors are isolated/random, the chain score is LOW (0.0-0.3).
-        - If behaviors form a partial chain, the score is MEDIUM (0.4-0.6).
-        - If behaviors form a 'Kill Chain' (Recon -> Weaponization -> Actions on Objectives), the chain score is HIGH (0.7-1.0).
+        - SCORING GUIDE:
+            * 0.0 - 0.3 (LOW): Isolated, random events. No connection.
+            * 0.4 - 0.6 (MEDIUM): Weak connection or partial chain.
+            * 0.7 - 1.0 (HIGH): Strong 'Kill Chain' (Recon -> Weaponization -> Actions).
         
         STEP 2: CONTEXT LEGITIMACY CHECK
         - Compare the 'Target Package Identity' (Description/Name) vs 'Detected Behaviors'.
-        - Ask: "Does a package named '{self.package.package_name}' reasonably need to perform these actions?"
-        - Example: A 'deployment-tool' needing 'child_process' is HIGH legitimacy (Score ~0.7-1.0)).
-        - Example: A 'icon-pack' needing 'network sockets' is LOW legitimacy (Score ~0.4-0.6).
-        - Example: An 'icon-pack' opening network sockets → LOW legitimacy (0.0-0.3)
-        
+        - Ask: "Is this behavior expected for a package named '{self.package.package_name}'?"
+        - SCORING GUIDE:
+            * 0.0 - 0.3 (LOW): Totally unjustified (e.g., 'icon-pack' exfiltrating env vars).
+            * 0.4 - 0.6 (MEDIUM): Questionable/Grey area (e.g., 'logger' executing shell commands).
+            * 0.7 - 1.0 (HIGH): Fully justified (e.g., 'deploy-tool' using child_process). 
         STEP 3: CALIBRATION
-        - Combine both chain_score and legitimacy_score to form final verdict:
-        * Low chain_score + Low legitimacy → MALICIOUS (high confidence)
-        * High chain_score + Low legitimacy → MALICIOUS (very high confidence)
-        * Low chain_score + High legitimacy → BENIGN (medium confidence)
-        * Medium scores on both → SUSPICIOUS (low-medium confidence)
+        Apply the following rules in order to determine the verdict.
+        
+        1. RULE: DETECTING MALICIOUS (High Threat)
+           - IF Chain Score is HIGH (> 0.6) AND Legitimacy Score is NOT HIGH (< 0.7) -> VERDICT: MALICIOUS
+             (Reasoning: Strong attack pattern with weak or no justification).
+           - IF Chain Score is MEDIUM (> 0.3) AND Legitimacy Score is LOW (< 0.4) -> VERDICT: MALICIOUS
+             (Reasoning: Suspicious chain with absolutely no valid reason).
+
+        2. RULE: DETECTING SUSPICIOUS (Uncertainty)
+           - IF Chain Score is MEDIUM (> 0.3) AND Legitimacy Score is MEDIUM (0.4 - 0.7) -> VERDICT: SUSPICIOUS
+             (Reasoning: Partial chain with questionable justification, requires manual review).
+
+        3. RULE: DETECTING BENIGN (Filtering False Positives)
+           - IF Legitimacy Score is HIGH (> 0.7) -> VERDICT: BENIGN
+             (Reasoning: Behaviors are normal and expected for this type of tool, regardless of chain).
+           - IF Chain Score is LOW (<= 0.3) -> VERDICT: BENIGN
+             (Reasoning: No coherent attack chain detected).
         
         OUTPUT FORMAT:
         - Return ONLY valid JSON matching this schema structure (replace all <...> placeholders with actual values):

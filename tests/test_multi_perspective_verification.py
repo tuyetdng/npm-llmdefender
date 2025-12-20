@@ -106,9 +106,11 @@ def load_semantic_results(semantic_output_dir: str = "./experiment_results/seman
                 with open(filepath, 'r', encoding='utf-8') as f:
                     data = json.load(f)
                     pkg_name = data.get('package_name')
-                    if pkg_name:
-                        semantic_results[pkg_name] = data
-                        logger.info(f"Loaded semantic result for {pkg_name}")
+                    version = data.get('version')
+                    if pkg_name and version:
+                        key = f"{pkg_name}@{version}"
+                        semantic_results[key] = data
+                        logger.info(f"Loaded semantic result for {key}")
             except Exception as e:
                 logger.error(f"Failed to load {filename}: {e}")
     
@@ -127,9 +129,9 @@ def run_verification_analysis(num_packages: int = 20):
     )
     
     packages = loader.load_packages(
-        use_cache=True,
+        use_cache=False,
         limit=num_packages,
-        balanced_experiment_test_only=True
+        balanced_experiment_test_only=False
     )
     
     if not packages:
@@ -178,14 +180,15 @@ def run_verification_analysis(num_packages: int = 20):
         print(f"Package {i}/{len(packages)}: {package.package_name}")
         print(f"{'='*60}")
         
-        semantic_findings = semantic_results.get(package.package_name)
+        semantic_key = f"{package.package_name}@{package.version}"
+        semantic_findings = semantic_results.get(semantic_key)
         
         if not semantic_findings:
             logger.warning(f"No semantic results found for {package.package_name}, skipping")
             csv_logger.log_model_failure(
                 package_name=package.package_name,
                 version=package.version,
-                response="No semantic analysis results found",
+                response=f"No semantic analysis results found for {semantic_key}",
                 failure_type="missing_semantic_results"
             )
             continue
