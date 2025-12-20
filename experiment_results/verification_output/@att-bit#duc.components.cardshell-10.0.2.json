@@ -3,36 +3,32 @@
   "version": "10.0.2",
   "label": "malicious",
   "semantic_findings_summary": {
-    "num_behaviors": 6,
+    "num_behaviors": 2,
     "risk_vector": [
-      "credential_theft",
-      "sensitive_data_collection",
-      "network_exfiltration",
-      "remote_code_execution",
       "supply_chain_attack",
-      "install_hook"
+      "suspicious_behavior"
     ]
   },
   "verification_result": {
     "chain_analysis": {
-      "is_coherent_chain": true,
-      "chain_narrative": "Recon -> Weaponization -> Actions on Objectives",
-      "chain_score": 0.6
+      "is_coherent_chain": false,
+      "chain_narrative": "The behaviors are isolated and do not form a coherent attack chain.",
+      "chain_score": 0.3
     },
     "legitimacy_check": {
       "is_justified": true,
-      "reasoning": "The package's purpose aligns with the detected behaviors",
+      "reasoning": "The package is named '@att-bit/duc.components.cardshell' and its stated purpose is 'ICH'. The behaviors of the package are related to testing and verification, which is a legitimate use of the package.",
       "legitimacy_score": 0.7
     },
     "final_verification": {
       "verdict": "SUSPICIOUS",
-      "calibrated_confidence": 0.85,
-      "explanation": "The package is performing actions that could potentially be part of a supply chain attack, but the legitimacy of these actions aligns with the package's purpose"
+      "calibrated_confidence": 0.65,
+      "explanation": "The chain score is medium (0.3-0.6) and the legitimacy score is high (0.7-1.0). Therefore, the final verification is 'SUSPICIOUS' with a calibrated confidence of 0.65."
     }
   },
   "analysis_metadata": {
     "model": "deepseek-coder-6.7b",
     "stage": "v2.0"
   },
-  "created_at": "2025-12-20T20:12:53.409584"
+  "created_at": "2025-12-20T21:00:27.567496"
 }
