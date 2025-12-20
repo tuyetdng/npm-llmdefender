@@ -52,7 +52,7 @@ class VerificationPromptAnalysis:
         with open(file_path, 'w', encoding='utf-8') as f:
             json.dump(result, f, indent=2, ensure_ascii=False)
         
-        return file_path
+        return result
 
 
     def _format_package_intent(self) -> str:

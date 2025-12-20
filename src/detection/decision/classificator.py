@@ -108,7 +108,7 @@ class FinalClassifier:
         
         return min(final_conf, 0.99)
     
-    def _calculate_risk_level(self, confidence: float, risk_vector: List[str]) -> str:
+    def _calculate_risk_level(self, confidence: float, risk_vector: List[str], verdict: str) -> str:
         """Determine risk level based on confidence and detected behaviors."""
         
         critical_categories = {
@@ -120,17 +120,26 @@ class FinalClassifier:
             BehaviorCategory.SUPPLY_CHAIN_PROPAGATION.value,
             BehaviorCategory.DEPENDENCY_INJECTION.value,
         }
-
-        has_critical = bool(set(risk_vector) & critical_categories)
         
-        if confidence >= self.CRITICAL_THRESHOLD or (has_critical and confidence >= 0.7):
-            return "CRITICAL"
-        elif confidence >= self.HIGH_THRESHOLD:
-            return "HIGH"
-        elif confidence >= self.MEDIUM_THRESHOLD:
-            return "MEDIUM"
-        else:
-            return "LOW"
+        if verdict.upper() == "BENIGN":
+            if confidence >= 0.9:
+                return "NONE"
+            elif confidence >= 0.7:
+                return "LOW"
+            else:
+                return "MEDIUM"  
+        elif verdict.upper() == "MALICIOUS":
+
+            has_critical = bool(set(risk_vector) & critical_categories)
+            
+            if confidence >= self.CRITICAL_THRESHOLD or (has_critical and confidence >= 0.7):
+                return "CRITICAL"
+            elif confidence >= self.HIGH_THRESHOLD:
+                return "HIGH"
+            elif confidence >= self.MEDIUM_THRESHOLD:
+                return "MEDIUM"
+            else:
+                return "LOW"
     
     def _generate_executive_summary(self, behaviors: List[Dict], 
                                    verification: Dict, verdict: str) -> str:
@@ -496,7 +505,14 @@ class FinalClassifier:
         
         Path(output_dir).mkdir(parents=True, exist_ok=True)
                 
-        safe_name = f"{self.package_name.replace('/', '#')}-{self.version}.json"
+        pkg_name = self.package_name
+        version = self.version
+
+        if not pkg_name or not version:
+            raise ValueError("Missing package_name or version in FinalClassifier")
+
+        safe_name = f"{pkg_name.replace('/', '#')}-{version}.json"
+
 
         filepath = Path(output_dir) / safe_name
         
@@ -520,7 +536,13 @@ class FinalClassifier:
         
         report = self.generate_user_report(result)
         
-        safe_name = f"{self.package_name.replace('/', '#')}-{self.version}.md"
+        pkg_name = self.package_name
+        version = self.version
+
+        if not pkg_name or not version:
+            raise ValueError("Missing package_name or version in FinalClassifier")
+
+        safe_name = f"{pkg_name.replace('/', '#')}-{version}.json"
 
         filepath = Path(output_dir) / safe_name
         

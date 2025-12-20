@@ -56,7 +56,7 @@ class SemanticPromptAnalysis:
         with open(file_path, 'w', encoding='utf-8') as f:
             json.dump(result, f, indent=2, ensure_ascii=False)
         
-        return file_path
+        return result  
         
     def _format_structural_context(self) -> str:
         """Format structural analysis findings (prioritize suspicious ones from structural analysis)."""

@@ -176,22 +176,24 @@ class MalwareDetectionPipeline:
             print(f"Successfully parsed semantic findings")
             
             try:
-                output_path = semantic_analyzer.save_parsed_output(
+                enriched_data = semantic_analyzer.save_parsed_output(
                     parsed_data=data,
                     version_tag=self.version_tag
                 )
-                logger.info(f"Semantic result saved to {output_path}")
+                logger.info(f"Semantic result saved to {enriched_data}")
             except Exception as e:
                 logger.error(f"Failed to save semantic result: {e}")
+                enriched_data = data
+                
             
             self.csv_logger.log_semantic_analysis(
                 package_name=package.package_name,
                 version=package.version,
                 raw_response=output,
-                parsed_json=data
+                parsed_json=enriched_data  
             )
             
-            return data
+            return enriched_data  
         else:
             print("Failed to parse semantic analysis output")
             self.csv_logger.log_model_failure(
@@ -231,22 +233,23 @@ class MalwareDetectionPipeline:
             print(f"Successfully parsed verification results")
             
             try:
-                output_path = verifier.save_verification_result(
+                enriched_data = verifier.save_verification_result(
                     parsed_data=data,
                     version_tag=self.version_tag
                 )
-                logger.info(f"Verification result saved to {output_path}")
+                logger.info(f"Verification result saved to {enriched_data}")
             except Exception as e:
                 logger.error(f"Failed to save verification result: {e}")
+                enriched_data = data
             
             self.csv_logger.log_verification_analysis(
                 package_name=package.package_name,
                 version=package.version,
                 parsed_json=data,
-                raw_response=output
+                raw_response=enriched_data
             )
-            
-            return data
+
+            return enriched_data
         else:
             print("Failed to parse verification output")
             self.csv_logger.log_model_failure(
@@ -259,6 +262,7 @@ class MalwareDetectionPipeline:
     
     def run_final_classification(
         self,
+        package: PackageProfile,
         semantic_result: Dict,
         verification_result: Dict
     ) -> Dict:
@@ -298,6 +302,7 @@ class MalwareDetectionPipeline:
                 raise Exception("Verification analysis failed")
             
             final_classification = self.run_final_classification(
+                package,
                 semantic_output, 
                 verification_output
             )
