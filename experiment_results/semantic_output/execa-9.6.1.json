@@ -1,0 +1,44 @@
+{
+  "package_name": "execa",
+  "version": "9.6.1",
+  "label": "benign",
+  "behaviors": [
+    {
+      "category": "remote_code_execution",
+      "summary": "The package execa allows for remote code execution by executing scripts or commands.",
+      "details": "The package execa allows for remote code execution by executing scripts or commands. This can be potentially harmful if the commands or scripts are not properly sanitized or validated.",
+      "confidence": 0.9,
+      "evidence_apis": [],
+      "evidence_files": [],
+      "evidence_domains": [],
+      "evidence_commands": [
+        "execaCommand",
+        "execaNode",
+        "$"
+      ],
+      "evidence_env_vars": []
+    },
+    {
+      "category": "dependency_injection",
+      "summary": "The package execa uses dependency injection to create commands.",
+      "details": "The package execa uses dependency injection to create commands. This can be potentially harmful if the injection is not properly managed.",
+      "confidence": 0.8,
+      "evidence_apis": [],
+      "evidence_files": [],
+      "evidence_domains": [],
+      "evidence_commands": [
+        "createExeca"
+      ],
+      "evidence_env_vars": []
+    }
+  ],
+  "risk_vector": [
+    "remote_code_execution",
+    "dependency_injection"
+  ],
+  "analysis_metadata": {
+    "model": "deepseek-coder-6.7b",
+    "stage": "v2.0"
+  },
+  "created_at": "2025-12-24T00:28:59.231846"
+}

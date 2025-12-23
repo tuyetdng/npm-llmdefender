@@ -1,0 +1,67 @@
+{
+  "package_name": "execa",
+  "version": "9.6.1",
+  "scan_timestamp": "2025-12-24T00:29:15.053760",
+  "final_verdict": {
+    "classification": "MALICIOUS",
+    "confidence": 0.88,
+    "risk_level": "CRITICAL"
+  },
+  "executive_summary": "The package execa allows for remote code execution by executing scripts or commands. The package execa uses dependency injection to create commands.",
+  "threat_profile": {
+    "attack_type": "Supply Chain Attack",
+    "primary_tactics": [
+      "Remote Code Execution",
+      "Dependency Injection"
+    ],
+    "severity_factors": [
+      "The package execa allows for remote code execution by executing scripts or commands.",
+      "The package execa uses dependency injection to create commands."
+    ]
+  },
+  "evidence_summary": {
+    "malicious_indicators": [
+      {
+        "type": "Remote Code Execution",
+        "description": "The package execa allows for remote code execution by executing scripts or commands. This can be potentially harmful if the commands or scripts are not properly sanitized or validated.",
+        "severity": "CRITICAL",
+        "command": "execaCommand"
+      },
+      {
+        "type": "Dependency Injection",
+        "description": "The package execa uses dependency injection to create commands. This can be potentially harmful if the injection is not properly managed.",
+        "severity": "HIGH",
+        "command": "createExeca"
+      }
+    ],
+    "behavioral_chain": "Behavior #1 facilitates Behavior #2. This suggests a potential attack chain where Behavior #2 is used to create commands that execute remote code.",
+    "legitimacy_assessment": "Both behaviors are expected for a package named 'execa'. Behavior #1 allows for remote code execution, which is a legitimate use of the package. Behavior #2 uses dependency injection, which is a common practice in software development and is expected for this type of package."
+  },
+  "recommendations": {
+    "immediate_action": "DO NOT INSTALL - Remove immediately if already installed",
+    "remediation_steps": [
+      "Review package source code and dependencies",
+      "Report to npm security team if confirmed malicious"
+    ]
+  },
+  "detailed_analysis": {
+    "semantic_detection": {
+      "behaviors_found": 2,
+      "categories": [
+        "remote_code_execution",
+        "dependency_injection"
+      ],
+      "highest_confidence": 0.9
+    },
+    "verification_analysis": {
+      "chain_coherence": "Behavior #1 facilitates Behavior #2. This suggests a potential attack chain where Behavior #2 is used to create commands that execute remote code.",
+      "legitimacy_mismatch": false,
+      "calibrated_confidence": 0.9
+    }
+  },
+  "metadata": {
+    "analysis_version": "v2.0",
+    "model": "deepseek-coder-6.7b",
+    "ground_truth_label": "benign"
+  }
+}

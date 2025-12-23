@@ -341,7 +341,7 @@ class MalwareDetectionPipeline:
                 error_message=str(e)
             )
     
-    def run_demo(self, num_malicious: int = 4, num_benign: int = 1):
+    def run_demo(self, num_malicious: int = 0, num_benign: int = 1):
         print(f"\n{'#'*70}")
         print(f"# MALWARE DETECTION PIPELINE DEMO")
         print(f"# Analyzing {num_malicious} malicious + {num_benign} benign packages")
@@ -400,7 +400,7 @@ def main():
     )
     
     results = pipeline.run_demo(
-        num_malicious=8,
+        num_malicious=0,
         num_benign=1
     )
     
