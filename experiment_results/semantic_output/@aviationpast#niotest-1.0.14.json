@@ -1,0 +1,44 @@
+{
+  "package_name": "@aviationpast/niotest",
+  "version": "1.0.14",
+  "label": "malicious",
+  "behaviors": [
+    {
+      "category": "install_hook",
+      "summary": "Install script found",
+      "details": "An install script is present in the package which could potentially be malicious.",
+      "confidence": 0.8,
+      "evidence_files": [
+        "package.json"
+      ]
+    },
+    {
+      "category": "supply_chain_propagation",
+      "summary": "Potential dependency confusion",
+      "details": "The package '@aviationpast/niotest' depends on non-scoped package '4equest' and 'npm' which could potentially lead to supply chain attacks.",
+      "confidence": 0.8,
+      "evidence_files": [
+        "package.json"
+      ]
+    },
+    {
+      "category": "system_capability",
+      "summary": "Potential execution of local code",
+      "details": "The package appears to install files on the user's desktop which could potentially be malicious.",
+      "confidence": 0.6,
+      "evidence_files": [
+        "install script"
+      ]
+    }
+  ],
+  "risk_vector": [
+    "install_hook",
+    "supply_chain_propagation",
+    "system_capability"
+  ],
+  "analysis_metadata": {
+    "model": "deepseek-coder-6.7b",
+    "stage": "v2.0"
+  },
+  "created_at": "2025-12-23T23:55:06.786170"
+}

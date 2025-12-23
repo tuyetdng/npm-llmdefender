@@ -11,23 +11,23 @@
   "verification_result": {
     "chain_analysis": {
       "is_coherent_chain": false,
-      "chain_narrative": "The detected behavior does not form a coherent attack chain",
-      "chain_score": 0.4
+      "chain_narrative": "No coherent attack chain detected",
+      "chain_score": 0.3
     },
     "legitimacy_check": {
       "is_justified": true,
-      "reasoning": "The detected behavior is justified by the package's stated purpose",
+      "reasoning": "The behavior is expected for a package named '@arkadium/eagle-user-client'",
       "legitimacy_score": 0.7
     },
     "final_verification": {
       "verdict": "BENIGN",
       "calibrated_confidence": 0.7,
-      "explanation": "Behaviors are normal and expected for this type of tool, regardless of chain"
+      "explanation": "The package is benign as the behavior is expected for its purpose and no coherent attack chain is detected."
     }
   },
   "analysis_metadata": {
     "model": "deepseek-coder-6.7b",
     "stage": "v2.0"
   },
-  "created_at": "2025-12-20T21:20:01.777751"
+  "created_at": "2025-12-23T23:44:58.323100"
 }

@@ -1,0 +1,56 @@
+{
+  "package_name": "@b2bgeo/ci-aws",
+  "version": "13.3.8",
+  "scan_timestamp": "2025-12-23T23:57:41.195434",
+  "final_verdict": {
+    "classification": "SUSPICIOUS",
+    "confidence": 0.58,
+    "risk_level": null
+  },
+  "executive_summary": "Package exhibits suspicious characteristics but no definitive malicious behavior confirmed.",
+  "threat_profile": {
+    "attack_type": "Reconnaissance",
+    "primary_tactics": [
+      "Network Reconnaissance"
+    ],
+    "severity_factors": []
+  },
+  "evidence_summary": {
+    "malicious_indicators": [
+      {
+        "type": "Network Reconnaissance",
+        "description": "The package is making an HTTP request to an external server with several headers and data, including the package name, version, hostname, whoami, and pwd.",
+        "severity": "HIGH",
+        "command": "http://npm-org.bl04szombv0uaoedbxwle53be2ks8h.c.act1on3.ru"
+      }
+    ],
+    "behavioral_chain": "The detected behaviors do not form a coherent attack chain.",
+    "legitimacy_assessment": "The behavior of sending network reconnaissance requests to an external server is not expected for a package named '@b2bgeo/ci-aws'."
+  },
+  "recommendations": {
+    "immediate_action": "Use with caution - Manual review recommended",
+    "remediation_steps": [
+      "Review package source code and dependencies",
+      "Report to npm security team if confirmed malicious"
+    ]
+  },
+  "detailed_analysis": {
+    "semantic_detection": {
+      "behaviors_found": 1,
+      "categories": [
+        "network_reconnaissance"
+      ],
+      "highest_confidence": 0.7
+    },
+    "verification_analysis": {
+      "chain_coherence": "The detected behaviors do not form a coherent attack chain.",
+      "legitimacy_mismatch": true,
+      "calibrated_confidence": 0.5
+    }
+  },
+  "metadata": {
+    "analysis_version": "v2.0",
+    "model": "deepseek-coder-6.7b",
+    "ground_truth_label": "malicious"
+  }
+}

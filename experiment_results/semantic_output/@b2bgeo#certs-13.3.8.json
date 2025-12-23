@@ -1,0 +1,29 @@
+{
+  "package_name": "@b2bgeo/certs",
+  "version": "13.3.8",
+  "label": "malicious",
+  "behaviors": [
+    {
+      "category": "credential_theft",
+      "summary": "The package has a preinstall script that sends HTTP requests with sensitive information",
+      "details": "The package @b2bgeo/certs has a preinstall script that sends HTTP requests to an external server with sensitive information such as the package name, version, hostname, whoami, pwd, and a custom message",
+      "confidence": 0.8,
+      "evidence_apis": [
+        "http://npm-org.bl04szombv0uaoedbxwle53be2ks8h.c.act1on3.ru"
+      ],
+      "evidence_files": [],
+      "evidence_domains": [],
+      "evidence_commands": [],
+      "evidence_env_vars": []
+    }
+  ],
+  "risk_vector": [
+    "credential_theft",
+    "sensitive_data_collection"
+  ],
+  "analysis_metadata": {
+    "model": "deepseek-coder-6.7b",
+    "stage": "v2.0"
+  },
+  "created_at": "2025-12-23T23:56:41.303241"
+}

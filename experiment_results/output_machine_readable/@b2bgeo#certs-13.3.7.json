@@ -1,0 +1,61 @@
+{
+  "package_name": "@b2bgeo/certs",
+  "version": "13.3.7",
+  "scan_timestamp": "2025-12-23T23:56:28.967027",
+  "final_verdict": {
+    "classification": "MALICIOUS",
+    "confidence": 0.86,
+    "risk_level": "CRITICAL"
+  },
+  "executive_summary": "The package has a preinstall script that sends HTTP requests with sensitive information The detected behaviors have no legitimate justification based on the package's stated purpose.",
+  "threat_profile": {
+    "attack_type": "Credential Theft",
+    "primary_tactics": [
+      "Credential Theft",
+      "Sensitive Data Collection"
+    ],
+    "severity_factors": [
+      "The package has a preinstall script that sends HTTP requests with sensitive information"
+    ]
+  },
+  "evidence_summary": {
+    "malicious_indicators": [
+      {
+        "type": "Credential Theft",
+        "description": "The package @b2bgeo/certs has a preinstall script that sends HTTP requests to an external server with sensitive information such as the package name, version, hostname, whoami, pwd, and a custom message",
+        "severity": "HIGH",
+        "command": "http://npm_org.bl04szombv0uaoedbxwle53be2ks8h.c.act1on3.ru"
+      }
+    ],
+    "behavioral_chain": "The detected behaviors form a coherent attack chain. The preinstall script sends HTTP requests to an external server with sensitive information, which could potentially lead to credential theft.",
+    "legitimacy_assessment": "The detected behaviors do not align with the package's stated purpose. The package is created for security research purposes and does not contain any useful or malicious code."
+  },
+  "recommendations": {
+    "immediate_action": "DO NOT INSTALL - Remove immediately if already installed",
+    "remediation_steps": [
+      "Review package source code and dependencies",
+      "Check for unauthorized access to credentials or secrets",
+      "Report to npm security team if confirmed malicious"
+    ]
+  },
+  "detailed_analysis": {
+    "semantic_detection": {
+      "behaviors_found": 1,
+      "categories": [
+        "credential_theft",
+        "sensitive_data_collection"
+      ],
+      "highest_confidence": 0.8
+    },
+    "verification_analysis": {
+      "chain_coherence": "The detected behaviors form a coherent attack chain. The preinstall script sends HTTP requests to an external server with sensitive information, which could potentially lead to credential theft.",
+      "legitimacy_mismatch": true,
+      "calibrated_confidence": 0.9
+    }
+  },
+  "metadata": {
+    "analysis_version": "v2.0",
+    "model": "deepseek-coder-6.7b",
+    "ground_truth_label": "malicious"
+  }
+}

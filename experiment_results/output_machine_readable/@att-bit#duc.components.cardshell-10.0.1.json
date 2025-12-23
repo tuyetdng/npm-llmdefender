@@ -1,0 +1,82 @@
+{
+  "package_name": "@att-bit/duc.components.cardshell",
+  "version": "10.0.1",
+  "scan_timestamp": "2025-12-23T23:46:31.801178",
+  "final_verdict": {
+    "classification": "SUSPICIOUS",
+    "confidence": 0.662,
+    "risk_level": null
+  },
+  "executive_summary": "The package sends DNS queries and HTTP requests to the provided URLs during preinstall script execution. The package contains the potential for remote code execution during preinstall script execution.",
+  "threat_profile": {
+    "attack_type": "Remote Code Execution",
+    "primary_tactics": [
+      "Network Reconnaissance",
+      "Credential Theft",
+      "Sensitive Data Collection",
+      "Remote Code Execution",
+      "Install Hook"
+    ],
+    "severity_factors": [
+      "The package sends DNS queries and HTTP requests to the provided URLs during preinstall script execution.",
+      "The package contains the potential for remote code execution during preinstall script execution.",
+      "The package has a preinstall script that could potentially be used to install a backdoor or malicious code."
+    ]
+  },
+  "evidence_summary": {
+    "malicious_indicators": [
+      {
+        "type": "Network Reconnaissance",
+        "description": "The preinstall script contains commands that send DNS queries and HTTP requests to the provided URLs.",
+        "severity": "HIGH",
+        "command": "https://s5yyin8i0k0g9u7wx12fwg9im9s0g04p.oastify.com"
+      },
+      {
+        "type": "Credential Theft",
+        "description": "The preinstall script contains a command that sends the content of the /etc/hosts file to the provided URL.",
+        "severity": "HIGH",
+        "command": "https://s5yyin8i0k0g9u7wx12fwg9im9s0g04p.oastify.com"
+      },
+      {
+        "type": "Sensitive Data Collection",
+        "description": "The preinstall script contains a command that sends the output of the `uname` command to the provided URL.",
+        "severity": "HIGH",
+        "command": "https://uname.rqlx3mthljlfutsvi0nehfuh78dz10pp.oastify.com"
+      }
+    ],
+    "behavioral_chain": "The behaviors do not form a coherent attack chain.",
+    "legitimacy_assessment": "The behaviors are expected for a package named '@att-bit/duc.components.cardshell' as it is stated for testing purposes."
+  },
+  "recommendations": {
+    "immediate_action": "Use with caution - Manual review recommended",
+    "remediation_steps": [
+      "Review package source code and dependencies",
+      "Inspect install/preinstall scripts in package.json",
+      "Check for unauthorized access to credentials or secrets",
+      "Report to npm security team if confirmed malicious"
+    ]
+  },
+  "detailed_analysis": {
+    "semantic_detection": {
+      "behaviors_found": 5,
+      "categories": [
+        "network_reconnaissance",
+        "credential_theft",
+        "sensitive_data_collection",
+        "remote_code_execution",
+        "install_hook"
+      ],
+      "highest_confidence": 0.9
+    },
+    "verification_analysis": {
+      "chain_coherence": "The behaviors do not form a coherent attack chain.",
+      "legitimacy_mismatch": false,
+      "calibrated_confidence": 0.57
+    }
+  },
+  "metadata": {
+    "analysis_version": "v2.0",
+    "model": "deepseek-coder-6.7b",
+    "ground_truth_label": "malicious"
+  }
+}

@@ -1,0 +1,51 @@
+{
+  "package_name": "@aviationpast/niotest",
+  "version": "1.0.10",
+  "scan_timestamp": "2025-12-23T23:54:54.499974",
+  "final_verdict": {
+    "classification": "BENIGN",
+    "confidence": 0.68,
+    "risk_level": "MEDIUM"
+  },
+  "executive_summary": "This package appears to be benign with no significant security concerns detected.",
+  "threat_profile": {
+    "attack_type": "Supply Chain Attack",
+    "primary_tactics": [
+      "Supply Chain Attack",
+      "Dependency Injection"
+    ],
+    "severity_factors": [
+      "Potential supply chain attack by downloading and installing Python 3.11.0 from the Python official website",
+      "Potential dependency confusion due to dependency on non-scoped packages '4equest' and 'npm'"
+    ]
+  },
+  "evidence_summary": {
+    "malicious_indicators": [],
+    "behavioral_chain": "No coherent attack chain detected",
+    "legitimacy_assessment": "The behaviors detected are not expected for a package named '@aviationpast/niotest'"
+  },
+  "recommendations": {
+    "immediate_action": "Package appears safe to use",
+    "remediation_steps": []
+  },
+  "detailed_analysis": {
+    "semantic_detection": {
+      "behaviors_found": 2,
+      "categories": [
+        "supply_chain_attack",
+        "dependency_injection"
+      ],
+      "highest_confidence": 0.8
+    },
+    "verification_analysis": {
+      "chain_coherence": "No coherent attack chain detected",
+      "legitimacy_mismatch": true,
+      "calibrated_confidence": 0.6
+    }
+  },
+  "metadata": {
+    "analysis_version": "v2.0",
+    "model": "deepseek-coder-6.7b",
+    "ground_truth_label": "malicious"
+  }
+}

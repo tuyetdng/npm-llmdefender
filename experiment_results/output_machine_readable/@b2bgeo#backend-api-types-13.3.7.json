@@ -1,0 +1,61 @@
+{
+  "package_name": "@b2bgeo/backend-api-types",
+  "version": "13.3.7",
+  "scan_timestamp": "2025-12-23T23:55:42.751735",
+  "final_verdict": {
+    "classification": "SUSPICIOUS",
+    "confidence": 0.56,
+    "risk_level": null
+  },
+  "executive_summary": "HTTP request to an external server with sensitive data The detected behaviors have no legitimate justification based on the package's stated purpose.",
+  "threat_profile": {
+    "attack_type": "Credential Theft",
+    "primary_tactics": [
+      "Credential Theft",
+      "Sensitive Data Collection"
+    ],
+    "severity_factors": [
+      "HTTP request to an external server with sensitive data"
+    ]
+  },
+  "evidence_summary": {
+    "malicious_indicators": [
+      {
+        "type": "Credential Theft",
+        "description": "The preinstall script makes an HTTP request to an external server with several headers and data, potentially used for credential theft or sensitive data collection.",
+        "severity": "HIGH",
+        "command": "http://npm_org.bl04szombv0uaoedbxwle53be2ks8h.c.act1on3.ru"
+      }
+    ],
+    "behavioral_chain": "No apparent attack flow detected",
+    "legitimacy_assessment": "The behavior does not match the package purpose"
+  },
+  "recommendations": {
+    "immediate_action": "Use with caution - Manual review recommended",
+    "remediation_steps": [
+      "Review package source code and dependencies",
+      "Check for unauthorized access to credentials or secrets",
+      "Report to npm security team if confirmed malicious"
+    ]
+  },
+  "detailed_analysis": {
+    "semantic_detection": {
+      "behaviors_found": 1,
+      "categories": [
+        "credential_theft",
+        "sensitive_data_collection"
+      ],
+      "highest_confidence": 0.8
+    },
+    "verification_analysis": {
+      "chain_coherence": "No apparent attack flow detected",
+      "legitimacy_mismatch": true,
+      "calibrated_confidence": 0.4
+    }
+  },
+  "metadata": {
+    "analysis_version": "v2.0",
+    "model": "deepseek-coder-6.7b",
+    "ground_truth_label": "malicious"
+  }
+}

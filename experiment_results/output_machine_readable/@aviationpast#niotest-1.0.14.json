@@ -1,0 +1,57 @@
+{
+  "package_name": "@aviationpast/niotest",
+  "version": "1.0.14",
+  "scan_timestamp": "2025-12-23T23:55:16.272434",
+  "final_verdict": {
+    "classification": "MALICIOUS",
+    "confidence": 0.653,
+    "risk_level": "MEDIUM"
+  },
+  "executive_summary": "Install script found Potential dependency confusion The detected behaviors have no legitimate justification based on the package's stated purpose.",
+  "threat_profile": {
+    "attack_type": "Supply Chain Attack",
+    "primary_tactics": [
+      "Install Hook",
+      "Supply Chain Propagation",
+      "System Capability"
+    ],
+    "severity_factors": [
+      "Install script found",
+      "Potential dependency confusion"
+    ]
+  },
+  "evidence_summary": {
+    "malicious_indicators": [],
+    "behavioral_chain": "No coherent attack chain detected",
+    "legitimacy_assessment": "The behaviors do not match the package purpose as stated in the description"
+  },
+  "recommendations": {
+    "immediate_action": "Use with caution - Manual review recommended",
+    "remediation_steps": [
+      "Review package source code and dependencies",
+      "Inspect install/preinstall scripts in package.json",
+      "Report to npm security team if confirmed malicious"
+    ]
+  },
+  "detailed_analysis": {
+    "semantic_detection": {
+      "behaviors_found": 3,
+      "categories": [
+        "install_hook",
+        "supply_chain_propagation",
+        "system_capability"
+      ],
+      "highest_confidence": 0.8
+    },
+    "verification_analysis": {
+      "chain_coherence": "No coherent attack chain detected",
+      "legitimacy_mismatch": true,
+      "calibrated_confidence": 0.6
+    }
+  },
+  "metadata": {
+    "analysis_version": "v2.0",
+    "model": "deepseek-coder-6.7b",
+    "ground_truth_label": "malicious"
+  }
+}

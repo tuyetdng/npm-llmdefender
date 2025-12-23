@@ -1,0 +1,52 @@
+{
+  "package_name": "@att-bit/duc.components.cardshell",
+  "version": "10.0.0",
+  "scan_timestamp": "2025-12-23T23:45:38.153414",
+  "final_verdict": {
+    "classification": "MALICIOUS",
+    "confidence": 0.68,
+    "risk_level": "MEDIUM"
+  },
+  "executive_summary": "Install hook present that may lead to unauthorized installation or malicious behavior The detected behaviors have no legitimate justification based on the package's stated purpose.",
+  "threat_profile": {
+    "attack_type": "Malicious Package",
+    "primary_tactics": [
+      "Install Hook"
+    ],
+    "severity_factors": [
+      "Install hook present that may lead to unauthorized installation or malicious behavior"
+    ]
+  },
+  "evidence_summary": {
+    "malicious_indicators": [],
+    "behavioral_chain": "No clear attack chain detected",
+    "legitimacy_assessment": "The behavior is not expected for a package named '@att-bit/duc.components.cardshell'"
+  },
+  "recommendations": {
+    "immediate_action": "Use with caution - Manual review recommended",
+    "remediation_steps": [
+      "Review package source code and dependencies",
+      "Inspect install/preinstall scripts in package.json",
+      "Report to npm security team if confirmed malicious"
+    ]
+  },
+  "detailed_analysis": {
+    "semantic_detection": {
+      "behaviors_found": 1,
+      "categories": [
+        "install_hook"
+      ],
+      "highest_confidence": 0.8
+    },
+    "verification_analysis": {
+      "chain_coherence": "No clear attack chain detected",
+      "legitimacy_mismatch": true,
+      "calibrated_confidence": 0.6
+    }
+  },
+  "metadata": {
+    "analysis_version": "v2.0",
+    "model": "deepseek-coder-6.7b",
+    "ground_truth_label": "malicious"
+  }
+}

@@ -1,0 +1,42 @@
+{
+  "package_name": "@angular/core",
+  "version": "16.2.6",
+  "scan_timestamp": "2025-12-23T23:57:53.012453",
+  "final_verdict": {
+    "classification": "BENIGN",
+    "confidence": 1.0,
+    "risk_level": "NONE"
+  },
+  "executive_summary": "This package appears to be benign with no significant security concerns detected.",
+  "threat_profile": {
+    "attack_type": "Malicious Package",
+    "primary_tactics": [],
+    "severity_factors": []
+  },
+  "evidence_summary": {
+    "malicious_indicators": [],
+    "behavioral_chain": "",
+    "legitimacy_assessment": "The package does not have any behaviors that are expected for a package named '@angular/core'."
+  },
+  "recommendations": {
+    "immediate_action": "Package appears safe to use",
+    "remediation_steps": []
+  },
+  "detailed_analysis": {
+    "semantic_detection": {
+      "behaviors_found": 0,
+      "categories": [],
+      "highest_confidence": 0
+    },
+    "verification_analysis": {
+      "chain_coherence": "",
+      "legitimacy_mismatch": false,
+      "calibrated_confidence": 1.0
+    }
+  },
+  "metadata": {
+    "analysis_version": "v2.0",
+    "model": "deepseek-coder-6.7b",
+    "ground_truth_label": "benign"
+  }
+}
