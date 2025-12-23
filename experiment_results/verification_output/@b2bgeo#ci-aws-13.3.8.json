@@ -1,0 +1,33 @@
+{
+  "package_name": "@b2bgeo/ci-aws",
+  "version": "13.3.8",
+  "label": "malicious",
+  "semantic_findings_summary": {
+    "num_behaviors": 1,
+    "risk_vector": [
+      "network_reconnaissance"
+    ]
+  },
+  "verification_result": {
+    "chain_analysis": {
+      "is_coherent_chain": false,
+      "chain_narrative": "The detected behaviors do not form a coherent attack chain.",
+      "chain_score": 0.4
+    },
+    "legitimacy_check": {
+      "is_justified": false,
+      "reasoning": "The behavior of sending network reconnaissance requests to an external server is not expected for a package named '@b2bgeo/ci-aws'.",
+      "legitimacy_score": 0.4
+    },
+    "final_verification": {
+      "verdict": "SUSPICIOUS",
+      "calibrated_confidence": 0.5,
+      "explanation": "The chain score is medium indicating a partial chain, but the legitimacy score is low indicating questionable justification. Therefore, the behavior is considered suspicious."
+    }
+  },
+  "analysis_metadata": {
+    "model": "deepseek-coder-6.7b",
+    "stage": "v2.0"
+  },
+  "created_at": "2025-12-23T23:57:41.194972"
+}

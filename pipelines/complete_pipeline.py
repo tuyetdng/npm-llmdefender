@@ -245,8 +245,8 @@ class MalwareDetectionPipeline:
             self.csv_logger.log_verification_analysis(
                 package_name=package.package_name,
                 version=package.version,
-                parsed_json=data,
-                raw_response=enriched_data
+                parsed_json=enriched_data,
+                raw_response=output
             )
 
             return enriched_data
@@ -275,11 +275,6 @@ class MalwareDetectionPipeline:
         
         json_path = classifier.save_result(result)
         md_path = classifier.save_user_report(result)
-        
-        print(f" Classification: {result['verdict']}")
-        print(f" Confidence: {result['confidence']:.2f}")
-        print(f" JSON report: {json_path}")
-        print(f" Markdown report: {md_path}")
         
         return result
     
@@ -311,11 +306,7 @@ class MalwareDetectionPipeline:
             
             print(f"\n{'='*60}")
             print("PIPELINE COMPLETED SUCCESSFULLY")
-            print(f"{'='*60}")
-            print(f"Total execution time: {execution_time:.2f}s")
-            print(f"Ground truth: {package.label}")
-            print(f"Predicted: {final_classification['verdict']}")
-            print(f"Confidence: {final_classification['confidence']:.2f}")
+
             
             return PipelineResult(
                 package_name=package.package_name,
@@ -350,7 +341,7 @@ class MalwareDetectionPipeline:
                 error_message=str(e)
             )
     
-    def run_demo(self, num_malicious: int = 1, num_benign: int = 1):
+    def run_demo(self, num_malicious: int = 4, num_benign: int = 1):
         print(f"\n{'#'*70}")
         print(f"# MALWARE DETECTION PIPELINE DEMO")
         print(f"# Analyzing {num_malicious} malicious + {num_benign} benign packages")
@@ -409,7 +400,7 @@ def main():
     )
     
     results = pipeline.run_demo(
-        num_malicious=1,
+        num_malicious=8,
         num_benign=1
     )
     

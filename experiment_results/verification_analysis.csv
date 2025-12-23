@@ -192,3 +192,681 @@ Based on the provided information, here is the analysis:
 In the chain analysis, the behaviors are isolated and do not form a coherent attack chain. The chain score is 0.3.
 
 In the legitimacy ch","{""chain_analysis"": {""is_coherent_chain"": false, ""chain_narrative"": ""The behaviors are isolated and do not form a coherent attack chain."", ""chain_score"": 0.3}, ""legitimacy_check"": {""is_justified"": false, ""reasoning"": ""The package '@angular/compiler-cli' is not reasonably expected to perform the behaviors of dependency injection of non-scoped packages and propagation of malicious packages."", ""legitimacy_score"": 0.4}, ""final_verification"": {""verdict"": ""SUSPICIOUS"", ""calibrated_confidence"": 0.5, ""explanation"": ""The chain score and legitimacy score suggest that the package might be performing behaviors that are not justified by its stated purpose. However, further investigation is needed to confirm these behaviors.""}}"
+@aszxc/npmexp,1.0.1,2025-12-21T04:19:24.401103,DeepSeek-Coder-6.7B-Instruct,v2.0,UNKNOWN,0.0,0.0,False,0.0,False,,,,"### Response:
+Based on the provided information, here is the analysis:
+
+```json
+{
+  ""chain_analysis"": {
+    ""is_coherent_chain"": true,
+    ""chain_narrative"": ""The detected behaviors form a coherent attack chain: Backdoor installation via preinstall script -> Network Call -> Reverse Shell Connection"",
+    ""chain_score"": 0.9
+  },
+  ""legitimacy_check"": {
+    ""is_justified"": false,
+    ""reasoning"": ""The behavior of establishing a reverse shell connection to a remote server is not expected for a package named '@aszxc/npmexp'"",
+    ""legitimacy_score"": 0.3
+  },
+  ""final_verification"": {
+    ""verdict"": ""MALICIOUS"",
+    ""calibrated_confidence"": 0.84,
+    ""explanation"": ""The high chain score indicates a strong attack pattern, but the low legitimacy score suggests that the behavior is not justified by the package's stated purpose. Therefore, the verdict is MALICIOUS.""
+  }
+}
+```
+
+In the chain analysis, the behaviors form a coherent attack chain, with a high score indicating a strong attack pattern","{""package_name"": ""@aszxc/npmexp"", ""version"": ""1.0.1"", ""label"": ""malicious"", ""semantic_findings_summary"": {""num_behaviors"": 1, ""risk_vector"": [""backdoor_installation""]}, ""verification_result"": {""chain_analysis"": {""is_coherent_chain"": true, ""chain_narrative"": ""The detected behaviors form a coherent attack chain: Backdoor installation via preinstall script -> Network Call -> Reverse Shell Connection"", ""chain_score"": 0.9}, ""legitimacy_check"": {""is_justified"": false, ""reasoning"": ""The behavior of establishing a reverse shell connection to a remote server is not expected for a package named '@aszxc/npmexp'"", ""legitimacy_score"": 0.3}, ""final_verification"": {""verdict"": ""MALICIOUS"", ""calibrated_confidence"": 0.84, ""explanation"": ""The high chain score indicates a strong attack pattern, but the low legitimacy score suggests that the behavior is not justified by the package's stated purpose. Therefore, the verdict is MALICIOUS.""}}, ""analysis_metadata"": {""model"": ""deepseek-coder-6.7b"", ""stage"": ""v2.0""}, ""created_at"": ""2025-12-21T04:19:24.400768""}"
+@aszxc/npmexp,1.0.1,2025-12-21T04:20:32.192156,DeepSeek-Coder-6.7B-Instruct,v2.0,UNKNOWN,0.0,0.0,False,0.0,False,,,,"### Response:
+Based on the provided information, here is the analysis:
+
+```json
+{
+  ""chain_analysis"": {
+    ""is_coherent_chain"": true,
+    ""chain_narrative"": ""The detected behaviors form a coherent attack chain: Backdoor installation via preinstall script -> Network Call -> Reverse Shell Connection"",
+    ""chain_score"": 0.9
+  },
+  ""legitimacy_check"": {
+    ""is_justified"": false,
+    ""reasoning"": ""The behavior of establishing a reverse shell connection to a remote server is not expected for a package named '@aszxc/npmexp'"",
+    ""legitimacy_score"": 0.3
+  },
+  ""final_verification"": {
+    ""verdict"": ""MALICIOUS"",
+    ""calibrated_confidence"": 0.84,
+    ""explanation"": ""The high chain score indicates a strong attack pattern, but the low legitimacy score suggests that the behavior is not justified by the package's stated purpose. Therefore, the verdict is MALICIOUS.""
+  }
+}
+```
+
+In the chain analysis, the behaviors form a coherent attack chain, with a high score indicating a strong attack pattern","{""package_name"": ""@aszxc/npmexp"", ""version"": ""1.0.1"", ""label"": ""malicious"", ""semantic_findings_summary"": {""num_behaviors"": 1, ""risk_vector"": [""backdoor_installation""]}, ""verification_result"": {""chain_analysis"": {""is_coherent_chain"": true, ""chain_narrative"": ""The detected behaviors form a coherent attack chain: Backdoor installation via preinstall script -> Network Call -> Reverse Shell Connection"", ""chain_score"": 0.9}, ""legitimacy_check"": {""is_justified"": false, ""reasoning"": ""The behavior of establishing a reverse shell connection to a remote server is not expected for a package named '@aszxc/npmexp'"", ""legitimacy_score"": 0.3}, ""final_verification"": {""verdict"": ""MALICIOUS"", ""calibrated_confidence"": 0.84, ""explanation"": ""The high chain score indicates a strong attack pattern, but the low legitimacy score suggests that the behavior is not justified by the package's stated purpose. Therefore, the verdict is MALICIOUS.""}}, ""analysis_metadata"": {""model"": ""deepseek-coder-6.7b"", ""stage"": ""v2.0""}, ""created_at"": ""2025-12-21T04:20:32.189354""}"
+@aszxc/npmexp,1.0.1,2025-12-21T04:22:56.734959,DeepSeek-Coder-6.7B-Instruct,v2.0,UNKNOWN,0.0,0.0,False,0.0,False,,,,"### Response:
+Based on the provided information, here is the analysis:
+
+```json
+{
+  ""chain_analysis"": {
+    ""is_coherent_chain"": true,
+    ""chain_narrative"": ""The detected behaviors form a coherent attack chain: Backdoor installation via preinstall script -> Network Call -> Reverse Shell Connection"",
+    ""chain_score"": 0.9
+  },
+  ""legitimacy_check"": {
+    ""is_justified"": false,
+    ""reasoning"": ""The behavior of establishing a reverse shell connection to a remote server is not expected for a package named '@aszxc/npmexp'"",
+    ""legitimacy_score"": 0.3
+  },
+  ""final_verification"": {
+    ""verdict"": ""MALICIOUS"",
+    ""calibrated_confidence"": 0.84,
+    ""explanation"": ""The high chain score indicates a strong attack pattern, but the low legitimacy score suggests that the behavior is not justified by the package's stated purpose. Therefore, the verdict is MALICIOUS.""
+  }
+}
+```
+
+In the chain analysis, the behaviors form a coherent attack chain, with a high score indicating a strong attack pattern","{""package_name"": ""@aszxc/npmexp"", ""version"": ""1.0.1"", ""label"": ""malicious"", ""semantic_findings_summary"": {""num_behaviors"": 1, ""risk_vector"": [""backdoor_installation""]}, ""verification_result"": {""chain_analysis"": {""is_coherent_chain"": true, ""chain_narrative"": ""The detected behaviors form a coherent attack chain: Backdoor installation via preinstall script -> Network Call -> Reverse Shell Connection"", ""chain_score"": 0.9}, ""legitimacy_check"": {""is_justified"": false, ""reasoning"": ""The behavior of establishing a reverse shell connection to a remote server is not expected for a package named '@aszxc/npmexp'"", ""legitimacy_score"": 0.3}, ""final_verification"": {""verdict"": ""MALICIOUS"", ""calibrated_confidence"": 0.84, ""explanation"": ""The high chain score indicates a strong attack pattern, but the low legitimacy score suggests that the behavior is not justified by the package's stated purpose. Therefore, the verdict is MALICIOUS.""}}, ""analysis_metadata"": {""model"": ""deepseek-coder-6.7b"", ""stage"": ""v2.0""}, ""created_at"": ""2025-12-21T04:22:56.734598""}"
+@aszxc/npmexp,1.0.1,2025-12-21T04:26:28.156612,DeepSeek-Coder-6.7B-Instruct,v2.0,UNKNOWN,0.0,0.0,False,0.0,False,,,,"### Response:
+Based on the provided information, here is the analysis:
+
+```json
+{
+  ""chain_analysis"": {
+    ""is_coherent_chain"": true,
+    ""chain_narrative"": ""The detected behaviors form a coherent attack chain: Backdoor installation via preinstall script -> Network Call -> Reverse Shell Connection"",
+    ""chain_score"": 0.9
+  },
+  ""legitimacy_check"": {
+    ""is_justified"": false,
+    ""reasoning"": ""The behavior of establishing a reverse shell connection to a remote server is not expected for a package named '@aszxc/npmexp'"",
+    ""legitimacy_score"": 0.3
+  },
+  ""final_verification"": {
+    ""verdict"": ""MALICIOUS"",
+    ""calibrated_confidence"": 0.84,
+    ""explanation"": ""The high chain score indicates a strong attack pattern, but the low legitimacy score suggests that the behavior is not justified by the package's stated purpose. Therefore, the verdict is MALICIOUS.""
+  }
+}
+```
+
+In the chain analysis, the behaviors form a coherent attack chain, with a high score indicating a strong attack pattern","{""package_name"": ""@aszxc/npmexp"", ""version"": ""1.0.1"", ""label"": ""malicious"", ""semantic_findings_summary"": {""num_behaviors"": 1, ""risk_vector"": [""backdoor_installation""]}, ""verification_result"": {""chain_analysis"": {""is_coherent_chain"": true, ""chain_narrative"": ""The detected behaviors form a coherent attack chain: Backdoor installation via preinstall script -> Network Call -> Reverse Shell Connection"", ""chain_score"": 0.9}, ""legitimacy_check"": {""is_justified"": false, ""reasoning"": ""The behavior of establishing a reverse shell connection to a remote server is not expected for a package named '@aszxc/npmexp'"", ""legitimacy_score"": 0.3}, ""final_verification"": {""verdict"": ""MALICIOUS"", ""calibrated_confidence"": 0.84, ""explanation"": ""The high chain score indicates a strong attack pattern, but the low legitimacy score suggests that the behavior is not justified by the package's stated purpose. Therefore, the verdict is MALICIOUS.""}}, ""analysis_metadata"": {""model"": ""deepseek-coder-6.7b"", ""stage"": ""v2.0""}, ""created_at"": ""2025-12-21T04:26:28.156335""}"
+@angular/core,16.2.6,2025-12-21T04:26:41.018427,DeepSeek-Coder-6.7B-Instruct,v2.0,UNKNOWN,0.0,0.0,False,0.0,False,,,,"### Response:
+Based on the provided information, the package '@angular/core' does not have any suspicious behaviors. Therefore, we can conclude that the chain analysis and legitimacy check are not applicable for this package. Here is the JSON output:
+
+```json
+{
+  ""chain_analysis"": {
+    ""is_coherent_chain"": false,
+    ""chain_narrative"": """",
+    ""chain_score"": 0.0
+  },
+  ""legitimacy_check"": {
+    ""is_justified"": true,
+    ""reasoning"": ""The package does not have any behaviors that are expected for a package named '@angular/core'."",
+    ""legitimacy_score"": 1.0
+  },
+  ""final_verification"": {
+    ""verdict"": ""BENIGN"",
+    ""calibrated_confidence"": 1.0,
+    ""explanation"": ""The package does not have any suspicious behaviors and all behaviors are expected for this type of package.""
+  }
+}
+```
+
+Please note that this is a hypothetical analysis and the actual scores would depend on the actual behaviors of the package.","{""package_name"": ""@angular/core"", ""version"": ""16.2.6"", ""label"": ""benign"", ""semantic_findings_summary"": {""num_behaviors"": 0, ""risk_vector"": []}, ""verification_result"": {""chain_analysis"": {""is_coherent_chain"": false, ""chain_narrative"": """", ""chain_score"": 0.0}, ""legitimacy_check"": {""is_justified"": true, ""reasoning"": ""The package does not have any behaviors that are expected for a package named '@angular/core'."", ""legitimacy_score"": 1.0}, ""final_verification"": {""verdict"": ""BENIGN"", ""calibrated_confidence"": 1.0, ""explanation"": ""The package does not have any suspicious behaviors and all behaviors are expected for this type of package.""}}, ""analysis_metadata"": {""model"": ""deepseek-coder-6.7b"", ""stage"": ""v2.0""}, ""created_at"": ""2025-12-21T04:26:41.018129""}"
+@angular/core,16.2.6,2025-12-21T04:29:52.970109,DeepSeek-Coder-6.7B-Instruct,v2.0,UNKNOWN,0.0,0.0,False,0.0,False,,,,"### Response:
+Based on the provided information, the package '@angular/core' does not have any suspicious behaviors. Therefore, we can conclude that the chain analysis and legitimacy check are not applicable for this package. Here is the JSON output:
+
+```json
+{
+  ""chain_analysis"": {
+    ""is_coherent_chain"": false,
+    ""chain_narrative"": """",
+    ""chain_score"": 0.0
+  },
+  ""legitimacy_check"": {
+    ""is_justified"": true,
+    ""reasoning"": ""The package does not have any behaviors that are expected for a package named '@angular/core'."",
+    ""legitimacy_score"": 1.0
+  },
+  ""final_verification"": {
+    ""verdict"": ""BENIGN"",
+    ""calibrated_confidence"": 1.0,
+    ""explanation"": ""The package does not have any suspicious behaviors and all behaviors are expected for this type of package.""
+  }
+}
+```
+
+Please note that this is a hypothetical analysis and the actual scores would depend on the actual behaviors of the package.","{""package_name"": ""@angular/core"", ""version"": ""16.2.6"", ""label"": ""benign"", ""semantic_findings_summary"": {""num_behaviors"": 0, ""risk_vector"": []}, ""verification_result"": {""chain_analysis"": {""is_coherent_chain"": false, ""chain_narrative"": """", ""chain_score"": 0.0}, ""legitimacy_check"": {""is_justified"": true, ""reasoning"": ""The package does not have any behaviors that are expected for a package named '@angular/core'."", ""legitimacy_score"": 1.0}, ""final_verification"": {""verdict"": ""BENIGN"", ""calibrated_confidence"": 1.0, ""explanation"": ""The package does not have any suspicious behaviors and all behaviors are expected for this type of package.""}}, ""analysis_metadata"": {""model"": ""deepseek-coder-6.7b"", ""stage"": ""v2.0""}, ""created_at"": ""2025-12-21T04:29:52.969823""}"
+@arkadium/eagle-user-client,9.1.1,2025-12-23T23:35:32.054620,DeepSeek-Coder-6.7B-Instruct,v2.0,UNKNOWN,0.0,0.0,False,0.0,False,,,,"### Response:
+Based on the provided information, the package name ""@arkadium/eagle-user-client"" does not seem to have any keywords associated with it. This could suggest that the package is not intended to be used in a credential theft manner. Therefore, the behavior of the package could be considered benign.
+
+Here is a JSON output based on the analysis:
+
+```json
+{
+  ""chain_analysis"": {
+    ""is_coherent_chain"": false,
+    ""chain_narrative"": ""No coherent attack chain detected"",
+    ""chain_score"": 0.3
+  },
+  ""legitimacy_check"": {
+    ""is_justified"": true,
+    ""reasoning"": ""The behavior is expected for a package named '@arkadium/eagle-user-client'"",
+    ""legitimacy_score"": 0.7
+  },
+  ""final_verification"": {
+    ""verdict"": ""BENIGN"",
+    ""calibrated_confidence"": 0.7,
+    ""explanation"": ""The package is benign as the behavior is expected for its purpose and no coherent attack chain is detected.""
+  }
+}
+```
+
+In this case, the chain score is 0.3, which is considered low, indicating that there is","{""package_name"": ""@arkadium/eagle-user-client"", ""version"": ""9.1.1"", ""label"": ""malicious"", ""semantic_findings_summary"": {""num_behaviors"": 1, ""risk_vector"": [""credential_theft""]}, ""verification_result"": {""chain_analysis"": {""is_coherent_chain"": false, ""chain_narrative"": ""No coherent attack chain detected"", ""chain_score"": 0.3}, ""legitimacy_check"": {""is_justified"": true, ""reasoning"": ""The behavior is expected for a package named '@arkadium/eagle-user-client'"", ""legitimacy_score"": 0.7}, ""final_verification"": {""verdict"": ""BENIGN"", ""calibrated_confidence"": 0.7, ""explanation"": ""The package is benign as the behavior is expected for its purpose and no coherent attack chain is detected.""}}, ""analysis_metadata"": {""model"": ""deepseek-coder-6.7b"", ""stage"": ""v2.0""}, ""created_at"": ""2025-12-23T23:35:32.054325""}"
+@arkadium/eagle-user-client,9.99.999,2025-12-23T23:35:53.987564,DeepSeek-Coder-6.7B-Instruct,v2.0,UNKNOWN,0.0,0.0,False,0.0,False,,,,"### Response:
+Based on the provided information, the package name ""@arkadium/eagle-user-client"" does not seem to have any keywords associated with it. This could suggest that the package is not intended to be used in a credential theft manner. Therefore, the behavior of the package could be considered benign.
+
+Here is a JSON output based on the analysis:
+
+```json
+{
+  ""chain_analysis"": {
+    ""is_coherent_chain"": false,
+    ""chain_narrative"": ""No clear attack chain detected"",
+    ""chain_score"": 0.3
+  },
+  ""legitimacy_check"": {
+    ""is_justified"": false,
+    ""reasoning"": ""The behavior does not seem to be expected for a package named '@arkadium/eagle-user-client'"",
+    ""legitimacy_score"": 0.3
+  },
+  ""final_verification"": {
+    ""verdict"": ""BENIGN"",
+    ""calibrated_confidence"": 0.6,
+    ""explanation"": ""The behavior is not a threat, but it does not seem to be expected for this type of package. Therefore, it could be considered a false positive.""
+  }
+}
+```
+
+In this case, the chain score is 0.3","{""package_name"": ""@arkadium/eagle-user-client"", ""version"": ""9.99.999"", ""label"": ""malicious"", ""semantic_findings_summary"": {""num_behaviors"": 1, ""risk_vector"": [""credential_theft""]}, ""verification_result"": {""chain_analysis"": {""is_coherent_chain"": false, ""chain_narrative"": ""No clear attack chain detected"", ""chain_score"": 0.3}, ""legitimacy_check"": {""is_justified"": false, ""reasoning"": ""The behavior does not seem to be expected for a package named '@arkadium/eagle-user-client'"", ""legitimacy_score"": 0.3}, ""final_verification"": {""verdict"": ""BENIGN"", ""calibrated_confidence"": 0.6, ""explanation"": ""The behavior is not a threat, but it does not seem to be expected for this type of package. Therefore, it could be considered a false positive.""}}, ""analysis_metadata"": {""model"": ""deepseek-coder-6.7b"", ""stage"": ""v2.0""}, ""created_at"": ""2025-12-23T23:35:53.987273""}"
+@att-bit/duc.components.cardshell,10.0.0,2025-12-23T23:36:11.963470,DeepSeek-Coder-6.7B-Instruct,v2.0,UNKNOWN,0.0,0.0,False,0.0,False,,,,"### Response:
+Based on the provided information, here is the analysis:
+
+```json
+{
+  ""chain_analysis"": {
+    ""is_coherent_chain"": false,
+    ""chain_narrative"": ""No clear attack chain detected"",
+    ""chain_score"": 0.3
+  },
+  ""legitimacy_check"": {
+    ""is_justified"": false,
+    ""reasoning"": ""The behavior is not expected for a package named '@att-bit/duc.components.cardshell'"",
+    ""legitimacy_score"": 0.3
+  },
+  ""final_verification"": {
+    ""verdict"": ""MALICIOUS"",
+    ""calibrated_confidence"": 0.6,
+    ""explanation"": ""The chain score is medium indicating a potential attack chain, but the legitimacy score is low indicating that the behavior is not justified by the package's stated purpose.""
+  }
+}
+```
+
+In this case, the chain analysis shows that there is no clear attack chain. The legitimacy check indicates that the behavior is not justified by the package's stated purpose. The final verification uses the calibration rules to determine the verdict. The verdict is ""MALICIOUS"" because the chain ","{""package_name"": ""@att-bit/duc.components.cardshell"", ""version"": ""10.0.0"", ""label"": ""malicious"", ""semantic_findings_summary"": {""num_behaviors"": 1, ""risk_vector"": [""install_hook""]}, ""verification_result"": {""chain_analysis"": {""is_coherent_chain"": false, ""chain_narrative"": ""No clear attack chain detected"", ""chain_score"": 0.3}, ""legitimacy_check"": {""is_justified"": false, ""reasoning"": ""The behavior is not expected for a package named '@att-bit/duc.components.cardshell'"", ""legitimacy_score"": 0.3}, ""final_verification"": {""verdict"": ""MALICIOUS"", ""calibrated_confidence"": 0.6, ""explanation"": ""The chain score is medium indicating a potential attack chain, but the legitimacy score is low indicating that the behavior is not justified by the package's stated purpose.""}}, ""analysis_metadata"": {""model"": ""deepseek-coder-6.7b"", ""stage"": ""v2.0""}, ""created_at"": ""2025-12-23T23:36:11.963151""}"
+@att-bit/duc.components.cardshell,10.0.1,2025-12-23T23:37:05.343143,DeepSeek-Coder-6.7B-Instruct,v2.0,UNKNOWN,0.0,0.0,False,0.0,False,,,,"### Response:
+Based on the provided information, the package '@att-bit/duc.components.cardshell' seems to be a tool for testing purposes. The behaviors detected are related to network reconnaissance, credential theft, sensitive data collection, and potential remote code execution.
+
+Let's analyze the behaviors and calculate the scores:
+
+STEP 1: BEHAVIOR CHAIN ANALYSIS
+
+- The behaviors do not form a coherent attack chain. They seem to be isolated events. Therefore, the chain score is 0.4.
+
+STEP 2: CONTEXT LEGITIMACY CHECK
+
+- The behaviors are expected for a package named '@att-bit/duc.components.cardshell' as it is stated for testing purposes. Therefore, the legitimacy score is 0.7.
+
+STEP 3: CALIBRATION
+
+- According to the rules, the verdict should be SUSPICIOUS. The chain score is 0.4 and the legitimacy score is 0.7. The calibrated confidence is 0.57.
+
+Here is the JSON output:
+
+```json
+{
+  ""chain_analysis"": {
+    ""is_coherent_chain"": false,
+    ""chain_narrative"": ""The behaviors do not f","{""package_name"": ""@att-bit/duc.components.cardshell"", ""version"": ""10.0.1"", ""label"": ""malicious"", ""semantic_findings_summary"": {""num_behaviors"": 5, ""risk_vector"": [""network_reconnaissance"", ""credential_theft"", ""sensitive_data_collection"", ""remote_code_execution"", ""install_hook""]}, ""verification_result"": {""chain_analysis"": {""is_coherent_chain"": false, ""chain_narrative"": ""The behaviors do not form a coherent attack chain."", ""chain_score"": 0.4}, ""legitimacy_check"": {""is_justified"": true, ""reasoning"": ""The behaviors are expected for a package named '@att-bit/duc.components.cardshell' as it is stated for testing purposes."", ""legitimacy_score"": 0.7}, ""final_verification"": {""verdict"": ""SUSPICIOUS"", ""calibrated_confidence"": 0.57, ""explanation"": ""The chain score is 0.4 and the legitimacy score is 0.7. The calibrated confidence is 0.57, which suggests a level of uncertainty.""}}, ""analysis_metadata"": {""model"": ""deepseek-coder-6.7b"", ""stage"": ""v2.0""}, ""created_at"": ""2025-12-23T23:37:05.342852""}"
+@angular/core,16.2.6,2025-12-23T23:37:17.296162,DeepSeek-Coder-6.7B-Instruct,v2.0,UNKNOWN,0.0,0.0,False,0.0,False,,,,"### Response:
+Based on the provided information, the package '@angular/core' does not have any suspicious behaviors. Therefore, we can conclude that the chain analysis and legitimacy check are not applicable for this package. Here is the JSON output:
+
+```json
+{
+  ""chain_analysis"": {
+    ""is_coherent_chain"": false,
+    ""chain_narrative"": """",
+    ""chain_score"": 0.0
+  },
+  ""legitimacy_check"": {
+    ""is_justified"": true,
+    ""reasoning"": ""The package does not have any behaviors that are expected for a package named '@angular/core'."",
+    ""legitimacy_score"": 1.0
+  },
+  ""final_verification"": {
+    ""verdict"": ""BENIGN"",
+    ""calibrated_confidence"": 1.0,
+    ""explanation"": ""The package does not have any suspicious behaviors and all behaviors are expected for this type of package.""
+  }
+}
+```
+
+Please note that this is a hypothetical analysis and the actual scores would depend on the actual behaviors of the package.","{""package_name"": ""@angular/core"", ""version"": ""16.2.6"", ""label"": ""benign"", ""semantic_findings_summary"": {""num_behaviors"": 0, ""risk_vector"": []}, ""verification_result"": {""chain_analysis"": {""is_coherent_chain"": false, ""chain_narrative"": """", ""chain_score"": 0.0}, ""legitimacy_check"": {""is_justified"": true, ""reasoning"": ""The package does not have any behaviors that are expected for a package named '@angular/core'."", ""legitimacy_score"": 1.0}, ""final_verification"": {""verdict"": ""BENIGN"", ""calibrated_confidence"": 1.0, ""explanation"": ""The package does not have any suspicious behaviors and all behaviors are expected for this type of package.""}}, ""analysis_metadata"": {""model"": ""deepseek-coder-6.7b"", ""stage"": ""v2.0""}, ""created_at"": ""2025-12-23T23:37:17.295829""}"
+@arkadium/eagle-user-client,9.1.1,2025-12-23T23:44:58.323444,DeepSeek-Coder-6.7B-Instruct,v2.0,UNKNOWN,0.0,0.0,False,0.0,False,,,,"### Response:
+Based on the provided information, the package name ""@arkadium/eagle-user-client"" does not seem to have any keywords associated with it. This could suggest that the package is not intended to be used in a credential theft manner. Therefore, the behavior of the package could be considered benign.
+
+Here is a JSON output based on the analysis:
+
+```json
+{
+  ""chain_analysis"": {
+    ""is_coherent_chain"": false,
+    ""chain_narrative"": ""No coherent attack chain detected"",
+    ""chain_score"": 0.3
+  },
+  ""legitimacy_check"": {
+    ""is_justified"": true,
+    ""reasoning"": ""The behavior is expected for a package named '@arkadium/eagle-user-client'"",
+    ""legitimacy_score"": 0.7
+  },
+  ""final_verification"": {
+    ""verdict"": ""BENIGN"",
+    ""calibrated_confidence"": 0.7,
+    ""explanation"": ""The package is benign as the behavior is expected for its purpose and no coherent attack chain is detected.""
+  }
+}
+```
+
+In this case, the chain score is 0.3, which is considered low, indicating that there is","{""package_name"": ""@arkadium/eagle-user-client"", ""version"": ""9.1.1"", ""label"": ""malicious"", ""semantic_findings_summary"": {""num_behaviors"": 1, ""risk_vector"": [""credential_theft""]}, ""verification_result"": {""chain_analysis"": {""is_coherent_chain"": false, ""chain_narrative"": ""No coherent attack chain detected"", ""chain_score"": 0.3}, ""legitimacy_check"": {""is_justified"": true, ""reasoning"": ""The behavior is expected for a package named '@arkadium/eagle-user-client'"", ""legitimacy_score"": 0.7}, ""final_verification"": {""verdict"": ""BENIGN"", ""calibrated_confidence"": 0.7, ""explanation"": ""The package is benign as the behavior is expected for its purpose and no coherent attack chain is detected.""}}, ""analysis_metadata"": {""model"": ""deepseek-coder-6.7b"", ""stage"": ""v2.0""}, ""created_at"": ""2025-12-23T23:44:58.323100""}"
+@arkadium/eagle-user-client,9.99.999,2025-12-23T23:45:20.272458,DeepSeek-Coder-6.7B-Instruct,v2.0,UNKNOWN,0.0,0.0,False,0.0,False,,,,"### Response:
+Based on the provided information, the package name ""@arkadium/eagle-user-client"" does not seem to have any keywords associated with it. This could suggest that the package is not intended to be used in a credential theft manner. Therefore, the behavior of the package could be considered benign.
+
+Here is a JSON output based on the analysis:
+
+```json
+{
+  ""chain_analysis"": {
+    ""is_coherent_chain"": false,
+    ""chain_narrative"": ""No clear attack chain detected"",
+    ""chain_score"": 0.3
+  },
+  ""legitimacy_check"": {
+    ""is_justified"": false,
+    ""reasoning"": ""The behavior does not seem to be expected for a package named '@arkadium/eagle-user-client'"",
+    ""legitimacy_score"": 0.3
+  },
+  ""final_verification"": {
+    ""verdict"": ""BENIGN"",
+    ""calibrated_confidence"": 0.6,
+    ""explanation"": ""The behavior is not a threat, but it does not seem to be expected for this type of package. Therefore, it could be considered a false positive.""
+  }
+}
+```
+
+In this case, the chain score is 0.3","{""package_name"": ""@arkadium/eagle-user-client"", ""version"": ""9.99.999"", ""label"": ""malicious"", ""semantic_findings_summary"": {""num_behaviors"": 1, ""risk_vector"": [""credential_theft""]}, ""verification_result"": {""chain_analysis"": {""is_coherent_chain"": false, ""chain_narrative"": ""No clear attack chain detected"", ""chain_score"": 0.3}, ""legitimacy_check"": {""is_justified"": false, ""reasoning"": ""The behavior does not seem to be expected for a package named '@arkadium/eagle-user-client'"", ""legitimacy_score"": 0.3}, ""final_verification"": {""verdict"": ""BENIGN"", ""calibrated_confidence"": 0.6, ""explanation"": ""The behavior is not a threat, but it does not seem to be expected for this type of package. Therefore, it could be considered a false positive.""}}, ""analysis_metadata"": {""model"": ""deepseek-coder-6.7b"", ""stage"": ""v2.0""}, ""created_at"": ""2025-12-23T23:45:20.272115""}"
+@att-bit/duc.components.cardshell,10.0.0,2025-12-23T23:45:38.153234,DeepSeek-Coder-6.7B-Instruct,v2.0,UNKNOWN,0.0,0.0,False,0.0,False,,,,"### Response:
+Based on the provided information, here is the analysis:
+
+```json
+{
+  ""chain_analysis"": {
+    ""is_coherent_chain"": false,
+    ""chain_narrative"": ""No clear attack chain detected"",
+    ""chain_score"": 0.3
+  },
+  ""legitimacy_check"": {
+    ""is_justified"": false,
+    ""reasoning"": ""The behavior is not expected for a package named '@att-bit/duc.components.cardshell'"",
+    ""legitimacy_score"": 0.3
+  },
+  ""final_verification"": {
+    ""verdict"": ""MALICIOUS"",
+    ""calibrated_confidence"": 0.6,
+    ""explanation"": ""The chain score is medium indicating a potential attack chain, but the legitimacy score is low indicating that the behavior is not justified by the package's stated purpose.""
+  }
+}
+```
+
+In this case, the chain analysis shows that there is no clear attack chain. The legitimacy check indicates that the behavior is not justified by the package's stated purpose. The final verification uses the calibration rules to determine the verdict. The verdict is ""MALICIOUS"" because the chain ","{""package_name"": ""@att-bit/duc.components.cardshell"", ""version"": ""10.0.0"", ""label"": ""malicious"", ""semantic_findings_summary"": {""num_behaviors"": 1, ""risk_vector"": [""install_hook""]}, ""verification_result"": {""chain_analysis"": {""is_coherent_chain"": false, ""chain_narrative"": ""No clear attack chain detected"", ""chain_score"": 0.3}, ""legitimacy_check"": {""is_justified"": false, ""reasoning"": ""The behavior is not expected for a package named '@att-bit/duc.components.cardshell'"", ""legitimacy_score"": 0.3}, ""final_verification"": {""verdict"": ""MALICIOUS"", ""calibrated_confidence"": 0.6, ""explanation"": ""The chain score is medium indicating a potential attack chain, but the legitimacy score is low indicating that the behavior is not justified by the package's stated purpose.""}}, ""analysis_metadata"": {""model"": ""deepseek-coder-6.7b"", ""stage"": ""v2.0""}, ""created_at"": ""2025-12-23T23:45:38.152896""}"
+@att-bit/duc.components.cardshell,10.0.1,2025-12-23T23:46:31.801001,DeepSeek-Coder-6.7B-Instruct,v2.0,UNKNOWN,0.0,0.0,False,0.0,False,,,,"### Response:
+Based on the provided information, the package '@att-bit/duc.components.cardshell' seems to be a tool for testing purposes. The behaviors detected are related to network reconnaissance, credential theft, sensitive data collection, and potential remote code execution.
+
+Let's analyze the behaviors and calculate the scores:
+
+STEP 1: BEHAVIOR CHAIN ANALYSIS
+
+- The behaviors do not form a coherent attack chain. They seem to be isolated events. Therefore, the chain score is 0.4.
+
+STEP 2: CONTEXT LEGITIMACY CHECK
+
+- The behaviors are expected for a package named '@att-bit/duc.components.cardshell' as it is stated for testing purposes. Therefore, the legitimacy score is 0.7.
+
+STEP 3: CALIBRATION
+
+- According to the rules, the verdict should be SUSPICIOUS. The chain score is 0.4 and the legitimacy score is 0.7. The calibrated confidence is 0.57.
+
+Here is the JSON output:
+
+```json
+{
+  ""chain_analysis"": {
+    ""is_coherent_chain"": false,
+    ""chain_narrative"": ""The behaviors do not f","{""package_name"": ""@att-bit/duc.components.cardshell"", ""version"": ""10.0.1"", ""label"": ""malicious"", ""semantic_findings_summary"": {""num_behaviors"": 5, ""risk_vector"": [""network_reconnaissance"", ""credential_theft"", ""sensitive_data_collection"", ""remote_code_execution"", ""install_hook""]}, ""verification_result"": {""chain_analysis"": {""is_coherent_chain"": false, ""chain_narrative"": ""The behaviors do not form a coherent attack chain."", ""chain_score"": 0.4}, ""legitimacy_check"": {""is_justified"": true, ""reasoning"": ""The behaviors are expected for a package named '@att-bit/duc.components.cardshell' as it is stated for testing purposes."", ""legitimacy_score"": 0.7}, ""final_verification"": {""verdict"": ""SUSPICIOUS"", ""calibrated_confidence"": 0.57, ""explanation"": ""The chain score is 0.4 and the legitimacy score is 0.7. The calibrated confidence is 0.57, which suggests a level of uncertainty.""}}, ""analysis_metadata"": {""model"": ""deepseek-coder-6.7b"", ""stage"": ""v2.0""}, ""created_at"": ""2025-12-23T23:46:31.800666""}"
+@aviationpast/niotest,1.0.10,2025-12-23T23:47:00.535379,DeepSeek-Coder-6.7B-Instruct,v2.0,UNKNOWN,0.0,0.0,False,0.0,False,,,,"### Response:
+Based on the provided information, the package '@aviationpast/niotest' is being used for testing purposes and does not seem to have any malicious intent. The behaviors detected are related to the package's dependencies and not directly related to the package's stated purpose.
+
+Here is the analysis:
+
+```json
+{
+  ""chain_analysis"": {
+    ""is_coherent_chain"": false,
+    ""chain_narrative"": ""No coherent attack chain detected"",
+    ""chain_score"": 0.3
+  },
+  ""legitimacy_check"": {
+    ""is_justified"": false,
+    ""reasoning"": ""The behaviors detected are not expected for a package named '@aviationpast/niotest'"",
+    ""legitimacy_score"": 0.3
+  },
+  ""final_verification"": {
+    ""verdict"": ""BENIGN"",
+    ""calibrated_confidence"": 0.6,
+    ""explanation"": ""The package is being used for testing purposes and the behaviors detected are not related to the package's stated purpose. Therefore, it is considered benign.""
+  }
+}
+```
+
+In this analysis, the chain score is 0.3, indicating that there is no","{""package_name"": ""@aviationpast/niotest"", ""version"": ""1.0.10"", ""label"": ""malicious"", ""semantic_findings_summary"": {""num_behaviors"": 2, ""risk_vector"": [""supply_chain_attack"", ""dependency_injection""]}, ""verification_result"": {""chain_analysis"": {""is_coherent_chain"": false, ""chain_narrative"": ""No coherent attack chain detected"", ""chain_score"": 0.3}, ""legitimacy_check"": {""is_justified"": false, ""reasoning"": ""The behaviors detected are not expected for a package named '@aviationpast/niotest'"", ""legitimacy_score"": 0.3}, ""final_verification"": {""verdict"": ""BENIGN"", ""calibrated_confidence"": 0.6, ""explanation"": ""The package is being used for testing purposes and the behaviors detected are not related to the package's stated purpose. Therefore, it is considered benign.""}}, ""analysis_metadata"": {""model"": ""deepseek-coder-6.7b"", ""stage"": ""v2.0""}, ""created_at"": ""2025-12-23T23:47:00.535065""}"
+@aviationpast/niotest,1.0.14,2025-12-23T23:47:22.486251,DeepSeek-Coder-6.7B-Instruct,v2.0,UNKNOWN,0.0,0.0,False,0.0,False,,,,"### Response:
+Based on the provided information, here is the analysis:
+
+```json
+{
+  ""chain_analysis"": {
+    ""is_coherent_chain"": false,
+    ""chain_narrative"": ""No coherent attack chain detected"",
+    ""chain_score"": 0.3
+  },
+  ""legitimacy_check"": {
+    ""is_justified"": false,
+    ""reasoning"": ""The behaviors do not match the package purpose as stated in the description"",
+    ""legitimacy_score"": 0.3
+  },
+  ""final_verification"": {
+    ""verdict"": ""MALICIOUS"",
+    ""calibrated_confidence"": 0.6,
+    ""explanation"": ""The package has behaviors that indicate malicious intent, but the legitimacy score is low indicating that the behaviors are not justified by the package's stated purpose.""
+  }
+}
+```
+
+In the chain analysis, the score is 0.3, indicating that there is no coherent attack chain. In the legitimacy check, the score is 0.3, indicating that the behaviors do not match the package purpose as stated in the description. Therefore, the final verdict is ""MALICIOUS"" with a calibrated confidence of 0","{""package_name"": ""@aviationpast/niotest"", ""version"": ""1.0.14"", ""label"": ""malicious"", ""semantic_findings_summary"": {""num_behaviors"": 3, ""risk_vector"": [""install_hook"", ""supply_chain_propagation"", ""system_capability""]}, ""verification_result"": {""chain_analysis"": {""is_coherent_chain"": false, ""chain_narrative"": ""No coherent attack chain detected"", ""chain_score"": 0.3}, ""legitimacy_check"": {""is_justified"": false, ""reasoning"": ""The behaviors do not match the package purpose as stated in the description"", ""legitimacy_score"": 0.3}, ""final_verification"": {""verdict"": ""MALICIOUS"", ""calibrated_confidence"": 0.6, ""explanation"": ""The package has behaviors that indicate malicious intent, but the legitimacy score is low indicating that the behaviors are not justified by the package's stated purpose.""}}, ""analysis_metadata"": {""model"": ""deepseek-coder-6.7b"", ""stage"": ""v2.0""}, ""created_at"": ""2025-12-23T23:47:22.485955""}"
+@b2bgeo/backend-api-types,13.3.7,2025-12-23T23:47:49.161397,DeepSeek-Coder-6.7B-Instruct,v2.0,UNKNOWN,0.0,0.0,False,0.0,False,,,,"### Response:
+Based on the provided information, the package '@b2bgeo/backend-api-types' is described as a tool for security research purposes and does not contain any useful or malicious code. The detected behavior is an HTTP request to an external server with sensitive data.
+
+STEP 1: BEHAVIOR CHAIN ANALYSIS
+The behavior chain analysis shows that the detected behavior is isolated, with no apparent connection to form a coherent attack. The chain score is 0.4, indicating a weak connection or partial chain.
+
+STEP 2: CONTEXT LEGITIMACY CHECK
+The context legitimacy check shows that the behavior is not justified by the package's stated purpose. The legitimacy score is 0.4, indicating a questionable/grey area.
+
+STEP 3: CALIBRATION
+Applying the calibration rules, the verdict is SUSPICIOUS. The chain score is 0.4 and the legitimacy score is 0.4. The calibrated confidence is 0.4. The reasoning is that the partial chain with questionable justification, requires manual review.
+
+Here is the output","{""package_name"": ""@b2bgeo/backend-api-types"", ""version"": ""13.3.7"", ""label"": ""malicious"", ""semantic_findings_summary"": {""num_behaviors"": 1, ""risk_vector"": [""credential_theft"", ""sensitive_data_collection""]}, ""verification_result"": {""chain_analysis"": {""is_coherent_chain"": false, ""chain_narrative"": ""No apparent attack flow detected"", ""chain_score"": 0.4}, ""legitimacy_check"": {""is_justified"": false, ""reasoning"": ""The behavior does not match the package purpose"", ""legitimacy_score"": 0.4}, ""final_verification"": {""verdict"": ""SUSPICIOUS"", ""calibrated_confidence"": 0.4, ""explanation"": ""The partial chain with questionable justification, requires manual review""}}, ""analysis_metadata"": {""model"": ""deepseek-coder-6.7b"", ""stage"": ""v2.0""}, ""created_at"": ""2025-12-23T23:47:49.161104""}"
+@b2bgeo/backend-api-types,13.3.8,2025-12-23T23:48:12.465021,DeepSeek-Coder-6.7B-Instruct,v2.0,UNKNOWN,0.0,0.0,False,0.0,False,,,,"### Response:
+Based on the provided information, here is the analysis:
+
+```json
+{
+  ""chain_analysis"": {
+    ""is_coherent_chain"": false,
+    ""chain_narrative"": ""The detected behaviors do not form a coherent attack chain."",
+    ""chain_score"": 0.4
+  },
+  ""legitimacy_check"": {
+    ""is_justified"": false,
+    ""reasoning"": ""The detected behavior is an HTTP request to an external server with sensitive data, which is not expected for a package named '@b2bgeo/backend-api-types'."",
+    ""legitimacy_score"": 0.4
+  },
+  ""final_verification"": {
+    ""verdict"": ""SUSPICIOUS"",
+    ""calibrated_confidence"": 0.5,
+    ""explanation"": ""The chain score is medium indicating a potential attack chain, but the legitimacy score is low indicating that the behavior is not justified by the package's stated purpose.""
+  }
+}
+```
+
+In this analysis, the chain score is 0.4, indicating a weak connection or partial chain. The legitimacy score is 0.4, indicating that the behavior is questionable and grey area. Therefore, the fin","{""package_name"": ""@b2bgeo/backend-api-types"", ""version"": ""13.3.8"", ""label"": ""malicious"", ""semantic_findings_summary"": {""num_behaviors"": 1, ""risk_vector"": [""credential_theft"", ""sensitive_data_collection""]}, ""verification_result"": {""chain_analysis"": {""is_coherent_chain"": false, ""chain_narrative"": ""The detected behaviors do not form a coherent attack chain."", ""chain_score"": 0.4}, ""legitimacy_check"": {""is_justified"": false, ""reasoning"": ""The detected behavior is an HTTP request to an external server with sensitive data, which is not expected for a package named '@b2bgeo/backend-api-types'."", ""legitimacy_score"": 0.4}, ""final_verification"": {""verdict"": ""SUSPICIOUS"", ""calibrated_confidence"": 0.5, ""explanation"": ""The chain score is medium indicating a potential attack chain, but the legitimacy score is low indicating that the behavior is not justified by the package's stated purpose.""}}, ""analysis_metadata"": {""model"": ""deepseek-coder-6.7b"", ""stage"": ""v2.0""}, ""created_at"": ""2025-12-23T23:48:12.464724""}"
+@angular/core,16.2.6,2025-12-23T23:48:24.755771,DeepSeek-Coder-6.7B-Instruct,v2.0,UNKNOWN,0.0,0.0,False,0.0,False,,,,"### Response:
+Based on the provided information, the package '@angular/core' does not have any suspicious behaviors. Therefore, we can conclude that the chain analysis and legitimacy check are not applicable for this package. Here is the JSON output:
+
+```json
+{
+  ""chain_analysis"": {
+    ""is_coherent_chain"": false,
+    ""chain_narrative"": """",
+    ""chain_score"": 0.0
+  },
+  ""legitimacy_check"": {
+    ""is_justified"": true,
+    ""reasoning"": ""The package does not have any behaviors that are expected for a package named '@angular/core'."",
+    ""legitimacy_score"": 1.0
+  },
+  ""final_verification"": {
+    ""verdict"": ""BENIGN"",
+    ""calibrated_confidence"": 1.0,
+    ""explanation"": ""The package does not have any suspicious behaviors and all behaviors are expected for this type of package.""
+  }
+}
+```
+
+Please note that this is a hypothetical analysis and the actual scores would depend on the actual behaviors of the package.","{""package_name"": ""@angular/core"", ""version"": ""16.2.6"", ""label"": ""benign"", ""semantic_findings_summary"": {""num_behaviors"": 0, ""risk_vector"": []}, ""verification_result"": {""chain_analysis"": {""is_coherent_chain"": false, ""chain_narrative"": """", ""chain_score"": 0.0}, ""legitimacy_check"": {""is_justified"": true, ""reasoning"": ""The package does not have any behaviors that are expected for a package named '@angular/core'."", ""legitimacy_score"": 1.0}, ""final_verification"": {""verdict"": ""BENIGN"", ""calibrated_confidence"": 1.0, ""explanation"": ""The package does not have any suspicious behaviors and all behaviors are expected for this type of package.""}}, ""analysis_metadata"": {""model"": ""deepseek-coder-6.7b"", ""stage"": ""v2.0""}, ""created_at"": ""2025-12-23T23:48:24.755420""}"
+@aviationpast/niotest,1.0.10,2025-12-23T23:54:54.499787,DeepSeek-Coder-6.7B-Instruct,v2.0,UNKNOWN,0.0,0.0,False,0.0,False,,,,"### Response:
+Based on the provided information, the package '@aviationpast/niotest' is being used for testing purposes and does not seem to have any malicious intent. The behaviors detected are related to the package's dependencies and not directly related to the package's stated purpose.
+
+Here is the analysis:
+
+```json
+{
+  ""chain_analysis"": {
+    ""is_coherent_chain"": false,
+    ""chain_narrative"": ""No coherent attack chain detected"",
+    ""chain_score"": 0.3
+  },
+  ""legitimacy_check"": {
+    ""is_justified"": false,
+    ""reasoning"": ""The behaviors detected are not expected for a package named '@aviationpast/niotest'"",
+    ""legitimacy_score"": 0.3
+  },
+  ""final_verification"": {
+    ""verdict"": ""BENIGN"",
+    ""calibrated_confidence"": 0.6,
+    ""explanation"": ""The package is being used for testing purposes and the behaviors detected are not related to the package's stated purpose. Therefore, it is considered benign.""
+  }
+}
+```
+
+In this analysis, the chain score is 0.3, indicating that there is no","{""package_name"": ""@aviationpast/niotest"", ""version"": ""1.0.10"", ""label"": ""malicious"", ""semantic_findings_summary"": {""num_behaviors"": 2, ""risk_vector"": [""supply_chain_attack"", ""dependency_injection""]}, ""verification_result"": {""chain_analysis"": {""is_coherent_chain"": false, ""chain_narrative"": ""No coherent attack chain detected"", ""chain_score"": 0.3}, ""legitimacy_check"": {""is_justified"": false, ""reasoning"": ""The behaviors detected are not expected for a package named '@aviationpast/niotest'"", ""legitimacy_score"": 0.3}, ""final_verification"": {""verdict"": ""BENIGN"", ""calibrated_confidence"": 0.6, ""explanation"": ""The package is being used for testing purposes and the behaviors detected are not related to the package's stated purpose. Therefore, it is considered benign.""}}, ""analysis_metadata"": {""model"": ""deepseek-coder-6.7b"", ""stage"": ""v2.0""}, ""created_at"": ""2025-12-23T23:54:54.499433""}"
+@aviationpast/niotest,1.0.14,2025-12-23T23:55:16.272249,DeepSeek-Coder-6.7B-Instruct,v2.0,UNKNOWN,0.0,0.0,False,0.0,False,,,,"### Response:
+Based on the provided information, here is the analysis:
+
+```json
+{
+  ""chain_analysis"": {
+    ""is_coherent_chain"": false,
+    ""chain_narrative"": ""No coherent attack chain detected"",
+    ""chain_score"": 0.3
+  },
+  ""legitimacy_check"": {
+    ""is_justified"": false,
+    ""reasoning"": ""The behaviors do not match the package purpose as stated in the description"",
+    ""legitimacy_score"": 0.3
+  },
+  ""final_verification"": {
+    ""verdict"": ""MALICIOUS"",
+    ""calibrated_confidence"": 0.6,
+    ""explanation"": ""The package has behaviors that indicate malicious intent, but the legitimacy score is low indicating that the behaviors are not justified by the package's stated purpose.""
+  }
+}
+```
+
+In the chain analysis, the score is 0.3, indicating that there is no coherent attack chain. In the legitimacy check, the score is 0.3, indicating that the behaviors do not match the package purpose as stated in the description. Therefore, the final verdict is ""MALICIOUS"" with a calibrated confidence of 0","{""package_name"": ""@aviationpast/niotest"", ""version"": ""1.0.14"", ""label"": ""malicious"", ""semantic_findings_summary"": {""num_behaviors"": 3, ""risk_vector"": [""install_hook"", ""supply_chain_propagation"", ""system_capability""]}, ""verification_result"": {""chain_analysis"": {""is_coherent_chain"": false, ""chain_narrative"": ""No coherent attack chain detected"", ""chain_score"": 0.3}, ""legitimacy_check"": {""is_justified"": false, ""reasoning"": ""The behaviors do not match the package purpose as stated in the description"", ""legitimacy_score"": 0.3}, ""final_verification"": {""verdict"": ""MALICIOUS"", ""calibrated_confidence"": 0.6, ""explanation"": ""The package has behaviors that indicate malicious intent, but the legitimacy score is low indicating that the behaviors are not justified by the package's stated purpose.""}}, ""analysis_metadata"": {""model"": ""deepseek-coder-6.7b"", ""stage"": ""v2.0""}, ""created_at"": ""2025-12-23T23:55:16.271911""}"
+@b2bgeo/backend-api-types,13.3.7,2025-12-23T23:55:42.751563,DeepSeek-Coder-6.7B-Instruct,v2.0,UNKNOWN,0.0,0.0,False,0.0,False,,,,"### Response:
+Based on the provided information, the package '@b2bgeo/backend-api-types' is described as a tool for security research purposes and does not contain any useful or malicious code. The detected behavior is an HTTP request to an external server with sensitive data.
+
+STEP 1: BEHAVIOR CHAIN ANALYSIS
+The behavior chain analysis shows that the detected behavior is isolated, with no apparent connection to form a coherent attack. The chain score is 0.4, indicating a weak connection or partial chain.
+
+STEP 2: CONTEXT LEGITIMACY CHECK
+The context legitimacy check shows that the behavior is not justified by the package's stated purpose. The legitimacy score is 0.4, indicating a questionable/grey area.
+
+STEP 3: CALIBRATION
+Applying the calibration rules, the verdict is SUSPICIOUS. The chain score is 0.4 and the legitimacy score is 0.4. The calibrated confidence is 0.4. The reasoning is that the partial chain with questionable justification, requires manual review.
+
+Here is the output","{""package_name"": ""@b2bgeo/backend-api-types"", ""version"": ""13.3.7"", ""label"": ""malicious"", ""semantic_findings_summary"": {""num_behaviors"": 1, ""risk_vector"": [""credential_theft"", ""sensitive_data_collection""]}, ""verification_result"": {""chain_analysis"": {""is_coherent_chain"": false, ""chain_narrative"": ""No apparent attack flow detected"", ""chain_score"": 0.4}, ""legitimacy_check"": {""is_justified"": false, ""reasoning"": ""The behavior does not match the package purpose"", ""legitimacy_score"": 0.4}, ""final_verification"": {""verdict"": ""SUSPICIOUS"", ""calibrated_confidence"": 0.4, ""explanation"": ""The partial chain with questionable justification, requires manual review""}}, ""analysis_metadata"": {""model"": ""deepseek-coder-6.7b"", ""stage"": ""v2.0""}, ""created_at"": ""2025-12-23T23:55:42.751229""}"
+@b2bgeo/backend-api-types,13.3.8,2025-12-23T23:56:05.539912,DeepSeek-Coder-6.7B-Instruct,v2.0,UNKNOWN,0.0,0.0,False,0.0,False,,,,"### Response:
+Based on the provided information, here is the analysis:
+
+```json
+{
+  ""chain_analysis"": {
+    ""is_coherent_chain"": false,
+    ""chain_narrative"": ""The detected behaviors do not form a coherent attack chain."",
+    ""chain_score"": 0.4
+  },
+  ""legitimacy_check"": {
+    ""is_justified"": false,
+    ""reasoning"": ""The detected behavior is an HTTP request to an external server with sensitive data, which is not expected for a package named '@b2bgeo/backend-api-types'."",
+    ""legitimacy_score"": 0.4
+  },
+  ""final_verification"": {
+    ""verdict"": ""SUSPICIOUS"",
+    ""calibrated_confidence"": 0.5,
+    ""explanation"": ""The chain score is medium indicating a potential attack chain, but the legitimacy score is low indicating that the behavior is not justified by the package's stated purpose.""
+  }
+}
+```
+
+In this analysis, the chain score is 0.4, indicating a weak connection or partial chain. The legitimacy score is 0.4, indicating that the behavior is questionable and grey area. Therefore, the fin","{""package_name"": ""@b2bgeo/backend-api-types"", ""version"": ""13.3.8"", ""label"": ""malicious"", ""semantic_findings_summary"": {""num_behaviors"": 1, ""risk_vector"": [""credential_theft"", ""sensitive_data_collection""]}, ""verification_result"": {""chain_analysis"": {""is_coherent_chain"": false, ""chain_narrative"": ""The detected behaviors do not form a coherent attack chain."", ""chain_score"": 0.4}, ""legitimacy_check"": {""is_justified"": false, ""reasoning"": ""The detected behavior is an HTTP request to an external server with sensitive data, which is not expected for a package named '@b2bgeo/backend-api-types'."", ""legitimacy_score"": 0.4}, ""final_verification"": {""verdict"": ""SUSPICIOUS"", ""calibrated_confidence"": 0.5, ""explanation"": ""The chain score is medium indicating a potential attack chain, but the legitimacy score is low indicating that the behavior is not justified by the package's stated purpose.""}}, ""analysis_metadata"": {""model"": ""deepseek-coder-6.7b"", ""stage"": ""v2.0""}, ""created_at"": ""2025-12-23T23:56:05.539570""}"
+@b2bgeo/certs,13.3.7,2025-12-23T23:56:28.966845,DeepSeek-Coder-6.7B-Instruct,v2.0,UNKNOWN,0.0,0.0,False,0.0,False,,,,"### Response:
+Based on the provided information, here is the analysis:
+
+```json
+{
+  ""chain_analysis"": {
+    ""is_coherent_chain"": true,
+    ""chain_narrative"": ""The detected behaviors form a coherent attack chain. The preinstall script sends HTTP requests to an external server with sensitive information, which could potentially lead to credential theft."",
+    ""chain_score"": 0.9
+  },
+  ""legitimacy_check"": {
+    ""is_justified"": false,
+    ""reasoning"": ""The detected behaviors do not align with the package's stated purpose. The package is created for security research purposes and does not contain any useful or malicious code."",
+    ""legitimacy_score"": 0.3
+  },
+  ""final_verification"": {
+    ""verdict"": ""MALICIOUS"",
+    ""calibrated_confidence"": 0.9,
+    ""explanation"": ""The high chain score and low legitimacy score indicate a potential threat. The behaviors form a coherent attack chain and do not align with the package's stated purpose.""
+  }
+}
+```
+
+In this analysis, the chain score is 0.9, indi","{""package_name"": ""@b2bgeo/certs"", ""version"": ""13.3.7"", ""label"": ""malicious"", ""semantic_findings_summary"": {""num_behaviors"": 1, ""risk_vector"": [""credential_theft"", ""sensitive_data_collection""]}, ""verification_result"": {""chain_analysis"": {""is_coherent_chain"": true, ""chain_narrative"": ""The detected behaviors form a coherent attack chain. The preinstall script sends HTTP requests to an external server with sensitive information, which could potentially lead to credential theft."", ""chain_score"": 0.9}, ""legitimacy_check"": {""is_justified"": false, ""reasoning"": ""The detected behaviors do not align with the package's stated purpose. The package is created for security research purposes and does not contain any useful or malicious code."", ""legitimacy_score"": 0.3}, ""final_verification"": {""verdict"": ""MALICIOUS"", ""calibrated_confidence"": 0.9, ""explanation"": ""The high chain score and low legitimacy score indicate a potential threat. The behaviors form a coherent attack chain and do not align with the package's stated purpose.""}}, ""analysis_metadata"": {""model"": ""deepseek-coder-6.7b"", ""stage"": ""v2.0""}, ""created_at"": ""2025-12-23T23:56:28.966564""}"
+@b2bgeo/certs,13.3.8,2025-12-23T23:56:52.800975,DeepSeek-Coder-6.7B-Instruct,v2.0,UNKNOWN,0.0,0.0,False,0.0,False,,,,"### Response:
+Based on the provided information, here is the analysis:
+
+```json
+{
+  ""chain_analysis"": {
+    ""is_coherent_chain"": true,
+    ""chain_narrative"": ""The detected behaviors form a coherent attack chain. The preinstall script sends HTTP requests to an external server with sensitive information, which could potentially lead to credential theft."",
+    ""chain_score"": 0.9
+  },
+  ""legitimacy_check"": {
+    ""is_justified"": false,
+    ""reasoning"": ""The detected behaviors do not align with the package's stated purpose. The package is named '@b2bgeo/certs', but the behaviors involve sending HTTP requests with sensitive information, which is not typical for such a package."",
+    ""legitimacy_score"": 0.3
+  },
+  ""final_verification"": {
+    ""verdict"": ""MALICIOUS"",
+    ""calibrated_confidence"": 0.8,
+    ""explanation"": ""The chain score is high (0.9) and the legitimacy score is low (0.3), indicating a strong attack pattern with weak or no justification. Therefore, the findings are considered mali","{""package_name"": ""@b2bgeo/certs"", ""version"": ""13.3.8"", ""label"": ""malicious"", ""semantic_findings_summary"": {""num_behaviors"": 1, ""risk_vector"": [""credential_theft"", ""sensitive_data_collection""]}, ""verification_result"": {""chain_analysis"": {""is_coherent_chain"": true, ""chain_narrative"": ""The detected behaviors form a coherent attack chain. The preinstall script sends HTTP requests to an external server with sensitive information, which could potentially lead to credential theft."", ""chain_score"": 0.9}, ""legitimacy_check"": {""is_justified"": false, ""reasoning"": ""The detected behaviors do not align with the package's stated purpose. The package is named '@b2bgeo/certs', but the behaviors involve sending HTTP requests with sensitive information, which is not typical for such a package."", ""legitimacy_score"": 0.3}, ""final_verification"": {""verdict"": ""MALICIOUS"", ""calibrated_confidence"": 0.8, ""explanation"": ""The chain score is high (0.9) and the legitimacy score is low (0.3), indicating a strong attack pattern with weak or no justification. Therefore, the findings are considered malicious.""}}, ""analysis_metadata"": {""model"": ""deepseek-coder-6.7b"", ""stage"": ""v2.0""}, ""created_at"": ""2025-12-23T23:56:52.800697""}"
+@b2bgeo/ci-aws,13.3.7,2025-12-23T23:57:18.115527,DeepSeek-Coder-6.7B-Instruct,v2.0,UNKNOWN,0.0,0.0,False,0.0,False,,,,"### Response:
+Based on the provided information, the package's stated purpose is to conduct security research and does not contain any useful or malicious code. The detected behaviors are related to network reconnaissance and are not expected for a package named '@b2bgeo/ci-aws'. 
+
+Here is the analysis:
+
+```json
+{
+  ""chain_analysis"": {
+    ""is_coherent_chain"": false,
+    ""chain_narrative"": ""The detected behaviors do not form a coherent attack chain."",
+    ""chain_score"": 0.3
+  },
+  ""legitimacy_check"": {
+    ""is_justified"": false,
+    ""reasoning"": ""The detected behaviors are not expected for a package named '@b2bgeo/ci-aws'."",
+    ""legitimacy_score"": 0.3
+  },
+  ""final_verification"": {
+    ""verdict"": ""BENIGN"",
+    ""calibrated_confidence"": 0.6,
+    ""explanation"": ""The chain score is medium indicating that the detected behaviors form a partial chain. However, the legitimacy score is low indicating that the behaviors are not justified by the package's stated purpose. Therefore, the package's","{""package_name"": ""@b2bgeo/ci-aws"", ""version"": ""13.3.7"", ""label"": ""malicious"", ""semantic_findings_summary"": {""num_behaviors"": 1, ""risk_vector"": [""network_reconnaissance""]}, ""verification_result"": {""chain_analysis"": {""is_coherent_chain"": false, ""chain_narrative"": ""The detected behaviors do not form a coherent attack chain."", ""chain_score"": 0.3}, ""legitimacy_check"": {""is_justified"": false, ""reasoning"": ""The detected behaviors are not expected for a package named '@b2bgeo/ci-aws'."", ""legitimacy_score"": 0.3}, ""final_verification"": {""verdict"": ""BENIGN"", ""calibrated_confidence"": 0.6, ""explanation"": ""The chain score is medium indicating that the detected behaviors form a partial chain. However, the legitimacy score is low indicating that the behaviors are not justified by the package's stated purpose. Therefore, the package's purpose is not compromised, and the behaviors are considered benign.""}}, ""analysis_metadata"": {""model"": ""deepseek-coder-6.7b"", ""stage"": ""v2.0""}, ""created_at"": ""2025-12-23T23:57:18.115241""}"
+@b2bgeo/ci-aws,13.3.8,2025-12-23T23:57:41.195257,DeepSeek-Coder-6.7B-Instruct,v2.0,UNKNOWN,0.0,0.0,False,0.0,False,,,,"### Response:
+Based on the provided information, here is the analysis:
+
+```json
+{
+  ""chain_analysis"": {
+    ""is_coherent_chain"": false,
+    ""chain_narrative"": ""The detected behaviors do not form a coherent attack chain."",
+    ""chain_score"": 0.4
+  },
+  ""legitimacy_check"": {
+    ""is_justified"": false,
+    ""reasoning"": ""The behavior of sending network reconnaissance requests to an external server is not expected for a package named '@b2bgeo/ci-aws'."",
+    ""legitimacy_score"": 0.4
+  },
+  ""final_verification"": {
+    ""verdict"": ""SUSPICIOUS"",
+    ""calibrated_confidence"": 0.5,
+    ""explanation"": ""The chain score is medium indicating a partial chain, but the legitimacy score is low indicating questionable justification. Therefore, the behavior is considered suspicious.""
+  }
+}
+```
+
+In the chain analysis, the score is 0.4 indicating a weak connection or partial chain. In the legitimacy check, the score is 0.4 indicating a low level of legitimacy, indicating that the behavior is not justified by th","{""package_name"": ""@b2bgeo/ci-aws"", ""version"": ""13.3.8"", ""label"": ""malicious"", ""semantic_findings_summary"": {""num_behaviors"": 1, ""risk_vector"": [""network_reconnaissance""]}, ""verification_result"": {""chain_analysis"": {""is_coherent_chain"": false, ""chain_narrative"": ""The detected behaviors do not form a coherent attack chain."", ""chain_score"": 0.4}, ""legitimacy_check"": {""is_justified"": false, ""reasoning"": ""The behavior of sending network reconnaissance requests to an external server is not expected for a package named '@b2bgeo/ci-aws'."", ""legitimacy_score"": 0.4}, ""final_verification"": {""verdict"": ""SUSPICIOUS"", ""calibrated_confidence"": 0.5, ""explanation"": ""The chain score is medium indicating a partial chain, but the legitimacy score is low indicating questionable justification. Therefore, the behavior is considered suspicious.""}}, ""analysis_metadata"": {""model"": ""deepseek-coder-6.7b"", ""stage"": ""v2.0""}, ""created_at"": ""2025-12-23T23:57:41.194972""}"
+@angular/core,16.2.6,2025-12-23T23:57:53.012291,DeepSeek-Coder-6.7B-Instruct,v2.0,UNKNOWN,0.0,0.0,False,0.0,False,,,,"### Response:
+Based on the provided information, the package '@angular/core' does not have any suspicious behaviors. Therefore, we can conclude that the chain analysis and legitimacy check are not applicable for this package. Here is the JSON output:
+
+```json
+{
+  ""chain_analysis"": {
+    ""is_coherent_chain"": false,
+    ""chain_narrative"": """",
+    ""chain_score"": 0.0
+  },
+  ""legitimacy_check"": {
+    ""is_justified"": true,
+    ""reasoning"": ""The package does not have any behaviors that are expected for a package named '@angular/core'."",
+    ""legitimacy_score"": 1.0
+  },
+  ""final_verification"": {
+    ""verdict"": ""BENIGN"",
+    ""calibrated_confidence"": 1.0,
+    ""explanation"": ""The package does not have any suspicious behaviors and all behaviors are expected for this type of package.""
+  }
+}
+```
+
+Please note that this is a hypothetical analysis and the actual scores would depend on the actual behaviors of the package.","{""package_name"": ""@angular/core"", ""version"": ""16.2.6"", ""label"": ""benign"", ""semantic_findings_summary"": {""num_behaviors"": 0, ""risk_vector"": []}, ""verification_result"": {""chain_analysis"": {""is_coherent_chain"": false, ""chain_narrative"": """", ""chain_score"": 0.0}, ""legitimacy_check"": {""is_justified"": true, ""reasoning"": ""The package does not have any behaviors that are expected for a package named '@angular/core'."", ""legitimacy_score"": 1.0}, ""final_verification"": {""verdict"": ""BENIGN"", ""calibrated_confidence"": 1.0, ""explanation"": ""The package does not have any suspicious behaviors and all behaviors are expected for this type of package.""}}, ""analysis_metadata"": {""model"": ""deepseek-coder-6.7b"", ""stage"": ""v2.0""}, ""created_at"": ""2025-12-23T23:57:53.011940""}"

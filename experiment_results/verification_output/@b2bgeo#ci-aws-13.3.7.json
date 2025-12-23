@@ -1,0 +1,33 @@
+{
+  "package_name": "@b2bgeo/ci-aws",
+  "version": "13.3.7",
+  "label": "malicious",
+  "semantic_findings_summary": {
+    "num_behaviors": 1,
+    "risk_vector": [
+      "network_reconnaissance"
+    ]
+  },
+  "verification_result": {
+    "chain_analysis": {
+      "is_coherent_chain": false,
+      "chain_narrative": "The detected behaviors do not form a coherent attack chain.",
+      "chain_score": 0.3
+    },
+    "legitimacy_check": {
+      "is_justified": false,
+      "reasoning": "The detected behaviors are not expected for a package named '@b2bgeo/ci-aws'.",
+      "legitimacy_score": 0.3
+    },
+    "final_verification": {
+      "verdict": "BENIGN",
+      "calibrated_confidence": 0.6,
+      "explanation": "The chain score is medium indicating that the detected behaviors form a partial chain. However, the legitimacy score is low indicating that the behaviors are not justified by the package's stated purpose. Therefore, the package's purpose is not compromised, and the behaviors are considered benign."
+    }
+  },
+  "analysis_metadata": {
+    "model": "deepseek-coder-6.7b",
+    "stage": "v2.0"
+  },
+  "created_at": "2025-12-23T23:57:18.115241"
+}

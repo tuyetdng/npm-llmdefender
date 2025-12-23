@@ -1,0 +1,34 @@
+{
+  "package_name": "@b2bgeo/certs",
+  "version": "13.3.8",
+  "label": "malicious",
+  "semantic_findings_summary": {
+    "num_behaviors": 1,
+    "risk_vector": [
+      "credential_theft",
+      "sensitive_data_collection"
+    ]
+  },
+  "verification_result": {
+    "chain_analysis": {
+      "is_coherent_chain": true,
+      "chain_narrative": "The detected behaviors form a coherent attack chain. The preinstall script sends HTTP requests to an external server with sensitive information, which could potentially lead to credential theft.",
+      "chain_score": 0.9
+    },
+    "legitimacy_check": {
+      "is_justified": false,
+      "reasoning": "The detected behaviors do not align with the package's stated purpose. The package is named '@b2bgeo/certs', but the behaviors involve sending HTTP requests with sensitive information, which is not typical for such a package.",
+      "legitimacy_score": 0.3
+    },
+    "final_verification": {
+      "verdict": "MALICIOUS",
+      "calibrated_confidence": 0.8,
+      "explanation": "The chain score is high (0.9) and the legitimacy score is low (0.3), indicating a strong attack pattern with weak or no justification. Therefore, the findings are considered malicious."
+    }
+  },
+  "analysis_metadata": {
+    "model": "deepseek-coder-6.7b",
+    "stage": "v2.0"
+  },
+  "created_at": "2025-12-23T23:56:52.800697"
+}
