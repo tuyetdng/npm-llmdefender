@@ -181,7 +181,7 @@ def main():
     print("STRUCTURAL ANALYSIS TEST (MAL + BEN)")
     print("=" * 60)
     
-    NUM_PACKAGES = 20
+    NUM_PACKAGES = 200
     
     try:
         loader = DatasetLoader(
@@ -193,7 +193,7 @@ def main():
         packages = loader.load_packages(
             use_cache=False, 
             limit=NUM_PACKAGES,
-            balanced_experiment_test_only=False 
+            balanced_experiment_test_only=True 
         )
         
         if not packages:

@@ -144,8 +144,8 @@ class VerificationPromptAnalysis:
             * 0.7 - 1.0 (HIGH): Strong 'Kill Chain' (Recon -> Weaponization -> Actions).
         
         STEP 2: CONTEXT LEGITIMACY CHECK
-        - Compare the 'Target Package Identity' (Description/Name) vs 'Detected Behaviors'.
-        - Ask: "Is this behavior expected for a package named '{self.package.package_name}'?"
+        - Compare the 'Declared Functionality' vs 'Detected Behaviors'.
+        - Ask: "Are these behaviors consistent with the stated purpose of '{self.package.package_name}'?"
         - SCORING GUIDE:
             * 0.0 - 0.3 (LOW): Totally unjustified (e.g., 'icon-pack' exfiltrating env vars).
             * 0.4 - 0.6 (MEDIUM): Questionable/Grey area (e.g., 'logger' executing shell commands).
