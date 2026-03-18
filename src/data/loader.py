@@ -2,6 +2,8 @@
 import json
 import logging
 import pickle
+import re
+import re
 import tarfile
 import shutil
 import traceback
@@ -25,6 +27,11 @@ logging.basicConfig(
 
 CACHE_VERSION = "1.0"
 EXTRACTION_MARKER = ".decompressed"
+
+_NODE_FILE_PATTERN = re.compile(
+    r"node\s+([a-zA-Z0-9_\-./]+\.(?:js|cjs|mjs))",
+    re.IGNORECASE
+)
 
 def _add_mode(directory: str):
     """
@@ -669,7 +676,59 @@ class DatasetLoader:
             "invalid_count": len(issues),
             "issues": issues
         }
-            
+          
+    def _load_install_script_files(
+        self,
+        package_dir: Path,
+        package_data: dict,
+        max_size_bytes: int = 512 * 1024,  # 512KB cap — avoid reading large bundles
+    ) -> Dict[str, str]:
+        """
+        Read the content of JS files called from install hooks.
+    
+        Args:
+            package_dir: Path to package directory (contains package.json)
+            package_data: Dict parsed from package.json
+            max_size_bytes: Skip files larger than this limit (avoid minified bundles)
+    
+        Returns:
+            Dict mapping filename → content JS
+        """
+        scripts = package_data.get("scripts", {})
+        result: Dict[str, str] = {}
+    
+        install_hooks = ["preinstall", "install", "postinstall", "prepublish", "prepare"]
+    
+        for hook in install_hooks:
+            command = scripts.get(hook, "")
+            if not command:
+                continue
+    
+            # Find "node <file.js>" in command
+            for match in _NODE_FILE_PATTERN.finditer(command):
+                filename = match.group(1)
+                file_path = package_dir / filename
+    
+                if not file_path.exists():
+                    continue
+    
+                # Skip file too large (usually bundles, not malware scripts)
+                try:
+                    size = file_path.stat().st_size
+                    if size > max_size_bytes:
+                        continue
+                except OSError:
+                    continue
+    
+                # Read content
+                try:
+                    content = file_path.read_text(encoding="utf-8", errors="replace")
+                    if content.strip():
+                        result[filename] = content
+                except Exception:
+                    continue
+    
+        return result  
             
     def _extract_install_script(self, package_data: dict) -> Optional[str]:
         """
@@ -787,9 +846,62 @@ class DatasetLoader:
         
         return data['packages']
     
-    def _load_single_package(self, package_dir: Path, label: str) -> Optional[PackageProfile]:
-        """ Load a single package directory """
+    # def _load_single_package(self, package_dir: Path, label: str) -> Optional[PackageProfile]:
+    #     """ Load a single package directory """
 
+    #     package_json_path = package_dir / "package" / "package.json"
+        
+    #     if not package_json_path.exists():
+    #         package_json_path = package_dir / "package.json"
+
+    #     if not package_json_path.exists():
+    #         logger.warning(f"Missing package.json in {package_dir}")
+    #         return None
+        
+    #     try: 
+    #         with open(package_json_path, 'r', encoding='utf-8') as f:
+    #             package_data = json.load(f) 
+    #     except Exception as e:
+    #         logger.debug(f"Failed to load package.json in {package_dir}: {e}")
+    #         return None
+        
+    #     name = package_data.get("name", package_dir.name)
+    #     version = package_data.get("version", "1.0.0")
+        
+    #     install_script = self._extract_install_script(package_data)
+        
+    #     install_script_files = self._load_install_script_files(pkg_dir, package_data)
+        
+    #     pkg_dir = package_json_path.parent          #dataset/mal/package_name/package/
+        
+    #     entry_point_code = self._load_entry_point(pkg_dir, package_data)
+        
+    #     readme_content = self._load_readme(pkg_dir)
+        
+    #     file_structure = self._get_file_structure(pkg_dir)
+        
+    #     has_native = self._has_native_code(file_structure)
+        
+    #     return PackageProfile(
+    #         package_name=name,
+    #         version=version,
+    #         dependencies=package_data.get("dependencies", {}),
+    #         dev_dependencies=package_data.get("devDependencies", {}),
+    #         peer_dependencies=package_data.get("peerDependencies", {}),
+    #         scripts=package_data.get("scripts", {}),
+    #         readme_content=readme_content,
+    #         entry_point_code=entry_point_code,
+    #         install_script_content=install_script,
+    #         install_script_files=install_script_files,
+    #         file_structure=file_structure,
+    #         has_native_code=has_native,
+    #         package_json_raw=package_data,
+    #         label=label
+    #     )
+    
+    def _load_single_package(self, package_dir: Path, label: str) -> Optional[PackageProfile]:
+        # Đổi parameter name thành package_dir thay vì pkg_dir
+        
         package_json_path = package_dir / "package" / "package.json"
         
         if not package_json_path.exists():
@@ -811,16 +923,14 @@ class DatasetLoader:
         
         install_script = self._extract_install_script(package_data)
         
-        pkg_dir = package_json_path.parent          #dataset/mal/package_name/package/
-        
-        entry_point_code = self._load_entry_point(pkg_dir, package_data)
-        
-        readme_content = self._load_readme(pkg_dir)
-        
-        file_structure = self._get_file_structure(pkg_dir)
-        
-        has_native = self._has_native_code(file_structure)
-        
+        pkg_root = package_json_path.parent
+
+        install_script_files = self._load_install_script_files(pkg_root, package_data)  # ← bỏ self thủ công
+        entry_point_code = self._load_entry_point(pkg_root, package_data)               # ← bỏ self
+        readme_content = self._load_readme(pkg_root)                                     # ← bỏ self
+        file_structure = self._get_file_structure(pkg_root)                              # ← bỏ self
+        has_native = self._has_native_code(file_structure)                               # ← bỏ self
+                
         return PackageProfile(
             package_name=name,
             version=version,
@@ -831,6 +941,7 @@ class DatasetLoader:
             readme_content=readme_content,
             entry_point_code=entry_point_code,
             install_script_content=install_script,
+            install_script_files=install_script_files,
             file_structure=file_structure,
             has_native_code=has_native,
             package_json_raw=package_data,
@@ -860,7 +971,9 @@ class DatasetLoader:
                 if package:
                     packages.append(package)
             except Exception as e:
-                logger.debug(f"Error loading package {pkg_dir}: {e}")
+                logger.warning(f"Error loading package {pkg_dir}: {e}")  # đổi debug → warning
+                import traceback
+                traceback.print_exc()  # thêm dòng này
                 continue
                 
         return packages

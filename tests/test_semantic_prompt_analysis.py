@@ -13,7 +13,7 @@ from logs.logging_config import setup_logger
 from config.csv_logger_config import CSVLoggerConfig
 
 
-VERSION_TAG = "v2.0"
+VERSION_TAG = "v3.0"
 logger = setup_logger()
 csv_logger = CSVLoggerConfig(
     output_dir="./experiment_results",
