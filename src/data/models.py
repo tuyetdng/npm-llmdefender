@@ -32,6 +32,7 @@ class PackageProfile(BaseModel):
     readme_content: Optional[str] = None
     entry_point_code: Optional[str] = None
     install_script_content: Optional[str] = None
+    install_script_files: Dict[str, str] = Field(default_factory=dict)
     file_structure: List[str] = Field(default_factory=list)
     has_native_code: bool = False
     package_json_raw: Dict[str, Any] = Field(default_factory=dict)
