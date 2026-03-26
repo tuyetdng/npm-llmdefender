@@ -57,6 +57,8 @@ class CSVLoggerConfig:
         """
         timestamp = datetime.now().isoformat()
 
+        has_signals = bool(context.confirmed_signals or context.supporting_signals)
+
         row = {
             "package_name": package_name,
             "version": version,
@@ -64,17 +66,23 @@ class CSVLoggerConfig:
             "timestamp": timestamp,
             "routing": context.routing,
             "risk_score": context.risk_score,
-            "confidence": context.confidence,
+
+            "confidence": context.confidence if has_signals else "",
+
             "primary_category": (
                 context.primary_category.value if context.primary_category else "none"
             ),
+
             "confirmed_count": len(context.confirmed_signals),
             "supporting_count": len(context.supporting_signals),
             "noise_filtered": context.noise_filtered,
+
             "layer1_count": layer1_count,
             "layer2_count": layer2_count,
-            "sources_analyzed": sources_analyzed,
+
+            "sources_analyzed": sources_analyzed or "none",
             "has_js_source": has_js_source,
+
             "confirmed_signals_json": json.dumps(context.confirmed_signals),
             "supporting_signals_json": json.dumps(context.supporting_signals),
         }
@@ -168,15 +176,31 @@ class CSVLoggerConfig:
         self,
         package_name: str,
         version: str,
-        label: str,           # ← thêm — cần cho thống kê
-        routing: str,         # ← thêm — structural routing
-        structural_risk_score: float,  # ← thêm
+        label: str,          
+        routing: str,        
+        structural_risk_score: float,  
         raw_response: str,
         parsed_json: Optional[Dict],
-        parse_success: bool = True,    # ← thêm
+        parse_success: bool = True,    
+        analyst_note: Optional[str] = None
+
     ):
         timestamp = datetime.now().isoformat()
         behaviors = parsed_json.get("behaviors", []) if parsed_json else []
+
+        total_behaviors = len(behaviors)
+
+        if behaviors:
+            behavior_categories = ";".join(
+                sorted({b.get("category", "unknown") for b in behaviors})
+            )
+
+            max_confidence = max(
+                b.get("confidence", 0) for b in behaviors
+            )
+        else:
+            behavior_categories = "none"
+            max_confidence = ""
 
         row = {
             "package_name":          package_name,
@@ -186,13 +210,14 @@ class CSVLoggerConfig:
             "routing":               routing,
             "structural_risk_score": structural_risk_score,
             "parse_success":         parse_success,
-            "total_behaviors":       len(behaviors),
-            "behavior_categories":   ";".join(sorted({b.get("category","") for b in behaviors})),
-            "max_confidence":        max((b.get("confidence", 0) for b in behaviors), default=0),
+            "total_behaviors":       total_behaviors,
+            "behavior_categories":   behavior_categories,
+            "max_confidence":        max_confidence,
             "model_name":            "deepseek-coder-6.7b-instruct",
             "prompt_version":        self.prompt_version,
             "raw_response":          raw_response[:3000],
             "parsed_json":           json.dumps(parsed_json) if parsed_json else "{}",
+            "analyst_note":          analyst_note
         }
         self._append_to_csv("semantic_analysis.csv", row)
 

@@ -1,0 +1,19 @@
+package_name,version,analysis_timestamp,model_name,prompt_version,failure_type,error_message,full_response
+@att-bit/duc.components.cardshell,10.0.0,2026-03-26T13:33:18.585613,DeepSeek-Coder-6.7B-Instruct,semantic_v1.0,json_parse_error,parse_error,"Based on the provided information, the primary signal is ""Known webhook/exfiltration collector domain in install hook"". This signal suggests that there might be a data exfiltration intent. However, without the actual source code or API calls, it's hard to confirm this. 
+
+
+The code snippet provided in the entry point (main) is:
+
+```javascript
+module.exports.hacked=function(){
+  return ""ICHPackageTest""
+}
+```
+
+This code exports a function that returns a string ""ICHPackageTest"". It doesn't seem to contain any API calls, files, or commands that could indicate a malicious intent. 
+
+The risk vector is set to ""data_exfiltration"". 
+
+The confidence score is 0.83, which is high. 
+
+Please provide the actual source code or API calls for a more accurate analysis."
