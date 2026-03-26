@@ -350,7 +350,7 @@ def main():
     print("STRUCTURAL ANALYSIS TEST — Full Pipeline")
     print("=" * 60)
 
-    NUM_PACKAGES = 20
+    NUM_PACKAGES = 246
 
     try:
         loader = DatasetLoader(
