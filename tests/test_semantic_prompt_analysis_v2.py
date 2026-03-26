@@ -469,7 +469,7 @@ def main():
     print("SEMANTIC ANALYSIS TEST — Full Pipeline v2")
     print("=" * 60)
 
-    NUM_PACKAGES = 20
+    NUM_PACKAGES = 246
     MODEL_CONFIG = {
         "torch_dtype": "float16",
         "device_map": "auto",
@@ -488,7 +488,7 @@ def main():
             use_cache=False,
             force_refresh=False,
             limit=NUM_PACKAGES,
-            balanced_experiment_test_only=True,
+            balanced_experiment_test_only=False,
         )
         if not packages:
             print("No packages loaded!")

