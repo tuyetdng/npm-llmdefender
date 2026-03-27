@@ -1,0 +1,59 @@
+{
+  "package_name": "acookie",
+  "version": "1.0.1",
+  "label": "malicious",
+  "semantic_summary": {
+    "num_behaviors": 1,
+    "risk_vector": [
+      "data_exfiltration"
+    ],
+    "behaviors": [
+      {
+        "category": "data_exfiltration",
+        "summary": "The code sends sensitive data to a remote server.",
+        "details": "The code sends environment variables, hostname, and other system information to a remote server via HTTPS POST request.",
+        "confidence": 0.86,
+        "evidence_apis": [
+          "https.request"
+        ],
+        "evidence_files": [
+          "index.js"
+        ],
+        "evidence_domains": [
+          "f5778d1d81cc30c39dcdd0da5ca1d49a.m.pipedream.net"
+        ],
+        "evidence_commands": [],
+        "evidence_env_vars": [
+          "PORT"
+        ]
+      }
+    ],
+    "analyst_note": ""
+  },
+  "verification_result": {
+    "chain_analysis": {
+      "is_coherent_chain": true,
+      "chain_narrative": "The detected behaviors form a coherent attack chain. For example, obfuscation reads environment credentials, POSTs to an external domain, downloads remote scripts, and executes them.",
+      "chain_score": 0.71
+    },
+    "legitimacy_check": {
+      "is_justified": false,
+      "reasoning": "The detected behaviors do not match the package's stated purpose. The package is designed to send sensitive data to a remote server, but the detected behaviors suggest that it might be exfiltrating tokens instead.",
+      "legitimacy_score": 0.4
+    },
+    "final_verification": {
+      "verdict": "MALICIOUS",
+      "calibrated_confidence": 0.8,
+      "explanation": "The package is sending sensitive data to a remote server, but the detected behaviors suggest that it might be exfiltrating tokens instead."
+    }
+  },
+  "analysis_metadata": {
+    "model": "deepseek-coder-6.7b-instruct",
+    "stage": "verification_v2.0",
+    "structural_routing": "flag",
+    "structural_risk_score": 0.9973,
+    "confirmed_signals_count": 2,
+    "has_structural_backup": true
+  },
+  "created_at": "2026-03-27T10:00:33.449067"
+}

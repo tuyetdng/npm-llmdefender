@@ -1,0 +1,33 @@
+{
+  "package_name": "cron-guru",
+  "version": "1.0.2",
+  "label": "malicious",
+  "behaviors": [
+    {
+      "category": "obfuscation",
+      "summary": "Obfuscation is being used in the code.",
+      "details": "The code appears to be obfuscating sensitive data using the js-obfuscator tool.",
+      "confidence": 0.9,
+      "evidence_apis": [
+        "post"
+      ],
+      "evidence_files": [],
+      "evidence_domains": [],
+      "evidence_commands": [],
+      "evidence_env_vars": []
+    }
+  ],
+  "risk_vector": [
+    "obfuscation"
+  ],
+  "analyst_note": "This analysis confirms the presence of obfuscation in the code, with a high level of confidence. The obfuscation tool signature '_0xpattern' is evident in the code, indicating the presence of obfuscation.",
+  "analysis_metadata": {
+    "model": "deepseek-coder-6.7b-instruct",
+    "stage": "semantic_v2.0",
+    "routing": "review",
+    "structural_risk_score": 0.42,
+    "confirmed_signals_count": 1,
+    "has_structural_backup": true
+  },
+  "created_at": "2026-03-26T22:12:17.546585"
+}

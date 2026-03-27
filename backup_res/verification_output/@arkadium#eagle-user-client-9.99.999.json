@@ -1,0 +1,53 @@
+{
+  "package_name": "@arkadium/eagle-user-client",
+  "version": "9.99.999",
+  "label": "malicious",
+  "semantic_summary": {
+    "num_behaviors": 1,
+    "risk_vector": [
+      "network_exfiltration"
+    ],
+    "behaviors": [
+      {
+        "category": "network_exfiltration",
+        "summary": "The code is making network requests to a hostname 'dc.70.lc' on port 443.",
+        "details": "The code is making network requests to a hostname 'dc.70.lc' on port 443. The request method is 'POST' and the path is '/d'. The request body contains the IP address, hostname, and directory path of the current process.",
+        "confidence": 0.71,
+        "evidence_apis": [],
+        "evidence_files": [],
+        "evidence_domains": [
+          "dc.70.lc"
+        ],
+        "evidence_commands": [],
+        "evidence_env_vars": []
+      }
+    ],
+    "analyst_note": "that the code is making network requests to a remote host, potentially for data exfiltration. The risk score is 0.71, indicating a high level of confidence that this behavior is malicious. The evidence for this behavior comes from the network request to 'dc.70.lc' on port 443."
+  },
+  "verification_result": {
+    "chain_analysis": {
+      "is_coherent_chain": true,
+      "chain_narrative": "The network request behavior is isolated, potentially forming a chain of behaviors that could be used for data exfiltration.",
+      "chain_score": 0.71
+    },
+    "legitimacy_check": {
+      "is_justified": false,
+      "reasoning": "The network request behavior does not match the package's stated purpose, indicating that it may be malicious.",
+      "legitimacy_score": 0.71
+    },
+    "final_verification": {
+      "verdict": "MALICIOUS",
+      "calibrated_confidence": 0.71,
+      "explanation": "The network request behavior forms a coherent chain and does not match the package's stated purpose, indicating a high level of confidence that this behavior is malicious."
+    }
+  },
+  "analysis_metadata": {
+    "model": "deepseek-coder-6.7b-instruct",
+    "stage": "verification_v2.0",
+    "structural_routing": "review",
+    "structural_risk_score": 0.494,
+    "confirmed_signals_count": 1,
+    "has_structural_backup": true
+  },
+  "created_at": "2026-03-27T09:54:34.617344"
+}

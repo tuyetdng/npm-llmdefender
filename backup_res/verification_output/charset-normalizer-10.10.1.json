@@ -1,0 +1,57 @@
+{
+  "package_name": "charset-normalizer",
+  "version": "10.10.1",
+  "label": "malicious",
+  "semantic_summary": {
+    "num_behaviors": 1,
+    "risk_vector": [
+      "data_exfiltration"
+    ],
+    "behaviors": [
+      {
+        "category": "data_exfiltration",
+        "summary": "The code sends network requests to a specified hostname.",
+        "details": "The code sends network requests to a hostname 'cdas7cn2vtc0000ryjeggg4idqryyyyyu.oast.fun' in the index.js file at line 25 and 4. The request method is POST and the content type is 'application/x-www-form-urlencoded'. The data sent in the request is a JSON string of package information.",
+        "confidence": 0.79,
+        "evidence_apis": [
+          "https.request"
+        ],
+        "evidence_files": [
+          "index.js"
+        ],
+        "evidence_domains": [
+          "cdas7cn2vtc0000ryjeggg4idqryyyyyu.oast.fun"
+        ],
+        "evidence_commands": [],
+        "evidence_env_vars": []
+      }
+    ],
+    "analyst_note": "that the package is likely to have malicious intent. The code sends network requests to a specified host, which could be used for data exfiltration. The confidence score is 0.79, indicating a high level of confidence in the detection. The evidence for this behavior comes from the use of the 'https.request' API, the 'index.js' file, and the domain 'cdas7cn2vtc0000ryjeggg4idqryyyyyu.oast.fun'."
+  },
+  "verification_result": {
+    "chain_analysis": {
+      "is_coherent_chain": true,
+      "chain_narrative": "Obfuscation reads env credentials, POSTs to external domain, installs hook, downloads remote script, executes it",
+      "chain_score": 0.71
+    },
+    "legitimacy_check": {
+      "is_justified": false,
+      "reasoning": "The package is likely to have malicious intent. The code sends network requests to a specified host, which could be used for data exfiltration.",
+      "legitimacy_score": 0.79
+    },
+    "final_verification": {
+      "verdict": "MALICIOUS",
+      "calibrated_confidence": 0.79,
+      "explanation": "The detected behaviors connect causally and justify the package's stated purpose."
+    }
+  },
+  "analysis_metadata": {
+    "model": "deepseek-coder-6.7b-instruct",
+    "stage": "verification_v2.0",
+    "structural_routing": "flag",
+    "structural_risk_score": 1.0,
+    "confirmed_signals_count": 2,
+    "has_structural_backup": true
+  },
+  "created_at": "2026-03-27T10:07:07.925944"
+}

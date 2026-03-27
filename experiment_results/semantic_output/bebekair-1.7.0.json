@@ -1,0 +1,38 @@
+{
+  "package_name": "bebekair",
+  "version": "1.7.0",
+  "label": "malicious",
+  "behaviors": [
+    {
+      "category": "network_exfiltration",
+      "summary": "The code sends network data to a remote server.",
+      "details": "The code sends network data to a remote server using DNS resolution. The data is sent in chunks of 60 characters and the chunks are resolved as A records. The server IPs are hardcoded in the function calls.",
+      "confidence": 0.85,
+      "evidence_apis": [
+        "dns.resolve"
+      ],
+      "evidence_files": [
+        "index.js"
+      ],
+      "evidence_domains": [
+        "8.8.8.8",
+        "8.8.4.4"
+      ],
+      "evidence_commands": [],
+      "evidence_env_vars": []
+    }
+  ],
+  "risk_vector": [
+    "network_exfiltration"
+  ],
+  "analyst_note": "",
+  "analysis_metadata": {
+    "model": "deepseek-coder-6.7b-instruct",
+    "stage": "semantic_v2.0",
+    "routing": "flag",
+    "structural_risk_score": 1.0,
+    "confirmed_signals_count": 1,
+    "has_structural_backup": true
+  },
+  "created_at": "2026-03-26T22:02:23.751119"
+}

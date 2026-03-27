@@ -1,0 +1,59 @@
+{
+  "package_name": "aae-stream",
+  "version": "130.0.0",
+  "label": "malicious",
+  "behaviors": [
+    {
+      "category": "network_exfiltration",
+      "summary": "The package is downloading files from an external IP address (196.188.125.134) and sending them to an unknown IP address (192.81.209.195).",
+      "details": "The package uses the wget command to download files from an external IP address (196.188.125.134) and sends them to an unknown IP address (192.81.209.195). The files are then sent to the victim's machine using netcat.",
+      "confidence": 0.89,
+      "evidence_apis": [
+        "wget"
+      ],
+      "evidence_files": [],
+      "evidence_domains": [
+        "196.188.125.134"
+      ],
+      "evidence_commands": [
+        "nc"
+      ],
+      "evidence_env_vars": []
+    },
+    {
+      "category": "sensitive_data_collection",
+      "summary": "The package is collecting sensitive data from the victim's machine.",
+      "details": "The package is collecting sensitive data from the victim's machine by reading files and environment variables.",
+      "confidence": 0.9,
+      "evidence_apis": [],
+      "evidence_files": [
+        "package.json"
+      ],
+      "evidence_domains": [],
+      "evidence_commands": [],
+      "evidence_env_vars": [
+        "user",
+        "path",
+        "hostname",
+        "s3",
+        "home",
+        "var",
+        "meta"
+      ]
+    }
+  ],
+  "risk_vector": [
+    "network_exfiltration",
+    "sensitive_data_collection"
+  ],
+  "analyst_note": "that this analysis is based on the provided evidence and may not cover all potential malicious activities. Further analysis is recommended to confirm the malicious intent.",
+  "analysis_metadata": {
+    "model": "deepseek-coder-6.7b-instruct",
+    "stage": "semantic_v2.0",
+    "routing": "flag",
+    "structural_risk_score": 1.0,
+    "confirmed_signals_count": 1,
+    "has_structural_backup": true
+  },
+  "created_at": "2026-03-26T21:58:21.273160"
+}

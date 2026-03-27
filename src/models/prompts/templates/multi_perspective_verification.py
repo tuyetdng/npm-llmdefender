@@ -1,22 +1,32 @@
 """
-MULTI-PERSPECTIVE VERIFICATION PROMPT TEMPLATES
+ATTACK CHAIN VERIFICATION PROMPT TEMPLATES
 
 Stage 2: Verification — runs ONLY when semantic stage detected ≥1 behavior.
 
-Two perspectives:
-    1. Attack Chain Analysis  — do behaviors connect into a coherent kill chain?
-    2. Context Legitimacy     — are behaviors justified by package's stated purpose?
+Core RQ: "Can LLMs reconstruct attack chains from detected behaviors,
+          providing a coherent view of the package's threat?"
+
+Primary  : Attack Chain Reconstruction — decompose behaviors into ordered stages
+Secondary: Context Legitimacy Check    — boolean sanity check (no scoring)
 
 Input:
-    - PackageProfile          (name, description, readme, scripts)
-    - StructuralContext       (routing, risk_score, confirmed_signals)
-    - semantic_findings       (behaviors list from Stage 1)
+    - PackageProfile      (name, description, readme, scripts)
+    - StructuralContext   (routing, risk_score, confirmed_signals)
+    - semantic_findings   (behaviors list from Stage 1)
 
 Output schema:
     {
-        "chain_analysis":      { "is_coherent_chain", "chain_narrative", "chain_score" }
-        "legitimacy_check":    { "is_justified", "reasoning", "legitimacy_score" }
-        "final_verification":  { "verdict", "calibrated_confidence", "explanation" }
+        "chain_analysis": {
+            "stages":          [str, ...]   # ordered attack stages reconstructed by LLM
+            "chain_narrative": str          # 1-2 sentence summary of full attack
+            "chain_score":     float        # 0.0-1.0, strength of reconstructed chain
+            "verdict":         str          # MALICIOUS | SUSPICIOUS | BENIGN
+            "confidence":      float        # 0.3-0.95, never 0.0
+        },
+        "legitimacy_check": {
+            "is_justified": bool            # would a legit package need this?
+            "reasoning":    str             # one sentence only
+        }
     }
 """
 
@@ -32,18 +42,15 @@ from logs.logging_config import setup_logger
 logger = setup_logger()
 
 VERIFICATION_OUTPUT_DIR = "./experiment_results/verification_output"
-
-# README budget — enough for intent signal, not full doc
-_README_BUDGET = 400   # chars
+_README_BUDGET = 400  # chars — enough for intent signal, not full doc
 
 
 class VerificationPromptAnalysis:
     """
-    Stage 2: Multi-Perspective Verification.
+    Stage 2: Attack Chain Reconstruction + Legitimacy Check.
 
-    Should only be called when semantic_findings contains ≥1 behavior.
-    Caller is responsible for this gate — this class does not enforce it
-    but will produce low-value output if behaviors is empty.
+    Should only be called when semantic_findings contains >=1 behavior.
+    Caller is responsible for this gate — this class does not enforce it.
     """
 
     def __init__(
@@ -51,35 +58,40 @@ class VerificationPromptAnalysis:
         package_profile: PackageProfile,
         structural_context: StructuralContext,
         semantic_findings: Dict[str, Any],
-        analyst_note: Optional[str] = None
+        analyst_note: Optional[str] = None,
     ):
         self.package = package_profile
         self.ctx = structural_context
         self.semantic_findings = semantic_findings
         self._behaviors: List[Dict] = semantic_findings.get("behaviors", [])
-        self.analyst_note = analyst_note
+        self.analyst_note = analyst_note.strip() if analyst_note and analyst_note.strip() else None
 
     # ------------------------------------------------------------------
     # Persistence
     # ------------------------------------------------------------------
 
     def save_verification_result(self, parsed_data: dict, version_tag: str) -> dict:
+        """Persist verification stage output to JSON."""
         os.makedirs(VERIFICATION_OUTPUT_DIR, exist_ok=True)
 
         result = {
             "package_name": self.package.package_name,
-            "version": self.package.version,
-            "label": self.package.label,
+            "version":      self.package.version,
+            "label":        self.package.label,
             "semantic_summary": {
                 "num_behaviors": len(self._behaviors),
-                "risk_vector": self.semantic_findings.get("risk_vector", []),
+                "risk_vector":   self.semantic_findings.get("risk_vector", []),
+                "behaviors":     self._behaviors,
+                "analyst_note":  self.analyst_note or "",
             },
             "verification_result": parsed_data,
             "analysis_metadata": {
-                "model": "deepseek-coder-6.7b-instruct",
-                "stage": version_tag,
-                "structural_routing": self.ctx.routing,
-                "structural_risk_score": self.ctx.risk_score,
+                "model":                   "deepseek-coder-6.7b-instruct",
+                "stage":                   version_tag,
+                "structural_routing":      self.ctx.routing,
+                "structural_risk_score":   self.ctx.risk_score,
+                "confirmed_signals_count": len(self.ctx.confirmed_signals),
+                "has_structural_backup":   len(self.ctx.confirmed_signals) > 0,
             },
             "created_at": datetime.now().isoformat(),
         }
@@ -98,75 +110,82 @@ class VerificationPromptAnalysis:
 
     def _system(self) -> str:
         return (
-            "You are a senior supply chain security auditor. "
-            "Your task is NOT to find new issues — it is to VERIFY existing findings "
-            "from a previous automated scan. "
-            "Reason across two perspectives: "
-            "(1) do the detected behaviors form a coherent attack chain, and "
-            "(2) are they justified by the package's stated purpose? "
+            "You are a malware analyst specializing in npm supply chain attacks. "
+            "You will receive behaviors detected by a previous automated scan. "
+            "Your task is to reconstruct the attack chain — decompose the behaviors "
+            "into ordered stages and explain how they connect into a coherent threat. "
             "Output ONLY valid JSON — no prose, no markdown fences."
         )
 
     def _user(self) -> str:
-        parts = [
+        return "\n\n".join([
             self._format_package_context(),
             self._format_structural_context(),
             self._format_detected_behaviors(),
-        ]
-        return "\n\n".join(parts)
+        ])
 
     def _instructions(self) -> str:
+        has_description = bool(
+            (self.package.package_json_raw or {}).get("description", "").strip()
+            or (self.package.readme_content or "").strip()
+        )
+
+        legitimacy_hint = (
+            f"Would a legitimate '{self.package.package_name}' package need this behavior?"
+            if has_description else
+            "This package has no description or README — any suspicious behavior is unjustified."
+        )
+
         output_schema = {
             "chain_analysis": {
-                "is_coherent_chain": True,
-                "chain_narrative": "Short description of attack flow, or 'none' if isolated",
+                "stages": [
+                    "stage 1: use ACTUAL evidence — real hook name, real command",
+                    "stage 2: use ACTUAL evidence — real IP/domain, real action taken",
+                ],
+                "chain_narrative": "1-2 sentences using the actual package name and real IOCs from evidence",
                 "chain_score": 0.0,
+                "verdict": "MALICIOUS or SUSPICIOUS or BENIGN",
+                "confidence": 0.0,
             },
             "legitimacy_check": {
                 "is_justified": False,
-                "reasoning": "Why behaviors match or do not match the package purpose",
-                "legitimacy_score": 0.0,
-            },
-            "final_verification": {
-                "verdict": "MALICIOUS",
-                "calibrated_confidence": 0.0,
-                "explanation": "One paragraph summary of the reasoning",
+                "reasoning": "one sentence referencing the actual package name and behavior",
             },
         }
 
-        return f"""VERIFICATION INSTRUCTIONS:
+        return f"""TASK: ATTACK CHAIN RECONSTRUCTION
 
-PERSPECTIVE 1 — ATTACK CHAIN ANALYSIS
-Examine the detected behaviors. Do they connect causally?
-Examples of coherent chains:
-  - Obfuscation → reads env credentials → POST to external domain  (strong chain)
-  - install hook downloads remote script → executes it             (strong chain)
-  - single https.request with no credential access                 (isolated, weak)
+Given the detected behaviors below, reconstruct the attack chain step by step.
+Use ONLY the actual evidence provided — real IPs, real commands, real domains from the behaviors above.
+Do NOT copy example text from these instructions into your output.
+
+RECONSTRUCTION GUIDE:
+  - Decompose behaviors into ordered stages based on causal relationship
+  - Each stage must reference real evidence: actual IP addresses, actual commands, actual domains
+  - For a reverse shell pattern, decompose into: what triggers it → what connects where → what is established
+  - Only add stages clearly supported by evidence — do NOT invent stages
+  - If behaviors are unrelated (no causal link), list them as parallel stages
+
 chain_score guide:
-  0.0–0.3 : isolated behaviors, no causal connection
-  0.4–0.6 : partial chain or circumstantial link
-  0.7–1.0 : clear kill chain (≥2 causally linked stages)
+  0.7-1.0 : >=2 stages with clear causal links (e.g. hook → download → exec)
+  0.4-0.69: 1 strong indicator, or partial chain with 1 implied next step
+  0.0-0.39: isolated behavior, no meaningful chain can be reconstructed
 
-PERSPECTIVE 2 — CONTEXT LEGITIMACY CHECK
-Compare the package's stated purpose vs detected behaviors.
-Ask: "Would a legitimate '{self.package.package_name}' package need to do this?"
-legitimacy_score guide:
-  0.0–0.3 : totally unjustified (e.g. icon pack exfiltrating tokens)
-  0.4–0.6 : grey area (e.g. logger running shell commands)
-  0.7–1.0 : fully justified (e.g. deploy-tool using child_process)
+verdict guide:
+  MALICIOUS  : chain_score >= 0.4 AND is_justified is false
+  SUSPICIOUS : chain_score >= 0.4 AND is_justified is ambiguous/true, OR chain_score < 0.4 but behavior is clearly anomalous
+  BENIGN     : chain_score < 0.4 AND behavior could be justified
 
-VERDICT RULES (apply in order, stop at first match):
-  1. chain_score > 0.6 AND legitimacy_score < 0.7  →  MALICIOUS
-  2. chain_score > 0.3 AND legitimacy_score < 0.4  →  MALICIOUS
-  3. chain_score > 0.3 AND legitimacy_score 0.4–0.7 →  SUSPICIOUS
-  4. legitimacy_score > 0.7                         →  BENIGN
-  5. chain_score <= 0.3                             →  BENIGN
+confidence guide:
+  Base = chain_score
+  +0.10 if package has no description/README
+  +0.10 if is_justified is false
+  Clamp to [0.30, 0.95]. Never output 0.0.
 
-calibrated_confidence: your overall confidence in the verdict (0.0–1.0).
-  - Use high confidence (>0.8) only when evidence is unambiguous.
-  - Use low confidence (<0.5) when behaviors are ambiguous or context is unclear.
+LEGITIMACY CHECK (secondary — boolean only, no scoring):
+  {legitimacy_hint}
 
-Output schema (fill with real values — no placeholders):
+Output schema (replace ALL angle-bracket placeholders with actual values):
 {json.dumps(output_schema, indent=2)}
 
 Output ONLY the JSON object. No explanation, no markdown."""
@@ -176,11 +195,10 @@ Output ONLY the JSON object. No explanation, no markdown."""
     # ------------------------------------------------------------------
 
     def _format_package_context(self) -> str:
-        """Package identity + stated purpose — for legitimacy check."""
+        """Package identity — for legitimacy check."""
         pkg_json = self.package.package_json_raw or {}
         description = pkg_json.get("description", "").strip() or "No description."
         keywords = pkg_json.get("keywords", [])
-
         readme = (self.package.readme_content or "").strip()
         readme_snippet = readme[:_README_BUDGET] + ("..." if len(readme) > _README_BUDGET else "")
 
@@ -194,22 +212,19 @@ Output ONLY the JSON object. No explanation, no markdown."""
             lines.append(f"  Keywords    : {', '.join(keywords[:8])}")
         if readme_snippet and readme_snippet != "No description.":
             lines.append(f"  README      : {readme_snippet.replace(chr(10), ' ')}")
+        if description == "No description." and not readme_snippet and not keywords:
+            lines.append("  WARNING: No stated purpose found.")
 
         return "\n".join(lines)
 
     def _format_structural_context(self) -> str:
-        """
-        Structural pre-analysis context — ground truth anchor for verifier.
-        Shows what rule-based analysis found BEFORE the LLM semantic scan.
-        Helps verifier distinguish 'LLM invented this' vs 'structural confirmed this'.
-        """
+        """Structural pre-analysis — ground truth anchor."""
         ctx = self.ctx
         lines = [
             "STRUCTURAL PRE-ANALYSIS (rule-based, pre-LLM):",
             f"  Routing    : {ctx.routing.upper()}",
             f"  Risk Score : {ctx.risk_score:.2f}",
         ]
-
         if ctx.confirmed_signals:
             lines.append(f"  Confirmed signals ({len(ctx.confirmed_signals)}):")
             for s in ctx.confirmed_signals[:4]:
@@ -217,15 +232,11 @@ Output ONLY the JSON object. No explanation, no markdown."""
                 lines.append(f"    [!] {first.strip()}")
         else:
             lines.append("  Confirmed signals : none")
-            lines.append(
-                "  NOTE: Semantic analyzer detected behaviors without structural confirmation — "
-                "apply extra scrutiny to legitimacy check."
-            )
 
         return "\n".join(lines)
 
     def _format_detected_behaviors(self) -> str:
-        """Semantic stage output — what needs to be verified."""
+        """Semantic stage output — the input to chain reconstruction."""
         if not self._behaviors:
             return "DETECTED BEHAVIORS: None."
 
@@ -248,11 +259,9 @@ Output ONLY the JSON object. No explanation, no markdown."""
                 evidence_parts.append(f"env_vars={b['evidence_env_vars'][:3]}")
             if evidence_parts:
                 lines.append(f"    Evidence : {', '.join(evidence_parts)}")
-            if self._analyst_note and self._analyst_note.strip():
-                lines.append(
-                    f"\n  ANALYST NOTE (semantic model free-form reasoning):\n"
-                    f"  {self._analyst_note.strip()[:400]}"
-                )
+
+        if self.analyst_note:
+            lines.append(f"\n  ANALYST NOTE:\n  {self.analyst_note[:400]}")
 
         risk_vector = self.semantic_findings.get("risk_vector", [])
         if risk_vector:
@@ -275,13 +284,10 @@ Output ONLY the JSON object. No explanation, no markdown."""
     @staticmethod
     def should_run(semantic_findings: Dict[str, Any]) -> bool:
         """
-        Gate check — verification is only meaningful when semantic found behaviors.
-        Call this before instantiating to avoid wasted inference.
+        Gate check — only run verification when semantic found >=1 behavior.
 
         Usage:
             if VerificationPromptAnalysis.should_run(parsed_semantic):
                 verifier = VerificationPromptAnalysis(pkg, ctx, parsed_semantic)
-                ...
         """
-        behaviors = semantic_findings.get("behaviors", [])
-        return len(behaviors) > 0
+        return len(semantic_findings.get("behaviors", [])) > 0

@@ -1,0 +1,53 @@
+{
+  "package_name": "chart.js-latest",
+  "version": "1.0.0",
+  "label": "malicious",
+  "semantic_summary": {
+    "num_behaviors": 1,
+    "risk_vector": [
+      "suspicious_behavior"
+    ],
+    "behaviors": [
+      {
+        "category": "suspicious_behavior",
+        "summary": "Package contains no JavaScript files",
+        "details": "Package file structure",
+        "confidence": 0.72,
+        "evidence_apis": [],
+        "evidence_files": [],
+        "evidence_domains": [],
+        "evidence_commands": [
+          "./pre.sh"
+        ],
+        "evidence_env_vars": []
+      }
+    ],
+    "analyst_note": "This JSON object represents the analysis of the package chart.js-latestVersion:1.0.0. The behavior category \"suspicious_behavior\" is identified with a confidence score of 0.72. The behavior details indicate that the package contains no JavaScript files and the evidence of suspicious behavior is the presence of the install hook command \"./pre.sh\"."
+  },
+  "verification_result": {
+    "chain_analysis": {
+      "is_coherent_chain": false,
+      "chain_narrative": "None",
+      "chain_score": 0.3
+    },
+    "legitimacy_check": {
+      "is_justified": false,
+      "reasoning": "Package contains no JavaScript files and the evidence of suspicious behavior is the presence of the install hook command './pre.sh'",
+      "legitimacy_score": 0.3
+    },
+    "final_verification": {
+      "verdict": "SUSPICIOUS",
+      "calibrated_confidence": 0.3,
+      "explanation": "The package contains no JavaScript files and the presence of the install hook command './pre.sh' could indicate a suspicious behavior."
+    }
+  },
+  "analysis_metadata": {
+    "model": "deepseek-coder-6.7b-instruct",
+    "stage": "verification_v2.0",
+    "structural_routing": "review",
+    "structural_risk_score": 0.336,
+    "confirmed_signals_count": 1,
+    "has_structural_backup": true
+  },
+  "created_at": "2026-03-27T10:07:19.279436"
+}

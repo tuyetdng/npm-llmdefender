@@ -7,7 +7,7 @@ from datetime import datetime
 import os
 import json
 import re
-from typing import Dict, List
+from typing import Dict, List, Optional
 from analysis.signal_aggregator import StructuralContext
 from analysis.structural_analysis import StructuralAnalysisFinding
 from data.models import PackageProfile, SemanticAnalysisResult, Behavior
@@ -64,33 +64,73 @@ class SemanticPromptAnalysis:
             or (getattr(self.package, "install_script_files", {}) or {})
         )
 
-    def save_parsed_output(self, parsed_data: dict, version_tag: str) -> dict:
-        """Persist parsed LLM output to JSON"""
-        os.makedirs(SEMANTIC_OUTPUT_DIR, exist_ok=True)
+    # def save_parsed_output(self, parsed_data: dict, version_tag: str) -> dict:
+    #     """Persist parsed LLM output to JSON"""
+    #     os.makedirs(SEMANTIC_OUTPUT_DIR, exist_ok=True)
         
+    #     result = {
+    #         "package_name": self.package.package_name,
+    #         "version": self.package.version,
+    #         "label": self.package.label,
+    #         "behaviors": parsed_data.get("behaviors", []),
+    #         "risk_vector": parsed_data.get("risk_vector", []),
+    #         "analysis_metadata": {
+    #             "model": "deepseek-coder-6.7b-instruct",
+    #             "stage": version_tag,
+    #             "routing": self._routing,
+    #             "structural_risk_score": self.ctx.risk_score,
+    #         },
+    #         "created_at": datetime.now().isoformat(),
+    #     }
+        
+    #     safe_name = f"{self.package.package_name.replace('/', '#')}-{self.package.version}.json"
+    #     file_path = os.path.join(SEMANTIC_OUTPUT_DIR, safe_name)
+        
+    #     with open(file_path, 'w', encoding='utf-8') as f:
+    #         json.dump(result, f, indent=2, ensure_ascii=False)
+        
+    #     return result
+    
+    
+    def save_parsed_output(
+        self,
+        parsed_data: dict,
+        version_tag: str,
+        analyst_note: Optional[str] = None,
+    ) -> dict:
+        """
+        Persist semantic stage output to JSON.
+
+        """
+        os.makedirs(SEMANTIC_OUTPUT_DIR, exist_ok=True)
+
         result = {
             "package_name": self.package.package_name,
-            "version": self.package.version,
-            "label": self.package.label,
-            "behaviors": parsed_data.get("behaviors", []),
-            "risk_vector": parsed_data.get("risk_vector", []),
+            "version":       self.package.version,
+            "label":         self.package.label,
+            # --- Core findings ---
+            "behaviors":     parsed_data.get("behaviors", []),
+            "risk_vector":   parsed_data.get("risk_vector", []),
+            "analyst_note":  analyst_note or "",
+            # --- Analysis metadata ---
             "analysis_metadata": {
-                "model": "deepseek-coder-6.7b-instruct",
-                "stage": version_tag,
-                "routing": self._routing,
-                "structural_risk_score": self.ctx.risk_score,
+                "model":                    "deepseek-coder-6.7b-instruct",
+                "stage":                    version_tag,
+                "routing":                  self._routing,
+                "structural_risk_score":    self.ctx.risk_score,
+                "confirmed_signals_count":  len(self.ctx.confirmed_signals),
+                "has_structural_backup":    len(self.ctx.confirmed_signals) > 0,
             },
             "created_at": datetime.now().isoformat(),
         }
-        
+
         safe_name = f"{self.package.package_name.replace('/', '#')}-{self.package.version}.json"
         file_path = os.path.join(SEMANTIC_OUTPUT_DIR, safe_name)
-        
-        with open(file_path, 'w', encoding='utf-8') as f:
+
+        with open(file_path, "w", encoding="utf-8") as f:
             json.dump(result, f, indent=2, ensure_ascii=False)
-        
+
         return result
-    
     # ------------------------------------------------------------------
     # Prompt sections
     # ------------------------------------------------------------------

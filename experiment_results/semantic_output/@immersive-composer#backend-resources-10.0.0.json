@@ -1,0 +1,33 @@
+{
+  "package_name": "@immersive-composer/backend-resources",
+  "version": "10.0.0",
+  "label": "malicious",
+  "behaviors": [
+    {
+      "category": "suspicious_behavior",
+      "summary": "Package contains no JavaScript files",
+      "details": "Package file structure",
+      "confidence": 0.72,
+      "evidence_apis": [],
+      "evidence_files": [],
+      "evidence_domains": [],
+      "evidence_commands": [
+        "digdcatrce.kedrns.com"
+      ],
+      "evidence_env_vars": []
+    }
+  ],
+  "risk_vector": [
+    "suspicious_behavior"
+  ],
+  "analyst_note": "This JSON object represents the analysis of the package @immersive-composer/backend-resources. The behavior category is \"suspicious_behavior\" and the summary is \"Package contains no JavaScript files\". The details are \"Package file structure\". The confidence score is 0.72. The evidence commands are [\"digdcatrce.kedrns.com\"]. The evidence files, domains, APIs, environment variables, and commands are all empty arrays. The risk vector is [\"suspicious_behavior\"].",
+  "analysis_metadata": {
+    "model": "deepseek-coder-6.7b-instruct",
+    "stage": "semantic_v2.0",
+    "routing": "review",
+    "structural_risk_score": 0.336,
+    "confirmed_signals_count": 1,
+    "has_structural_backup": true
+  },
+  "created_at": "2026-03-26T22:01:56.308422"
+}

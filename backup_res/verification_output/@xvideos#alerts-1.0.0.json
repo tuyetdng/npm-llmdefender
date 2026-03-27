@@ -1,0 +1,53 @@
+{
+  "package_name": "@xvideos/alerts",
+  "version": "1.0.0",
+  "label": "malicious",
+  "semantic_summary": {
+    "num_behaviors": 1,
+    "risk_vector": [
+      "unknown"
+    ],
+    "behaviors": [
+      {
+        "category": "unknown",
+        "summary": "The code appears to be performing DNS lookups with subdomains derived from the system information.",
+        "details": "The code is making DNS lookups with subdomains derived from the system information. The subdomains are derived from the base64 encoded string of the system information. The DNS lookups are performed with a domain appended to the end of the subdomain.",
+        "confidence": 0.5,
+        "evidence_apis": [
+          "dns.lookup"
+        ],
+        "evidence_files": [],
+        "evidence_domains": [],
+        "evidence_commands": [],
+        "evidence_env_vars": []
+      }
+    ],
+    "analyst_note": ""
+  },
+  "verification_result": {
+    "chain_analysis": {
+      "is_coherent_chain": false,
+      "chain_narrative": "None",
+      "chain_score": 0.0
+    },
+    "legitimacy_check": {
+      "is_justified": false,
+      "reasoning": "The detected behaviors do not match the package's stated purpose",
+      "legitimacy_score": 0.0
+    },
+    "final_verification": {
+      "verdict": "MALICIOUS",
+      "calibrated_confidence": 0.0,
+      "explanation": "The package appears to perform DNS lookups with subdomains derived from the system information, but the detected behaviors do not match the package's stated purpose."
+    }
+  },
+  "analysis_metadata": {
+    "model": "deepseek-coder-6.7b-instruct",
+    "stage": "verification_v2.0",
+    "structural_routing": "skip",
+    "structural_risk_score": 0.13,
+    "confirmed_signals_count": 0,
+    "has_structural_backup": false
+  },
+  "created_at": "2026-03-27T09:58:10.492028"
+}

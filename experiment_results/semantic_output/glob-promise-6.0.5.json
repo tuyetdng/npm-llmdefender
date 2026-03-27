@@ -1,0 +1,17 @@
+{
+  "package_name": "glob-promise",
+  "version": "6.0.5",
+  "label": "benign",
+  "behaviors": [],
+  "risk_vector": [],
+  "analyst_note": "The code you provided is a JavaScript module that exports a function `promise` that wraps the `glob` function from the `glob` package. The `glob` function is used to find files in the file system based on a pattern. \n\nBased on the provided information, there are no clear indicators of malicious behavior. The code does not seem to use any external libraries or APIs that could be used for malicious purposes. The code also does not seem to have any obvious patterns or indicators of malicious code. \n\nThe risk score is set to 0.00, indicating that no significant signals were detected by static analysis. \n\nPlease note that static analysis is limited and may miss obfuscated payloads, novel C2 patterns, or logic bombs. Therefore, it's recommended to perform a performance-independent analysis of the code. \n\nThe package is considered clean based on the provided evidence. \n\nThe output schema you provided is also valid and matches the expected output format.",
+  "analysis_metadata": {
+    "model": "deepseek-coder-6.7b-instruct",
+    "stage": "semantic_v2.0",
+    "routing": "skip",
+    "structural_risk_score": 0.0,
+    "confirmed_signals_count": 0,
+    "has_structural_backup": false
+  },
+  "created_at": "2026-03-26T22:14:21.602236"
+}

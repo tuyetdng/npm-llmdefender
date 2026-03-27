@@ -1,0 +1,35 @@
+{
+  "package_name": "bitshares-ui-style-guide",
+  "version": "1.0.1",
+  "label": "malicious",
+  "behaviors": [
+    {
+      "category": "data_exfiltration",
+      "summary": "The code sends network requests to a specified hostname.",
+      "details": "The code sends network requests to a hostname 'eon4ohhg8790gtf.m.pipedream.net' in the index.js file.",
+      "confidence": 0.79,
+      "evidence_apis": [],
+      "evidence_files": [
+        "index.js"
+      ],
+      "evidence_domains": [
+        "eon4ohhg8790gtf.m.pipedream.net"
+      ],
+      "evidence_commands": [],
+      "evidence_env_vars": []
+    }
+  ],
+  "risk_vector": [
+    "data_exfiltration"
+  ],
+  "analyst_note": "that the package 'bitshares-ui-style-guide' with version 1.0.1 has a high level of malicious intent based on the evidence of sending network requests to a specified hostname. The risk vector includes 'data_exfiltration'.",
+  "analysis_metadata": {
+    "model": "deepseek-coder-6.7b-instruct",
+    "stage": "semantic_v2.0",
+    "routing": "flag",
+    "structural_risk_score": 1.0,
+    "confirmed_signals_count": 1,
+    "has_structural_backup": true
+  },
+  "created_at": "2026-03-26T22:05:51.945327"
+}

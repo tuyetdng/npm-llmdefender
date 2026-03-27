@@ -1,0 +1,69 @@
+{
+  "package_name": "copy-webpack-plugin-v6",
+  "version": "6.0.0",
+  "label": "malicious",
+  "semantic_summary": {
+    "num_behaviors": 2,
+    "risk_vector": [
+      "install_hook",
+      "suspicious_behavior"
+    ],
+    "behaviors": [
+      {
+        "category": "install_hook",
+        "summary": "The package contains a pre-install hook present in the payload that may execute at install time via the commands listed in the package metadata.",
+        "details": "The package contains a pre-install hook present in the payload that may execute at install time via the commands listed in the package metadata. This could potentially be a malicious payload.",
+        "confidence": 0.72,
+        "evidence_commands": [
+          "preinstall:shpre.sh"
+        ],
+        "evidence_files": [
+          "packagefile_structure"
+        ],
+        "evidence_apis": [],
+        "evidence_domains": [],
+        "evidence_env_vars": []
+      },
+      {
+        "category": "suspicious_behavior",
+        "summary": "Package contains no JavaScript files.",
+        "details": "The package contains no JavaScript files, which could indicate suspicious behavior.",
+        "confidence": 0.34,
+        "evidence_commands": [],
+        "evidence_files": [
+          "packagefile_structure"
+        ],
+        "evidence_apis": [],
+        "evidence_domains": [],
+        "evidence_env_vars": []
+      }
+    ],
+    "analyst_note": "This JSON object represents the analysis of the npm package 'copy-webpack-plugin-v6' version '6.0.0'. The analysis indicates that the package contains a pre-install hook present in the payload that may execute at install time via the commands listed in the package metadata, which could potentially be a malicious payload. The package also contains no JavaScript files, which could indicate suspicious behavior. The overall risk score is 0.34 and the confidence level is 0.72."
+  },
+  "verification_result": {
+    "chain_analysis": {
+      "is_coherent_chain": true,
+      "chain_narrative": "The package contains a pre-install hook present in the payload that may execute at install time via the commands listed in the package metadata. This could potentially be a malicious payload.",
+      "chain_score": 0.72
+    },
+    "legitimacy_check": {
+      "is_justified": false,
+      "reasoning": "The package's stated purpose does not match the detected behaviors.",
+      "legitimacy_score": 0.34
+    },
+    "final_verification": {
+      "verdict": "MALICIOUS",
+      "calibrated_confidence": 0.5,
+      "explanation": "The package contains a pre-install hook present in the payload that may execute at install time via the commands listed in the package metadata. The package also contains no JavaScript files, which could indicate suspicious behavior."
+    }
+  },
+  "analysis_metadata": {
+    "model": "deepseek-coder-6.7b-instruct",
+    "stage": "verification_v2.0",
+    "structural_routing": "review",
+    "structural_risk_score": 0.336,
+    "confirmed_signals_count": 1,
+    "has_structural_backup": true
+  },
+  "created_at": "2026-03-27T10:09:41.501085"
+}

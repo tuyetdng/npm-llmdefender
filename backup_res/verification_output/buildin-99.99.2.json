@@ -1,0 +1,55 @@
+{
+  "package_name": "buildin",
+  "version": "99.99.2",
+  "label": "malicious",
+  "semantic_summary": {
+    "num_behaviors": 1,
+    "risk_vector": [
+      "data_exfiltration"
+    ],
+    "behaviors": [
+      {
+        "category": "data_exfiltration",
+        "summary": "The code sends network requests to a specified hostname.",
+        "details": "The code sends network requests to a hostname 'eoqu05c9wd0uxgg.m.pipedream.net' in the index.js file at line 25. This could indicate data exfiltration.",
+        "confidence": 0.79,
+        "evidence_apis": [],
+        "evidence_files": [
+          "index.js"
+        ],
+        "evidence_domains": [
+          "eoqu05c9wd0uxgg.m.pipedream.net"
+        ],
+        "evidence_commands": [],
+        "evidence_env_vars": []
+      }
+    ],
+    "analyst_note": "that the package is likely to have malicious intent based on the data exfiltration behavior. The code sends network requests to a specified hostname, which could indicate data exfiltration. The confidence score is 0.79, indicating a high level of confidence in the detection."
+  },
+  "verification_result": {
+    "chain_analysis": {
+      "is_coherent_chain": true,
+      "chain_narrative": "The package sends network requests to a specified hostname, potentially indicating data exfiltration",
+      "chain_score": 0.79
+    },
+    "legitimacy_check": {
+      "is_justified": false,
+      "reasoning": "The package is likely to have malicious intent based on the data exfiltration behavior",
+      "legitimacy_score": 0.79
+    },
+    "final_verification": {
+      "verdict": "MALICIOUS",
+      "calibrated_confidence": 0.79,
+      "explanation": "The package sends network requests to a specified hostname, potentially indicating data exfiltration. The confidence score is high, indicating a high level of confidence in the detection."
+    }
+  },
+  "analysis_metadata": {
+    "model": "deepseek-coder-6.7b-instruct",
+    "stage": "verification_v2.0",
+    "structural_routing": "flag",
+    "structural_risk_score": 1.0,
+    "confirmed_signals_count": 2,
+    "has_structural_backup": true
+  },
+  "created_at": "2026-03-27T10:05:47.994663"
+}

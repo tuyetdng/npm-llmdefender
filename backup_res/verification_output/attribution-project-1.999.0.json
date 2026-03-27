@@ -1,0 +1,58 @@
+{
+  "package_name": "attribution-project",
+  "version": "1.999.0",
+  "label": "malicious",
+  "semantic_summary": {
+    "num_behaviors": 1,
+    "risk_vector": [
+      "credential_theft"
+    ],
+    "behaviors": [
+      {
+        "category": "credential_theft",
+        "summary": "The code executes a series of commands that may involve credential theft.",
+        "details": "The code uses the child_process module to execute a series of commands that may involve credential theft. The commands include hostname, pwd, whoami, and curl. The commands may also involve the execution of a reverse shell or exfiltration of credentials.",
+        "confidence": 0.65,
+        "evidence_apis": [],
+        "evidence_files": [],
+        "evidence_domains": [
+          "https://ifconfig.me"
+        ],
+        "evidence_commands": [
+          "hostname",
+          "pwd",
+          "whoami",
+          "curl"
+        ],
+        "evidence_env_vars": []
+      }
+    ],
+    "analyst_note": "evidence of the use of the child_process module in the code, which includes the execution of commands that may involve credential theft. The commands include hostname, pwd, whoami, and curl, which are often used to gather system information and credentials. The domain https://ifconfig.me is also included as a potential source of evidence of credential theft. The confidence score is 0.65, indicating a high level of confidence in the detection of malicious behavior."
+  },
+  "verification_result": {
+    "chain_analysis": {
+      "is_coherent_chain": false,
+      "chain_narrative": "None",
+      "chain_score": 0.3
+    },
+    "legitimacy_check": {
+      "is_justified": false,
+      "reasoning": "The detected behaviors do not match the package's stated purpose",
+      "legitimacy_score": 0.4
+    },
+    "final_verification": {
+      "verdict": "MALICIOUS",
+      "calibrated_confidence": 0.4,
+      "explanation": "The chain score is less than 0.6 and the legitimacy score is greater than 0.4, indicating a high level of risk."
+    }
+  },
+  "analysis_metadata": {
+    "model": "deepseek-coder-6.7b-instruct",
+    "stage": "verification_v2.0",
+    "structural_routing": "review",
+    "structural_risk_score": 0.39,
+    "confirmed_signals_count": 0,
+    "has_structural_backup": false
+  },
+  "created_at": "2026-03-27T10:00:58.805866"
+}

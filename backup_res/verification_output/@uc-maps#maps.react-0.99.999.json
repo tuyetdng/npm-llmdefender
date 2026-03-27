@@ -1,0 +1,55 @@
+{
+  "package_name": "@uc-maps/maps.react",
+  "version": "0.99.999",
+  "label": "malicious",
+  "semantic_summary": {
+    "num_behaviors": 1,
+    "risk_vector": [
+      "network_exfiltration"
+    ],
+    "behaviors": [
+      {
+        "category": "network_exfiltration",
+        "summary": "The code is making network requests to a specific host.",
+        "details": "The code is making network requests to 'dc.70.lc' on port 443.",
+        "confidence": 0.71,
+        "evidence_apis": [
+          "https.request"
+        ],
+        "evidence_files": [],
+        "evidence_domains": [
+          "dc.70.lc"
+        ],
+        "evidence_commands": [],
+        "evidence_env_vars": []
+      }
+    ],
+    "analyst_note": "that the code is making network requests to a specific host, which is a potential behavior associated with network exfiltration. The confidence score is 0.71, indicating a high level of confidence in this behavior. The evidence for this behavior comes from the use of the 'https.request' API, and the domain 'dc.70.lc'."
+  },
+  "verification_result": {
+    "chain_analysis": {
+      "is_coherent_chain": true,
+      "chain_narrative": "The detected behaviors form a coherent attack chain: Network request to 'dc.70.lc' on port 443.",
+      "chain_score": 0.71
+    },
+    "legitimacy_check": {
+      "is_justified": false,
+      "reasoning": "The detected behaviors do not match the package's stated purpose, which is associated with network exfiltration. The evidence for this behavior comes from the use of the 'https.request' API and the domain 'dc.70.lc'.",
+      "legitimacy_score": 0.71
+    },
+    "final_verification": {
+      "verdict": "MALICIOUS",
+      "calibrated_confidence": 0.71,
+      "explanation": "The package's stated purpose does not justify the detected behaviors, indicating a potential malicious intent."
+    }
+  },
+  "analysis_metadata": {
+    "model": "deepseek-coder-6.7b-instruct",
+    "stage": "verification_v2.0",
+    "structural_routing": "review",
+    "structural_risk_score": 0.494,
+    "confirmed_signals_count": 1,
+    "has_structural_backup": true
+  },
+  "created_at": "2026-03-27T09:57:55.268708"
+}

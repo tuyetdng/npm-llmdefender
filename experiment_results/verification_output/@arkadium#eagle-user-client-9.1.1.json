@@ -2,32 +2,55 @@
   "package_name": "@arkadium/eagle-user-client",
   "version": "9.1.1",
   "label": "malicious",
-  "semantic_findings_summary": {
+  "semantic_summary": {
     "num_behaviors": 1,
     "risk_vector": [
-      "credential_theft"
-    ]
+      "network_exfiltration"
+    ],
+    "behaviors": [
+      {
+        "category": "network_exfiltration",
+        "summary": "The code is making network requests to a specific host.",
+        "details": "The code is making network requests to 'dc.70.lc' on port 443.",
+        "confidence": 0.78,
+        "evidence_apis": [
+          "https.request"
+        ],
+        "evidence_files": [
+          "./.pbk.js"
+        ],
+        "evidence_domains": [
+          "dc.70.lc"
+        ],
+        "evidence_commands": [],
+        "evidence_env_vars": []
+      }
+    ],
+    "analyst_note": "that the code is making network requests to a specific host, potentially for data exfiltration. The confidence score is 0.78, indicating a high level of confidence in the detection of this behavior. The evidence for this behavior comes from the use of the 'https.request' API in the file './.pbk.js'. The domain 'dc.70.lc' is also a sign of potential network exfiltration."
   },
   "verification_result": {
     "chain_analysis": {
-      "is_coherent_chain": false,
-      "chain_narrative": "No coherent attack chain detected",
-      "chain_score": 0.3
+      "stages": [
+        "stage1: use 'https.request' API to 'dc.70.lc' on port 443",
+        "stage2: use real IP/domain, real action taken"
+      ],
+      "chain_narrative": "The code is making network requests to 'dc.70.lc' on port 443 using the 'https.request' API.",
+      "chain_score": 0.0,
+      "verdict": "MALICIOUS or SUSPICIOUS or BENIGN",
+      "confidence": 0.0
     },
     "legitimacy_check": {
-      "is_justified": true,
-      "reasoning": "The behavior is expected for a package named '@arkadium/eagle-user-client'",
-      "legitimacy_score": 0.7
-    },
-    "final_verification": {
-      "verdict": "BENIGN",
-      "calibrated_confidence": 0.7,
-      "explanation": "The package is benign as the behavior is expected for its purpose and no coherent attack chain is detected."
+      "is_justified": false,
+      "reasoning": "One sentence referencing the actual package name and behavior"
     }
   },
   "analysis_metadata": {
-    "model": "deepseek-coder-6.7b",
-    "stage": "v2.0"
+    "model": "deepseek-coder-6.7b-instruct",
+    "stage": "verification_v2.0",
+    "structural_routing": "review",
+    "structural_risk_score": 0.364,
+    "confirmed_signals_count": 1,
+    "has_structural_backup": true
   },
-  "created_at": "2025-12-23T23:44:58.323100"
+  "created_at": "2026-03-27T12:50:20.124140"
 }

@@ -1,0 +1,58 @@
+{
+  "package_name": "bebekair",
+  "version": "1.7.0",
+  "label": "malicious",
+  "semantic_summary": {
+    "num_behaviors": 1,
+    "risk_vector": [
+      "network_exfiltration"
+    ],
+    "behaviors": [
+      {
+        "category": "network_exfiltration",
+        "summary": "The code sends network data to a remote server.",
+        "details": "The code sends network data to a remote server using DNS resolution. The data is sent in chunks of 60 characters and the chunks are resolved as A records. The server IPs are hardcoded in the function calls.",
+        "confidence": 0.85,
+        "evidence_apis": [
+          "dns.resolve"
+        ],
+        "evidence_files": [
+          "index.js"
+        ],
+        "evidence_domains": [
+          "8.8.8.8",
+          "8.8.4.4"
+        ],
+        "evidence_commands": [],
+        "evidence_env_vars": []
+      }
+    ],
+    "analyst_note": ""
+  },
+  "verification_result": {
+    "chain_analysis": {
+      "is_coherent_chain": true,
+      "chain_narrative": "Obfuscation reads environment credentials, POSTs to an external domain, downloads remote script, executes it",
+      "chain_score": 0.71
+    },
+    "legitimacy_check": {
+      "is_justified": false,
+      "reasoning": "The detected behaviors do not match the package's stated purpose",
+      "legitimacy_score": 0.4
+    },
+    "final_verification": {
+      "verdict": "MALICIOUS",
+      "calibrated_confidence": 0.8,
+      "explanation": "The package's stated purpose and detected behaviors do not align, indicating a potential security risk"
+    }
+  },
+  "analysis_metadata": {
+    "model": "deepseek-coder-6.7b-instruct",
+    "stage": "verification_v2.0",
+    "structural_routing": "flag",
+    "structural_risk_score": 1.0,
+    "confirmed_signals_count": 4,
+    "has_structural_backup": true
+  },
+  "created_at": "2026-03-27T10:02:48.324737"
+}

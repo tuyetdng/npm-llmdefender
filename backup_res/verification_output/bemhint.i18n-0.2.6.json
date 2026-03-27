@@ -1,0 +1,51 @@
+{
+  "package_name": "bemhint.i18n",
+  "version": "0.2.6",
+  "label": "malicious",
+  "semantic_summary": {
+    "num_behaviors": 1,
+    "risk_vector": [
+      "suspicious_behavior"
+    ],
+    "behaviors": [
+      {
+        "category": "suspicious_behavior",
+        "summary": "The package contains no JavaScript files",
+        "details": "The package file structure indicates that it may contain no JavaScript files",
+        "confidence": 0.72,
+        "evidence_apis": [],
+        "evidence_files": [],
+        "evidence_domains": [],
+        "evidence_commands": [],
+        "evidence_env_vars": []
+      }
+    ],
+    "analyst_note": ""
+  },
+  "verification_result": {
+    "chain_analysis": {
+      "is_coherent_chain": false,
+      "chain_narrative": "None",
+      "chain_score": 0.34
+    },
+    "legitimacy_check": {
+      "is_justified": false,
+      "reasoning": "The package contains no JavaScript files, which may indicate that it may contain no JavaScript files",
+      "legitimacy_score": 0.72
+    },
+    "final_verification": {
+      "verdict": "SUSPICIOUS",
+      "calibrated_confidence": 0.4,
+      "explanation": "The package contains no JavaScript files, but the stated purpose of the package is security testing. The detected behaviors do not connect causally and the legitimacy check shows that the package's stated purpose is justified."
+    }
+  },
+  "analysis_metadata": {
+    "model": "deepseek-coder-6.7b-instruct",
+    "stage": "verification_v2.0",
+    "structural_routing": "review",
+    "structural_risk_score": 0.336,
+    "confirmed_signals_count": 1,
+    "has_structural_backup": true
+  },
+  "created_at": "2026-03-27T10:03:23.174529"
+}

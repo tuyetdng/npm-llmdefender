@@ -1,0 +1,79 @@
+{
+  "package_name": "aae-stream",
+  "version": "130.0.0",
+  "label": "malicious",
+  "semantic_summary": {
+    "num_behaviors": 2,
+    "risk_vector": [
+      "network_exfiltration",
+      "sensitive_data_collection"
+    ],
+    "behaviors": [
+      {
+        "category": "network_exfiltration",
+        "summary": "The package is downloading files from an external IP address (196.188.125.134) and sending them to an unknown IP address (192.81.209.195).",
+        "details": "The package uses the wget command to download files from an external IP address (196.188.125.134) and sends them to an unknown IP address (192.81.209.195). The files are then sent to the victim's machine using netcat.",
+        "confidence": 0.89,
+        "evidence_apis": [
+          "wget"
+        ],
+        "evidence_files": [],
+        "evidence_domains": [
+          "196.188.125.134"
+        ],
+        "evidence_commands": [
+          "nc"
+        ],
+        "evidence_env_vars": []
+      },
+      {
+        "category": "sensitive_data_collection",
+        "summary": "The package is collecting sensitive data from the victim's machine.",
+        "details": "The package is collecting sensitive data from the victim's machine by reading files and environment variables.",
+        "confidence": 0.9,
+        "evidence_apis": [],
+        "evidence_files": [
+          "package.json"
+        ],
+        "evidence_domains": [],
+        "evidence_commands": [],
+        "evidence_env_vars": [
+          "user",
+          "path",
+          "hostname",
+          "s3",
+          "home",
+          "var",
+          "meta"
+        ]
+      }
+    ],
+    "analyst_note": "that this analysis is based on the provided evidence and may not cover all potential malicious activities. Further analysis is recommended to confirm the malicious intent."
+  },
+  "verification_result": {
+    "chain_analysis": {
+      "is_coherent_chain": true,
+      "chain_narrative": "Obfuscation reads env credentials POST to external domain (strong chain), install hook downloads remote script executes it (strong chain), single HTTPS request with no credential access (isolated, weak chain)",
+      "chain_score": 0.71
+    },
+    "legitimacy_check": {
+      "is_justified": false,
+      "reasoning": "The package's stated purpose does not match the detected behaviors, suggesting that it may be performing malicious activities.",
+      "legitimacy_score": 0.4
+    },
+    "final_verification": {
+      "verdict": "MALICIOUS",
+      "calibrated_confidence": 0.8,
+      "explanation": "Based on the evidence and the analysis, the package appears to be performing malicious activities."
+    }
+  },
+  "analysis_metadata": {
+    "model": "deepseek-coder-6.7b-instruct",
+    "stage": "verification_v2.0",
+    "structural_routing": "flag",
+    "structural_risk_score": 1.0,
+    "confirmed_signals_count": 4,
+    "has_structural_backup": true
+  },
+  "created_at": "2026-03-27T09:59:05.585632"
+}

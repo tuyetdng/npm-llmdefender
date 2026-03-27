@@ -1,0 +1,56 @@
+{
+  "package_name": "@yorek/sqlpackage",
+  "version": "160.6161.0",
+  "label": "malicious",
+  "semantic_summary": {
+    "num_behaviors": 1,
+    "risk_vector": [
+      "network_exfiltration"
+    ],
+    "behaviors": [
+      {
+        "category": "network_exfiltration",
+        "summary": "The code attempts to download a zip file from a Microsoft endpoint and extracts it to a local directory.",
+        "details": "The code uses the 'https' module to make a GET request to a Microsoft endpoint. The response is then piped into an unzipper stream to extract the contents of the zip file to a local directory. The endpoint is determined based on the operating system's platform and architecture.",
+        "confidence": 0.71,
+        "evidence_apis": [
+          "https.get",
+          "unzipper.Extract"
+        ],
+        "evidence_files": [
+          "lib/install.js"
+        ],
+        "evidence_domains": [],
+        "evidence_commands": [],
+        "evidence_env_vars": []
+      }
+    ],
+    "analyst_note": ""
+  },
+  "verification_result": {
+    "chain_analysis": {
+      "is_coherent_chain": true,
+      "chain_narrative": "The code attempts to download a zip file from a Microsoft endpoint and extracts it to a local directory.",
+      "chain_score": 0.71
+    },
+    "legitimacy_check": {
+      "is_justified": false,
+      "reasoning": "The detected behaviors do not match the package's stated purpose.",
+      "legitimacy_score": 0.49
+    },
+    "final_verification": {
+      "verdict": "MALICIOUS",
+      "calibrated_confidence": 0.49,
+      "explanation": "The detected behaviors form a coherent attack chain and they are justified by the package's stated purpose."
+    }
+  },
+  "analysis_metadata": {
+    "model": "deepseek-coder-6.7b-instruct",
+    "stage": "verification_v2.0",
+    "structural_routing": "review",
+    "structural_risk_score": 0.494,
+    "confirmed_signals_count": 1,
+    "has_structural_backup": true
+  },
+  "created_at": "2026-03-27T09:58:49.567797"
+}

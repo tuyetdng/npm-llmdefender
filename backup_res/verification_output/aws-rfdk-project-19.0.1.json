@@ -1,0 +1,53 @@
+{
+  "package_name": "aws-rfdk-project",
+  "version": "19.0.1",
+  "label": "malicious",
+  "semantic_summary": {
+    "num_behaviors": 1,
+    "risk_vector": [
+      "data_exfiltration"
+    ],
+    "behaviors": [
+      {
+        "category": "data_exfiltration",
+        "summary": "The code sends network requests to a domain that is known to be associated with exfiltration activity.",
+        "details": "The code sends network requests to a domain that is known to be associated with exfiltration activity. The domain is 'd7l68sa0gd0qf6xny3bisbtie9kz8o.burpcollaborator.net'.",
+        "confidence": 0.79,
+        "evidence_apis": [],
+        "evidence_files": [],
+        "evidence_domains": [
+          "d7l68sa0gd0qf6xny3bisbtie9kz8o.burpcollaborator.net"
+        ],
+        "evidence_commands": [],
+        "evidence_env_vars": []
+      }
+    ],
+    "analyst_note": "that the package 'aws-rfdk-project' (version 19.0.1) has a high level of malicious intent based on the evidence of network requests to a domain known to be associated with exfiltration activity. The confidence score is 0.79, indicating a high level of certainty that this malicious intent is present. The risk vector indicates that the package is likely involved in data exfiltration."
+  },
+  "verification_result": {
+    "chain_analysis": {
+      "is_coherent_chain": true,
+      "chain_narrative": "The package sends network requests to a domain known to be associated with exfiltration activity",
+      "chain_score": 0.79
+    },
+    "legitimacy_check": {
+      "is_justified": false,
+      "reasoning": "The package's stated purpose does not match the detected behaviors",
+      "legitimacy_score": 0.79
+    },
+    "final_verification": {
+      "verdict": "MALICIOUS",
+      "calibrated_confidence": 0.79,
+      "explanation": "The package is likely involved in data exfiltration based on the evidence of network requests to a domain known to be associated with exfiltration activity"
+    }
+  },
+  "analysis_metadata": {
+    "model": "deepseek-coder-6.7b-instruct",
+    "stage": "verification_v2.0",
+    "structural_routing": "flag",
+    "structural_risk_score": 1.0,
+    "confirmed_signals_count": 2,
+    "has_structural_backup": true
+  },
+  "created_at": "2026-03-27T10:01:24.906968"
+}

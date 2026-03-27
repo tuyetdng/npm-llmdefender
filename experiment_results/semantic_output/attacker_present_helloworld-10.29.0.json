@@ -1,0 +1,33 @@
+{
+  "package_name": "attacker_present_helloworld",
+  "version": "10.29.0",
+  "label": "malicious",
+  "behaviors": [
+    {
+      "category": "unknown",
+      "summary": "The code appears to be sending user input to a remote server without any explicit API calls, files, or commands.",
+      "details": "The code is using the Fetch API to send user input to a remote server. However, the exact nature of the malicious action is unclear based on the provided code snippet.",
+      "confidence": 0.5,
+      "evidence_apis": [],
+      "evidence_files": [],
+      "evidence_domains": [
+        "https://npg66ok9u6yy2e7x48rezmhan1tshi57.oastify.com"
+      ],
+      "evidence_commands": [],
+      "evidence_env_vars": []
+    }
+  ],
+  "risk_vector": [
+    "unknown"
+  ],
+  "analyst_note": "This analysis suggests that the code may be involved in credential theft or sensitive data collection, but the exact nature of the malicious action is unclear. The code is using the Fetch API to send user input to a remote server, but no explicit API calls, files, or commands are identified. The confidence score is 0.5, indicating a moderate level of confidence in the malicious action.",
+  "analysis_metadata": {
+    "model": "deepseek-coder-6.7b-instruct",
+    "stage": "semantic_v2.0",
+    "routing": "skip",
+    "structural_risk_score": 0.13,
+    "confirmed_signals_count": 1,
+    "has_structural_backup": true
+  },
+  "created_at": "2026-03-26T21:59:48.009781"
+}

@@ -1,0 +1,67 @@
+{
+  "package_name": "commerce-clients",
+  "version": "999.9.9",
+  "label": "malicious",
+  "semantic_summary": {
+    "num_behaviors": 2,
+    "risk_vector": [
+      "dynamic_code_execution",
+      "version_containing_flated_segment"
+    ],
+    "behaviors": [
+      {
+        "category": "dynamic_code_execution",
+        "summary": "The code execution is performed dynamically using eval function in install.js file.",
+        "details": "The code execution is performed dynamically using eval function in install.js file. The code is decrypted using AES-256-ctr algorithm and then evaluated.",
+        "confidence": 0.82,
+        "evidence_apis": [],
+        "evidence_files": [
+          "install.js"
+        ],
+        "evidence_domains": [],
+        "evidence_commands": [],
+        "evidence_env_vars": []
+      },
+      {
+        "category": "version_containing_flated_segment",
+        "summary": "The version number contains inflated segment (999).",
+        "details": "The version number contains inflated segment (999) in package.json file.",
+        "confidence": 0.77,
+        "evidence_apis": [],
+        "evidence_files": [
+          "package.json"
+        ],
+        "evidence_domains": [],
+        "evidence_commands": [],
+        "evidence_env_vars": []
+      }
+    ],
+    "analyst_note": "This JSON output indicates that the package has dynamic code execution and version containing inflated segment behavior. The confidence scores for these behaviors are 0.82 and 0.77 respectively. The details of these behaviors are also provided in the JSON output."
+  },
+  "verification_result": {
+    "chain_analysis": {
+      "is_coherent_chain": true,
+      "chain_narrative": "Dynamic code execution is performed using eval function in install.js file and version containing inflated segment behavior is present",
+      "chain_score": 0.77
+    },
+    "legitimacy_check": {
+      "is_justified": false,
+      "reasoning": "The package's stated purpose is for ethical hacking purposes only",
+      "legitimacy_score": 0.71
+    },
+    "final_verification": {
+      "verdict": "MALICIOUS",
+      "calibrated_confidence": 0.74,
+      "explanation": "The package exhibits dynamic code execution and version containing inflated segment behavior, which are not justified by the package's stated purpose"
+    }
+  },
+  "analysis_metadata": {
+    "model": "deepseek-coder-6.7b-instruct",
+    "stage": "verification_v2.0",
+    "structural_routing": "flag",
+    "structural_risk_score": 0.77,
+    "confirmed_signals_count": 2,
+    "has_structural_backup": true
+  },
+  "created_at": "2026-03-27T10:08:38.356501"
+}

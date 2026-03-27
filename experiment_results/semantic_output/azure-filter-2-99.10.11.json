@@ -1,0 +1,67 @@
+{
+  "package_name": "azure-filter-2",
+  "version": "99.10.11",
+  "label": "malicious",
+  "behaviors": [
+    {
+      "category": "network_exfiltration",
+      "summary": "The code is making network requests to a specific hostname (425a2.rt11.ml) in the HTTPS POST request.",
+      "details": "The code is making network requests to a specific hostname (425a2.rt11.ml) in the HTTPS POST request. The POST request contains a JSON payload with sensitive data.",
+      "confidence": 0.9,
+      "evidence_apis": [
+        "https.request"
+      ],
+      "evidence_files": [],
+      "evidence_domains": [
+        "425a2.rt11.ml"
+      ],
+      "evidence_commands": [],
+      "evidence_env_vars": []
+    },
+    {
+      "category": "sensitive_data_collection",
+      "summary": "The code is reading sensitive data from the filesystem.",
+      "details": "The code is reading sensitive data from the filesystem. The evidence includes reading files from the paths ['C:\\', 'D:\\', '/', '/home'].",
+      "confidence": 0.9,
+      "evidence_apis": [
+        "fs.readdirSync"
+      ],
+      "evidence_files": [
+        "C:\\",
+        "D:\\",
+        "/",
+        "/home"
+      ],
+      "evidence_domains": [],
+      "evidence_commands": [],
+      "evidence_env_vars": []
+    },
+    {
+      "category": "sensitive_data_collection",
+      "summary": "The code is reading sensitive data from the network interfaces.",
+      "details": "The code is reading sensitive data from the network interfaces. The evidence includes reading IP addresses from the network interfaces.",
+      "confidence": 0.9,
+      "evidence_apis": [
+        "os.networkInterfaces"
+      ],
+      "evidence_files": [],
+      "evidence_domains": [],
+      "evidence_commands": [],
+      "evidence_env_vars": []
+    }
+  ],
+  "risk_vector": [
+    "network_exfiltration",
+    "sensitive_data_collection"
+  ],
+  "analyst_note": "that this analysis is based on the provided code and may not cover all potential malicious behaviors. Further analysis and testing are recommended to confirm the behavior.",
+  "analysis_metadata": {
+    "model": "deepseek-coder-6.7b-instruct",
+    "stage": "semantic_v2.0",
+    "routing": "review",
+    "structural_risk_score": 0.494,
+    "confirmed_signals_count": 1,
+    "has_structural_backup": true
+  },
+  "created_at": "2026-03-26T22:01:01.445129"
+}

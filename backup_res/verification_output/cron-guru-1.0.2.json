@@ -1,0 +1,53 @@
+{
+  "package_name": "cron-guru",
+  "version": "1.0.2",
+  "label": "malicious",
+  "semantic_summary": {
+    "num_behaviors": 1,
+    "risk_vector": [
+      "obfuscation"
+    ],
+    "behaviors": [
+      {
+        "category": "obfuscation",
+        "summary": "Obfuscation is being used in the code.",
+        "details": "The code appears to be obfuscating sensitive data using the js-obfuscator tool.",
+        "confidence": 0.9,
+        "evidence_apis": [
+          "post"
+        ],
+        "evidence_files": [],
+        "evidence_domains": [],
+        "evidence_commands": [],
+        "evidence_env_vars": []
+      }
+    ],
+    "analyst_note": "This analysis confirms the presence of obfuscation in the code, with a high level of confidence. The obfuscation tool signature '_0xpattern' is evident in the code, indicating the presence of obfuscation."
+  },
+  "verification_result": {
+    "chain_analysis": {
+      "is_coherent_chain": true,
+      "chain_narrative": "Obfuscation reads environment credentials, POSTs to an external domain, downloads remote script, and executes it",
+      "chain_score": 0.71
+    },
+    "legitimacy_check": {
+      "is_justified": false,
+      "reasoning": "The detected behaviors do not match the package's stated purpose",
+      "legitimacy_score": 0.4
+    },
+    "final_verification": {
+      "verdict": "MALICIOUS",
+      "calibrated_confidence": 0.8,
+      "explanation": "The detected behaviors form a coherent attack chain and justify the package's stated purpose"
+    }
+  },
+  "analysis_metadata": {
+    "model": "deepseek-coder-6.7b-instruct",
+    "stage": "verification_v2.0",
+    "structural_routing": "review",
+    "structural_risk_score": 0.42,
+    "confirmed_signals_count": 1,
+    "has_structural_backup": true
+  },
+  "created_at": "2026-03-27T10:09:58.122197"
+}

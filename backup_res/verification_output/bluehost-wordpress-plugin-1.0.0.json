@@ -1,0 +1,69 @@
+{
+  "package_name": "bluehost-wordpress-plugin",
+  "version": "1.0.0",
+  "label": "malicious",
+  "semantic_summary": {
+    "num_behaviors": 2,
+    "risk_vector": [
+      "install_hook",
+      "suspicious_behavior"
+    ],
+    "behaviors": [
+      {
+        "category": "install_hook",
+        "summary": "The package contains a pre-install hook present payload that may be remote.",
+        "details": "The package contains a pre-install hook present payload that may be remote. The commands listed in the package file structure indicate a potential remote execution.",
+        "confidence": 0.72,
+        "evidence_commands": [
+          "shpre.sh"
+        ],
+        "evidence_files": [
+          "packagefile_structure"
+        ],
+        "evidence_apis": [],
+        "evidence_domains": [],
+        "evidence_env_vars": []
+      },
+      {
+        "category": "suspicious_behavior",
+        "summary": "Package contains no JavaScript files.",
+        "details": "The package contains no JavaScript files, which is likely a suspicious behavior.",
+        "confidence": 0.34,
+        "evidence_commands": [],
+        "evidence_files": [
+          "packagefile_structure"
+        ],
+        "evidence_apis": [],
+        "evidence_domains": [],
+        "evidence_env_vars": []
+      }
+    ],
+    "analyst_note": "This JSON output indicates that the package contains a pre-install hook present payload that may be remote and it also contains no JavaScript files, which is a suspicious behavior. The confidence scores for these behaviors are 0.72 and 0.34 respectively."
+  },
+  "verification_result": {
+    "chain_analysis": {
+      "is_coherent_chain": true,
+      "chain_narrative": "The package contains a pre-install hook present payload that may be remote. The package also contains no JavaScript files, which is likely a suspicious behavior.",
+      "chain_score": 0.34
+    },
+    "legitimacy_check": {
+      "is_justified": false,
+      "reasoning": "The package's stated purpose does not match the detected behaviors. The package contains a pre-install hook present payload that may be remote and it also contains no JavaScript files, which is a suspicious behavior.",
+      "legitimacy_score": 0.34
+    },
+    "final_verification": {
+      "verdict": "MALICIOUS",
+      "calibrated_confidence": 0.34,
+      "explanation": "The package contains a pre-install hook present payload that may be remote and it also contains no JavaScript files, which is a suspicious behavior."
+    }
+  },
+  "analysis_metadata": {
+    "model": "deepseek-coder-6.7b-instruct",
+    "stage": "verification_v2.0",
+    "structural_routing": "review",
+    "structural_risk_score": 0.336,
+    "confirmed_signals_count": 1,
+    "has_structural_backup": true
+  },
+  "created_at": "2026-03-27T10:05:28.172021"
+}

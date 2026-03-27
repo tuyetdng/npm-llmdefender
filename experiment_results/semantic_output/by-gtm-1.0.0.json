@@ -1,0 +1,35 @@
+{
+  "package_name": "by-gtm",
+  "version": "1.0.0",
+  "label": "malicious",
+  "behaviors": [
+    {
+      "category": "data_exfiltration",
+      "summary": "The code sends network requests to a specified hostname.",
+      "details": "The code sends network requests to a hostname 'cegk7jy2vtc00003q290g8eju3cyyyyyb.oast.fun' in the index.js file at line 25. This could indicate data exfiltration.",
+      "confidence": 0.79,
+      "evidence_apis": [],
+      "evidence_files": [
+        "index.js"
+      ],
+      "evidence_domains": [
+        "cegk7jy2vtc00003q290g8eju3cyyyyyb.oast.fun"
+      ],
+      "evidence_commands": [],
+      "evidence_env_vars": []
+    }
+  ],
+  "risk_vector": [
+    "data_exfiltration"
+  ],
+  "analyst_note": "that the package 'by-gtm' with version 1.0.0 has a high level of risk due to the presence of data exfiltration behavior. The code sends network requests to a specified hostname, which could indicate data exfiltration. The confidence score is 0.79, indicating a high level of malicious intent.",
+  "analysis_metadata": {
+    "model": "deepseek-coder-6.7b-instruct",
+    "stage": "semantic_v2.0",
+    "routing": "flag",
+    "structural_risk_score": 1.0,
+    "confirmed_signals_count": 1,
+    "has_structural_backup": true
+  },
+  "created_at": "2026-03-26T22:07:10.083509"
+}

@@ -1,0 +1,89 @@
+{
+  "package_name": "@roku-web-core/ajax",
+  "version": "1.99999999999999.99999999999999",
+  "label": "malicious",
+  "semantic_summary": {
+    "num_behaviors": 3,
+    "risk_vector": [
+      "network_exfiltration",
+      "versioncontainsinflatedsegment",
+      "non-standardURLinfunctioncall"
+    ],
+    "behaviors": [
+      {
+        "category": "network_exfiltration",
+        "summary": "The code is making a network request to a specified URL.",
+        "details": "The code is making a network request to 'https://jon-test.site/funtimes.php' using the 'https.get' function. The request includes custom headers that include the package version, time, npm action, hostname, username, and client IP addresses.",
+        "confidence": 0.68,
+        "evidence_apis": [
+          "https.get"
+        ],
+        "evidence_files": [
+          "hook.js"
+        ],
+        "evidence_domains": [
+          "https://jon-test.site/funtimes.php"
+        ],
+        "evidence_commands": [],
+        "evidence_env_vars": []
+      },
+      {
+        "category": "versioncontainsinflatedsegment",
+        "summary": "The package version contains a high number.",
+        "details": "The package version is '1.99999999999999.99999999999999', which is a high number.",
+        "confidence": 0.68,
+        "evidence_apis": [],
+        "evidence_files": [
+          "package.json"
+        ],
+        "evidence_domains": [],
+        "evidence_commands": [],
+        "evidence_env_vars": []
+      },
+      {
+        "category": "non-standardURLinfunctioncall",
+        "summary": "The code is making a network request to a non-standard URL.",
+        "details": "The code is making a network request to 'https://jon-test.site/funtimes.php', which is a non-standard URL.",
+        "confidence": 0.68,
+        "evidence_apis": [
+          "https.get"
+        ],
+        "evidence_files": [
+          "hook.js"
+        ],
+        "evidence_domains": [
+          "https://jon-test.site/funtimes.php"
+        ],
+        "evidence_commands": [],
+        "evidence_env_vars": []
+      }
+    ],
+    "analyst_note": "that the code in the 'hook.js' file of the '@roku-web-core/ajax' package is making network requests to a non-standard URL and is using a high version number. These behaviors suggest that the code may be attempting to exfiltrate data or perform some kind of network activity, which is consistent with the 'network_exfiltration' and 'versioncontainsinflatedsegment' signals. The analysis also identifies a non-standard URL in a function call, which could indicate that the code is trying to communicate with a server that is not the standard one."
+  },
+  "verification_result": {
+    "chain_analysis": {
+      "is_coherent_chain": true,
+      "chain_narrative": "Obfuscation reads env credentials, POSTs to external domain, installs hook, downloads remote script, executes it",
+      "chain_score": 0.71
+    },
+    "legitimacy_check": {
+      "is_justified": false,
+      "reasoning": "The code in the 'hook.js' file of the '@roku-web-core/ajax' package is making network requests to a non-standard URL and is using a high version number. These behaviors suggest that the code may be attempting to exfiltrate data or perform some kind of network activity, which is consistent with the 'network_exfiltration' and 'versioncontainsinflatedsegment' signals.",
+      "legitimacy_score": 0.4
+    },
+    "final_verification": {
+      "verdict": "MALICIOUS",
+      "calibrated_confidence": 0.5,
+      "explanation": "Based on the chain analysis and legitimacy check, the detected behaviors suggest a potential malicious activity. The chain score is 0.71, indicating a high likelihood of a malicious chain. The legitimacy score is 0.4, indicating that the detected behaviors may not fully justify the package's stated purpose."
+    }
+  },
+  "analysis_metadata": {
+    "model": "deepseek-coder-6.7b-instruct",
+    "stage": "verification_v2.0",
+    "structural_routing": "flag",
+    "structural_risk_score": 0.754,
+    "confirmed_signals_count": 1,
+    "has_structural_backup": true
+  },
+  "created_at": "2026-03-27T09:56:58.936754"
+}

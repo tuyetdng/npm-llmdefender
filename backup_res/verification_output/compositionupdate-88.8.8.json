@@ -1,0 +1,57 @@
+{
+  "package_name": "compositionupdate",
+  "version": "88.8.8",
+  "label": "malicious",
+  "semantic_summary": {
+    "num_behaviors": 1,
+    "risk_vector": [
+      "data_exfiltration"
+    ],
+    "behaviors": [
+      {
+        "category": "data_exfiltration",
+        "summary": "The code sends network requests to a known exfiltration collector domain.",
+        "details": "The code makes a network request to a domain known to exfiltration collectors. The request sends tracking data in the POST body.",
+        "confidence": 0.79,
+        "evidence_apis": [
+          "https.request"
+        ],
+        "evidence_files": [
+          "index.js"
+        ],
+        "evidence_domains": [
+          "oiaqaquemkde49kzmhr5ot4uhlnbb0.burpcollaborator.net"
+        ],
+        "evidence_commands": [],
+        "evidence_env_vars": []
+      }
+    ],
+    "analyst_note": "that the package is likely involved in data exfiltration. The evidence suggests that the package is making network requests to a known exfiltration collector domain, which is a common practice for data exfiltration. The confidence score of 0.79 indicates a high level of certainty that this behavior is malicious."
+  },
+  "verification_result": {
+    "chain_analysis": {
+      "is_coherent_chain": true,
+      "chain_narrative": "The package sends network requests to a known exfiltration collector domain",
+      "chain_score": 0.79
+    },
+    "legitimacy_check": {
+      "is_justified": false,
+      "reasoning": "The evidence suggests that the package is making network requests to a known exfiltration collector domain, which is a common practice for data exfiltration",
+      "legitimacy_score": 0.79
+    },
+    "final_verification": {
+      "verdict": "MALICIOUS",
+      "calibrated_confidence": 0.79,
+      "explanation": "The package is likely involved in data exfiltration based on the detected behaviors"
+    }
+  },
+  "analysis_metadata": {
+    "model": "deepseek-coder-6.7b-instruct",
+    "stage": "verification_v2.0",
+    "structural_routing": "flag",
+    "structural_risk_score": 1.0,
+    "confirmed_signals_count": 2,
+    "has_structural_backup": true
+  },
+  "created_at": "2026-03-27T10:09:07.849876"
+}

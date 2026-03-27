@@ -1,0 +1,55 @@
+{
+  "package_name": "@tide-web-apps/bert2",
+  "version": "3.2.0",
+  "label": "malicious",
+  "semantic_summary": {
+    "num_behaviors": 1,
+    "risk_vector": [
+      "data_exfiltration"
+    ],
+    "behaviors": [
+      {
+        "category": "data_exfiltration",
+        "summary": "The package sends data to a known exfiltration collector domain.",
+        "details": "The package uses ping commands to send data to a domain that appears to be a part of a known exfiltration collector network.",
+        "confidence": 0.95,
+        "evidence_apis": [],
+        "evidence_files": [],
+        "evidence_domains": [
+          "$USER.$HOST.lpetgyzx2ghe7bqjh666m2b0trzin7.burpcollaborator.net"
+        ],
+        "evidence_commands": [
+          "ping"
+        ],
+        "evidence_env_vars": []
+      }
+    ],
+    "analyst_note": "that this is a preliminary analysis and more detailed investigation is recommended."
+  },
+  "verification_result": {
+    "chain_analysis": {
+      "is_coherent_chain": true,
+      "chain_narrative": "Obfuscation reads env credentials, POST to external domain, install hook downloads remote script, executes it",
+      "chain_score": 0.71
+    },
+    "legitimacy_check": {
+      "is_justified": false,
+      "reasoning": "The detected behaviors do not match the package's stated purpose",
+      "legitimacy_score": 0.4
+    },
+    "final_verification": {
+      "verdict": "MALICIOUS",
+      "calibrated_confidence": 0.8,
+      "explanation": "The detected behaviors form a coherent attack chain and they are justified by the package's stated purpose"
+    }
+  },
+  "analysis_metadata": {
+    "model": "deepseek-coder-6.7b-instruct",
+    "stage": "verification_v2.0",
+    "structural_routing": "flag",
+    "structural_risk_score": 1.0,
+    "confirmed_signals_count": 2,
+    "has_structural_backup": true
+  },
+  "created_at": "2026-03-27T10:03:56.195023"
+}

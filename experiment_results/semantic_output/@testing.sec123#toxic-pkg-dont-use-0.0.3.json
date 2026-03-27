@@ -1,0 +1,35 @@
+{
+  "package_name": "@testing.sec123/toxic-pkg-dont-use",
+  "version": "0.0.3",
+  "label": "malicious",
+  "behaviors": [
+    {
+      "category": "network_exfiltration",
+      "summary": "The package sends data to an external server using HTTPS POST request.",
+      "details": "The package sends data to 'amaext.tools' on path '/' using HTTPS POST request. The data is base64 encoded and sent as part of the request body.",
+      "confidence": 0.78,
+      "evidence_apis": [
+        "https.request"
+      ],
+      "evidence_files": [],
+      "evidence_domains": [
+        "amaext.tools"
+      ],
+      "evidence_commands": [],
+      "evidence_env_vars": []
+    }
+  ],
+  "risk_vector": [
+    "network_exfiltration"
+  ],
+  "analyst_note": "",
+  "analysis_metadata": {
+    "model": "deepseek-coder-6.7b-instruct",
+    "stage": "semantic_v2.0",
+    "routing": "review",
+    "structural_risk_score": 0.364,
+    "confirmed_signals_count": 1,
+    "has_structural_backup": true
+  },
+  "created_at": "2026-03-26T21:55:50.817095"
+}

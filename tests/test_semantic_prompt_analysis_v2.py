@@ -329,6 +329,16 @@ def run_semantic_analysis(
                 parse_success=True,
                 analyst_note=analyst_note,
             )
+            
+            try:
+                semantic.save_parsed_output(
+                    parsed_data=parsed,
+                    version_tag="semantic_v2.0",
+                    analyst_note=analyst_note,
+                )
+            except Exception as e:
+                logger.warning(f"save_parsed_output failed for {package.package_name}: {e}")
+            
             behaviors = parsed.get("behaviors", [])
             print(f"  Success — {len(behaviors)} behavior(s)")
             if behaviors:

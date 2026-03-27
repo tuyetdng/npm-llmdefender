@@ -1,0 +1,55 @@
+{
+  "package_name": "binary-bot",
+  "version": "5.3.2",
+  "label": "malicious",
+  "semantic_summary": {
+    "num_behaviors": 1,
+    "risk_vector": [
+      "network_exfiltration"
+    ],
+    "behaviors": [
+      {
+        "category": "network_exfiltration",
+        "summary": "The code sends network requests to a specified hostname.",
+        "details": "The code sends network requests to a hostname 'binary-bot-ccmwya12vtc0000f7ne0ggkqxfryyyyyb.mybeautifuliframe.com' using HTTPS POST method.",
+        "confidence": 0.71,
+        "evidence_apis": [
+          "https.request"
+        ],
+        "evidence_files": [],
+        "evidence_domains": [
+          "binary-bot-ccmwya12vtc0000f7ne0ggkqxfryyyyyb.mybeautifuliframe.com"
+        ],
+        "evidence_commands": [],
+        "evidence_env_vars": []
+      }
+    ],
+    "analyst_note": ""
+  },
+  "verification_result": {
+    "chain_analysis": {
+      "is_coherent_chain": true,
+      "chain_narrative": "The detected behavior is a network exfiltration attack chain. The package sends network requests to a specified hostname using HTTPS POST method.",
+      "chain_score": 0.71
+    },
+    "legitimacy_check": {
+      "is_justified": false,
+      "reasoning": "The detected behavior does not match the package's stated purpose. The package is a bug bounty research tool and it should not be sending network requests to a specified hostname.",
+      "legitimacy_score": 0.0
+    },
+    "final_verification": {
+      "verdict": "MALICIOUS",
+      "calibrated_confidence": 0.71,
+      "explanation": "The package is a legitimate binary-bot package and it should not be sending network requests to a specified hostname."
+    }
+  },
+  "analysis_metadata": {
+    "model": "deepseek-coder-6.7b-instruct",
+    "stage": "verification_v2.0",
+    "structural_routing": "review",
+    "structural_risk_score": 0.494,
+    "confirmed_signals_count": 1,
+    "has_structural_backup": true
+  },
+  "created_at": "2026-03-27T10:04:24.013064"
+}

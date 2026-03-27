@@ -1,0 +1,38 @@
+{
+  "package_name": "bleeding-edge-css",
+  "version": "2.2.2",
+  "label": "malicious",
+  "behaviors": [
+    {
+      "category": "network_exfiltration",
+      "summary": "The code is connecting to an external IP address (193.105.207.70) on port 9001 and piping data to it.",
+      "details": "The code is making use of the 'net' and 'child_process' modules to establish a connection to an external IP address (193.105.207.70) on port 9001 and then piping data to it. The 'child_process.spawn()' function is used with a dynamic argument.",
+      "confidence": 0.83,
+      "evidence_apis": [
+        "net.Socket.connect",
+        "child_process.spawn"
+      ],
+      "evidence_files": [
+        "index.js"
+      ],
+      "evidence_domains": [
+        "193.105.207.70"
+      ],
+      "evidence_commands": [],
+      "evidence_env_vars": []
+    }
+  ],
+  "risk_vector": [
+    "network_exfiltration"
+  ],
+  "analyst_note": "This JSON object indicates that the package 'bleeding-edge-css' has malicious intent based on the evidence provided. The code is making use of the 'net' and 'child_process' modules to establish a connection to an external IP address (193.105.207.70) on port 9001 and then piping data to it. The 'child_process.spawn()' function is used with a dynamic argument, indicating that the malicious intent is to exfiltrate sensitive data. The 'risk_vector' field indicates that the malicious intent is network exfiltration.",
+  "analysis_metadata": {
+    "model": "deepseek-coder-6.7b-instruct",
+    "stage": "semantic_v2.0",
+    "routing": "flag",
+    "structural_risk_score": 1.0,
+    "confirmed_signals_count": 1,
+    "has_structural_backup": true
+  },
+  "created_at": "2026-03-26T22:06:16.451721"
+}

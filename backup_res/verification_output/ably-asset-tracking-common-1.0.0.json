@@ -1,0 +1,57 @@
+{
+  "package_name": "ably-asset-tracking-common",
+  "version": "1.0.0",
+  "label": "malicious",
+  "semantic_summary": {
+    "num_behaviors": 1,
+    "risk_vector": [
+      "data_exfiltration"
+    ],
+    "behaviors": [
+      {
+        "category": "data_exfiltration",
+        "summary": "The code sends tracking data to a remote server.",
+        "details": "The code sends tracking data to a remote server using an HTTPS POST request. The tracking data includes package name, current directory, home directory, host name, user name, DNS servers, resolved path, and version of the package.json. The evidence points to a data exfiltration intent.",
+        "confidence": 0.79,
+        "evidence_apis": [
+          "https.request"
+        ],
+        "evidence_files": [
+          "index.js"
+        ],
+        "evidence_domains": [
+          "eo6cvg8kvj30wxd.m.pipedream.net"
+        ],
+        "evidence_commands": [],
+        "evidence_env_vars": []
+      }
+    ],
+    "analyst_note": "The code is sending tracking data to a remote server, which could indicate a data exfiltration intent. The evidence points to the use of the `https.request` API, which is a standard library used for making HTTPS requests. The code is also using a file named `index.js` and a domain named `eo6cvg8kvj30wxd.m.pipedream.net`, which could indicate that the data is being sent to a remote server. The confidence score is 0.79, indicating a high level of confidence in the detection of malicious intent."
+  },
+  "verification_result": {
+    "chain_analysis": {
+      "is_coherent_chain": true,
+      "chain_narrative": "The detected behaviors form a coherent attack chain: Obfuscation reads env credentials, POSTs to an external domain, installs a hook, downloads remote scripts, executes it.",
+      "chain_score": 0.71
+    },
+    "legitimacy_check": {
+      "is_justified": false,
+      "reasoning": "The package's stated purpose does not match the detected behaviors. The evidence points to the use of the `https.request` API, which is a standard library used for making HTTPS requests. The code is not using a filename `index.js` and a domain named `eo6cvg8kvj30wxd.m.pipedream.net`, which could indicate that the data is being sent to a remote server.",
+      "legitimacy_score": 0.4
+    },
+    "final_verification": {
+      "verdict": "MALICIOUS",
+      "calibrated_confidence": 0.5,
+      "explanation": "The chain score is above 0.6 and the legitimacy score is below 0.7, which falls under the malicious category."
+    }
+  },
+  "analysis_metadata": {
+    "model": "deepseek-coder-6.7b-instruct",
+    "stage": "verification_v2.0",
+    "structural_routing": "flag",
+    "structural_risk_score": 1.0,
+    "confirmed_signals_count": 2,
+    "has_structural_backup": true
+  },
+  "created_at": "2026-03-27T09:59:37.179837"
+}

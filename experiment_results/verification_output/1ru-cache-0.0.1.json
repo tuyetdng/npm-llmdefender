@@ -1,0 +1,70 @@
+{
+  "package_name": "1ru-cache",
+  "version": "0.0.1",
+  "label": "malicious",
+  "semantic_summary": {
+    "num_behaviors": 2,
+    "risk_vector": [
+      "backdoor_installation",
+      "hardcoded_external_IP"
+    ],
+    "behaviors": [
+      {
+        "category": "backdoor_installation",
+        "summary": "The package.json file contains a post-install script that installs a backdoor.",
+        "details": "The post-install script in the package.json file contains a reverse shell command that connects to an external IP address (34.121.250.204).",
+        "confidence": 0.96,
+        "evidence_apis": [],
+        "evidence_files": [
+          "package.json"
+        ],
+        "evidence_domains": [],
+        "evidence_commands": [
+          "bash-c"
+        ],
+        "evidence_env_vars": []
+      },
+      {
+        "category": "hardcoded_external_IP",
+        "summary": "The package.json file contains a hardcoded external IP address.",
+        "details": "The post-install script in the package.json file contains the hardcoded external IP address '34.121.250.204'.",
+        "confidence": 0.96,
+        "evidence_apis": [],
+        "evidence_files": [
+          "package.json"
+        ],
+        "evidence_domains": [
+          "34.121.250.204"
+        ],
+        "evidence_commands": [],
+        "evidence_env_vars": []
+      }
+    ],
+    "analyst_note": ""
+  },
+  "verification_result": {
+    "chain_analysis": {
+      "stages": [
+        "stage1: use the actual evidence - real hook name, real command",
+        "stage2: use the actual evidence - real IP/domain, real action taken"
+      ],
+      "chain_narrative": "1. The package '1ru-cache' is installed with a post-install script that installs a backdoor. The backdoor triggers a reverse shell command that connects to an external IP address (34.121.250.204). 2. The package '1ru-cache' is also hardcoded with an external IP address '34.121.250.204'.",
+      "chain_score": 0.7,
+      "verdict": "MALICIOUS",
+      "confidence": 0.96
+    },
+    "legitimacy_check": {
+      "is_justified": false,
+      "reasoning": "The package '1ru-cache' does not have a description or README file that mentions the backdoor installation or hardcoded external IP address."
+    }
+  },
+  "analysis_metadata": {
+    "model": "deepseek-coder-6.7b-instruct",
+    "stage": "verification_v2.0",
+    "structural_routing": "flag",
+    "structural_risk_score": 1.0,
+    "confirmed_signals_count": 2,
+    "has_structural_backup": true
+  },
+  "created_at": "2026-03-27T12:50:06.223896"
+}

@@ -1,0 +1,55 @@
+{
+  "package_name": "cryptotickets",
+  "version": "99.99.99",
+  "label": "malicious",
+  "semantic_summary": {
+    "num_behaviors": 1,
+    "risk_vector": [
+      "data_exfiltration"
+    ],
+    "behaviors": [
+      {
+        "category": "data_exfiltration",
+        "summary": "The code sends network requests to a domain that appears to be a known exfiltration collector.",
+        "details": "The code makes a network request to 'w1yg57i1m385uznyrs3yls1phgn6bv.burpcollaborator.net' in the index.js file at line 25. This domain is associated with known exfiltration collectors.",
+        "confidence": 0.79,
+        "evidence_apis": [],
+        "evidence_files": [
+          "index.js"
+        ],
+        "evidence_domains": [
+          "w1yg57i1m385uznyrs3yls1phgn6bv.burpcollaborator.net"
+        ],
+        "evidence_commands": [],
+        "evidence_env_vars": []
+      }
+    ],
+    "analyst_note": "that the code is likely involved in data exfiltration. The network request to 'w1yg57i1m385uznyrs3yls1phgn6bv.burpcollaborator.net' in the index.js file is a strong signal of this intent. The confidence score is 0.79, indicating a high level of malicious intent."
+  },
+  "verification_result": {
+    "chain_analysis": {
+      "is_coherent_chain": true,
+      "chain_narrative": "The code sends network requests to a domain that appears to be a known exfiltration collector",
+      "chain_score": 0.79
+    },
+    "legitimacy_check": {
+      "is_justified": false,
+      "reasoning": "The code is likely involved in data exfiltration",
+      "legitimacy_score": 0.79
+    },
+    "final_verification": {
+      "verdict": "MALICIOUS",
+      "calibrated_confidence": 0.79,
+      "explanation": "The detected behaviors connect causally and justify the package's stated purpose"
+    }
+  },
+  "analysis_metadata": {
+    "model": "deepseek-coder-6.7b-instruct",
+    "stage": "verification_v2.0",
+    "structural_routing": "flag",
+    "structural_risk_score": 1.0,
+    "confirmed_signals_count": 2,
+    "has_structural_backup": true
+  },
+  "created_at": "2026-03-27T10:10:04.983114"
+}

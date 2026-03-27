@@ -1,0 +1,55 @@
+{
+  "package_name": "bjabaiheiiyuuui",
+  "version": "5.0.0",
+  "label": "malicious",
+  "semantic_summary": {
+    "num_behaviors": 1,
+    "risk_vector": [
+      "data_exfiltration"
+    ],
+    "behaviors": [
+      {
+        "category": "data_exfiltration",
+        "summary": "The code sends network requests to a specified hostname.",
+        "details": "The code sends network requests to a hostname 'ccjjr4r2vtc0000ta0ggggjk9uayyyyyr.oast.fun' in the index.js file at line 25 and 4.",
+        "confidence": 0.79,
+        "evidence_apis": [],
+        "evidence_files": [
+          "index.js"
+        ],
+        "evidence_domains": [
+          "ccjjr4r2vtc0000ta0ggggjk9uayyyyyr.oast.fun"
+        ],
+        "evidence_commands": [],
+        "evidence_env_vars": []
+      }
+    ],
+    "analyst_note": "that the package is likely involved in data exfiltration. The code sends network requests to a specified hostname, indicating that it may be involved in data exfiltration. The confidence score is 0.79, indicating a high level of confidence in the detection. The evidence points to the use of the 'https' module in the code, which is a standard library and should not be considered malicious without additional context."
+  },
+  "verification_result": {
+    "chain_analysis": {
+      "is_coherent_chain": true,
+      "chain_narrative": "The package sends network requests to a specified hostname, potentially involved in data exfiltration",
+      "chain_score": 0.79
+    },
+    "legitimacy_check": {
+      "is_justified": false,
+      "reasoning": "The package's stated purpose does not match the detected behaviors, indicating that it might be involved in data exfiltration",
+      "legitimacy_score": 0.79
+    },
+    "final_verification": {
+      "verdict": "MALICIOUS",
+      "calibrated_confidence": 0.79,
+      "explanation": "The package is likely involved in data exfiltration based on the detected behaviors and the package's stated purpose"
+    }
+  },
+  "analysis_metadata": {
+    "model": "deepseek-coder-6.7b-instruct",
+    "stage": "verification_v2.0",
+    "structural_routing": "flag",
+    "structural_risk_score": 1.0,
+    "confirmed_signals_count": 2,
+    "has_structural_backup": true
+  },
+  "created_at": "2026-03-27T10:05:04.475833"
+}

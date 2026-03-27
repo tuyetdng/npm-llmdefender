@@ -1,0 +1,33 @@
+{
+  "package_name": "@playgami/portal-logs",
+  "version": "2.99.99",
+  "label": "malicious",
+  "behaviors": [
+    {
+      "category": "install_hook",
+      "summary": "Package contains no JavaScript files but install hook present",
+      "details": "Package file structure",
+      "confidence": 0.72,
+      "evidence_apis": [],
+      "evidence_files": [],
+      "evidence_domains": [],
+      "evidence_commands": [
+        "./pre.sh"
+      ],
+      "evidence_env_vars": []
+    }
+  ],
+  "risk_vector": [
+    "install_hook"
+  ],
+  "analyst_note": "This JSON object represents the analysis of the package. The behavior category is \"install_hook\", which indicates that the package contains no JavaScript files but an install hook present. The confidence score is 0.72, indicating high confidence that this behavior is malicious. The evidence commands include \"./pre.sh\", which is the install hook command. The risk vector includes \"install_hook\", indicating that this package has a potential for install hook-based attacks.",
+  "analysis_metadata": {
+    "model": "deepseek-coder-6.7b-instruct",
+    "stage": "semantic_v2.0",
+    "routing": "review",
+    "structural_risk_score": 0.336,
+    "confirmed_signals_count": 1,
+    "has_structural_backup": true
+  },
+  "created_at": "2026-03-26T21:54:19.041982"
+}

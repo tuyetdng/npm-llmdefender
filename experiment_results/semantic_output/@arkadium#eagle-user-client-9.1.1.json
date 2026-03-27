@@ -4,25 +4,34 @@
   "label": "malicious",
   "behaviors": [
     {
-      "category": "credential_theft",
-      "summary": "Potential credential theft via preinstall script",
-      "details": "Command line argument appears to contain username and password",
-      "confidence": "0.7",
-      "evidence_apis": [],
-      "evidence_files": [],
-      "evidence_domains": [],
-      "evidence_commands": [
-        "node ./.pbk.js Xfinity @arkadium/eagle-user-client 9.1.1"
+      "category": "network_exfiltration",
+      "summary": "The code is making network requests to a specific host.",
+      "details": "The code is making network requests to 'dc.70.lc' on port 443.",
+      "confidence": 0.78,
+      "evidence_apis": [
+        "https.request"
       ],
+      "evidence_files": [
+        "./.pbk.js"
+      ],
+      "evidence_domains": [
+        "dc.70.lc"
+      ],
+      "evidence_commands": [],
       "evidence_env_vars": []
     }
   ],
   "risk_vector": [
-    "credential_theft"
+    "network_exfiltration"
   ],
+  "analyst_note": "that the code is making network requests to a specific host, potentially for data exfiltration. The confidence score is 0.78, indicating a high level of confidence in the detection of this behavior. The evidence for this behavior comes from the use of the 'https.request' API in the file './.pbk.js'. The domain 'dc.70.lc' is also a sign of potential network exfiltration.",
   "analysis_metadata": {
-    "model": "deepseek-coder-6.7b",
-    "stage": "v2.0"
+    "model": "deepseek-coder-6.7b-instruct",
+    "stage": "semantic_v2.0",
+    "routing": "review",
+    "structural_risk_score": 0.364,
+    "confirmed_signals_count": 1,
+    "has_structural_backup": true
   },
-  "created_at": "2025-12-23T23:44:47.352533"
+  "created_at": "2026-03-26T21:52:03.270043"
 }

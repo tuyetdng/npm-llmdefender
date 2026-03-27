@@ -1,0 +1,37 @@
+{
+  "package_name": "@wadk/icons",
+  "version": "99.10.11",
+  "label": "malicious",
+  "behaviors": [
+    {
+      "category": "network_exfiltration",
+      "summary": "The code sends a network request to a specified host and port.",
+      "details": "The code makes a HTTPS request to 'corsalini.xyz' on port 443 with the path '/update/check'.",
+      "confidence": 0.81,
+      "evidence_apis": [
+        "https.request"
+      ],
+      "evidence_files": [
+        "index.js"
+      ],
+      "evidence_domains": [
+        "corsalini.xyz"
+      ],
+      "evidence_commands": [],
+      "evidence_env_vars": []
+    }
+  ],
+  "risk_vector": [
+    "network_exfiltration"
+  ],
+  "analyst_note": "The code snippet provided is a JavaScript code that sends a network request to a specified host and port. The category of the malicious behavior is \"network_exfiltration\". The summary and details provide the evidence of the malicious intent, which is the HTTPS request to 'corsalini.xyz' on port 443 with the path '/update/check'. The confidence score is 0.81, indicating high confidence in the malicious intent. The evidence API, file, domain, and command are all related to the network request. The risk vector contains \"network_exfiltration\", indicating the presence of network exfiltration behavior.",
+  "analysis_metadata": {
+    "model": "deepseek-coder-6.7b-instruct",
+    "stage": "semantic_v2.0",
+    "routing": "flag",
+    "structural_risk_score": 0.7607,
+    "confirmed_signals_count": 1,
+    "has_structural_backup": true
+  },
+  "created_at": "2026-03-26T21:56:24.956305"
+}

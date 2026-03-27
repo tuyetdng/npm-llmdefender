@@ -1,0 +1,53 @@
+{
+  "package_name": "chalc",
+  "version": "2.0.0",
+  "label": "malicious",
+  "semantic_summary": {
+    "num_behaviors": 1,
+    "risk_vector": [
+      "supply_chain_propagation"
+    ],
+    "behaviors": [
+      {
+        "category": "supply_chain_propagation",
+        "summary": "The package name closely resembles popular package 'chalk'",
+        "details": "The package name 'chalc' closely resembles popular package 'chalk'",
+        "confidence": 0.82,
+        "evidence_apis": [],
+        "evidence_files": [
+          "package.json"
+        ],
+        "evidence_domains": [],
+        "evidence_commands": [],
+        "evidence_env_vars": []
+      }
+    ],
+    "analyst_note": "The package name 'chalc' closely resembles popular package 'chalk'. The confidence score is 0.82, indicating high confidence that this package is part of a supply chain attack. The evidence file is 'package.json', indicating that this behavior is likely related to the package.json file."
+  },
+  "verification_result": {
+    "chain_analysis": {
+      "is_coherent_chain": true,
+      "chain_narrative": "The package name closely resembles popular package 'chalk' and there is a hardcoded external IP in function call.",
+      "chain_score": 0.77
+    },
+    "legitimacy_check": {
+      "is_justified": false,
+      "reasoning": "The package name 'chalc' closely resembles popular package 'chalk', indicating high confidence that this package is part of a supply chain attack.",
+      "legitimacy_score": 0.82
+    },
+    "final_verification": {
+      "verdict": "MALICIOUS",
+      "calibrated_confidence": 0.82,
+      "explanation": "The package name 'chalc' closely resembles popular package 'chalk', indicating high confidence that this package is part of a supply chain attack."
+    }
+  },
+  "analysis_metadata": {
+    "model": "deepseek-coder-6.7b-instruct",
+    "stage": "verification_v2.0",
+    "structural_routing": "flag",
+    "structural_risk_score": 0.77,
+    "confirmed_signals_count": 2,
+    "has_structural_backup": true
+  },
+  "created_at": "2026-03-27T10:06:32.324911"
+}

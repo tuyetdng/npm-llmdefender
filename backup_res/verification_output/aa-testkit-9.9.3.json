@@ -1,0 +1,55 @@
+{
+  "package_name": "aa-testkit",
+  "version": "9.9.3",
+  "label": "malicious",
+  "semantic_summary": {
+    "num_behaviors": 1,
+    "risk_vector": [
+      "network_exfiltration"
+    ],
+    "behaviors": [
+      {
+        "category": "network_exfiltration",
+        "summary": "The code sends network requests to an external server with sensitive data.",
+        "details": "The code uses the 'https' module to send a POST request to an external server with sensitive data.",
+        "confidence": 0.9,
+        "evidence_apis": [
+          "https.request"
+        ],
+        "evidence_files": [],
+        "evidence_domains": [
+          "http://alter.cderwc12vtc0000pa6cgggzcqgyyyyyyb.oast.fun"
+        ],
+        "evidence_commands": [],
+        "evidence_env_vars": []
+      }
+    ],
+    "analyst_note": "that the package aa-testkit version 9.9.3 has a network exfiltration behavior. The evidence for this behavior is the use of the 'https.request' API to send a POST request to an external server with sensitive data. The confidence score for this behavior is 0.9, indicating a high level of confidence in the detection."
+  },
+  "verification_result": {
+    "chain_analysis": {
+      "is_coherent_chain": true,
+      "chain_narrative": "Obfuscation reads env credentials, POSTs to external domain, installs hook, downloads remote script, executes it",
+      "chain_score": 0.71
+    },
+    "legitimacy_check": {
+      "is_justified": false,
+      "reasoning": "The detected behaviors do not match the package's stated purpose",
+      "legitimacy_score": 0.4
+    },
+    "final_verification": {
+      "verdict": "MALICIOUS",
+      "calibrated_confidence": 0.8,
+      "explanation": "The detected behaviors form a coherent attack chain and justify the package's stated purpose"
+    }
+  },
+  "analysis_metadata": {
+    "model": "deepseek-coder-6.7b-instruct",
+    "stage": "verification_v2.0",
+    "structural_routing": "skip",
+    "structural_risk_score": 0.0,
+    "confirmed_signals_count": 0,
+    "has_structural_backup": false
+  },
+  "created_at": "2026-03-27T09:58:57.013761"
+}

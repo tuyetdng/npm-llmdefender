@@ -1,0 +1,57 @@
+{
+  "package_name": "backdoor119",
+  "version": "10.0.0",
+  "label": "malicious",
+  "semantic_summary": {
+    "num_behaviors": 1,
+    "risk_vector": [
+      "data_exfiltration"
+    ],
+    "behaviors": [
+      {
+        "category": "data_exfiltration",
+        "summary": "The code sends data to an unknown domain over HTTPS.",
+        "details": "The code sends data to the domain 'eozoqlc5vryvzzr.m.pipedream.net' over HTTPS in the preinstall hook of the package.",
+        "confidence": 0.86,
+        "evidence_apis": [
+          "https.request"
+        ],
+        "evidence_files": [
+          "index.js"
+        ],
+        "evidence_domains": [
+          "eozoqlc5vryvzzr.m.pipedream.net"
+        ],
+        "evidence_commands": [],
+        "evidence_env_vars": []
+      }
+    ],
+    "analyst_note": "that the package 'backdoor119' version 10.0.0 has a high level of malicious intent based on the evidence provided. The package sends data to an unknown domain over HTTPS in the preinstall hook of the package, indicating a potential data exfiltration activity. The confidence score is 0.86, indicating a high level of malicious intent."
+  },
+  "verification_result": {
+    "chain_analysis": {
+      "is_coherent_chain": true,
+      "chain_narrative": "The package sends data to an unknown domain over HTTPS in the pre-install hook of the package",
+      "chain_score": 0.71
+    },
+    "legitimacy_check": {
+      "is_justified": false,
+      "reasoning": "The package's stated purpose does not match the detected behaviors",
+      "legitimacy_score": 0.4
+    },
+    "final_verification": {
+      "verdict": "MALICIOUS",
+      "calibrated_confidence": 0.7,
+      "explanation": "The package sends data to an unknown domain over HTTPS in the pre-install hook of the package, indicating potential data exfiltration activity. The confidence score is high, indicating a high level of malicious intent."
+    }
+  },
+  "analysis_metadata": {
+    "model": "deepseek-coder-6.7b-instruct",
+    "stage": "verification_v2.0",
+    "structural_routing": "flag",
+    "structural_risk_score": 0.9973,
+    "confirmed_signals_count": 2,
+    "has_structural_backup": true
+  },
+  "created_at": "2026-03-27T10:02:17.777559"
+}

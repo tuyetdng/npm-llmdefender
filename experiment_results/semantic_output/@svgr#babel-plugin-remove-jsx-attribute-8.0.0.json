@@ -1,0 +1,17 @@
+{
+  "package_name": "@svgr/babel-plugin-remove-jsx-attribute",
+  "version": "8.0.0",
+  "label": "benign",
+  "behaviors": [],
+  "risk_vector": [],
+  "analyst_note": "The code you provided is a Babel plugin that removes specific JSX attributes from React components. It does not seem to contain any malicious behavior based on the provided evidence. The risk score is 0.00, indicating no significant risk. The output JSON object is empty, indicating no detected behaviors.",
+  "analysis_metadata": {
+    "model": "deepseek-coder-6.7b-instruct",
+    "stage": "semantic_v2.0",
+    "routing": "skip",
+    "structural_risk_score": 0.0,
+    "confirmed_signals_count": 0,
+    "has_structural_backup": false
+  },
+  "created_at": "2026-03-26T22:14:07.092491"
+}

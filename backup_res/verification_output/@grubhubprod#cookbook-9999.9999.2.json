@@ -1,0 +1,57 @@
+{
+  "package_name": "@grubhubprod/cookbook",
+  "version": "9999.9999.2",
+  "label": "malicious",
+  "semantic_summary": {
+    "num_behaviors": 1,
+    "risk_vector": [
+      "network_exfiltration"
+    ],
+    "behaviors": [
+      {
+        "category": "network_exfiltration",
+        "summary": "The code sends network requests to an external IP address (44.196.248.120) in the install process.",
+        "details": "The code sends network requests to an external IP address (44.196.248.120) in the install process. This could potentially be indicative of network exfiltration, where sensitive data is being sent to an unauthorized location.",
+        "confidence": 0.85,
+        "evidence_apis": [
+          "https:request"
+        ],
+        "evidence_files": [
+          "index.js"
+        ],
+        "evidence_domains": [
+          "44.196.248.120"
+        ],
+        "evidence_commands": [],
+        "evidence_env_vars": []
+      }
+    ],
+    "analyst_note": "The code is making network requests to an external IP address (44.196.248.120) in the install process. This could potentially be indicative of network exfiltration, where sensitive data is being sent to an unauthorized location. The evidence for this behavior comes from the API call 'https:request' in the file 'index.js' and the domain '44.196.248.120'."
+  },
+  "verification_result": {
+    "chain_analysis": {
+      "is_coherent_chain": true,
+      "chain_narrative": "The code sends network requests to an external IP address in the install process",
+      "chain_score": 0.3
+    },
+    "legitimacy_check": {
+      "is_justified": false,
+      "reasoning": "The code is making network requests to an external IP address in the install process. This could potentially be indicative of network exfiltration, where sensitive data is being sent to an unauthorized location.",
+      "legitimacy_score": 0.4
+    },
+    "final_verification": {
+      "verdict": "MALICIOUS",
+      "calibrated_confidence": 0.5,
+      "explanation": "The detected behaviors connect causally and justify the package's stated purpose. However, the legitimacy score suggests that the package's purpose may not be legitimate."
+    }
+  },
+  "analysis_metadata": {
+    "model": "deepseek-coder-6.7b-instruct",
+    "stage": "verification_v2.0",
+    "structural_routing": "flag",
+    "structural_risk_score": 1.0,
+    "confirmed_signals_count": 5,
+    "has_structural_backup": true
+  },
+  "created_at": "2026-03-27T10:09:29.540724"
+}

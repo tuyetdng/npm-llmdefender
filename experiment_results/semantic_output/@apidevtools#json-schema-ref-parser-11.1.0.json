@@ -1,0 +1,17 @@
+{
+  "package_name": "@apidevtools/json-schema-ref-parser",
+  "version": "11.1.0",
+  "label": "benign",
+  "behaviors": [],
+  "risk_vector": [],
+  "analyst_note": "that this analysis is based on the provided code and does not guarantee the safety of the package. For a comprehensive security analysis, it is recommended to conduct a full code review and possibly conduct a dynamic analysis.",
+  "analysis_metadata": {
+    "model": "deepseek-coder-6.7b-instruct",
+    "stage": "semantic_v2.0",
+    "routing": "skip",
+    "structural_risk_score": 0.0,
+    "confirmed_signals_count": 0,
+    "has_structural_backup": false
+  },
+  "created_at": "2026-03-26T22:13:08.671718"
+}

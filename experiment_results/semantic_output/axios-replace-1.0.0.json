@@ -1,0 +1,17 @@
+{
+  "package_name": "axios-replace",
+  "version": "1.0.0",
+  "label": "malicious",
+  "behaviors": [],
+  "risk_vector": [],
+  "analyst_note": "",
+  "analysis_metadata": {
+    "model": "deepseek-coder-6.7b-instruct",
+    "stage": "semantic_v2.0",
+    "routing": "skip",
+    "structural_risk_score": 0.0,
+    "confirmed_signals_count": 0,
+    "has_structural_backup": false
+  },
+  "created_at": "2026-03-26T22:00:39.713254"
+}

