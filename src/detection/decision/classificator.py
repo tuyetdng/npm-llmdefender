@@ -1,116 +1,241 @@
 """
 Final Classification and Report Generator
+
+Compatible with:
+  - semantic_v2.0   output schema
+  - verification_v2.0 output schema  (chain_analysis + legitimacy_check)
+  - verification_result=None          (no behaviors detected → CLEAN path)
 """
 
 import json
-from typing import Dict, List, Any, Optional
+from typing import Any, Dict, List, Optional
 from datetime import datetime
 from pathlib import Path
 
 from enums.behavior_category import BehaviorCategory
 
 
-class FinalClassifier:
-    """Generates final classification with calibrated confidence and explanation."""
-    
-    # Risk level thresholds
-    CRITICAL_THRESHOLD = 0.85
-    HIGH_THRESHOLD = 0.70
-    MEDIUM_THRESHOLD = 0.50
+# ---------------------------------------------------------------------------
+# Helpers
+# ---------------------------------------------------------------------------
 
-    def __init__(self, semantic_result: Dict, verification_result: Dict):
-        """
-        Args:
-            semantic_result: semantic analysis
-            verification_result: verification analysis
-        """
-        self.semantic = semantic_result
-        self.verification = verification_result
-        self.package_name = semantic_result.get("package_name")
-        self.version = semantic_result.get("version")
-        self.ground_truth_label = semantic_result.get("label")
-        
+def _safe_chain(verification_result: Optional[Dict]) -> Dict:
+    """Extract chain_analysis block safely."""
+    if not verification_result:
+        return {}
+    return verification_result.get("verification_result", {}).get("chain_analysis", {})
+
+
+def _safe_legitimacy(verification_result: Optional[Dict]) -> Dict:
+    """Extract legitimacy_check block safely."""
+    if not verification_result:
+        return {}
+    return verification_result.get("verification_result", {}).get("legitimacy_check", {})
+
+
+# ---------------------------------------------------------------------------
+# FinalClassifier
+# ---------------------------------------------------------------------------
+
+class FinalClassifier:
+    """
+    Generates final classification with calibrated confidence and explanation.
+
+    Handles three input cases:
+        Case A: behaviors ≥ 1 AND verification present  → full pipeline
+        Case B: behaviors ≥ 1 AND verification missing  → semantic-only fallback
+        Case C: behaviors = 0                           → CLEAN (no verification needed)
+    """
+
+    CRITICAL_THRESHOLD = 0.85
+    HIGH_THRESHOLD     = 0.70
+    MEDIUM_THRESHOLD   = 0.50
+
+    def __init__(
+        self,
+        semantic_result: Dict,
+        verification_result: Optional[Dict] = None,
+    ):
+        self.semantic            = semantic_result
+        self.verification        = verification_result          # may be None
+        self.package_name        = semantic_result.get("package_name", "unknown")
+        self.version             = semantic_result.get("version", "unknown")
+        self.ground_truth_label  = semantic_result.get("label")
+
+    # ------------------------------------------------------------------
+    # Public entry point
+    # ------------------------------------------------------------------
+
     def classify(self) -> Dict[str, Any]:
-        """Generate final classification output."""
-        
-        behaviors = self.semantic.get("behaviors", [])
+        behaviors   = self.semantic.get("behaviors", [])
         risk_vector = self.semantic.get("risk_vector", [])
-        verification = self.verification.get("verification_result", {})
-        
-        final_confidence = self._calculate_final_confidence(verification)
-        
-        raw_verdict = verification.get("final_verification", {}).get("verdict", "SUSPICIOUS")
-        final_verdict = raw_verdict  
-        
-        risk_level = self._calculate_risk_level(final_confidence, risk_vector, final_verdict)
-        
+
+        # ── Case C: no behaviors at all ────────────────────────────────
+        if not behaviors:
+            return self._classify_clean()
+
+        chain      = _safe_chain(self.verification)
+        legitimacy = _safe_legitimacy(self.verification)
+
+        final_confidence = self._calculate_final_confidence(behaviors, chain)
+        final_verdict    = self._resolve_verdict(chain, behaviors)
+        risk_level       = self._calculate_risk_level(final_confidence, risk_vector, final_verdict)
+
         return {
-            "package_name": self.package_name,
-            "version": self.version,
-            "scan_timestamp": datetime.now().isoformat(),
-            
+            "package_name":    self.package_name,
+            "version":         self.version,
+            "scan_timestamp":  datetime.now().isoformat(),
+
             "final_verdict": {
                 "classification": final_verdict,
-                "confidence": round(final_confidence, 3),
-                "risk_level": risk_level
+                "confidence":     round(final_confidence, 3),
+                "risk_level":     risk_level,
             },
-            
+
             "executive_summary": self._generate_executive_summary(
-                behaviors, verification, final_verdict
+                behaviors, chain, legitimacy, final_verdict
             ),
-            
-            "threat_profile": self._build_threat_profile(behaviors, risk_vector),
-            
-            "evidence_summary": self._build_evidence_summary(
-                behaviors, verification
-            ),
-            
+
+            "threat_profile": self._build_threat_profile(behaviors, risk_vector, chain),
+
+            "evidence_summary": self._build_evidence_summary(behaviors, chain, legitimacy),
+
             "recommendations": self._generate_recommendations(
                 final_verdict, risk_level, behaviors
             ),
-            
+
             "detailed_analysis": {
                 "semantic_detection": {
-                    "behaviors_found": len(behaviors),
-                    "categories": risk_vector,
+                    "behaviors_found":    len(behaviors),
+                    "categories":         risk_vector,
                     "highest_confidence": max(
-                        [b.get("confidence", 0) for b in behaviors], default=0
-                    )
+                        (b.get("confidence", 0) for b in behaviors), default=0
+                    ),
                 },
                 "verification_analysis": {
-                    "chain_coherence": verification.get("chain_analysis", {}).get("chain_narrative", "N/A"),
-                    "legitimacy_mismatch": not verification.get("legitimacy_check", {}).get("is_justified", True),
-                    "calibrated_confidence": verification.get("final_verification", {}).get("calibrated_confidence", 0)
-                }
+                    "chain_narrative":        chain.get("chain_narrative", "N/A"),
+                    "chain_score":            chain.get("chain_score", 0.0),
+                    "legitimacy_mismatch":    not legitimacy.get("is_justified", True),
+                    "verification_available": self.verification is not None,
+                },
             },
-            
+
             "metadata": {
                 "analysis_version": self.semantic.get("analysis_metadata", {}).get("stage", "unknown"),
-                "model": self.semantic.get("analysis_metadata", {}).get("model", "unknown"),
-                "ground_truth_label": self.ground_truth_label
-            }
+                "model":            self.semantic.get("analysis_metadata", {}).get("model", "unknown"),
+                "ground_truth_label": self.ground_truth_label,
+            },
         }
-    
-    def _calculate_final_confidence(self, verification: Dict) -> float:
+
+    # ------------------------------------------------------------------
+    # Case C — clean path
+    # ------------------------------------------------------------------
+
+    def _classify_clean(self) -> Dict[str, Any]:
+        """Return a CLEAN result when no behaviors were detected by any stage."""
+        structural_score = self.semantic.get(
+            "analysis_metadata", {}
+        ).get("structural_risk_score", 0.0)
+
+        # If structural layer already flagged something but semantic found nothing,
+        # demote to SUSPICIOUS rather than CLEAN so it gets human attention.
+        if structural_score >= 0.60:
+            verdict    = "SUSPICIOUS"
+            risk_level = "LOW"
+            confidence = 0.50
+            summary    = (
+                "No behaviors detected by semantic analysis, but structural "
+                f"pre-analysis flagged a risk score of {structural_score:.2f}. "
+                "Manual review recommended."
+            )
+        else:
+            verdict    = "BENIGN"
+            risk_level = "NONE"
+            confidence = 0.85
+            summary    = "No suspicious behaviors detected by structural or semantic analysis."
+
+        return {
+            "package_name":   self.package_name,
+            "version":        self.version,
+            "scan_timestamp": datetime.now().isoformat(),
+
+            "final_verdict": {
+                "classification": verdict,
+                "confidence":     confidence,
+                "risk_level":     risk_level,
+            },
+
+            "executive_summary": summary,
+            "threat_profile":    {"attack_type": "None", "primary_tactics": [], "severity_factors": []},
+            "evidence_summary":  {"malicious_indicators": [], "behavioral_chain": "N/A", "legitimacy_assessment": "N/A"},
+            "recommendations":   {"immediate_action": "Package appears safe to use", "remediation_steps": []},
+
+            "detailed_analysis": {
+                "semantic_detection": {
+                    "behaviors_found":    0,
+                    "categories":         [],
+                    "highest_confidence": 0.0,
+                },
+                "verification_analysis": {
+                    "chain_narrative":        "N/A",
+                    "chain_score":            0.0,
+                    "legitimacy_mismatch":    False,
+                    "verification_available": False,
+                },
+            },
+
+            "metadata": {
+                "analysis_version":   self.semantic.get("analysis_metadata", {}).get("stage", "unknown"),
+                "model":              self.semantic.get("analysis_metadata", {}).get("model", "unknown"),
+                "ground_truth_label": self.ground_truth_label,
+            },
+        }
+
+    # ------------------------------------------------------------------
+    # Confidence + verdict
+    # ------------------------------------------------------------------
+
+    def _calculate_final_confidence(
+        self, behaviors: List[Dict], chain: Dict
+    ) -> float:
         """
-        Calibrate final confidence by combining semantic and verification confidences.
+        Weighted blend:
+            - verification present : 0.40 × avg_semantic  + 0.60 × chain_score
+            - verification absent  : avg_semantic  (semantic-only fallback)
+
+        chain_score comes from chain_analysis.chain_score (0.0–1.0).
         """
-        verification_confidence = verification.get("final_verification", {}).get("calibrated_confidence", 0.5)
-        
-        behaviors = self.semantic.get("behaviors", [])
-        if not behaviors:
-            return verification_confidence
-        
-        semantic_confidences = [b.get("confidence", 0) for b in behaviors]
-        avg_semantic_conf = sum(semantic_confidences) / len(semantic_confidences)
-        
-        final_conf = (0.4 * avg_semantic_conf) + (0.6 * verification_confidence)
-        
-        return min(final_conf, 0.99)
-    
-    def _calculate_risk_level(self, confidence: float, risk_vector: List[str], verdict: str) -> str:
-        """Determine risk level based on confidence and detected behaviors."""
-        
+        avg_semantic = sum(b.get("confidence", 0) for b in behaviors) / len(behaviors)
+
+        chain_score = chain.get("chain_score")          # None when verification absent
+        if chain_score is not None:
+            blended = 0.40 * avg_semantic + 0.60 * chain_score
+        else:
+            blended = avg_semantic                      # fallback: semantic only
+
+        return min(round(blended, 4), 0.99)
+
+    def _resolve_verdict(self, chain: Dict, behaviors: List[Dict]) -> str:
+        """
+        Primary source: verification chain verdict.
+        Fallback (no verification): derive from semantic confidence.
+        """
+        # Verification present → trust its verdict
+        chain_verdict = chain.get("verdict", "").upper()
+        if chain_verdict in {"MALICIOUS", "SUSPICIOUS", "BENIGN"}:
+            return chain_verdict
+
+        # Semantic-only fallback
+        avg_semantic = sum(b.get("confidence", 0) for b in behaviors) / len(behaviors)
+        if avg_semantic >= 0.70:
+            return "MALICIOUS"
+        elif avg_semantic >= 0.45:
+            return "SUSPICIOUS"
+        return "BENIGN"
+
+    def _calculate_risk_level(
+        self, confidence: float, risk_vector: List[str], verdict: str
+    ) -> str:
         critical_categories = {
             BehaviorCategory.REMOTE_CODE_EXECUTION.value,
             BehaviorCategory.CREDENTIAL_THEFT.value,
@@ -120,313 +245,256 @@ class FinalClassifier:
             BehaviorCategory.SUPPLY_CHAIN_PROPAGATION.value,
             BehaviorCategory.DEPENDENCY_INJECTION.value,
         }
-        
-        if verdict.upper() == "BENIGN":
-            if confidence >= 0.9:
-                return "NONE"
-            elif confidence >= 0.7:
-                return "LOW"
-            else:
-                return "MEDIUM"  
-        elif verdict.upper() == "MALICIOUS":
 
-            has_critical = bool(set(risk_vector) & critical_categories)
-            
-            if confidence >= self.CRITICAL_THRESHOLD or (has_critical and confidence >= 0.7):
-                return "CRITICAL"
-            elif confidence >= self.HIGH_THRESHOLD:
+        if verdict == "BENIGN":
+            if confidence >= 0.90:
+                return "NONE"
+            elif confidence >= 0.70:
+                return "LOW"
+            return "MEDIUM"
+
+        if verdict == "SUSPICIOUS":
+            if confidence >= self.HIGH_THRESHOLD:
                 return "HIGH"
             elif confidence >= self.MEDIUM_THRESHOLD:
                 return "MEDIUM"
-            else:
-                return "LOW"
-    
-    def _generate_executive_summary(self, behaviors: List[Dict], 
-                                   verification: Dict, verdict: str) -> str:
-        """Generate human-readable executive summary."""
-        
+            return "LOW"
+
+        # MALICIOUS
+        has_critical = bool(set(risk_vector) & critical_categories)
+        if confidence >= self.CRITICAL_THRESHOLD or (has_critical and confidence >= 0.70):
+            return "CRITICAL"
+        elif confidence >= self.HIGH_THRESHOLD:
+            return "HIGH"
+        elif confidence >= self.MEDIUM_THRESHOLD:
+            return "MEDIUM"
+        return "LOW"
+
+    # ------------------------------------------------------------------
+    # Report builders
+    # ------------------------------------------------------------------
+
+    def _generate_executive_summary(
+        self,
+        behaviors: List[Dict],
+        chain: Dict,
+        legitimacy: Dict,
+        verdict: str,
+    ) -> str:
         if verdict == "BENIGN":
-            return f"This package appears to be benign with no significant security concerns detected."
-        
-        key_behaviors = [b for b in behaviors if b.get("confidence", 0) > 0.7]
-        
-        if not key_behaviors:
+            return "This package appears to be benign with no significant security concerns detected."
+
+        # Prefer chain_narrative as the primary summary when available
+        narrative = chain.get("chain_narrative", "").strip()
+        if narrative:
+            justification = (
+                " The detected behaviors have no legitimate justification based "
+                "on the package's stated purpose."
+                if not legitimacy.get("is_justified", True)
+                else ""
+            )
+            return narrative + justification
+
+        # Fallback: compose from high-confidence behaviors
+        key = [b for b in behaviors if b.get("confidence", 0) > 0.70]
+        if not key:
             return "Package exhibits suspicious characteristics but no definitive malicious behavior confirmed."
-        
-        summaries = []
-        for behavior in key_behaviors[:3]:
-            summaries.append(behavior.get("summary", ""))
-        
-        legitimacy = verification.get("legitimacy_check", {})
+        summaries = " ".join(b.get("summary", "") for b in key[:2])
         if not legitimacy.get("is_justified", True):
-            context = " The detected behaviors have no legitimate justification based on the package's stated purpose."
-        else:
-            context = ""
-        
-        return " ".join(summaries[:2]) + context
-    
-    def _build_threat_profile(self, behaviors: List[Dict], 
-                             risk_vector: List[str]) -> Dict[str, Any]:
-        """Build structured threat profile."""
-        
-        attack_type = self._infer_attack_type(risk_vector)
-        
-        primary_tactics = self._get_primary_tactics(risk_vector)
-        
-        severity_factors = []
-        for behavior in behaviors:
-            if behavior.get("confidence", 0) > 0.7:
-                severity_factors.append(behavior.get("summary", ""))
-        
+            summaries += " The detected behaviors have no legitimate justification."
+        return summaries
+
+    def _build_threat_profile(
+        self, behaviors: List[Dict], risk_vector: List[str], chain: Dict
+    ) -> Dict[str, Any]:
+        attack_vectors = chain.get("attack_vector", [])
         return {
-            "attack_type": attack_type,
-            "primary_tactics": primary_tactics,
-            "severity_factors": severity_factors[:5] 
+            "attack_type":     self._infer_attack_type(risk_vector),
+            "primary_tactics": self._get_primary_tactics(risk_vector),
+            "severity_factors": [
+                b.get("summary", "")
+                for b in behaviors
+                if b.get("confidence", 0) > 0.70
+            ][:5],
+            "attack_vector_iocs": attack_vectors[:6],   # real IOCs from verification
         }
-    
-    def _build_evidence_summary(self, behaviors: List[Dict], 
-                               verification: Dict) -> Dict[str, Any]:
-        """Evidence summary with concrete indicators."""
-        
-        malicious_indicators = []
-        
+
+    def _build_evidence_summary(
+        self, behaviors: List[Dict], chain: Dict, legitimacy: Dict
+    ) -> Dict[str, Any]:
+        indicators = []
         for behavior in behaviors:
-            if behavior.get("confidence", 0) < 0.6:
+            if behavior.get("confidence", 0) < 0.60:
                 continue
-                
-            evidence_apis = behavior.get("evidence_apis", [])
-            evidence_commands = behavior.get("evidence_commands", [])
-            
-            if evidence_apis or evidence_commands:
-                indicator = {
-                    "type": behavior.get("category", "").replace("_", " ").title(),
-                    "description": behavior.get("details", behavior.get("summary", "")),
-                    "severity": self._map_confidence_to_severity(behavior.get("confidence", 0))
-                }
-                
-                if evidence_apis:
-                    indicator["command"] = evidence_apis[0]
-                elif evidence_commands:
-                    indicator["command"] = evidence_commands[0]
-                
-                malicious_indicators.append(indicator)
-        
-        return {
-            "malicious_indicators": malicious_indicators[:5],
-            "behavioral_chain": verification.get("chain_analysis", {}).get("chain_narrative", "N/A"),
-            "legitimacy_assessment": verification.get("legitimacy_check", {}).get("reasoning", "N/A")
-        }
-    
-    def _generate_recommendations(self, verdict: str, risk_level: str, 
-                                 behaviors: List[Dict]) -> Dict[str, Any]:
-        """Generate actionable recommendations."""
-        
-        if verdict == "BENIGN":
-            return {
-                "immediate_action": "Package appears safe to use",
-                "remediation_steps": []
+            apis     = behavior.get("evidence_apis", [])
+            commands = behavior.get("evidence_commands", [])
+            domains  = behavior.get("evidence_domains", [])
+            if not (apis or commands or domains):
+                continue
+            indicator: Dict[str, Any] = {
+                "type":        behavior.get("category", "").replace("_", " ").title(),
+                "description": behavior.get("details", behavior.get("summary", "")),
+                "severity":    self._map_confidence_to_severity(behavior.get("confidence", 0)),
             }
-        
-        if risk_level in ["CRITICAL", "HIGH"]:
-            immediate = "DO NOT INSTALL - Remove immediately if already installed"
-        else:
-            immediate = "Use with caution - Manual review recommended"
-        
-        remediation = ["Review package source code and dependencies"]
-        
-        risk_categories = {
-            b.get("category")
-            for b in behaviors
-            if b.get("confidence", 0) >= 0.6
+            # Prefer command → API → domain as the representative IOC
+            if commands:
+                indicator["command"] = commands[0]
+            elif apis:
+                indicator["command"] = apis[0]
+            elif domains:
+                indicator["command"] = domains[0]
+            indicators.append(indicator)
+
+        return {
+            "malicious_indicators": indicators[:5],
+            "behavioral_chain":     chain.get("chain_narrative", "N/A"),
+            "legitimacy_assessment": legitimacy.get("reasoning", "N/A"),
         }
-        
+
+    def _generate_recommendations(
+        self, verdict: str, risk_level: str, behaviors: List[Dict]
+    ) -> Dict[str, Any]:
+        if verdict == "BENIGN":
+            return {"immediate_action": "Package appears safe to use", "remediation_steps": []}
+
+        immediate = (
+            "DO NOT INSTALL — Remove immediately if already installed"
+            if risk_level in {"CRITICAL", "HIGH"}
+            else "Use with caution — Manual review recommended"
+        )
+
+        remediation = ["Review package source code and dependencies"]
+
         REMEDIATION_MAP = {
             BehaviorCategory.NETWORK_EXFILTRATION.value:
                 "Monitor network traffic for suspicious outbound connections",
-
             BehaviorCategory.CREDENTIAL_THEFT.value:
                 "Check for unauthorized access to credentials or secrets",
-
             BehaviorCategory.INSTALL_HOOK.value:
                 "Inspect install/preinstall scripts in package.json",
-
             BehaviorCategory.SUPPLY_CHAIN_ATTACK.value:
-                "Scan for other compromised packages from same author"
+                "Scan for other compromised packages from the same author",
+            BehaviorCategory.BACKDOOR_INSTALLATION.value:
+                "Audit system for unauthorized processes or cron jobs",
+            BehaviorCategory.REMOTE_CODE_EXECUTION.value:
+                "Isolate affected systems and audit running processes",
         }
 
-        
-        for category in risk_categories:
-            if category in REMEDIATION_MAP:
-                remediation.append(REMEDIATION_MAP[category])
+        risk_categories = {
+            b.get("category")
+            for b in behaviors
+            if b.get("confidence", 0) >= 0.60
+        }
+        for cat in risk_categories:
+            if cat in REMEDIATION_MAP:
+                remediation.append(REMEDIATION_MAP[cat])
 
         remediation.append("Report to npm security team if confirmed malicious")
-        
-        return {
-            "immediate_action": immediate,
-            "remediation_steps": remediation
-        }
-    
+        return {"immediate_action": immediate, "remediation_steps": remediation}
+
+    # ------------------------------------------------------------------
+    # Taxonomy helpers
+    # ------------------------------------------------------------------
+
     def _infer_attack_type(self, risk_vector: List[str]) -> str:
-        """
-        Infer primary attack objective based on highest-impact behavior.
-        """
         rv = set(risk_vector)
-
-        if rv & {
-            BehaviorCategory.SUPPLY_CHAIN_ATTACK.value,
-            BehaviorCategory.SUPPLY_CHAIN_PROPAGATION.value,
-            BehaviorCategory.DEPENDENCY_INJECTION.value,
-            BehaviorCategory.REPOSITORY_MANIPULATION.value,
-            BehaviorCategory.TYPOSQUATTING.value,
-        }:
-            return "Supply Chain Attack"
-
-        if rv & {
-            BehaviorCategory.BACKDOOR_INSTALLATION.value,
-            BehaviorCategory.PERSISTENCE.value,
-        }:
-            return "Backdoor Installation"
-
-        if rv & {
-            BehaviorCategory.REMOTE_CODE_EXECUTION.value,
-            BehaviorCategory.DYNAMIC_CODE_EXECUTION.value,
-            BehaviorCategory.LOCAL_CODE_EXECUTION.value,
-            BehaviorCategory.PRIVILEGE_ESCALATION.value,
-        }:
-            return "Remote Code Execution"
-
-        if rv & {
-            BehaviorCategory.CREDENTIAL_THEFT.value,
-            BehaviorCategory.SENSITIVE_DATA_COLLECTION.value,
-            BehaviorCategory.SENSITIVE_FILE_ACCESS.value,
-        }:
-            return "Credential Theft"
-
-        if rv & {
-            BehaviorCategory.NETWORK_EXFILTRATION.value,
-            BehaviorCategory.DATA_EXFILTRATION.value,
-        }:
-            return "Data Exfiltration"
-        if rv & {
-            BehaviorCategory.CRYPTO_HIJACKING.value, 
-            BehaviorCategory.RESOURCE_ABUSE.value
-        }:
-            return "Cryptocurrency Mining"
-        
-        if rv & {
-            BehaviorCategory.SYSTEM_RECONNAISSANCE.value,
-            BehaviorCategory.NETWORK_RECONNAISSANCE.value,
-        }:
-            return "Reconnaissance"
-        if rv & {
-            BehaviorCategory.OBFUSCATION.value,
-            BehaviorCategory.ANTI_DEBUGGING.value,
-            BehaviorCategory.ANTI_ANALYSIS.value,
-        }:
-            return "Defense Evasion"
-
+        checks = [
+            ({"supply_chain_attack", "supply_chain_propagation", "dependency_injection",
+              "repository_manipulation", "typosquatting",
+              BehaviorCategory.SUPPLY_CHAIN_ATTACK.value,
+              BehaviorCategory.TYPOSQUATTING.value},          "Supply Chain Attack"),
+            ({BehaviorCategory.BACKDOOR_INSTALLATION.value,
+              BehaviorCategory.PERSISTENCE.value},             "Backdoor Installation"),
+            ({BehaviorCategory.REMOTE_CODE_EXECUTION.value,
+              BehaviorCategory.DYNAMIC_CODE_EXECUTION.value,
+              BehaviorCategory.LOCAL_CODE_EXECUTION.value,
+              BehaviorCategory.PRIVILEGE_ESCALATION.value},   "Remote Code Execution"),
+            ({BehaviorCategory.CREDENTIAL_THEFT.value,
+              BehaviorCategory.SENSITIVE_DATA_COLLECTION.value,
+              BehaviorCategory.SENSITIVE_FILE_ACCESS.value},  "Credential Theft"),
+            ({BehaviorCategory.NETWORK_EXFILTRATION.value,
+              BehaviorCategory.DATA_EXFILTRATION.value},      "Data Exfiltration"),
+            ({BehaviorCategory.CRYPTO_HIJACKING.value,
+              BehaviorCategory.RESOURCE_ABUSE.value},         "Cryptocurrency Mining"),
+            ({BehaviorCategory.SYSTEM_RECONNAISSANCE.value,
+              BehaviorCategory.NETWORK_RECONNAISSANCE.value}, "Reconnaissance"),
+            ({BehaviorCategory.OBFUSCATION.value,
+              BehaviorCategory.ANTI_DEBUGGING.value,
+              BehaviorCategory.ANTI_ANALYSIS.value},          "Defense Evasion"),
+        ]
+        for category_set, label in checks:
+            if rv & category_set:
+                return label
         return "Malicious Package"
 
-    
     def _get_primary_tactics(self, risk_vector: List[str]) -> List[str]:
-        """Get human-readable tactics."""
-        
         tactic_map = {
-            # Execution
-            BehaviorCategory.REMOTE_CODE_EXECUTION: "Execution (Remote)",
-            BehaviorCategory.DYNAMIC_CODE_EXECUTION: "Execution (Dynamic)",
-            BehaviorCategory.LOCAL_CODE_EXECUTION: "Execution (Local)",
-
-            # Persistence
-            BehaviorCategory.BACKDOOR_INSTALLATION: "Persistence (Backdoor)",
-            BehaviorCategory.PERSISTENCE: "Persistence (Auto-run)",
-            BehaviorCategory.INSTALL_HOOK: "Persistence (Install Hook)",
-
-            # Credential Access
-            BehaviorCategory.CREDENTIAL_THEFT: "Credential Access",
-            BehaviorCategory.SENSITIVE_FILE_ACCESS: "Credential Access (File Access)",
-            BehaviorCategory.SENSITIVE_DATA_COLLECTION: "Credential Access (Sensitive Data)",
-
-            # Exfiltration
-            BehaviorCategory.NETWORK_EXFILTRATION: "Exfiltration (Network)",
-            BehaviorCategory.DATA_EXFILTRATION: "Exfiltration (File/Data)",
-
-            # Defense Evasion
-            BehaviorCategory.OBFUSCATION: "Defense Evasion (Obfuscation)",
-            BehaviorCategory.ANTI_ANALYSIS: "Defense Evasion (Anti-Analysis)",
-            BehaviorCategory.ANTI_DEBUGGING: "Defense Evasion (Anti-Debugging)",
-
-            # Discovery
-            BehaviorCategory.SYSTEM_RECONNAISSANCE: "Discovery (System)",
-            BehaviorCategory.NETWORK_RECONNAISSANCE: "Discovery (Network)",
-            
-            # Impact
-            BehaviorCategory.CRYPTO_HIJACKING: "Impact (Crypto Mining)",
-            BehaviorCategory.RESOURCE_ABUSE: "Impact (Resource Abuse)",
+            BehaviorCategory.REMOTE_CODE_EXECUTION:      "Execution (Remote)",
+            BehaviorCategory.DYNAMIC_CODE_EXECUTION:     "Execution (Dynamic)",
+            BehaviorCategory.LOCAL_CODE_EXECUTION:       "Execution (Local)",
+            BehaviorCategory.BACKDOOR_INSTALLATION:      "Persistence (Backdoor)",
+            BehaviorCategory.PERSISTENCE:                "Persistence (Auto-run)",
+            BehaviorCategory.INSTALL_HOOK:               "Persistence (Install Hook)",
+            BehaviorCategory.CREDENTIAL_THEFT:           "Credential Access",
+            BehaviorCategory.SENSITIVE_FILE_ACCESS:      "Credential Access (File Access)",
+            BehaviorCategory.SENSITIVE_DATA_COLLECTION:  "Credential Access (Sensitive Data)",
+            BehaviorCategory.NETWORK_EXFILTRATION:       "Exfiltration (Network)",
+            BehaviorCategory.DATA_EXFILTRATION:          "Exfiltration (File/Data)",
+            BehaviorCategory.OBFUSCATION:                "Defense Evasion (Obfuscation)",
+            BehaviorCategory.ANTI_ANALYSIS:              "Defense Evasion (Anti-Analysis)",
+            BehaviorCategory.ANTI_DEBUGGING:             "Defense Evasion (Anti-Debugging)",
+            BehaviorCategory.SYSTEM_RECONNAISSANCE:      "Discovery (System)",
+            BehaviorCategory.NETWORK_RECONNAISSANCE:     "Discovery (Network)",
+            BehaviorCategory.CRYPTO_HIJACKING:           "Impact (Crypto Mining)",
+            BehaviorCategory.RESOURCE_ABUSE:             "Impact (Resource Abuse)",
         }
-        
-        tactics = []
-        seen = set()
-        
-        for behavior in risk_vector:
-            if behavior in tactic_map:
-                tactic = tactic_map[behavior]
-                if tactic not in seen:
-                    tactics.append(tactic)
-                    seen.add(tactic)
-            else:
-                tactic = behavior.replace("_", " ").title()
-                if tactic not in seen:
-                    tactics.append(tactic)
-                    seen.add(tactic)
-        
-        return tactics[:5]  
-    
+        seen: set = set()
+        tactics: List[str] = []
+        for entry in risk_vector:
+            tactic = next(
+                (v for k, v in tactic_map.items() if k.value == entry),
+                entry.replace("_", " ").title()
+            )
+            if tactic not in seen:
+                tactics.append(tactic)
+                seen.add(tactic)
+        return tactics[:5]
+
     def _map_confidence_to_severity(self, confidence: float) -> str:
-        """Map confidence score to severity level."""
         if confidence >= 0.85:
             return "CRITICAL"
-        elif confidence >= 0.7:
+        elif confidence >= 0.70:
             return "HIGH"
-        elif confidence >= 0.4:
+        elif confidence >= 0.40:
             return "MEDIUM"
-        else:
-            return "LOW"
-    
-    def generate_user_report(self, result) -> str:
-        """
-        Generate human-readable report for end users.
-        
-        Args:
-            output_format: "markdown" or "text"
-        
-        Returns:
-            Formatted report as string
-        """        
+        return "LOW"
+
+    # ------------------------------------------------------------------
+    # Markdown report
+    # ------------------------------------------------------------------
+
+    def generate_user_report(self, result: Dict) -> str:
         return self._generate_markdown_report(result)
 
-    
     def _generate_markdown_report(self, result: Dict) -> str:
-        """Generate markdown formatted report."""
-        
-        verdict = result["final_verdict"]
-        risk_level = verdict["risk_level"]
+        verdict        = result["final_verdict"]
+        risk_level     = verdict["risk_level"]
         classification = verdict["classification"]
-        confidence = verdict["confidence"]
-        
+        confidence     = verdict["confidence"]
+
         RISK_LABEL = {
             "CRITICAL": "SEV-1 (Critical)",
-            "HIGH": "SEV-2 (High)",
-            "MEDIUM": "SEV-3 (Medium)",
-            "LOW": "SEV-4 (Low)"
+            "HIGH":     "SEV-2 (High)",
+            "MEDIUM":   "SEV-3 (Medium)",
+            "LOW":      "SEV-4 (Low)",
+            "NONE":     "SEV-5 (None)",
         }
-        
         VERDICT_LABEL = {
-            "MALICIOUS": "Blocked",
+            "MALICIOUS":  "Blocked",
             "SUSPICIOUS": "Needs Review",
-            "BENIGN": "Allowed"
+            "BENIGN":     "Allowed",
         }
-        
+
         report = f"""# NPM Package Security Analysis Report
 
 ## Package Information
@@ -438,7 +506,7 @@ class FinalClassifier:
 
 ## Final Security Verdict: **{classification}** (Policy: {VERDICT_LABEL.get(classification, "Unknown")})
 
-**Risk Level:** {RISK_LABEL.get(risk_level, '')} **{risk_level}**  
+**Risk Level:** {RISK_LABEL.get(risk_level, risk_level)} **{risk_level}**  
 **Confidence Score:** {confidence * 100:.1f}%
 
 ### Executive Summary
@@ -448,20 +516,25 @@ class FinalClassifier:
 
 ## THREAT PROFILE
 
-**ATTACK TYPES:** {result['threat_profile']['attack_type']}
+**ATTACK TYPE:** {result['threat_profile']['attack_type']}
 
 **PRIMARY TACTICS:**
 """
-        
         for tactic in result['threat_profile']['primary_tactics']:
             report += f"- {tactic}\n"
-        
+
+        iocs = result['threat_profile'].get('attack_vector_iocs', [])
+        if iocs:
+            report += "\n**ATTACK VECTOR IOCs:**\n"
+            for ioc in iocs:
+                report += f"- `{ioc}`\n"
+
         report += "\n**KEY RISK FACTORS:**\n"
         for factor in result['threat_profile']['severity_factors'][:3]:
             report += f"- {factor}\n"
-        
+
         report += "\n---\n\n## EVIDENCE SUMMARY\n\n"
-        
+
         indicators = result['evidence_summary']['malicious_indicators']
         if indicators:
             report += "### MALICIOUS INDICATORS DETECTED\n\n"
@@ -469,86 +542,70 @@ class FinalClassifier:
                 report += f"#### {i}. {indicator['type']} [{indicator['severity']}]\n"
                 report += f"**Description:** {indicator['description']}\n\n"
                 if 'command' in indicator:
-                    report += f"```bash\n{indicator['command']}\n```\n\n"
-        
+                    report += f"```\n{indicator['command']}\n```\n\n"
+
         chain = result['evidence_summary']['behavioral_chain']
         if chain != "N/A":
             report += f"**Attack Chain:** {chain}\n\n"
-        
+
         legitimacy = result['evidence_summary']['legitimacy_assessment']
         if legitimacy != "N/A":
             report += f"**Legitimacy Assessment:** {legitimacy}\n\n"
-        
+
         report += "---\n\n## RECOMMENDATIONS\n\n"
         report += f"### Immediate Action\n**{result['recommendations']['immediate_action']}**\n\n"
-        
-        if result['recommendations']['remediation_steps']:
+
+        steps = result['recommendations']['remediation_steps']
+        if steps:
             report += "### Remediation Steps\n"
-            for step in result['recommendations']['remediation_steps']:
+            for step in steps:
                 report += f"1. {step}\n"
-        
+
+        sem  = result['detailed_analysis']['semantic_detection']
+        veri = result['detailed_analysis']['verification_analysis']
+
         report += f"\n---\n\n## TECHNICAL ANALYSIS DETAILS\n\n"
-        report += f"**Behaviors Detected:** {result['detailed_analysis']['semantic_detection']['behaviors_found']}\n"
-        report += f"**Risk Categories:** {', '.join(result['detailed_analysis']['semantic_detection']['categories'][:5])}\n"
-        report += f"**Highest Detection Confidence:** {result['detailed_analysis']['semantic_detection']['highest_confidence'] * 100:.1f}%\n"
-        report += f"**Verification Confidence:** {result['detailed_analysis']['verification_analysis']['calibrated_confidence'] * 100:.1f}%\n\n"
-        
+        report += f"**Behaviors Detected:** {sem['behaviors_found']}\n"
+        report += f"**Risk Categories:** {', '.join(sem['categories'][:5])}\n"
+        report += f"**Highest Detection Confidence:** {sem['highest_confidence'] * 100:.1f}%\n"
+
+        if veri['verification_available']:
+            report += f"**Chain Score:** {veri['chain_score']:.2f}\n"
+            report += f"**Chain Narrative:** {veri['chain_narrative']}\n"
+        else:
+            report += "**Verification Stage:** Not run (no behaviors detected)\n"
+
         report += f"\n---\n\n*Analysis Version: {result['metadata']['analysis_version']}*  \n"
         report += f"*Model: {result['metadata']['model']}*  \n"
         if result['metadata'].get('ground_truth_label'):
             report += f"*Ground Truth Label: {result['metadata']['ground_truth_label']}*\n"
-        
+
         return report
 
-    def save_result(self, result,output_dir: str = "./experiment_results/output_machine_readable") -> str:
-        """Save final classification result to disk."""
-        
+    # ------------------------------------------------------------------
+    # Persistence
+    # ------------------------------------------------------------------
+
+    def save_result(
+        self,
+        result: Dict,
+        output_dir: str = "./experiment_results/output_machine_readable",
+    ) -> str:
         Path(output_dir).mkdir(parents=True, exist_ok=True)
-                
-        pkg_name = self.package_name
-        version = self.version
-
-        if not pkg_name or not version:
-            raise ValueError("Missing package_name or version in FinalClassifier")
-
-        safe_name = f"{pkg_name.replace('/', '#')}-{version}.json"
-
-
-        filepath = Path(output_dir) / safe_name
-        
-        with open(filepath, 'w', encoding='utf-8') as f:
+        safe_name = f"{self.package_name.replace('/', '#')}-{self.version}.json"
+        filepath  = Path(output_dir) / safe_name
+        with open(filepath, "w", encoding="utf-8") as f:
             json.dump(result, f, indent=2, ensure_ascii=False)
-        
         return str(filepath)
-    
-    def save_user_report(self, result, output_dir: str = "./experiment_results/report_human_readable") -> str:
-        """
-        Save human-readable report to disk.
-        
-        Args:
-            output_dir: Directory to save report
-            format: "markdown" or "text"
-        
-        Returns:
-            Path to saved report file
-        """
+
+    def save_user_report(
+        self,
+        result: Dict,
+        output_dir: str = "./experiment_results/report_human_readable",
+    ) -> str:
         Path(output_dir).mkdir(parents=True, exist_ok=True)
-        
-        report = self.generate_user_report(result)
-        
-        pkg_name = self.package_name
-        version = self.version
-
-        if not pkg_name or not version:
-            raise ValueError("Missing package_name or version in FinalClassifier")
-
-        safe_name = f"{pkg_name.replace('/', '#')}-{version}.md"
-
-        filepath = Path(output_dir) / safe_name
-        
-        with open(filepath, 'w', encoding='utf-8') as f:
-            f.write(report)
-        
+        safe_name = f"{self.package_name.replace('/', '#')}-{self.version}.md"
+        filepath  = Path(output_dir) / safe_name
+        with open(filepath, "w", encoding="utf-8") as f:
+            f.write(self.generate_user_report(result))
         return str(filepath)
-
-

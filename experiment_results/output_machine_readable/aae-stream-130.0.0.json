@@ -1,0 +1,71 @@
+{
+  "package_name": "aae-stream",
+  "version": "130.0.0",
+  "scan_timestamp": "2026-03-27T14:40:49.024367",
+  "final_verdict": {
+    "classification": "MALICIOUS",
+    "confidence": 0.892,
+    "risk_level": "CRITICAL"
+  },
+  "executive_summary": "The package is downloading files from an external IP address (196.188.125.134) and sending them to an unknown IP address (192.81.209.195). The files are then sent to the victim's machine. The package is collecting sensitive data from the victim's machine by reading files and environment variables. The detected behaviors have no legitimate justification based on the package's stated purpose.",
+  "threat_profile": {
+    "attack_type": "Credential Theft",
+    "primary_tactics": [
+      "Exfiltration (Network)",
+      "Credential Access (Sensitive Data)"
+    ],
+    "severity_factors": [
+      "The package is downloading files from an external IP address (196.188.125.134) and sending them to an unknown IP address (192.81.209.195).",
+      "The package is collecting sensitive data from the victim's machine."
+    ],
+    "attack_vector_iocs": [
+      "nc",
+      "wget",
+      "196.188.125.134",
+      "192.81.209.195",
+      "user",
+      "path"
+    ]
+  },
+  "evidence_summary": {
+    "malicious_indicators": [
+      {
+        "type": "Network Exfiltration",
+        "description": "The package uses the wget command to download files from an external IP address (196.188.125.134) and sends them to an unknown IP address (192.81.209.195). The files are then sent to the victim's machine using netcat.",
+        "severity": "CRITICAL",
+        "command": "nc"
+      }
+    ],
+    "behavioral_chain": "The package is downloading files from an external IP address (196.188.125.134) and sending them to an unknown IP address (192.81.209.195). The files are then sent to the victim's machine. The package is collecting sensitive data from the victim's machine by reading files and environment variables.",
+    "legitimacy_assessment": ""
+  },
+  "recommendations": {
+    "immediate_action": "DO NOT INSTALL — Remove immediately if already installed",
+    "remediation_steps": [
+      "Review package source code and dependencies",
+      "Monitor network traffic for suspicious outbound connections",
+      "Report to npm security team if confirmed malicious"
+    ]
+  },
+  "detailed_analysis": {
+    "semantic_detection": {
+      "behaviors_found": 2,
+      "categories": [
+        "network_exfiltration",
+        "sensitive_data_collection"
+      ],
+      "highest_confidence": 0.9
+    },
+    "verification_analysis": {
+      "chain_narrative": "The package is downloading files from an external IP address (196.188.125.134) and sending them to an unknown IP address (192.81.209.195). The files are then sent to the victim's machine. The package is collecting sensitive data from the victim's machine by reading files and environment variables.",
+      "chain_score": 0.89,
+      "legitimacy_mismatch": true,
+      "verification_available": true
+    }
+  },
+  "metadata": {
+    "analysis_version": "semantic_v2.0",
+    "model": "deepseek-coder-6.7b-instruct",
+    "ground_truth_label": "malicious"
+  }
+}

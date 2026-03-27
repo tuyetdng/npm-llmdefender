@@ -1,0 +1,75 @@
+{
+  "package_name": "1ru-cache",
+  "version": "0.0.1",
+  "scan_timestamp": "2026-03-27T14:31:22.876479",
+  "final_verdict": {
+    "classification": "MALICIOUS",
+    "confidence": 0.804,
+    "risk_level": "CRITICAL"
+  },
+  "executive_summary": "The package '1ru-cache' is installed with a post-install script that installs a backdoor and hardcodes an external IP address. The backdoor is a reverse shell that connects to an external IP address (34.121.250.204). The detected behaviors have no legitimate justification based on the package's stated purpose.",
+  "threat_profile": {
+    "attack_type": "Backdoor Installation",
+    "primary_tactics": [
+      "Persistence (Backdoor)",
+      "Hardcoded External Ip"
+    ],
+    "severity_factors": [
+      "The package.json file contains a post-install script that installs a backdoor.",
+      "The package.json file contains a hardcoded external IP address."
+    ],
+    "attack_vector_iocs": [
+      "postinstallhook",
+      "bash-c",
+      "34.121.250.204:4444",
+      "reverseshell"
+    ]
+  },
+  "evidence_summary": {
+    "malicious_indicators": [
+      {
+        "type": "Backdoor Installation",
+        "description": "The post-install script in the package.json file contains a reverse shell command that connects to an external IP address (34.121.250.204).",
+        "severity": "CRITICAL",
+        "command": "bash-c"
+      },
+      {
+        "type": "Hardcoded External Ip",
+        "description": "The post-install script in the package.json file contains the hardcoded external IP address '34.121.250.204'.",
+        "severity": "CRITICAL",
+        "command": "34.121.250.204"
+      }
+    ],
+    "behavioral_chain": "The package '1ru-cache' is installed with a post-install script that installs a backdoor and hardcodes an external IP address. The backdoor is a reverse shell that connects to an external IP address (34.121.250.204).",
+    "legitimacy_assessment": "The package '1ru-cache' does not have a description or README file, indicating that it is not a legitimate package."
+  },
+  "recommendations": {
+    "immediate_action": "DO NOT INSTALL — Remove immediately if already installed",
+    "remediation_steps": [
+      "Review package source code and dependencies",
+      "Audit system for unauthorized processes or cron jobs",
+      "Report to npm security team if confirmed malicious"
+    ]
+  },
+  "detailed_analysis": {
+    "semantic_detection": {
+      "behaviors_found": 2,
+      "categories": [
+        "backdoor_installation",
+        "hardcoded_external_IP"
+      ],
+      "highest_confidence": 0.96
+    },
+    "verification_analysis": {
+      "chain_narrative": "The package '1ru-cache' is installed with a post-install script that installs a backdoor and hardcodes an external IP address. The backdoor is a reverse shell that connects to an external IP address (34.121.250.204).",
+      "chain_score": 0.7,
+      "legitimacy_mismatch": true,
+      "verification_available": true
+    }
+  },
+  "metadata": {
+    "analysis_version": "semantic_v2.0",
+    "model": "deepseek-coder-6.7b-instruct",
+    "ground_truth_label": "malicious"
+  }
+}

