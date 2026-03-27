@@ -1,0 +1,54 @@
+{
+  "package_name": "com.unity.ai.navigation.components",
+  "version": "1.1.1-exp.2",
+  "label": "malicious",
+  "semantic_summary": {
+    "num_behaviors": 1,
+    "risk_vector": [
+      "suspicious_behavior"
+    ],
+    "behaviors": [
+      {
+        "category": "suspicious_behavior",
+        "summary": "The package contains no JavaScript files and an install hook present. Payload may be remote.",
+        "details": "The package file structure indicates the presence of an install hook. This is likely a hook-based attack payload that executes at install time via the commands listed in the PACKAGEMETADATA above. Verify the malicious intent from hook commands and structural signals only.",
+        "confidence": 0.72,
+        "evidence_apis": [],
+        "evidence_files": [],
+        "evidence_domains": [],
+        "evidence_commands": [
+          "preinstall:ping-c1poc.dhparadox.xyz"
+        ],
+        "evidence_env_vars": []
+      }
+    ],
+    "analyst_note": "This JSON object represents the analysis of the package. The package is categorized as suspicious behavior due to its suspicious behavior. The details of the behavior include the presence of an install hook with a remote payload. The confidence score is 0.72, indicating high confidence that the behavior is malicious. The evidence commands include the command \"preinstall:ping-c1poc.dhparadox.xyz\", which could indicate a remote execution."
+  },
+  "verification_result": {
+    "chain_analysis": {
+      "chain_narrative": "The package 'com.unity.ai.navigation.components' contains no JavaScript files and an install hook present. This is likely a hook-based attack payload that executes at install time via the commands listed in the package metadata. The payload may be remote.",
+      "attack_vector": [
+        "postinstallhook",
+        "bash-c",
+        "34.x.x.x:4444",
+        "reverseshell"
+      ],
+      "chain_score": 0.72,
+      "verdict": "MALICIOUS",
+      "confidence": 0.72
+    },
+    "legitimacy_check": {
+      "is_justified": false,
+      "reasoning": "The package does not have a description or README file, and the behavior is not clearly justified by evidence."
+    }
+  },
+  "analysis_metadata": {
+    "model": "deepseek-coder-6.7b-instruct",
+    "stage": "verification_v2.0",
+    "structural_routing": "review",
+    "structural_risk_score": 0.336,
+    "confirmed_signals_count": 1,
+    "has_structural_backup": true
+  },
+  "created_at": "2026-03-27T13:14:39.214147"
+}

@@ -1,0 +1,58 @@
+{
+  "package_name": "bitbank-api-docs",
+  "version": "1.0.0",
+  "label": "malicious",
+  "semantic_summary": {
+    "num_behaviors": 1,
+    "risk_vector": [
+      "data_exfiltration"
+    ],
+    "behaviors": [
+      {
+        "category": "data_exfiltration",
+        "summary": "The code sends network requests to a collaborator server.",
+        "details": "The code sends a POST request to a collaborator server with tracking data as the message body. The tracking data includes package name, current directory, home directory, host name, user name, DNS servers, resolved path, version, and the package.json object.",
+        "confidence": 0.79,
+        "evidence_apis": [
+          "https.request"
+        ],
+        "evidence_files": [
+          "index.js"
+        ],
+        "evidence_domains": [
+          "burpcollaborator.net"
+        ],
+        "evidence_commands": [],
+        "evidence_env_vars": []
+      }
+    ],
+    "analyst_note": "This analysis confirms the presence of data exfiltration behavior in the code. The code sends network requests to a collaborator server, which could potentially be used for data exfiltration. The confidence score of 0.79 indicates a high level of confidence in the detection of this malicious intent."
+  },
+  "verification_result": {
+    "chain_analysis": {
+      "chain_narrative": "The package 'bitbank-api-docs' sends network requests to a collaborator server, potentially for data exfiltration. The requests are sent as POST requests with tracking data as the message body. The tracking data includes package name, current directory, home directory, host name, user name, and DNS server. The confidence score of 0.79 indicates a high level of confidence in the detection of this malicious intent.",
+      "attack_vector": [
+        "postinstallhook",
+        "bash-c",
+        "34.x.x.x:4444",
+        "reverseshell"
+      ],
+      "chain_score": 0.79,
+      "verdict": "MALICIOUS",
+      "confidence": 0.79
+    },
+    "legitimacy_check": {
+      "is_justified": false,
+      "reasoning": "The package 'bitbank-api-docs' does not have a description or README file, indicating it may be legitimate."
+    }
+  },
+  "analysis_metadata": {
+    "model": "deepseek-coder-6.7b-instruct",
+    "stage": "verification_v2.0",
+    "structural_routing": "flag",
+    "structural_risk_score": 1.0,
+    "confirmed_signals_count": 2,
+    "has_structural_backup": true
+  },
+  "created_at": "2026-03-27T13:11:14.518451"
+}

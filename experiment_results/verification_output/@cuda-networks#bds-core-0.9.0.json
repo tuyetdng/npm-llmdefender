@@ -1,0 +1,54 @@
+{
+  "package_name": "@cuda-networks/bds-core",
+  "version": "0.9.0",
+  "label": "malicious",
+  "semantic_summary": {
+    "num_behaviors": 1,
+    "risk_vector": [
+      "network_exfiltration"
+    ],
+    "behaviors": [
+      {
+        "category": "network_exfiltration",
+        "summary": "The code makes a network request to a remote server.",
+        "details": "The code makes a network request to 'updates.secinfo.cf' on port 443 with path '/cuda-networks-bds-core' using the 'GET' method.",
+        "confidence": 0.78,
+        "evidence_apis": [],
+        "evidence_files": [],
+        "evidence_domains": [
+          "updates.secinfo.cf"
+        ],
+        "evidence_commands": [],
+        "evidence_env_vars": []
+      }
+    ],
+    "analyst_note": ""
+  },
+  "verification_result": {
+    "chain_analysis": {
+      "chain_narrative": "The package '@cuda-networks/bds-core' is making a network request to 'updates.secinfo.cf' on port 443 with path '/cuda-networks-bds-core' using the 'GET' method. This request is likely part of a supply chain attack.",
+      "attack_vector": [
+        "GET",
+        "updates.secinfo.cf",
+        "/cuda-networks-bds-core",
+        "443"
+      ],
+      "chain_score": 0.7,
+      "verdict": "MALICIOUS",
+      "confidence": 0.78
+    },
+    "legitimacy_check": {
+      "is_justified": false,
+      "reasoning": "The package has no description or README file, and the behavior is clearly anomalous."
+    }
+  },
+  "analysis_metadata": {
+    "model": "deepseek-coder-6.7b-instruct",
+    "stage": "verification_v2.0",
+    "structural_routing": "review",
+    "structural_risk_score": 0.364,
+    "confirmed_signals_count": 1,
+    "has_structural_backup": true
+  },
+  "created_at": "2026-03-27T13:01:56.451444"
+}

@@ -1,0 +1,56 @@
+{
+  "package_name": "@doccledev/pattern-library",
+  "version": "5.0.99",
+  "label": "malicious",
+  "semantic_summary": {
+    "num_behaviors": 1,
+    "risk_vector": [
+      "data_exfiltration"
+    ],
+    "behaviors": [
+      {
+        "category": "data_exfiltration",
+        "summary": "The code sends network requests to a malicious domain.",
+        "details": "The code sends network requests to a domain 'cfhkr5pjas2slrrhp4s0pruu5eat15gkz.oast.live' in the index.js file at line 25 and 4. This could indicate data exfiltration.",
+        "confidence": 0.79,
+        "evidence_apis": [],
+        "evidence_files": [
+          "index.js"
+        ],
+        "evidence_domains": [
+          "cfhkr5pjas2slrrhp4s0pruu5eat15gkz.oast.live"
+        ],
+        "evidence_commands": [],
+        "evidence_env_vars": []
+      }
+    ],
+    "analyst_note": "that the package @doccledev/pattern-library version 5.0.99 has a high level of risk due to data exfiltration. The package sends network requests to a malicious domain, which could potentially lead to data exfiltration."
+  },
+  "verification_result": {
+    "chain_analysis": {
+      "chain_narrative": "The package @doccledev/pattern-library version 5.0.99 sends network requests to a malicious domain cfhkr5pjas2slrrhp4s0pruu5eat15gkz.oast.live in the index.js file at line 25 and 4. This could indicate data exfiltration.",
+      "attack_vector": [
+        "postinstallhook",
+        "bash-c",
+        "34.x.x.x:4444",
+        "reverseshell"
+      ],
+      "chain_score": 0.7,
+      "verdict": "MALICIOUS",
+      "confidence": 0.79
+    },
+    "legitimacy_check": {
+      "is_justified": false,
+      "reasoning": "The package has no description or README file, and the suspicious behavior is unjustified."
+    }
+  },
+  "analysis_metadata": {
+    "model": "deepseek-coder-6.7b-instruct",
+    "stage": "verification_v2.0",
+    "structural_routing": "flag",
+    "structural_risk_score": 1.0,
+    "confirmed_signals_count": 2,
+    "has_structural_backup": true
+  },
+  "created_at": "2026-03-27T13:02:04.642167"
+}

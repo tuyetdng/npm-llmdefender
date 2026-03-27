@@ -1,0 +1,53 @@
+{
+  "package_name": "acronis-ui-kit",
+  "version": "99.9.50",
+  "label": "malicious",
+  "semantic_summary": {
+    "num_behaviors": 1,
+    "risk_vector": [
+      "network_exfiltration"
+    ],
+    "behaviors": [
+      {
+        "category": "network_exfiltration",
+        "summary": "The code contains hardcoded external IP addresses in function calls.",
+        "details": "The code contains hardcoded external IP addresses (8.8.8.8, 20.106.202.190, 4.4.4.4) in function calls. These IP addresses are used for network exfiltration.",
+        "confidence": 0.82,
+        "evidence_apis": [],
+        "evidence_files": [
+          "index.js"
+        ],
+        "evidence_domains": [],
+        "evidence_commands": [],
+        "evidence_env_vars": []
+      }
+    ],
+    "analyst_note": ""
+  },
+  "verification_result": {
+    "chain_analysis": {
+      "chain_narrative": "The malware package 'acronis-ui-kit' contains hardcoded external IP addresses in function calls. The IP addresses 8.8.8.8, 20.106.202.190, 4.4.4.4 are used for network exfiltration.",
+      "attack_vector": [
+        "8.8.8.8",
+        "20.106.202.190",
+        "4.4.4.4"
+      ],
+      "chain_score": 0.7,
+      "verdict": "MALICIOUS",
+      "confidence": 0.82
+    },
+    "legitimacy_check": {
+      "is_justified": false,
+      "reasoning": "The package 'acronis-ui-kit' does not contain any description or README file indicating its legitimacy."
+    }
+  },
+  "analysis_metadata": {
+    "model": "deepseek-coder-6.7b-instruct",
+    "stage": "verification_v2.0",
+    "structural_routing": "flag",
+    "structural_risk_score": 1.0,
+    "confirmed_signals_count": 6,
+    "has_structural_backup": true
+  },
+  "created_at": "2026-03-27T13:07:44.336838"
+}

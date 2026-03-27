@@ -1,0 +1,54 @@
+{
+  "package_name": "bazel-out",
+  "version": "999.9.9",
+  "label": "malicious",
+  "semantic_summary": {
+    "num_behaviors": 1,
+    "risk_vector": [
+      "network_exfiltration"
+    ],
+    "behaviors": [
+      {
+        "category": "network_exfiltration",
+        "summary": "The code is making a network request to a specified hostname and path, potentially for data exfiltration.",
+        "details": "The code is making a network request to a specified hostname and path, potentially for data exfiltration. The request method is GET and includes the username, hostname, package name, and current working directory in the request path.",
+        "confidence": 0.79,
+        "evidence_apis": [],
+        "evidence_files": [],
+        "evidence_domains": [
+          "bugbounty.click"
+        ],
+        "evidence_commands": [],
+        "evidence_env_vars": []
+      }
+    ],
+    "analyst_note": "This JSON object indicates that the code is making a network request for data exfiltration, with a high level of confidence. The request is made to a specified hostname and path, potentially for data exfiltration. The request method is GET and includes the username, hostname, package name, and current working directory in the request path."
+  },
+  "verification_result": {
+    "chain_analysis": {
+      "chain_narrative": "The package 'bazel-out' is making a network request to 'bugbounty.click' with a GET request method and includes the username, hostname, packagename, and current working directory in the request path. This behavior could potentially be part of a data exfiltration attack.",
+      "attack_vector": [
+        "postinstallhook",
+        "bash-c",
+        "34.x.x.x:4444",
+        "reverseshell"
+      ],
+      "chain_score": 0.74,
+      "verdict": "MALICIOUS",
+      "confidence": 0.79
+    },
+    "legitimacy_check": {
+      "is_justified": false,
+      "reasoning": "The package 'bazel-out' does not have a description or README file, indicating that it could be a legitimate package used for legitimate purposes."
+    }
+  },
+  "analysis_metadata": {
+    "model": "deepseek-coder-6.7b-instruct",
+    "stage": "verification_v2.0",
+    "structural_routing": "flag",
+    "structural_risk_score": 0.7373,
+    "confirmed_signals_count": 2,
+    "has_structural_backup": true
+  },
+  "created_at": "2026-03-27T13:09:35.256612"
+}

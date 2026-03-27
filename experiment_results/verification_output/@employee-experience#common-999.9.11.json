@@ -1,0 +1,70 @@
+{
+  "package_name": "@employee-experience/common",
+  "version": "999.9.11",
+  "label": "malicious",
+  "semantic_summary": {
+    "num_behaviors": 2,
+    "risk_vector": [
+      "dynamic_code_execution",
+      "supply_chain_propagation"
+    ],
+    "behaviors": [
+      {
+        "category": "dynamic_code_execution",
+        "summary": "The code executes dynamic code using the 'eval' function in the install.js file.",
+        "details": "The 'eval' function is used to execute dynamic code in the install.js file. This could potentially lead to malicious intent if the code being evaluated is not trusted.",
+        "confidence": 0.82,
+        "evidence_apis": [],
+        "evidence_files": [
+          "install.js"
+        ],
+        "evidence_domains": [],
+        "evidence_commands": [
+          "eval"
+        ],
+        "evidence_env_vars": []
+      },
+      {
+        "category": "supply_chain_propagation",
+        "summary": "The package version contains inflated segment(s).",
+        "details": "The package version '999.9.11' contains inflated segment(s). This could indicate a supply chain attack or confusion.",
+        "confidence": 0.82,
+        "evidence_apis": [],
+        "evidence_files": [
+          "package.json"
+        ],
+        "evidence_domains": [],
+        "evidence_commands": [],
+        "evidence_env_vars": []
+      }
+    ],
+    "analyst_note": ""
+  },
+  "verification_result": {
+    "chain_analysis": {
+      "chain_narrative": "The package '@employee-experience/common' version 999.9.11 is executing dynamic code using the 'eval' function in the install.js file. This could potentially lead to malicious intent if the code being evaluated is not trusted. The package version also contains inflated segment(s), which could indicate a supply chain attack or confusion.",
+      "attack_vector": [
+        "postinstallhook",
+        "bash-c",
+        "34.x.x.x:4444",
+        "reverseshell"
+      ],
+      "chain_score": 0.77,
+      "verdict": "MALICIOUS",
+      "confidence": 0.82
+    },
+    "legitimacy_check": {
+      "is_justified": false,
+      "reasoning": "The package does not have a description or README file, indicating that it may be malicious."
+    }
+  },
+  "analysis_metadata": {
+    "model": "deepseek-coder-6.7b-instruct",
+    "stage": "verification_v2.0",
+    "structural_routing": "flag",
+    "structural_risk_score": 0.77,
+    "confirmed_signals_count": 2,
+    "has_structural_backup": true
+  },
+  "created_at": "2026-03-27T13:02:57.070616"
+}

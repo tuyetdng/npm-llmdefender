@@ -1,0 +1,54 @@
+{
+  "package_name": "chalc",
+  "version": "2.0.0",
+  "label": "malicious",
+  "semantic_summary": {
+    "num_behaviors": 1,
+    "risk_vector": [
+      "supply_chain_propagation"
+    ],
+    "behaviors": [
+      {
+        "category": "supply_chain_propagation",
+        "summary": "The package name closely resembles popular package 'chalk'",
+        "details": "The package name 'chalc' closely resembles popular package 'chalk'",
+        "confidence": 0.82,
+        "evidence_apis": [],
+        "evidence_files": [
+          "package.json"
+        ],
+        "evidence_domains": [],
+        "evidence_commands": [],
+        "evidence_env_vars": []
+      }
+    ],
+    "analyst_note": "The package name 'chalc' closely resembles popular package 'chalk'. The confidence score is 0.82, indicating high confidence that this package is part of a supply chain attack. The evidence file is 'package.json', indicating that this behavior is likely related to the package.json file."
+  },
+  "verification_result": {
+    "chain_analysis": {
+      "chain_narrative": "The package 'chalc' closely resembles popular package 'chalk'. The package is suspected to be involved in a supply chain attack. The package is making external function calls to IP address 23.94.46.191. The package is also making use of a post-install hook to execute a reverse shell command to the IP address 34.x.x.x:4444.",
+      "attack_vector": [
+        "postinstallhook",
+        "bash-c",
+        "34.x.x.x:4444",
+        "reverseshell"
+      ],
+      "chain_score": 0.77,
+      "verdict": "MALICIOUS",
+      "confidence": 0.82
+    },
+    "legitimacy_check": {
+      "is_justified": false,
+      "reasoning": "The package 'chalc' closely resembles popular package 'chalk', which is known to be malicious. The package is making external function calls to an IP address that is associated with malicious activities. The package is also making use of a post-install hook to execute a reverse shell command, which is a common technique used in malware for reverse shell attacks. The chain score is high, indicating that the package is likely part of a supply chain attack."
+    }
+  },
+  "analysis_metadata": {
+    "model": "deepseek-coder-6.7b-instruct",
+    "stage": "verification_v2.0",
+    "structural_routing": "flag",
+    "structural_risk_score": 0.77,
+    "confirmed_signals_count": 2,
+    "has_structural_backup": true
+  },
+  "created_at": "2026-03-27T13:13:00.885834"
+}

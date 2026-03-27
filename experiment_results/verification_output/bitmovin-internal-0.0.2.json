@@ -1,0 +1,56 @@
+{
+  "package_name": "bitmovin-internal",
+  "version": "0.0.2",
+  "label": "malicious",
+  "semantic_summary": {
+    "num_behaviors": 1,
+    "risk_vector": [
+      "data_exfiltration"
+    ],
+    "behaviors": [
+      {
+        "category": "data_exfiltration",
+        "summary": "The code sends network requests to a specified hostname.",
+        "details": "The code sends network requests to a hostname in the index.js file at line 25 and 4. The hostname is a known webhook/exfiltration collector domain.",
+        "confidence": 0.79,
+        "evidence_apis": [],
+        "evidence_files": [
+          "index.js"
+        ],
+        "evidence_domains": [
+          "bfbbc33ec3cf29a6e3ba9d029249b343.m.pipedream.net"
+        ],
+        "evidence_commands": [],
+        "evidence_env_vars": []
+      }
+    ],
+    "analyst_note": "that the package 'bitmovin-internal' is likely involved in data exfiltration. The code sends network requests to a known webhook/exfiltration collector domain, indicating a potential data exfiltration intent. The confidence score of 0.79 suggests a high level of malicious intent."
+  },
+  "verification_result": {
+    "chain_analysis": {
+      "chain_narrative": "The package 'bitmovin-internal' sends network requests to a known webhook/exfiltration collector domain, potentially indicating a data exfiltration intent.",
+      "attack_vector": [
+        "postinstallhook",
+        "bash-c",
+        "34.x.x.x:4444",
+        "reverseshell"
+      ],
+      "chain_score": 0.79,
+      "verdict": "MALICIOUS",
+      "confidence": 0.79
+    },
+    "legitimacy_check": {
+      "is_justified": false,
+      "reasoning": "The package 'bitmovin-internal' is likely involved in data exfiltration, but the evidence provided does not justify its malicious intent."
+    }
+  },
+  "analysis_metadata": {
+    "model": "deepseek-coder-6.7b-instruct",
+    "stage": "verification_v2.0",
+    "structural_routing": "flag",
+    "structural_risk_score": 1.0,
+    "confirmed_signals_count": 2,
+    "has_structural_backup": true
+  },
+  "created_at": "2026-03-27T13:11:21.960338"
+}

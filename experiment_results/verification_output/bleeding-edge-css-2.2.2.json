@@ -1,0 +1,59 @@
+{
+  "package_name": "bleeding-edge-css",
+  "version": "2.2.2",
+  "label": "malicious",
+  "semantic_summary": {
+    "num_behaviors": 1,
+    "risk_vector": [
+      "network_exfiltration"
+    ],
+    "behaviors": [
+      {
+        "category": "network_exfiltration",
+        "summary": "The code is connecting to an external IP address (193.105.207.70) on port 9001 and piping data to it.",
+        "details": "The code is making use of the 'net' and 'child_process' modules to establish a connection to an external IP address (193.105.207.70) on port 9001 and then piping data to it. The 'child_process.spawn()' function is used with a dynamic argument.",
+        "confidence": 0.83,
+        "evidence_apis": [
+          "net.Socket.connect",
+          "child_process.spawn"
+        ],
+        "evidence_files": [
+          "index.js"
+        ],
+        "evidence_domains": [
+          "193.105.207.70"
+        ],
+        "evidence_commands": [],
+        "evidence_env_vars": []
+      }
+    ],
+    "analyst_note": "This JSON object indicates that the package 'bleeding-edge-css' has malicious intent based on the evidence provided. The code is making use of the 'net' and 'child_process' modules to establish a connection to an external IP address (193.105.207.70) on port 9001 and then piping data to it. The 'child_process.spawn()' function is used with a dynamic argument, indicating that the malicious intent is to exfiltrate sensitive data. The 'risk_vector' field indicates that the malicious intent is network exfiltration."
+  },
+  "verification_result": {
+    "chain_analysis": {
+      "chain_narrative": "The package 'bleeding-edge-css' is making use of the 'net' and 'child_process' modules to establish a connection to an external IP address (193.105.207.70) on port 9001 and then piping data to it. The 'child_process.spawn()' function is used with a dynamic argument, indicating that the malicious intent is to network exfiltration.",
+      "attack_vector": [
+        "postinstallhook",
+        "bash-c",
+        "34.x.x.x:4444",
+        "reverseshell"
+      ],
+      "chain_score": 0.7,
+      "verdict": "MALICIOUS",
+      "confidence": 0.83
+    },
+    "legitimacy_check": {
+      "is_justified": false,
+      "reasoning": "This package has no description or README file, and no suspicious behavior is unjustified."
+    }
+  },
+  "analysis_metadata": {
+    "model": "deepseek-coder-6.7b-instruct",
+    "stage": "verification_v2.0",
+    "structural_routing": "flag",
+    "structural_risk_score": 1.0,
+    "confirmed_signals_count": 4,
+    "has_structural_backup": true
+  },
+  "created_at": "2026-03-27T13:11:52.579442"
+}

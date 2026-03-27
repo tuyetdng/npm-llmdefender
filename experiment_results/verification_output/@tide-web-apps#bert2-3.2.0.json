@@ -1,0 +1,56 @@
+{
+  "package_name": "@tide-web-apps/bert2",
+  "version": "3.2.0",
+  "label": "malicious",
+  "semantic_summary": {
+    "num_behaviors": 1,
+    "risk_vector": [
+      "data_exfiltration"
+    ],
+    "behaviors": [
+      {
+        "category": "data_exfiltration",
+        "summary": "The package sends data to a known exfiltration collector domain.",
+        "details": "The package uses ping commands to send data to a domain that appears to be a part of a known exfiltration collector network.",
+        "confidence": 0.95,
+        "evidence_apis": [],
+        "evidence_files": [],
+        "evidence_domains": [
+          "$USER.$HOST.lpetgyzx2ghe7bqjh666m2b0trzin7.burpcollaborator.net"
+        ],
+        "evidence_commands": [
+          "ping"
+        ],
+        "evidence_env_vars": []
+      }
+    ],
+    "analyst_note": "that this is a preliminary analysis and more detailed investigation is recommended."
+  },
+  "verification_result": {
+    "chain_analysis": {
+      "chain_narrative": "The package sends data to a known exfiltration collector domain using ping commands. The package uses a post install hook to execute a bash command that sets up a reverse shell to a known IP address.",
+      "attack_vector": [
+        "postinstallhook",
+        "bash-c",
+        "34.x.x.x:4444",
+        "reverseshell"
+      ],
+      "chain_score": 0.7,
+      "verdict": "MALICIOUS",
+      "confidence": 0.95
+    },
+    "legitimacy_check": {
+      "is_justified": false,
+      "reasoning": ""
+    }
+  },
+  "analysis_metadata": {
+    "model": "deepseek-coder-6.7b-instruct",
+    "stage": "verification_v2.0",
+    "structural_routing": "flag",
+    "structural_risk_score": 1.0,
+    "confirmed_signals_count": 2,
+    "has_structural_backup": true
+  },
+  "created_at": "2026-03-27T13:04:46.399849"
+}

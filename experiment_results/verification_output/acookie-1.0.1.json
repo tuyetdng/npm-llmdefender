@@ -1,0 +1,60 @@
+{
+  "package_name": "acookie",
+  "version": "1.0.1",
+  "label": "malicious",
+  "semantic_summary": {
+    "num_behaviors": 1,
+    "risk_vector": [
+      "data_exfiltration"
+    ],
+    "behaviors": [
+      {
+        "category": "data_exfiltration",
+        "summary": "The code sends sensitive data to a remote server.",
+        "details": "The code sends environment variables, hostname, and other system information to a remote server via HTTPS POST request.",
+        "confidence": 0.86,
+        "evidence_apis": [
+          "https.request"
+        ],
+        "evidence_files": [
+          "index.js"
+        ],
+        "evidence_domains": [
+          "f5778d1d81cc30c39dcdd0da5ca1d49a.m.pipedream.net"
+        ],
+        "evidence_commands": [],
+        "evidence_env_vars": [
+          "PORT"
+        ]
+      }
+    ],
+    "analyst_note": ""
+  },
+  "verification_result": {
+    "chain_analysis": {
+      "chain_narrative": "The attack chain involves the sending of sensitive data to a remote server via HTTPS POST request from a known webhook/exfiltration collector domain. The data sent includes environment variables, hostname, and other system information.",
+      "attack_vector": [
+        "postinstallhook",
+        "bash-c",
+        "34.x.x.x:4444",
+        "reverseshell"
+      ],
+      "chain_score": 0.7,
+      "verdict": "MALICIOUS",
+      "confidence": 0.86
+    },
+    "legitimacy_check": {
+      "is_justified": false,
+      "reasoning": ""
+    }
+  },
+  "analysis_metadata": {
+    "model": "deepseek-coder-6.7b-instruct",
+    "stage": "verification_v2.0",
+    "structural_routing": "flag",
+    "structural_risk_score": 0.9973,
+    "confirmed_signals_count": 2,
+    "has_structural_backup": true
+  },
+  "created_at": "2026-03-27T13:07:36.396934"
+}

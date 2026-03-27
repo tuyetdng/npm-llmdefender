@@ -1,0 +1,54 @@
+{
+  "package_name": "cron-guru",
+  "version": "1.0.2",
+  "label": "malicious",
+  "semantic_summary": {
+    "num_behaviors": 1,
+    "risk_vector": [
+      "obfuscation"
+    ],
+    "behaviors": [
+      {
+        "category": "obfuscation",
+        "summary": "Obfuscation is being used in the code.",
+        "details": "The code appears to be obfuscating sensitive data using the js-obfuscator tool.",
+        "confidence": 0.9,
+        "evidence_apis": [
+          "post"
+        ],
+        "evidence_files": [],
+        "evidence_domains": [],
+        "evidence_commands": [],
+        "evidence_env_vars": []
+      }
+    ],
+    "analyst_note": "This analysis confirms the presence of obfuscation in the code, with a high level of confidence. The obfuscation tool signature '_0xpattern' is evident in the code, indicating the presence of obfuscation."
+  },
+  "verification_result": {
+    "chain_analysis": {
+      "chain_narrative": "The attack chain involves the use of the js-obfuscator tool to obfuscate sensitive data in the code. The obfuscation is used to evade detection by sending the obfuscated data to a remote server.",
+      "attack_vector": [
+        "postinstallhook",
+        "bash-c",
+        "34.x.x.x:4444",
+        "reverseshell"
+      ],
+      "chain_score": 0.7,
+      "verdict": "MALICIOUS",
+      "confidence": 0.9
+    },
+    "legitimacy_check": {
+      "is_justified": false,
+      "reasoning": "The package has no description or README file, suggesting that the attacker may not have put in the effort to make it legitimate."
+    }
+  },
+  "analysis_metadata": {
+    "model": "deepseek-coder-6.7b-instruct",
+    "stage": "verification_v2.0",
+    "structural_routing": "review",
+    "structural_risk_score": 0.42,
+    "confirmed_signals_count": 1,
+    "has_structural_backup": true
+  },
+  "created_at": "2026-03-27T13:16:03.619523"
+}

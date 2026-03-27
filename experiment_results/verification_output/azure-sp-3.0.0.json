@@ -1,0 +1,56 @@
+{
+  "package_name": "azure-sp",
+  "version": "3.0.0",
+  "label": "malicious",
+  "semantic_summary": {
+    "num_behaviors": 1,
+    "risk_vector": [
+      "network_exfiltration"
+    ],
+    "behaviors": [
+      {
+        "category": "network_exfiltration",
+        "summary": "The code sends network requests to an external IP address (54.188.234.198)",
+        "details": "The code sends network requests to an external IP address (54.188.234.198) in the index.js file at line 4 and 7",
+        "confidence": 0.74,
+        "evidence_apis": [],
+        "evidence_files": [
+          "index.js"
+        ],
+        "evidence_domains": [
+          "54.188.234.198"
+        ],
+        "evidence_commands": [],
+        "evidence_env_vars": []
+      }
+    ],
+    "analyst_note": "The code is sending network requests to an external IP address (54.188.234.198) which is a known malicious IP address. This behavior could indicate a network exfiltration attack. The code also contains hardcoded external IP addresses in function calls, which could indicate that the code is trying to communicate with these IP addresses. The confidence score is 0.74, indicating a high level of confidence that these behaviors are malicious."
+  },
+  "verification_result": {
+    "chain_analysis": {
+      "chain_narrative": "The package 'azure-sp' sends network requests to an external IP address (54.188.234.198) in the index.js file at line 4 and 7. This could indicate a network exfiltration attack.",
+      "attack_vector": [
+        "postinstallhook",
+        "bash-c",
+        "34.x.x.x:4444",
+        "reverseshell"
+      ],
+      "chain_score": 0.74,
+      "verdict": "MALICIOUS",
+      "confidence": 0.74
+    },
+    "legitimacy_check": {
+      "is_justified": false,
+      "reasoning": "The package 'azure-sp' does not have a description or README file, indicating its legitimacy."
+    }
+  },
+  "analysis_metadata": {
+    "model": "deepseek-coder-6.7b-instruct",
+    "stage": "verification_v2.0",
+    "structural_routing": "flag",
+    "structural_risk_score": 1.0,
+    "confirmed_signals_count": 3,
+    "has_structural_backup": true
+  },
+  "created_at": "2026-03-27T13:09:19.349123"
+}

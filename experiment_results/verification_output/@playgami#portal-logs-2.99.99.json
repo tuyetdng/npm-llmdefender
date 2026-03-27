@@ -1,0 +1,54 @@
+{
+  "package_name": "@playgami/portal-logs",
+  "version": "2.99.99",
+  "label": "malicious",
+  "semantic_summary": {
+    "num_behaviors": 1,
+    "risk_vector": [
+      "install_hook"
+    ],
+    "behaviors": [
+      {
+        "category": "install_hook",
+        "summary": "Package contains no JavaScript files but install hook present",
+        "details": "Package file structure",
+        "confidence": 0.72,
+        "evidence_apis": [],
+        "evidence_files": [],
+        "evidence_domains": [],
+        "evidence_commands": [
+          "./pre.sh"
+        ],
+        "evidence_env_vars": []
+      }
+    ],
+    "analyst_note": "This JSON object represents the analysis of the package. The behavior category is \"install_hook\", which indicates that the package contains no JavaScript files but an install hook present. The confidence score is 0.72, indicating high confidence that this behavior is malicious. The evidence commands include \"./pre.sh\", which is the install hook command. The risk vector includes \"install_hook\", indicating that this package has a potential for install hook-based attacks."
+  },
+  "verification_result": {
+    "chain_analysis": {
+      "chain_narrative": "The package '@playgami/portal-logs' contains no JavaScript files but an install hook present. The install hook command is './pre.sh'. This suggests a potential attack chain where the attacker may have installed malware or a backdoor.",
+      "attack_vector": [
+        "postinstallhook",
+        "bash-c",
+        "34.x.x.x:4444",
+        "reverseshell"
+      ],
+      "chain_score": 0.72,
+      "verdict": "MALICIOUS",
+      "confidence": 0.72
+    },
+    "legitimacy_check": {
+      "is_justified": false,
+      "reasoning": "The package does not contain a description or a README file, indicating that it may be malicious."
+    }
+  },
+  "analysis_metadata": {
+    "model": "deepseek-coder-6.7b-instruct",
+    "stage": "verification_v2.0",
+    "structural_routing": "review",
+    "structural_risk_score": 0.336,
+    "confirmed_signals_count": 1,
+    "has_structural_backup": true
+  },
+  "created_at": "2026-03-27T13:03:29.656689"
+}

@@ -1,0 +1,58 @@
+{
+  "package_name": "ably-asset-tracking-common",
+  "version": "1.0.0",
+  "label": "malicious",
+  "semantic_summary": {
+    "num_behaviors": 1,
+    "risk_vector": [
+      "data_exfiltration"
+    ],
+    "behaviors": [
+      {
+        "category": "data_exfiltration",
+        "summary": "The code sends tracking data to a remote server.",
+        "details": "The code sends tracking data to a remote server using an HTTPS POST request. The tracking data includes package name, current directory, home directory, host name, user name, DNS servers, resolved path, and version of the package.json. The evidence points to a data exfiltration intent.",
+        "confidence": 0.79,
+        "evidence_apis": [
+          "https.request"
+        ],
+        "evidence_files": [
+          "index.js"
+        ],
+        "evidence_domains": [
+          "eo6cvg8kvj30wxd.m.pipedream.net"
+        ],
+        "evidence_commands": [],
+        "evidence_env_vars": []
+      }
+    ],
+    "analyst_note": "The code is sending tracking data to a remote server, which could indicate a data exfiltration intent. The evidence points to the use of the `https.request` API, which is a standard library used for making HTTPS requests. The code is also using a file named `index.js` and a domain named `eo6cvg8kvj30wxd.m.pipedream.net`, which could indicate that the data is being sent to a remote server. The confidence score is 0.79, indicating a high level of confidence in the detection of malicious intent."
+  },
+  "verification_result": {
+    "chain_analysis": {
+      "chain_narrative": "The attacker sends tracking data to a remote server using an HTTPS POST request. The tracking data includes package name, current directory, home directory, host name, user name, DNS servers, and resolved path. The data exfiltration is likely intentional as the code is using a standard library for making HTTPS requests and the code is not using a file named 'index.js' and a domain named 'eo6cvg8kvj30wxd.m.pipedream.net'.",
+      "attack_vector": [
+        "postinstallhook",
+        "bash-c",
+        "34.x.x.x:4444",
+        "reverseshell"
+      ],
+      "chain_score": 0.79,
+      "verdict": "MALICIOUS",
+      "confidence": 0.79
+    },
+    "legitimacy_check": {
+      "is_justified": false,
+      "reasoning": "The behavior is clearly malicious as the package 'ably-asset-tracking-common' is known to send tracking data to a remote server."
+    }
+  },
+  "analysis_metadata": {
+    "model": "deepseek-coder-6.7b-instruct",
+    "stage": "verification_v2.0",
+    "structural_routing": "flag",
+    "structural_risk_score": 1.0,
+    "confirmed_signals_count": 2,
+    "has_structural_backup": true
+  },
+  "created_at": "2026-03-27T13:06:56.595015"
+}

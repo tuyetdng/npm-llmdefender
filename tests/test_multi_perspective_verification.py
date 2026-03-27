@@ -198,8 +198,8 @@ def _extract_chain(parsed: Dict) -> Dict:
     """Safely extract chain_analysis fields with defaults."""
     chain = parsed.get("chain_analysis", {})
     return {
-        "stages":          chain.get("stages", []),
         "chain_narrative": chain.get("chain_narrative", ""),
+        "attack_vector":   chain.get("attack_vector", []),
         "chain_score":     float(chain.get("chain_score", 0.0)),
         "verdict":         chain.get("verdict", "BENIGN"),
         "confidence":      float(chain.get("confidence", 0.3)),
@@ -305,13 +305,12 @@ def run_verification(
 
             verdict_icon = {"MALICIOUS": "🔴", "SUSPICIOUS": "🟡", "BENIGN": "🟢"}.get(chain["verdict"], "❓")
             print(f"  {verdict_icon} Verdict      : {chain['verdict']} (conf={chain['confidence']:.2f})")
-            print(f"     Chain score : {chain['chain_score']:.2f} | stages: {len(chain['stages'])}")
+            print(f"     Chain score : {chain['chain_score']:.2f}")
             print(f"     Justified   : {legitimacy['is_justified']} — {legitimacy['reasoning'][:80]}")
             if chain["chain_narrative"]:
-                print(f"     Narrative   : {chain['chain_narrative'][:100]}")
-            if chain["stages"]:
-                for j, stage in enumerate(chain["stages"][:3], 1):
-                    print(f"       Stage {j}: {stage[:80]}")
+                print(f"     Narrative   : {chain['chain_narrative'][:120]}")
+            if chain["attack_vector"]:
+                print(f"     IOCs        : {', '.join(str(v) for v in chain['attack_vector'][:5])}")
 
             # CSV log
             csv_logger.log_verification_analysis(
@@ -341,7 +340,7 @@ def run_verification(
                 response=raw_output,
                 failure_type=f"verification_{output_type}",
             )
-            chain      = {"stages": [], "chain_narrative": "", "chain_score": 0.0, "verdict": "UNKNOWN", "confidence": 0.0}
+            chain      = {"chain_narrative": "", "attack_vector": [], "chain_score": 0.0, "verdict": "UNKNOWN", "confidence": 0.0}
             legitimacy = {"is_justified": True, "reasoning": ""}
 
         all_results.append({

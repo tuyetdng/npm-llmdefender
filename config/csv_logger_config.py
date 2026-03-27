@@ -275,66 +275,63 @@ class CSVLoggerConfig:
         self._append_to_csv("model_failures.csv", row)
 
     def log_verification_analysis(
-        self,
-        package_name: str,
-        version: str,
-        label: str,
-        routing: str,
-        structural_risk_score: float,
-        chain: dict,
-        legitimacy: dict,
-        raw_response: str,
-        parsed_json: dict,
-    ) -> None:
-        """
-        Log verification stage output to verification_analysis.csv.
+            self,
+            package_name: str,
+            version: str,
+            label: str,
+            routing: str,
+            structural_risk_score: float,
+            chain: dict,
+            legitimacy: dict,
+            raw_response: str,
+            parsed_json: dict,
+        ) -> None:
+            """
+            Log verification stage output to verification_analysis.csv.
 
-        Schema aligned with new VerificationPromptAnalysis output:
-            chain_analysis   → stages, chain_narrative, chain_score, verdict, confidence
-            legitimacy_check → is_justified, reasoning  (boolean only, no score)
+            Schema aligned with new VerificationPromptAnalysis output:
+                chain_analysis   → chain_narrative, chain_score, verdict, confidence
+                legitimacy_check → is_justified, reasoning  (boolean only, no score)
 
-        CSV columns:
-            package_name, version, label, timestamp, routing, structural_risk_score
-            verdict, confidence, chain_score, num_stages
-            is_justified, legitimacy_reasoning
-            chain_narrative, stages_json
-            parse_success, raw_response (truncated), parsed_json
-        """
-        timestamp = datetime.now().isoformat()
+            CSV columns:
+                package_name, version, label, timestamp, routing, structural_risk_score
+                verdict, confidence, chain_score, num_stages
+                is_justified, legitimacy_reasoning
+                chain_narrative, stages_json
+                parse_success, raw_response (truncated), parsed_json
+            """
+            timestamp = datetime.now().isoformat()
 
-        stages = chain.get("stages", [])
+            row = {
+                # Identity
+                "package_name":          package_name,
+                "version":               version,
+                "label":                 label,
+                "timestamp":             timestamp,
 
-        row = {
-            # Identity
-            "package_name":          package_name,
-            "version":               version,
-            "label":                 label,
-            "timestamp":             timestamp,
+                # Structural anchor
+                "routing":               routing,
+                "structural_risk_score": structural_risk_score,
 
-            # Structural anchor
-            "routing":               routing,
-            "structural_risk_score": structural_risk_score,
+                # Chain analysis (primary RQ)
+                "verdict":               chain.get("verdict", "UNKNOWN"),
+                "confidence":            chain.get("confidence", 0.0),
+                "chain_score":           chain.get("chain_score", 0.0),
+                "chain_narrative":       chain.get("chain_narrative", "")[:300],
+                "attack_vector_json":    json.dumps(chain.get("attack_vector", [])),
 
-            # Chain analysis (primary RQ)
-            "verdict":               chain.get("verdict", "UNKNOWN"),
-            "confidence":            chain.get("confidence", 0.0),
-            "chain_score":           chain.get("chain_score", 0.0),
-            "num_stages":            len(stages),
-            "chain_narrative":       chain.get("chain_narrative", "")[:300],
-            "stages_json":           json.dumps(stages),
+                # Legitimacy (secondary, boolean only)
+                "is_justified":          legitimacy.get("is_justified", True),
+                "legitimacy_reasoning":  legitimacy.get("reasoning", "")[:200],
 
-            # Legitimacy (secondary, boolean only)
-            "is_justified":          legitimacy.get("is_justified", True),
-            "legitimacy_reasoning":  legitimacy.get("reasoning", "")[:200],
+                # Raw output
+                "model_name":            "deepseek-coder-6.7b-instruct",
+                "prompt_version":        self.prompt_version,
+                "raw_response":          raw_response[:2000],
+                "parsed_json":           json.dumps(parsed_json),
+            }
 
-            # Raw output
-            "model_name":            "deepseek-coder-6.7b-instruct",
-            "prompt_version":        self.prompt_version,
-            "raw_response":          raw_response[:2000],
-            "parsed_json":           json.dumps(parsed_json),
-        }
-
-        self._append_to_csv("verification_analysis.csv", row)
+            self._append_to_csv("verification_analysis.csv", row)
     def _extract_error_reason(self, response: str) -> str:
         response_lower = response.lower()
 

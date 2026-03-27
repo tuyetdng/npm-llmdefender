@@ -17,8 +17,7 @@ Input:
 Output schema:
     {
         "chain_analysis": {
-            "stages":          [str, ...]   # ordered attack stages reconstructed by LLM
-            "chain_narrative": str          # 1-2 sentence summary of full attack
+                        "chain_narrative": str          # 1-2 sentence summary of full attack
             "chain_score":     float        # 0.0-1.0, strength of reconstructed chain
             "verdict":         str          # MALICIOUS | SUSPICIOUS | BENIGN
             "confidence":      float        # 0.3-0.95, never 0.0
@@ -138,18 +137,15 @@ class VerificationPromptAnalysis:
 
         output_schema = {
             "chain_analysis": {
-                "stages": [
-                    "stage 1: use ACTUAL evidence — real hook name, real command",
-                    "stage 2: use ACTUAL evidence — real IP/domain, real action taken",
-                ],
-                "chain_narrative": "1-2 sentences using the actual package name and real IOCs from evidence",
+                "chain_narrative": "",
+                "attack_vector": [],
                 "chain_score": 0.0,
-                "verdict": "MALICIOUS or SUSPICIOUS or BENIGN",
+                "verdict": "MALICIOUS",
                 "confidence": 0.0,
             },
             "legitimacy_check": {
                 "is_justified": False,
-                "reasoning": "one sentence referencing the actual package name and behavior",
+                "reasoning": "",
             },
         }
 
@@ -160,16 +156,16 @@ Use ONLY the actual evidence provided — real IPs, real commands, real domains 
 Do NOT copy example text from these instructions into your output.
 
 RECONSTRUCTION GUIDE:
-  - Decompose behaviors into ordered stages based on causal relationship
-  - Each stage must reference real evidence: actual IP addresses, actual commands, actual domains
-  - For a reverse shell pattern, decompose into: what triggers it → what connects where → what is established
-  - Only add stages clearly supported by evidence — do NOT invent stages
-  - If behaviors are unrelated (no causal link), list them as parallel stages
+  - chain_narrative: 1-2 sentences summarizing the full attack using real package name and real IOCs
+  - attack_vector: short list of the key technical indicators — real IPs, domains, commands, API calls
+    Example of attack_vector for a reverse shell: ["postinstall hook", "bash -c", "34.x.x.x:4444", "reverse shell"]
+    Use ACTUAL values from the evidence above, not the example values
+  - Only include what is clearly supported by evidence — do NOT invent
 
 chain_score guide:
-  0.7-1.0 : >=2 stages with clear causal links (e.g. hook → download → exec)
-  0.4-0.69: 1 strong indicator, or partial chain with 1 implied next step
-  0.0-0.39: isolated behavior, no meaningful chain can be reconstructed
+  0.7-1.0 : multiple behaviors with clear causal links (hook → exec → exfil)
+  0.4-0.69: 1 strong behavior, or partial chain
+  0.0-0.39: isolated behavior, no meaningful chain
 
 verdict guide:
   MALICIOUS  : chain_score >= 0.4 AND is_justified is false
@@ -185,7 +181,9 @@ confidence guide:
 LEGITIMACY CHECK (secondary — boolean only, no scoring):
   {legitimacy_hint}
 
-Output schema (replace ALL angle-bracket placeholders with actual values):
+Fill the output schema below with values derived from the detected behaviors above.
+"verdict" must be exactly one of: MALICIOUS, SUSPICIOUS, BENIGN.
+Output schema:
 {json.dumps(output_schema, indent=2)}
 
 Output ONLY the JSON object. No explanation, no markdown."""

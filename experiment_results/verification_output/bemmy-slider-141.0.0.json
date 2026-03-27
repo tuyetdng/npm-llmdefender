@@ -1,0 +1,63 @@
+{
+  "package_name": "bemmy-slider",
+  "version": "141.0.0",
+  "label": "malicious",
+  "semantic_summary": {
+    "num_behaviors": 1,
+    "risk_vector": [
+      "supply_chain_propagation"
+    ],
+    "behaviors": [
+      {
+        "category": "supply_chain_propagation",
+        "summary": "The code sends a POST request to an unknown host with sensitive data in the request body.",
+        "details": "The code makes a POST request to an unknown host with sensitive data in the request body. The sensitive data is obtained from the process environment variables. The request is sent in a base64 encoded format.",
+        "confidence": 0.9,
+        "evidence_apis": [
+          "http.request"
+        ],
+        "evidence_files": [
+          "index.js"
+        ],
+        "evidence_domains": [],
+        "evidence_commands": [],
+        "evidence_env_vars": [
+          "COLOR",
+          "EDITOR",
+          "LOGNAME",
+          "OLDPWD",
+          "APPDATA",
+          "npm_config_registry"
+        ]
+      }
+    ],
+    "analyst_note": "that the code is making a POST request to an unknown host with sensitive data in the request body. The sensitive data is obtained from the process environment variables. The request is sent in a base64 encoded format. The malicious intent seems to be supply chain propagation, as the code is sending this data to an unknown host. The confidence score is 0.9, indicating high confidence that this is malicious behavior. The evidence for this behavior comes from the use of the http.request API and the index.js file. The evidence also includes the use of several environment variables, which could potentially contain sensitive information."
+  },
+  "verification_result": {
+    "chain_analysis": {
+      "chain_narrative": "The package 'bemmy-slider' sends a POST request to an unknown host with sensitive data in the request body. The sensitive data is obtained from the process environment variables. The request is sent in base64 encoded format. The malicious intent seems to be supply chain propagation, as the code is sending this data to an unknown host.",
+      "attack_vector": [
+        "postinstallhook",
+        "bash-c",
+        "34.x.x.x:4444",
+        "reverseshell"
+      ],
+      "chain_score": 0.84,
+      "verdict": "MALICIOUS",
+      "confidence": 0.9
+    },
+    "legitimacy_check": {
+      "is_justified": false,
+      "reasoning": "The package 'bemmy-slider' does not have a description or README file, indicating that it may be legitimate."
+    }
+  },
+  "analysis_metadata": {
+    "model": "deepseek-coder-6.7b-instruct",
+    "stage": "verification_v2.0",
+    "structural_routing": "flag",
+    "structural_risk_score": 0.84,
+    "confirmed_signals_count": 2,
+    "has_structural_backup": true
+  },
+  "created_at": "2026-03-27T13:10:42.976388"
+}

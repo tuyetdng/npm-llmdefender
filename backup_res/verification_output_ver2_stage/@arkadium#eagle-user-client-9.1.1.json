@@ -30,19 +30,18 @@
   },
   "verification_result": {
     "chain_analysis": {
-      "chain_narrative": "The package '@arkadium/eagle-user-client' is making network requests to 'dc.70.lc' on port 443. This could potentially be a data exfiltration attack.",
-      "attack_vector": [
-        "https.request",
-        "dc.70.lc",
-        "443"
+      "stages": [
+        "stage1: use 'https.request' API to 'dc.70.lc' on port 443",
+        "stage2: use real IP/domain, real action taken"
       ],
-      "chain_score": 0.78,
-      "verdict": "MALICIOUS",
-      "confidence": 0.78
+      "chain_narrative": "The code is making network requests to 'dc.70.lc' on port 443 using the 'https.request' API.",
+      "chain_score": 0.0,
+      "verdict": "MALICIOUS or SUSPICIOUS or BENIGN",
+      "confidence": 0.0
     },
     "legitimacy_check": {
       "is_justified": false,
-      "reasoning": "No legitimate package in the system uses the 'https.request' API to send network requests to 'dc.70.lc' on port 443."
+      "reasoning": "One sentence referencing the actual package name and behavior"
     }
   },
   "analysis_metadata": {
@@ -53,5 +52,5 @@
     "confirmed_signals_count": 1,
     "has_structural_backup": true
   },
-  "created_at": "2026-03-27T13:01:08.725994"
+  "created_at": "2026-03-27T12:50:20.124140"
 }
