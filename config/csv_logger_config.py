@@ -87,7 +87,7 @@ class CSVLoggerConfig:
             "supporting_signals_json": json.dumps(context.supporting_signals),
         }
 
-        self._append_to_csv("structural_analysis_log.csv", row)
+        self._append_to_csv("structural_analysis_layer_log.csv", row)
 
     def log_structural_anlyser(
         self, package_name: str, version: str, findings: List[StructuralAnalysisFinding]
