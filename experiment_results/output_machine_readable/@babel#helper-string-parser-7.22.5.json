@@ -1,0 +1,43 @@
+{
+  "package_name": "@babel/helper-string-parser",
+  "version": "7.22.5",
+  "scan_timestamp": "2026-03-28T09:31:51.954508",
+  "final_verdict": {
+    "classification": "BENIGN",
+    "confidence": 0.85,
+    "risk_level": "NONE"
+  },
+  "executive_summary": "No suspicious behaviors detected by structural or semantic analysis.",
+  "threat_profile": {
+    "attack_type": "None",
+    "primary_tactics": [],
+    "severity_factors": []
+  },
+  "evidence_summary": {
+    "malicious_indicators": [],
+    "behavioral_chain": "N/A",
+    "legitimacy_assessment": "N/A"
+  },
+  "recommendations": {
+    "immediate_action": "Package appears safe to use",
+    "remediation_steps": []
+  },
+  "detailed_analysis": {
+    "semantic_detection": {
+      "behaviors_found": 0,
+      "categories": [],
+      "highest_confidence": 0.0
+    },
+    "verification_analysis": {
+      "chain_narrative": "N/A",
+      "chain_score": 0.0,
+      "legitimacy_mismatch": false,
+      "verification_available": false
+    }
+  },
+  "metadata": {
+    "analysis_version": "semantic_v2.0",
+    "model": "deepseek-coder-6.7b-instruct",
+    "ground_truth_label": "benign"
+  }
+}

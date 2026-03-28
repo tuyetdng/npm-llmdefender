@@ -3,7 +3,7 @@
 ## Package Information
 - **Package Name:** `1ru-cache`
 - **Version:** `0.0.1`
-- **Scan Date:** 2026-03-27T14:31:22
+- **Scan Date:** 2026-03-28T09:31:19
 
 ---
 

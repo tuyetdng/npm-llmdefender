@@ -2,11 +2,11 @@
 TEST — Final Classifier (Step 3)
 
 Usage:
-    tester = TestFinalClassifierSingleFile(
-        semantic_file="./experiment_results/semantic_output/@aszxc#npmexp-1.0.1.json",
-        verification_file="./experiment_results/verification_output/@aszxc#npmexp-1.0.1.json"
-    )
+    tester = TestFinalClassifierSingleFile("1ru-cache-0.0.1")
     tester.run()
+
+    # hoặc CLI:
+    python test_final_classifier.py --package 1ru-cache-0.0.1
 """
 
 import sys
@@ -25,41 +25,56 @@ except ImportError as e:
     print(f"❌ Import error: {e}")
     sys.exit(1)
 
+SEMANTIC_DIR      = "./experiment_results/semantic_output"
+VERIFICATION_DIR  = "./experiment_results/verification_output"
 
-def _load_json(path: str) -> Dict:
-    p = Path(path)
-    if not p.exists():
+
+def _load_json(path: Path) -> Dict:
+    if not path.exists():
         raise FileNotFoundError(f"File not found: {path}")
-    return json.loads(p.read_text(encoding="utf-8"))
+    return json.loads(path.read_text(encoding="utf-8"))
 
 
 class TestFinalClassifierSingleFile:
-    def __init__(
-        self,
-        semantic_file: str,
-        verification_file: Optional[str] = None,
-    ):
-        self.semantic_file     = semantic_file
-        self.verification_file = verification_file
+    """
+    Truyền tên gói (không cần .json), class tự resolve path:
+        semantic_output/<package>.json
+        verification_output/<package>.json  (nếu có)
+    """
+
+    def __init__(self, package: str):
+        filename         = package if package.endswith(".json") else f"{package}.json"
+        self.sem_path    = Path(SEMANTIC_DIR)  / filename
+        self.veri_path   = Path(VERIFICATION_DIR) / filename
 
     def run(self):
-        # ── Load files ───────────────────────────────────────────────
-        semantic     = _load_json(self.semantic_file)
-        verification = _load_json(self.verification_file) if self.verification_file else None
+        # ── Load semantic (bắt buộc) ─────────────────────────────────
+        try:
+            semantic = _load_json(self.sem_path)
+        except FileNotFoundError as e:
+            print(f"❌ {e}")
+            return
 
-        # ── Run classifier ───────────────────────────────────────────
+        # ── Load verification (nếu có) ───────────────────────────────
+        verification: Optional[Dict] = None
+        if self.veri_path.exists():
+            verification = _load_json(self.veri_path)
+            print(f"📂 Semantic     : {self.sem_path}")
+            print(f"📂 Verification : {self.veri_path}")
+        else:
+            print(f"📂 Semantic     : {self.sem_path}")
+            print(f"📂 Verification : not found — running without")
+
+        # ── Classify ─────────────────────────────────────────────────
         classifier = FinalClassifier(semantic, verification)
         result     = classifier.classify()
 
-        # ── Print result ─────────────────────────────────────────────
-        fv = result["final_verdict"]
+        # ── Print ────────────────────────────────────────────────────
+        fv           = result["final_verdict"]
+        verdict_icon = {"MALICIOUS": "🔴", "SUSPICIOUS": "🟡", "BENIGN": "🟢"}.get(fv["classification"], "❓")
+        label_icon   = "🔴" if semantic.get("label") == "malicious" else "🟢"
 
-        verdict_icon = {"MALICIOUS": "🔴", "SUSPICIOUS": "🟡", "BENIGN": "🟢"}.get(
-            fv["classification"], "❓"
-        )
-        label_icon = "🔴" if semantic.get("label") == "malicious" else "🟢"
-
-        print("=" * 60)
+        print("\n" + "=" * 60)
         print(f"{label_icon} {semantic['package_name']} v{semantic['version']}"
               f"  (ground truth: {semantic.get('label', '?')})")
         print("=" * 60)
@@ -107,13 +122,11 @@ class TestFinalClassifierSingleFile:
         else:
             print(f"   Verification       : not available")
 
-        print(f"\n📄 Generating markdown report...")
-        report = classifier.generate_user_report(result)
+        print(f"\n📄 Saving report...")
         classifier.save_result(result)
         classifier.save_user_report(result)
-        print(f"   Report length : {len(report)} chars")
-        print(f"   ✅ Saved to ./experiment_results/output_machine_readable/")
-        print(f"   ✅ Saved to ./experiment_results/report_human_readable/")
+        print(f"   ✅ ./experiment_results/output_machine_readable/")
+        print(f"   ✅ ./experiment_results/report_human_readable/")
         print("=" * 60)
 
 
@@ -125,12 +138,8 @@ if __name__ == "__main__":
     import argparse
 
     parser = argparse.ArgumentParser()
-    parser.add_argument("--semantic",      required=True)
-    parser.add_argument("--verification",  default=None)
+    parser.add_argument("--package", required=True,
+                        help="Package filename without .json, e.g. 1ru-cache-0.0.1")
     args = parser.parse_args()
 
-    tester = TestFinalClassifierSingleFile(
-        semantic_file=args.semantic,
-        verification_file=args.verification,
-    )
-    tester.run()
+    TestFinalClassifierSingleFile(args.package).run()
