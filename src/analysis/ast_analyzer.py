@@ -6,22 +6,6 @@ Input : PackageProfile
 Output: List[StructuralAnalysisFinding]
 
 Compatible with tree-sitter >= 0.22 (pure AST walk, no Query API).
-
-Changes from v1:
-- _analyze_source(): new helper — parse + run all checks on any JS code string,
-  with source_label (filename:line) threaded through all evidence strings.
-  Replaces _parse() which only handled entry_point_code.
-- run_all(): now analyzes install_script_files FIRST, then entry_point_code.
-  If neither is available → skip with warning (same behavior as before).
-- All regex-based checks (_check_obfuscator_signatures, _check_base64_eval_combo,
-  _check_indirect_eval, _check_low_confidence_signals) now receive current_source_text
-  as parameter instead of reading entry_point_code directly. This makes them
-  work correctly regardless of which source is being analyzed.
-- _check_hardcoded_urls(): webhook domains → CRITICAL / 0.95 confidence.
-- _check_child_process_dynamic(): detect destructured require patterns:
-  const { exec } = require('child_process') → exec(...).
-- TaintTracker evidence: includes source_label for file:line attribution.
-- _build_evidence(): updated to include source_label prefix.
 """
 
 from __future__ import annotations

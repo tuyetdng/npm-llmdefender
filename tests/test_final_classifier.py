@@ -36,11 +36,7 @@ def _load_json(path: Path) -> Dict:
 
 
 class TestFinalClassifierSingleFile:
-    """
-    Truyền tên gói (không cần .json), class tự resolve path:
-        semantic_output/<package>.json
-        verification_output/<package>.json  (nếu có)
-    """
+
 
     def __init__(self, package: str):
         filename         = package if package.endswith(".json") else f"{package}.json"
