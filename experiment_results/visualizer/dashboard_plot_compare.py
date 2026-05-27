@@ -39,17 +39,17 @@ for _, row in structural_df.iterrows():
 
 structural_risk_df = pd.DataFrame(structural_risks)
 
-# 3. Phân tích behavior
+# behavior analyze
 behavior_risk_df = behavior_df[['package_name', 'category']].copy()
 behavior_risk_df['source'] = 'behavior'
 
-# 4. Kết hợp dữ liệu từ cả 2 nguồn
+# combine data for category comparison
 combined_df = pd.concat([
     structural_risk_df[['package_name', 'category', 'source']],
     behavior_risk_df[['package_name', 'category', 'source']]
 ])
 
-# Khởi tạo Dash app
+# Dash app initialization
 app = dash.Dash(__name__)
 
 # Layout dashboard
@@ -76,22 +76,22 @@ app.layout = html.Div([
     
     # Tabs
     dcc.Tabs([
-        # Tab 1: Tổng quan
-        dcc.Tab(label='Tổng quan', children=[
+        # Tab 1: summary and comparison
+        dcc.Tab(label='Summary and Comparison', children=[
             html.Div([
-                # Biểu đồ 1: So sánh phát hiện từ 2 phương pháp
+                # 1: detection method comparison
                 dcc.Graph(id='detection-method-comparison'),
                 
-                # Biểu đồ 2: Top packages có nhiều risk nhất
+                # 2: top risky packages
                 dcc.Graph(id='top-risky-packages'),
                 
-                # Biểu đồ 3: Phân bố severity
+                # 3: severity distribution
                 dcc.Graph(id='severity-distribution'),
             ], style={'padding': '20px'})
         ]),
         
-        # Tab 2: Phân tích chi tiết theo category
-        dcc.Tab(label='Phân tích Category', children=[
+        # Tab 2: Detailed Category Analysis
+        dcc.Tab(label='Detailed Category Analysis', children=[
             html.Div([
                 dcc.Dropdown(
                     id='source-selector',
@@ -108,7 +108,7 @@ app.layout = html.Div([
             ])
         ]),
         
-        # Tab 3: Chi tiết từng package
+        # Tab 3: Package Details
         dcc.Tab(label='Package Details', children=[
             html.Div([
                 dcc.Dropdown(
@@ -124,13 +124,13 @@ app.layout = html.Div([
     ])
 ])
 
-# Callback 1: So sánh phương pháp phát hiện
+# Callback 1: compare detection methods
 @app.callback(
     Output('detection-method-comparison', 'figure'),
     Input('detection-method-comparison', 'id')
 )
 def update_detection_comparison(_):
-    # Đếm unique packages phát hiện được bởi mỗi phương pháp
+    # count unique packages detected by each method
     structural_pkgs = set(structural_risk_df['package_name'].unique())
     behavior_pkgs = set(behavior_risk_df['package_name'].unique())
     
@@ -157,7 +157,7 @@ def update_detection_comparison(_):
     Input('top-risky-packages', 'id')
 )
 def update_top_risky_packages(_):
-    # Tính tổng risk count cho mỗi package
+    # total risk count per package
     structural_counts = structural_risk_df.groupby('package_name').size().reset_index(name='structural_count')
     behavior_counts = behavior_df.groupby('package_name').size().reset_index(name='behavior_count')
     
@@ -165,7 +165,7 @@ def update_top_risky_packages(_):
     risk_counts = pd.merge(structural_counts, behavior_counts, on='package_name', how='outer').fillna(0)
     risk_counts['total_count'] = risk_counts['structural_count'] + risk_counts['behavior_count']
     
-    # Lấy top 10
+    # top 10
     top_10 = risk_counts.nlargest(10, 'total_count')
     
     fig = go.Figure()
@@ -194,7 +194,7 @@ def update_top_risky_packages(_):
     
     return fig
 
-# Callback 3: Phân bố severity
+# Callback 3: Severity Distribution
 @app.callback(
     Output('severity-distribution', 'figure'),
     Input('severity-distribution', 'id')
@@ -219,7 +219,7 @@ def update_severity_distribution(_):
     
     return fig
 
-# Callback 4: So sánh category theo phương pháp
+# Callback 4: Category Comparison by Method
 @app.callback(
     Output('category-comparison-chart', 'figure'),
     Input('source-selector', 'value')
@@ -252,7 +252,7 @@ def update_category_comparison(source):
     
     return fig
 
-# Callback 5: Category phân bổ theo package
+# Callback 5: Category Distribution by Package
 @app.callback(
     Output('category-by-package-chart', 'figure'),
     Input('source-selector', 'value')
@@ -265,7 +265,7 @@ def update_category_by_package(source):
     else:
         df = behavior_risk_df
     
-    # Tạo heatmap data
+    # heatmap data
     heatmap_data = pd.crosstab(df['package_name'], df['category'])
     
     fig = px.imshow(
@@ -279,16 +279,16 @@ def update_category_by_package(source):
     
     return fig
 
-# Callback 6: Chi tiết package
+# Callback 6: Package Details
 @app.callback(
     Output('package-details-container', 'children'),
     Input('package-selector', 'value')
 )
 def update_package_details(selected_package):
-    # Lấy dữ liệu structural
+    # get structural data
     structural_data = structural_df[structural_df['package_name'] == selected_package]
     
-    # Lấy dữ liệu behavior
+    # get behavior data
     behavior_data = behavior_df[behavior_df['package_name'] == selected_package]
     
     children = []
@@ -343,9 +343,9 @@ def update_package_details(selected_package):
             html.Tbody(behavior_table)
         ], style={'margin': '20px'}))
     
-    # Thêm biểu đồ so sánh
+    # Add comparison chart
     if not structural_data.empty and not behavior_data.empty:
-        # Tạo radar chart cho so sánh
+        # Create radar chart for comparison
         structural_cats = structural_risk_df[structural_risk_df['package_name'] == selected_package]['category'].value_counts()
         behavior_cats = behavior_data['category'].value_counts()
         

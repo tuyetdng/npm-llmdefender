@@ -1,11 +1,11 @@
 """
-TEST — Final Classifier (Step 3)
+TEST — Final Classifier
 
 Usage:
     tester = TestFinalClassifierSingleFile("1ru-cache-0.0.1")
     tester.run()
 
-    # hoặc CLI:
+    # or CLI:
     python test_final_classifier.py --package 1ru-cache-0.0.1
 """
 
@@ -44,14 +44,14 @@ class TestFinalClassifierSingleFile:
         self.veri_path   = Path(VERIFICATION_DIR) / filename
 
     def run(self):
-        # ── Load semantic (bắt buộc) ─────────────────────────────────
+        # Load semantic (required) 
         try:
             semantic = _load_json(self.sem_path)
         except FileNotFoundError as e:
             print(f"❌ {e}")
             return
 
-        # ── Load verification (nếu có) ───────────────────────────────
+        #  Load verification (if available) 
         verification: Optional[Dict] = None
         if self.veri_path.exists():
             verification = _load_json(self.veri_path)
@@ -61,11 +61,11 @@ class TestFinalClassifierSingleFile:
             print(f"📂 Semantic     : {self.sem_path}")
             print(f"📂 Verification : not found — running without")
 
-        # ── Classify ─────────────────────────────────────────────────
+        #  Classify 
         classifier = FinalClassifier(semantic, verification)
         result     = classifier.classify()
 
-        # ── Print ────────────────────────────────────────────────────
+        #  Print 
         fv           = result["final_verdict"]
         verdict_icon = {"MALICIOUS": "🔴", "SUSPICIOUS": "🟡", "BENIGN": "🟢"}.get(fv["classification"], "❓")
         label_icon   = "🔴" if semantic.get("label") == "malicious" else "🟢"

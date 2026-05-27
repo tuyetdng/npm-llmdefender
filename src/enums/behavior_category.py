@@ -27,6 +27,6 @@ class BehaviorCategory(Enum):
     TYPOSQUATTING = "typosquatting"
     INSTALL_HOOK = "install_hook"
     SYSTEM_CAPABILITY = "system_capability"
-    SUSPICIOUS_BEHAVIOR = "suspicious_behavior"     # Can't classify but looks bad
+    SUSPICIOUS_BEHAVIOR = "suspicious_behavior"         # Can't classify but looks bad
     UNKNOWN = "unknown"                                 # Fallback for unclassified behaviors
     

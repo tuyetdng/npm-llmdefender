@@ -43,14 +43,14 @@ class DeepSeekAdapter:
             trust_remote_code=True
         )
 
-        # Quantization config — ưu tiên 4-bit, fallback 8-bit, fallback none
+        # Quantization config — priority 4-bit, fallback 8-bit, fallback none
         quant_config = None
         if self.config.get("load_in_4bit"):
             quant_config = BitsAndBytesConfig(
                 load_in_4bit=True,
                 bnb_4bit_compute_dtype=torch.float16,
-                bnb_4bit_use_double_quant=True,   # double quant tiết kiệm thêm ~0.4 GiB
-                bnb_4bit_quant_type="nf4",        # nf4 tốt hơn fp4 cho LLM
+                bnb_4bit_use_double_quant=True,   # double quantization improve 4-bit performance
+                bnb_4bit_quant_type="nf4",     
             )
             print("Using 4-bit quantization (NF4)")
         elif self.config.get("load_in_8bit"):

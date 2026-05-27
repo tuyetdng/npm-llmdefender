@@ -125,19 +125,19 @@ def generate_llm_context(results: list) -> str:
 
     samples = []
 
-    # Lấy package malicious đầu tiên có findings
+    #first malicious package have findings
     for r in results:
         if r["label"] == "malicious" and r["context"].routing != "skip":
             samples.append(r)
             break
 
-    # Lấy package benign đầu tiên có findings (false positive candidate)
+    #first benign package have findings (false positive candidate)
     for r in results:
         if r["label"] == "benign" and r["context"].routing != "skip":
             samples.append(r)
             break
 
-    # Nếu không đủ thì lấy bất kỳ
+    # Add a random package if we don't have 2 already (e.g., if all malicious were routed skip)
     if len(samples) < 2:
         for r in results:
             if r not in samples:
@@ -311,7 +311,6 @@ def main():
         return 1
 
     results = run_structural_analysis(packages)
-    # Thêm tạm vào test script để debug, sau run_structural_analysis
     for pkg in packages[:3]:
         print(f"{pkg.package_name}:")
         print(f"  entry_point_code: {bool(pkg.entry_point_code)}")

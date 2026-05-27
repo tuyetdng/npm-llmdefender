@@ -218,13 +218,13 @@ def update_dashboard(severity_filter, selected_categories):
 
     category_counter = Counter(all_categories)
 
-    # Thay vì dùng most_common(10), tạo DataFrame từ tất cả categories
+    # create DataFrame from all categories
     all_categories_df = pd.DataFrame(
-        list(category_counter.items()),  # Sử dụng items() thay vì most_common()
+        list(category_counter.items()),
         columns=['category', 'count']
     )
 
-    # Sắp xếp theo count giảm dần để dễ đọc
+    # sort by count
     all_categories_df = all_categories_df.sort_values('count', ascending=False)
 
     fig3 = px.bar(

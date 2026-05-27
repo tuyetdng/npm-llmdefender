@@ -1,7 +1,8 @@
 """
 STRUCTURAL ANALYSIS MODULE
 Layer 1: Metadata-level analysis  (package.json + install hooks + install script files)
-Layer 2: AST-level analysis (JS source code) — TODO: tree-sitter implementation
+Layer 2: AST-level analysis (JS source code) 
+TODO: tree-sitter implementation
 
 Output: List[StructuralAnalysisFinding] → consumed by SignalAggregator → StructuralContext → LLM
 """
@@ -21,10 +22,7 @@ from src.enums.severity import Severity
 logger = setup_logger()
 
 
-# ---------------------------------------------------------------------------
 # Data class
-# ---------------------------------------------------------------------------
-
 @dataclass
 class StructuralAnalysisFinding:
     """Represents a single structural analysis finding."""
@@ -35,10 +33,7 @@ class StructuralAnalysisFinding:
     category: BehaviorCategory
 
 
-# ---------------------------------------------------------------------------
 # Module-level helpers
-# ---------------------------------------------------------------------------
-
 def _is_internal_ip(ip: str) -> bool:
     try:
         addr = ipaddress.ip_address(ip)
@@ -79,10 +74,7 @@ def _build_evidence(signal: str, location: str, code: str) -> str:
     return f"Signal  : {signal}\nLocation: {location}\nCode    : {code}"
 
 
-# ---------------------------------------------------------------------------
 # StructuralAnalyzer
-# ---------------------------------------------------------------------------
-
 class StructuralAnalyzer:
     """
     LAYER 1: METADATA-LEVEL STATIC ANALYSIS
@@ -310,10 +302,7 @@ class StructuralAnalyzer:
         self.package_profile = package_profile
         self.risks: List[StructuralAnalysisFinding] = []
 
-    # ------------------------------------------------------------------
     # Install hook — shell command level
-    # ------------------------------------------------------------------
-
     def _check_install_script(self) -> None:
         """
         Scan install hook commands (raw shell strings from package.json scripts).
@@ -364,11 +353,9 @@ class StructuralAnalyzer:
                         confidence=confidence,
                         category=category,
                     ))
+                    
 
-    # ------------------------------------------------------------------
     # Install script files — JS source level
-    # ------------------------------------------------------------------
-
     def _check_install_script_files(self) -> None:
         """
         Scan JS files that are called from install hooks (e.g. "node preinstall.js").
@@ -420,11 +407,9 @@ class StructuralAnalyzer:
                         confidence=confidence,
                         category=category,
                     ))
+                    
 
-    # ------------------------------------------------------------------
     # Typosquatting
-    # ------------------------------------------------------------------
-
     def _check_typosquatting(self) -> None:
         package_name = self.package_profile.package_name.lower()
 
@@ -462,10 +447,8 @@ class StructuralAnalyzer:
                 ))
                 break
 
-    # ------------------------------------------------------------------
-    # Dependency confusion
-    # ------------------------------------------------------------------
 
+    # Dependency confusion
     def _check_dependency_confusion(self) -> None:
         package_name = self.package_profile.package_name
 
@@ -498,10 +481,8 @@ class StructuralAnalyzer:
             category=BehaviorCategory.SUPPLY_CHAIN_ATTACK,
         ))
 
-    # ------------------------------------------------------------------
-    # Suspicious dependencies
-    # ------------------------------------------------------------------
 
+    # Suspicious dependencies
     def _check_suspicious_dependencies(self) -> None:
         deps = self.package_profile.dependencies or {}
 
@@ -528,10 +509,8 @@ class StructuralAnalyzer:
                 category=BehaviorCategory.SYSTEM_CAPABILITY,
             ))
 
-    # ------------------------------------------------------------------
-    # Hardcoded IP in metadata
-    # ------------------------------------------------------------------
 
+    # Hardcoded IP in metadata
     def _check_hardcoded_ip_in_metadata(self) -> None:
         fields = {}
         fields["homepage"] = self.package_profile.package_json_raw.get("homepage", "")
@@ -578,10 +557,8 @@ class StructuralAnalyzer:
                     category=BehaviorCategory.NETWORK_EXFILTRATION,
                 ))
 
-    # ------------------------------------------------------------------
-    # Version anomaly
-    # ------------------------------------------------------------------
 
+    # Version anomaly
     def _check_version_anomaly(self) -> None:
         """
         Detect version inflation used in dependency confusion / version injection attacks.
@@ -619,10 +596,8 @@ class StructuralAnalyzer:
             category=BehaviorCategory.SUPPLY_CHAIN_ATTACK,
         ))
 
-    # ------------------------------------------------------------------
-    # Empty package
-    # ------------------------------------------------------------------
 
+    # Empty package
     def _check_empty_package(self) -> None:
         """
         Flag packages that have no JS files at all.
@@ -670,10 +645,8 @@ class StructuralAnalyzer:
             category=BehaviorCategory.SUSPICIOUS_BEHAVIOR,
         ))
 
-    # ------------------------------------------------------------------
-    # Entry point
-    # ------------------------------------------------------------------
 
+    # Entry point
     def run_all(self) -> List[StructuralAnalysisFinding]:
         """Execute all Layer 1 checks."""
         logger.info(f"[Layer 1] Structural analysis: {self.package_profile.package_name}")

@@ -24,10 +24,7 @@ from src.analysis.ast_analyzer import ASTAnalyzer
 logger = setup_logger()
 
 
-# ---------------------------------------------------------------------------
 # Severity weights — calculate risk_score
-# ---------------------------------------------------------------------------
-
 _SEVERITY_WEIGHT: dict[Severity, float] = {
     Severity.CRITICAL: 1.0,
     Severity.HIGH:     0.7,
@@ -42,10 +39,7 @@ _CONFIRMED_THRESHOLD = 0.70
 _SUPPORTING_THRESHOLD = 0.40
 
 
-# ---------------------------------------------------------------------------
 # Output data structure
-# ---------------------------------------------------------------------------
-
 @dataclass
 class StructuralContext:
     """
@@ -82,15 +76,12 @@ class StructuralContext:
         if self.confirmed_signals:
             lines.append(f"\nConfirmed Signals ({len(self.confirmed_signals)}):")
             for s in self.confirmed_signals:
-                # Evidence có thể là 1 dòng hoặc 3 dòng (Signal/Location/Code)
-                # Indent tất cả các dòng đồng đều
                 indented = "\n    ".join(s.strip().splitlines())
                 lines.append(f"  [!] {indented}")
 
         if self.supporting_signals:
             lines.append(f"\nSupporting Signals ({len(self.supporting_signals)}):")
             for s in self.supporting_signals:
-                # Chỉ lấy dòng Signal (dòng đầu) để giữ ngắn gọn
                 first_line = s.strip().splitlines()[0]
                 lines.append(f"  [-] {first_line}")
 
@@ -105,10 +96,7 @@ class StructuralContext:
         return "\n".join(lines)
 
 
-# ---------------------------------------------------------------------------
 # SignalAggregator
-# ---------------------------------------------------------------------------
-
 class SignalAggregator:
     """
     Aggregate findings from Layer 1 and Layer 2 into a StructuralContext.

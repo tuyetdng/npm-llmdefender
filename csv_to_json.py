@@ -1,8 +1,5 @@
 """
 csv_to_json.py
---------------
-Đọc file CSV kết quả semantic analysis và lưu từng dòng thành JSON
-theo đúng format của save_parsed_output().
 
 Usage:
     python csv_to_json.py --csv results.csv --out semantic_outputs/
@@ -24,7 +21,7 @@ def safe_parse_json(raw: str) -> dict:
     try:
         return json.loads(raw)
     except json.JSONDecodeError:
-        # Fallback: thử eval nếu là Python dict string
+        # Fallback: try eval if Python dict string
         try:
             return ast.literal_eval(raw)
         except Exception:

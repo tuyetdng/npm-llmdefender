@@ -3,9 +3,6 @@ ATTACK CHAIN VERIFICATION PROMPT TEMPLATES
 
 Stage 2: Verification — runs ONLY when semantic stage detected ≥1 behavior.
 
-Core RQ: "Can LLMs reconstruct attack chains from detected behaviors,
-          providing a coherent view of the package's threat?"
-
 Primary  : Attack Chain Reconstruction — decompose behaviors into ordered stages
 Secondary: Context Legitimacy Check    — boolean sanity check (no scoring)
 
@@ -65,10 +62,7 @@ class VerificationPromptAnalysis:
         self._behaviors: List[Dict] = semantic_findings.get("behaviors", [])
         self.analyst_note = analyst_note.strip() if analyst_note and analyst_note.strip() else None
 
-    # ------------------------------------------------------------------
     # Persistence
-    # ------------------------------------------------------------------
-
     def save_verification_result(self, parsed_data: dict, version_tag: str) -> dict:
         """Persist verification stage output to JSON."""
         os.makedirs(VERIFICATION_OUTPUT_DIR, exist_ok=True)
@@ -103,10 +97,7 @@ class VerificationPromptAnalysis:
 
         return result
 
-    # ------------------------------------------------------------------
     # Prompt sections
-    # ------------------------------------------------------------------
-
     def _system(self) -> str:
         return (
             "You are a malware analyst specializing in npm supply chain attacks. "
@@ -188,10 +179,8 @@ Output schema:
 
 Output ONLY the JSON object. No explanation, no markdown."""
 
-    # ------------------------------------------------------------------
-    # Context formatters
-    # ------------------------------------------------------------------
 
+    # Context formatters
     def _format_package_context(self) -> str:
         """Package identity — for legitimacy check."""
         pkg_json = self.package.package_json_raw or {}
@@ -267,10 +256,8 @@ Output ONLY the JSON object. No explanation, no markdown."""
 
         return "\n".join(lines)
 
-    # ------------------------------------------------------------------
-    # Public
-    # ------------------------------------------------------------------
 
+    # Public
     def build_prompt(self) -> Dict[str, str]:
         """Return {system, user, instructions} dict for the LLM call."""
         return {

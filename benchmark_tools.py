@@ -2,13 +2,13 @@ import os
 import subprocess
 import json
 
-# Ép UTF-8 cho Windows
+#  UTF-8 Windows
 os.environ["PYTHONUTF8"] = "1"
 
 def inspect_package(path):
     print(f"--- Đang kiểm tra sâu: {os.path.basename(path)} ---")
     try:
-        # Chạy GuardDog ngay tại thư mục của gói (dùng cwd và ".")
+        #  GuardDog 
         result = subprocess.run(
             ["guarddog", "npm", "scan", ".", "--output-format", "json"],
             cwd=path,
@@ -52,6 +52,6 @@ def inspect_package(path):
     except Exception as e:
         print(f"Lỗi Python: {e}")
 
-# THAY ĐƯỜNG DẪN GÓI BẠN MUỐN KIỂM TRA VÀO ĐÂY
+# THAY ĐƯỜNG DẪN GÓI MUỐN KIỂM TRA
 test_path = r"C:\PROJECT_BUILDING\CAPSTONE\LLMDefender_core\npm-llmdefender\extracted_packages\mal\@anemone95evil-1.0.9"
 inspect_package(test_path)

@@ -15,10 +15,7 @@ from pathlib import Path
 from enums.behavior_category import BehaviorCategory
 
 
-# ---------------------------------------------------------------------------
-# Helpers
-# ---------------------------------------------------------------------------
-
+# Helpers 
 def _safe_chain(verification_result: Optional[Dict]) -> Dict:
     """Extract chain_analysis block safely."""
     if not verification_result:
@@ -33,9 +30,7 @@ def _safe_legitimacy(verification_result: Optional[Dict]) -> Dict:
     return verification_result.get("verification_result", {}).get("legitimacy_check", {})
 
 
-# ---------------------------------------------------------------------------
-# FinalClassifier
-# ---------------------------------------------------------------------------
+# FinalClassifier 
 
 class FinalClassifier:
     """
@@ -57,20 +52,18 @@ class FinalClassifier:
         verification_result: Optional[Dict] = None,
     ):
         self.semantic            = semantic_result
-        self.verification        = verification_result          # may be None
+        self.verification        = verification_result          # None
         self.package_name        = semantic_result.get("package_name", "unknown")
         self.version             = semantic_result.get("version", "unknown")
         self.ground_truth_label  = semantic_result.get("label")
 
-    # ------------------------------------------------------------------
-    # Public entry point
-    # ------------------------------------------------------------------
+    # Public entry point 
 
     def classify(self) -> Dict[str, Any]:
         behaviors   = self.semantic.get("behaviors", [])
         risk_vector = self.semantic.get("risk_vector", [])
 
-        # ── Case C: no behaviors at all ────────────────────────────────
+        # Case C: no behavior
         if not behaviors:
             return self._classify_clean()
 
@@ -127,9 +120,7 @@ class FinalClassifier:
             },
         }
 
-    # ------------------------------------------------------------------
-    # Case C — clean path
-    # ------------------------------------------------------------------
+    # Case C — clean path 
 
     def _classify_clean(self) -> Dict[str, Any]:
         """Return a CLEAN result when no behaviors were detected by any stage."""
@@ -191,9 +182,7 @@ class FinalClassifier:
             },
         }
 
-    # ------------------------------------------------------------------
     # Confidence + verdict
-    # ------------------------------------------------------------------
 
     def _calculate_final_confidence(
         self, behaviors: List[Dict], chain: Dict
@@ -270,10 +259,8 @@ class FinalClassifier:
             return "MEDIUM"
         return "LOW"
 
-    # ------------------------------------------------------------------
-    # Report builders
-    # ------------------------------------------------------------------
 
+    # Report builders
     def _generate_executive_summary(
         self,
         behaviors: List[Dict],
@@ -392,10 +379,7 @@ class FinalClassifier:
         remediation.append("Report to npm security team if confirmed malicious")
         return {"immediate_action": immediate, "remediation_steps": remediation}
 
-    # ------------------------------------------------------------------
     # Taxonomy helpers
-    # ------------------------------------------------------------------
-
     def _infer_attack_type(self, risk_vector: List[str]) -> str:
         rv = set(risk_vector)
         checks = [
@@ -469,10 +453,7 @@ class FinalClassifier:
             return "MEDIUM"
         return "LOW"
 
-    # ------------------------------------------------------------------
     # Markdown report
-    # ------------------------------------------------------------------
-
     def generate_user_report(self, result: Dict) -> str:
         return self._generate_markdown_report(result)
 
@@ -582,10 +563,7 @@ class FinalClassifier:
 
         return report
 
-    # ------------------------------------------------------------------
     # Persistence
-    # ------------------------------------------------------------------
-
     def save_result(
         self,
         result: Dict,

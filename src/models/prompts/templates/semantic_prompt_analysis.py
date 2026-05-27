@@ -62,35 +62,7 @@ class SemanticPromptAnalysis:
         return bool(
             (self.package.entry_point_code or "").strip()
             or (getattr(self.package, "install_script_files", {}) or {})
-        )
-
-    # def save_parsed_output(self, parsed_data: dict, version_tag: str) -> dict:
-    #     """Persist parsed LLM output to JSON"""
-    #     os.makedirs(SEMANTIC_OUTPUT_DIR, exist_ok=True)
-        
-    #     result = {
-    #         "package_name": self.package.package_name,
-    #         "version": self.package.version,
-    #         "label": self.package.label,
-    #         "behaviors": parsed_data.get("behaviors", []),
-    #         "risk_vector": parsed_data.get("risk_vector", []),
-    #         "analysis_metadata": {
-    #             "model": "deepseek-coder-6.7b-instruct",
-    #             "stage": version_tag,
-    #             "routing": self._routing,
-    #             "structural_risk_score": self.ctx.risk_score,
-    #         },
-    #         "created_at": datetime.now().isoformat(),
-    #     }
-        
-    #     safe_name = f"{self.package.package_name.replace('/', '#')}-{self.package.version}.json"
-    #     file_path = os.path.join(SEMANTIC_OUTPUT_DIR, safe_name)
-        
-    #     with open(file_path, 'w', encoding='utf-8') as f:
-    #         json.dump(result, f, indent=2, ensure_ascii=False)
-        
-    #     return result
-    
+        )   
     
     def save_parsed_output(
         self,
@@ -220,10 +192,6 @@ Output schema (fill exactly, no extra fields):
 Valid categories: {", ".join(categories)}
 Output ONLY the JSON object. No explanation, no markdown."""
 
-    # ------------------------------------------------------------------
-    # Metadata + structural anchor  (previously missing — added here)
-    # ------------------------------------------------------------------
-
     def _format_metadata(self) -> str:
         """Compact package identity block — always included regardless of routing."""
         pkg = self.package
@@ -270,9 +238,8 @@ Output ONLY the JSON object. No explanation, no markdown."""
         """
         ctx = self.ctx
 
-        # ------------------------------------------------------------------
+
         # Case 3 & 4: SKIP
-        # ------------------------------------------------------------------
         if self._routing == "skip":
             lines = [
                 "STRUCTURAL PRE-ANALYSIS:",
@@ -299,9 +266,8 @@ Output ONLY the JSON object. No explanation, no markdown."""
                 ]
             return "\n".join(lines)
 
-        # ------------------------------------------------------------------
+
         # Case 1 & 2: FLAG / REVIEW
-        # ------------------------------------------------------------------
         lines = [
             "STRUCTURAL PRE-ANALYSIS:",
             f"  Routing    : {ctx.routing.upper()}",
@@ -334,10 +300,8 @@ Output ONLY the JSON object. No explanation, no markdown."""
 
         return "\n".join(lines)
 
-    # ------------------------------------------------------------------
-    # Code context (budget-controlled)
-    # ------------------------------------------------------------------
 
+    # Code context (budget-controlled)
     def _format_code_context(self) -> str:
         """
         Assemble code sections within token budget.

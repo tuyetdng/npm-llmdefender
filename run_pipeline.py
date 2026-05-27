@@ -1,8 +1,7 @@
 """
 END-TO-END PIPELINE — Single Package Analysis
 
-Chạy toàn bộ pipeline từ .tar.gz đến final report:
-    Step 0 : Load & extract package từ dataset/ben/ hoặc dataset/mal/
+    Step 0 : Load & extract package from dataset/ben/ or dataset/mal/
     Step 1 : Structural Analysis  (Layer 1 + Layer 2 + SignalAggregator)
     Step 2 : Semantic Analysis    (LLM — DeepSeek)
     Step 3 : Verification         (LLM — Attack Chain Reconstruction)

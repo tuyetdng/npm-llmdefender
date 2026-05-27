@@ -2,19 +2,6 @@
 STRUCTURAL ANALYSIS TEST (MALICIOUS + BENIGN)
 Full pipeline: Layer 1 + Layer 2 + SignalAggregator → StructuralContext
 
-Changes from v1:
-- run_structural_analysis(): log layer1_count + layer2_count + sources_analyzed
-  per package (requires running Layer 1 and Layer 2 separately before aggregating,
-  OR reading from aggregator internals — we use a lightweight approach: run
-  SignalAggregator normally, then read its internal layer breakdown via a patched
-  _collect_findings that returns tagged findings).
-- generate_llm_context(): print FULL to_llm_prompt_block() output (not truncated),
-  now also samples 1 SKIP package to show what LLM sees for clean packages.
-- print_detailed_summary(): add source coverage stats (how many packages had
-  JS source available for Layer 2), signal breakdown by layer.
-- main(): remove debug block (entry_point_code preview), use_cache=True to
-  avoid re-extracting on repeated runs.
-- CSVLoggerConfig.log_structural_analyser_context(): updated to log new fields.
 """
 
 import sys
@@ -48,10 +35,7 @@ except ImportError as e:
     sys.exit(1)
 
 
-# ---------------------------------------------------------------------------
 # Helper: run layers separately to get per-layer counts + source info
-# ---------------------------------------------------------------------------
-
 def _run_with_layer_info(package: PackageProfile) -> Tuple[StructuralContext, Dict]:
     """
     Run full pipeline AND collect per-layer metadata for logging/debugging.
@@ -67,7 +51,7 @@ def _run_with_layer_info(package: PackageProfile) -> Tuple[StructuralContext, Di
     # Layer 1
     layer1_findings: List[StructuralAnalysisFinding] = StructuralAnalyzer(package).run_all()
 
-    # Layer 2 — run separately so we can inspect what was analyzed
+    # Layer 2 — run separately 
     ast_analyzer = ASTAnalyzer(package)
     layer2_findings: List[StructuralAnalysisFinding] = ast_analyzer.run_all()
 
@@ -148,7 +132,6 @@ def run_structural_analysis(packages: list) -> list:
         if context.confirmed_signals:
             print(f"\n  Confirmed signals ({len(context.confirmed_signals)}):")
             for s in context.confirmed_signals:
-                # Print full evidence (3-line format), indented
                 indented = "\n      ".join(s.strip().splitlines())
                 print(f"    [!] {indented}")
 
@@ -174,10 +157,7 @@ def run_structural_analysis(packages: list) -> list:
     return all_results
 
 
-# ---------------------------------------------------------------------------
 # LLM context preview
-# ---------------------------------------------------------------------------
-
 def generate_llm_context(results: list) -> str:
     """
     Print to_llm_prompt_block() for 3 representative packages:
@@ -361,9 +341,9 @@ def main():
         print(f"\n📦 Loading {NUM_PACKAGES} packages...")
         packages = loader.load_packages(
             use_cache=False,
-            force_refresh=False,        # ← không force, để loader tự xử lý
+            force_refresh=False,       
             limit=NUM_PACKAGES,
-            balanced_experiment_test_only=False,  # ← giữ False như test cũ
+            balanced_experiment_test_only=False, 
         )
 
         if not packages:

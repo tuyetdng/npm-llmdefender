@@ -262,10 +262,8 @@ class TaintTracker:
                 return self._tainted_vars[name]
         return None
 
-    # ------------------------------------------------------------------
-    # Pass 2: check sinks
-    # ------------------------------------------------------------------
 
+    # Pass 2: check sinks
     def _check_sinks(self) -> List[Tuple[str, int, str, _TaintedVar]]:
         """Returns list of (sink_fn_name, sink_line, call_snippet, tainted_var)."""
         results = []
@@ -329,10 +327,7 @@ class TaintTracker:
         return findings
 
 
-# ---------------------------------------------------------------------------
 # ASTAnalyzer
-# ---------------------------------------------------------------------------
-
 class ASTAnalyzer:
     """
     LAYER 2: AST-LEVEL STATIC ANALYSIS
@@ -359,10 +354,8 @@ class ASTAnalyzer:
         self._source_label: str = "unknown"
         self._source_text: str = ""   # decoded string, for regex-based checks
 
-    # ------------------------------------------------------------------
-    # Multi-source entry point
-    # ------------------------------------------------------------------
 
+    # Multi-source entry point
     def _analyze_source(self, code: str, source_label: str) -> List[StructuralAnalysisFinding]:
         """
         Parse a JS code string and run all checks against it.
@@ -477,10 +470,8 @@ class ASTAnalyzer:
         self.risks = all_findings
         return all_findings
 
-    # ------------------------------------------------------------------
-    # HIGH CONFIDENCE checks
-    # ------------------------------------------------------------------
 
+    # HIGH CONFIDENCE checks
     def _check_obfuscator_signatures(self) -> None:
         """
         _0x variable names — signature of javascript-obfuscator tool.
@@ -596,10 +587,8 @@ class ASTAnalyzer:
         findings = TaintTracker(self._root, self._source, self._source_label).run()
         self.risks.extend(findings)
 
-    # ------------------------------------------------------------------
-    # MEDIUM CONFIDENCE checks
-    # ------------------------------------------------------------------
 
+    # MEDIUM CONFIDENCE checks
     def _check_hardcoded_urls(self) -> None:
         """
         URLs hardcoded in function call arguments.
@@ -767,10 +756,7 @@ class ASTAnalyzer:
                 category=BehaviorCategory.OBFUSCATION,
             ))
 
-    # ------------------------------------------------------------------
     # LOW CONFIDENCE checks
-    # ------------------------------------------------------------------
-
     def _check_low_confidence_signals(self) -> None:
         """
         Weak signals — contribute to score but not individually conclusive.

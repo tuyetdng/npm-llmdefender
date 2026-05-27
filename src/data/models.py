@@ -481,15 +481,6 @@ class DetectionResult(BaseModel):
             "needs_review": self.should_escalate_for_review(),
             "analysis_time": f"{self.analysis_duration:.2f}s"
         }
-    
-    
-# class PatternStatus(str, Enum):
-#     """Lifecycle status of the consolidated malicious pattern."""
-#     ACTIVE = "active"                    # Pattern is in detection use
-#     DEPRECATED = "deprecated"            # Superseded by newer pattern
-#     ARCHIVED = "archived"                # Historical, not used in current detection
-#     UNDER_REVIEW = "under_review"        # High false positive rate, needs investigation
-#     REVALIDATING = "revalidating"        # Being tested on new dataset
 
 class PatternDetectionMetrics(BaseModel):
     """Performance metrics on validation set (training phase)."""

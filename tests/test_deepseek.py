@@ -113,8 +113,8 @@ def parse_output(raw: str) -> Optional[Dict[str, Any]]:
 def main():
     config = {
         "torch_dtype": "float16",
-        "device_map": "auto",     # để HF tự chọn GPU có đủ VRAM
-        "load_in_4bit": True,     # ~4 GiB thay vì ~7 GiB — fit trong 2.65 GiB free? không đủ
+        "device_map": "auto",     # HF auto fix GPU have enough VRAM
+        "load_in_4bit": True,
         "max_new_tokens": 4096,
         "do_sample": False,
     }

@@ -245,12 +245,7 @@ class DatasetLoader:
         self.extract_dir.mkdir(parents=True, exist_ok=True)
         
         self.cache_dir.mkdir(exist_ok=True)
-        
-        # print(f"   DEBUG PATHS:")
-        # print(f"   Current dir: {Path.cwd()}")
-        # print(f"   source_dir : '{source_dir}'")
-        # print(f"   self.mal_source: {self.mal_source.absolute()}")
-        
+
         if not self.data_dir.exists():
             raise FileNotFoundError(f"Source directory does not exist: {self.data_dir}")
         
@@ -900,7 +895,6 @@ class DatasetLoader:
     #     )
     
     def _load_single_package(self, package_dir: Path, label: str) -> Optional[PackageProfile]:
-        # Đổi parameter name thành package_dir thay vì pkg_dir
         
         package_json_path = package_dir / "package" / "package.json"
         
@@ -925,11 +919,11 @@ class DatasetLoader:
         
         pkg_root = package_json_path.parent
 
-        install_script_files = self._load_install_script_files(pkg_root, package_data)  # ← bỏ self thủ công
-        entry_point_code = self._load_entry_point(pkg_root, package_data)               # ← bỏ self
-        readme_content = self._load_readme(pkg_root)                                     # ← bỏ self
-        file_structure = self._get_file_structure(pkg_root)                              # ← bỏ self
-        has_native = self._has_native_code(file_structure)                               # ← bỏ self
+        install_script_files = self._load_install_script_files(pkg_root, package_data)  
+        entry_point_code = self._load_entry_point(pkg_root, package_data)              
+        readme_content = self._load_readme(pkg_root)                                   
+        file_structure = self._get_file_structure(pkg_root)                            
+        has_native = self._has_native_code(file_structure)                             
                 
         return PackageProfile(
             package_name=name,
@@ -971,7 +965,7 @@ class DatasetLoader:
                 if package:
                     packages.append(package)
             except Exception as e:
-                logger.warning(f"Error loading package {pkg_dir}: {e}")  # đổi debug → warning
+                logger.warning(f"Error loading package {pkg_dir}: {e}")  
                 import traceback
                 traceback.print_exc()  # thêm dòng này
                 continue
