@@ -3,11 +3,11 @@ Batch Final Classifier
 
 Scans semantic_output/ as the source of truth (all 229 packages).
 For each semantic file:
-    Case A — behaviors ≥ 1 AND matching verification file exists
+    Case A  behaviors ≥ 1 AND matching verification file exists
              → FinalClassifier(semantic, verification)
-    Case B — behaviors ≥ 1 AND verification file missing
+    Case B  behaviors ≥ 1 AND verification file missing
              → FinalClassifier(semantic, None)   [semantic-only fallback]
-    Case C — behaviors = 0
+    Case C  behaviors = 0
              → FinalClassifier(semantic, None)   [CLEAN path]
 """
 
@@ -68,20 +68,20 @@ class BatchFinalClassifier:
             verification_result: Optional[dict] = None
 
             if behaviors:
-                # Case A / B — try to load verification
+                # Case A / B  try to load verification
                 if veri_file.exists():
                     verification_result = self._load_json(veri_file)
                     if verification_result is None:
                         logger.warning(
-                            f"Verification file corrupt for {sem_file.name} — "
+                            f"Verification file corrupt for {sem_file.name}  "
                             "falling back to semantic-only"
                         )
                 else:
                     logger.warning(
                         f"No verification file for {sem_file.name} "
-                        f"({len(behaviors)} behavior(s)) — using semantic-only fallback"
+                        f"({len(behaviors)} behavior(s))  using semantic-only fallback"
                     )
-            # Case C — behaviors = 0, verification_result stays None → CLEAN path
+            # Case C  behaviors = 0, verification_result stays None → CLEAN path
 
             try:
                 classifier = FinalClassifier(semantic_result, verification_result)
@@ -101,6 +101,6 @@ class BatchFinalClassifier:
                 skipped += 1
 
         logger.info(
-            f"Batch complete — total={total} success={success} skipped={skipped}"
+            f"Batch complete  total={total} success={success} skipped={skipped}"
         )
         print(f"\nBatch complete: {success}/{total} processed, {skipped} skipped.")

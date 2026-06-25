@@ -120,7 +120,7 @@ class FinalClassifier:
             },
         }
 
-    # Case C — clean path 
+    # Case C  clean path 
 
     def _classify_clean(self) -> Dict[str, Any]:
         """Return a CLEAN result when no behaviors were detected by any stage."""
@@ -345,9 +345,9 @@ class FinalClassifier:
             return {"immediate_action": "Package appears safe to use", "remediation_steps": []}
 
         immediate = (
-            "DO NOT INSTALL — Remove immediately if already installed"
+            "DO NOT INSTALL  Remove immediately if already installed"
             if risk_level in {"CRITICAL", "HIGH"}
-            else "Use with caution — Manual review recommended"
+            else "Use with caution  Manual review recommended"
         )
 
         remediation = ["Review package source code and dependencies"]

@@ -438,7 +438,7 @@ class DetectionResult(BaseModel):
         return v
 
     
-    # --- Helper methods for analysis ---
+    # Helper methods for analysis
     @computed_field
     @property
     def boundary_distance(self) -> float:

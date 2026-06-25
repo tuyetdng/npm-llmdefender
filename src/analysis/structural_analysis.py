@@ -28,7 +28,7 @@ class StructuralAnalysisFinding:
     """Represents a single structural analysis finding."""
     risk_type: str
     severity: Severity
-    evidence: str       # Multi-line: Signal / Location / Code — ready for LLM prompt
+    evidence: str       # Multi-line: Signal / Location / Code - ready for LLM prompt
     confidence: float
     category: BehaviorCategory
 
@@ -80,7 +80,7 @@ class StructuralAnalyzer:
     LAYER 1: METADATA-LEVEL STATIC ANALYSIS
 
     Analyzes package.json metadata and install hook scripts.
-    Does NOT parse JS AST — that is Layer 2 (ASTAnalyzer).
+    Does NOT parse JS AST
     """
 
     _IP_PATTERN = re.compile(r'\b(?:[0-9]{1,3}\.){3}[0-9]{1,3}\b')
@@ -133,7 +133,7 @@ class StructuralAnalyzer:
     # (regex_pattern, risk_type, category, severity, confidence)
     # Ordered: high-confidence first
     _HOOK_PATTERNS = [
-        # --- Pipe to shell (RCE, very high confidence) ---
+        # Pipe to shell (RCE, very high confidence) 
         (
             r"curl\s+\S+.*\|\s*(?:bash|sh|zsh|fish|ksh)",
             "remote_shell_download",
@@ -146,14 +146,14 @@ class StructuralAnalyzer:
             BehaviorCategory.REMOTE_CODE_EXECUTION,
             Severity.CRITICAL, 0.97,
         ),
-        # --- Download + execute ---
+        # Download + execute 
         (
             r"(?:curl|wget)\s+\S+.*(?:-o|-O)\s+\S+.*&&.*(?:bash|sh|chmod\s+\+x)",
             "download_and_exec",
             BehaviorCategory.REMOTE_CODE_EXECUTION,
             Severity.CRITICAL, 0.93,
         ),
-        # --- Reverse shell ---
+        # Reverse shell 
         (
             r"/dev/tcp/",
             "reverse_shell_tcp",
@@ -172,14 +172,14 @@ class StructuralAnalyzer:
             BehaviorCategory.BACKDOOR_INSTALLATION,
             Severity.CRITICAL, 0.92,
         ),
-        # --- child_process in shell command (inline node -e) ---
+        # child_process in shell command (inline node -e) 
         (
             r"child_process\.(exec|spawn|execSync|spawnSync|execFile)\s*\(",
             "child_process_in_hook",
             BehaviorCategory.LOCAL_CODE_EXECUTION,
             Severity.HIGH, 0.90,
         ),
-        # --- Credential access ---
+        # Credential access 
         (
             r'process\.env\.(?:NPM_TOKEN|TOKEN|SECRET|PASSWORD|API_KEY|AUTH|KEY|CREDENTIAL)',
             "credential_env_access",
@@ -192,7 +192,7 @@ class StructuralAnalyzer:
             BehaviorCategory.CREDENTIAL_THEFT,
             Severity.HIGH, 0.88,
         ),
-        # --- Dynamic code execution ---
+        # Dynamic code execution 
         (
             r"\beval\s*\(",
             "eval_in_hook",
@@ -205,14 +205,14 @@ class StructuralAnalyzer:
             BehaviorCategory.DYNAMIC_CODE_EXECUTION,
             Severity.HIGH, 0.83,
         ),
-        # --- Obfuscation combo ---
+        # Obfuscation combo
         (
             r"(?:btoa|atob|Buffer\.from).*(?:eval|Function)",
             "base64_exec_combo",
             BehaviorCategory.OBFUSCATION,
             Severity.HIGH, 0.92,
         ),
-        # --- Polyglot execution ---
+        # Polyglot execution
         (
             r"python\s+-c\s+['\"]",
             "python_inline_exec",
@@ -225,7 +225,7 @@ class StructuralAnalyzer:
             BehaviorCategory.LOCAL_CODE_EXECUTION,
             Severity.HIGH, 0.88,
         ),
-        # --- Generic curl/wget (lower confidence, no pipe) ---
+        # Generic curl/wget (lower confidence, no pipe) 
         (
             r"curl\s+https?://\S+",
             "curl_external_url",
@@ -238,7 +238,7 @@ class StructuralAnalyzer:
             BehaviorCategory.NETWORK_EXFILTRATION,
             Severity.MEDIUM, 0.72,
         ),
-        # --- Package manager abuse ---
+        # Package manager abuse 
         (
             r"(?:apt-get|apt|yum|brew|pip)\s+install\s+-?y?\s+\S+",
             "package_manager_install",
@@ -302,13 +302,13 @@ class StructuralAnalyzer:
         self.package_profile = package_profile
         self.risks: List[StructuralAnalysisFinding] = []
 
-    # Install hook — shell command level
+    # Install hook - shell command level
     def _check_install_script(self) -> None:
         """
         Scan install hook commands (raw shell strings from package.json scripts).
 
         Key improvements over v1:
-        - Does NOT break after first match — collects ALL signals per hook
+        - Does NOT break after first match - collects ALL signals per hook
         - Webhook domains get CRITICAL severity regardless of other patterns
         - evidence uses _build_evidence() for consistent LLM formatting
         - risk_type is specific (not generic "suspicious_install_hook")
@@ -320,7 +320,7 @@ class StructuralAnalyzer:
             if not script:
                 continue
 
-            # --- Webhook domain check (highest priority) ---
+            # Webhook domain check (highest priority) 
             if self._WEBHOOK_DOMAINS.search(script):
                 self.risks.append(StructuralAnalysisFinding(
                     risk_type="webhook_exfiltration_in_hook",
@@ -334,7 +334,7 @@ class StructuralAnalyzer:
                     category=BehaviorCategory.DATA_EXFILTRATION,
                 ))
 
-            # --- Pattern scan (collect all, no break) ---
+            # Pattern scan (collect all, no break) 
             matched_risk_types = set()
             for pattern, risk_type, category, severity, confidence in self._HOOK_PATTERNS:
                 if risk_type in matched_risk_types:
@@ -355,7 +355,7 @@ class StructuralAnalyzer:
                     ))
                     
 
-    # Install script files — JS source level
+    # Install script files - JS source level
     def _check_install_script_files(self) -> None:
         """
         Scan JS files that are called from install hooks (e.g. "node preinstall.js").
@@ -373,7 +373,7 @@ class StructuralAnalyzer:
             if not code or not code.strip():
                 continue
 
-            # --- Webhook domain in file content ---
+            # Webhook domain in file content 
             if self._WEBHOOK_DOMAINS.search(code):
                 for line_no, line in enumerate(code.splitlines(), 1):
                     if self._WEBHOOK_DOMAINS.search(line):
@@ -390,7 +390,7 @@ class StructuralAnalyzer:
                         ))
                         break  # one finding per file for webhook
 
-            # --- Pattern scan ---
+            # Pattern scan 
             for pattern, risk_type, category, severity, confidence in self._INSTALL_FILE_PATTERNS:
                 m = re.search(pattern, code, re.IGNORECASE)
                 if m:
@@ -564,7 +564,7 @@ class StructuralAnalyzer:
         Detect version inflation used in dependency confusion / version injection attacks.
 
         Pattern: versions with segments >= 99 (e.g. 9.99.999, 99.0.0).
-        These are used to force override of legitimate packages via semver resolution.
+        force override of legitimate packages via semver resolution.
         """
         version = self.package_profile.version or ""
         core = version.split("-")[0]   # strip pre-release tag
@@ -587,7 +587,7 @@ class StructuralAnalyzer:
             risk_type="version_anomaly",
             severity=severity,
             evidence=_build_evidence(
-                signal=f"Version contains inflated segment(s) {inflated} — "
+                signal=f"Version contains inflated segment(s) {inflated} - "
                        "possible dependency confusion or squatting attempt",
                 location="package.json → version",
                 code=version,
@@ -603,8 +603,8 @@ class StructuralAnalyzer:
         Flag packages that have no JS files at all.
 
         A published npm package with zero JS files is structurally anomalous.
-        - With install hook: HIGH confidence — payload may be downloaded at install time
-        - Without install hook: LOW confidence — could be data-only / types package
+        - With install hook: HIGH confidence - payload may be downloaded at install time
+        - Without install hook: LOW confidence - could be data-only / types package
         """
         file_structure = self.package_profile.file_structure or []
 
@@ -615,7 +615,7 @@ class StructuralAnalyzer:
         ]
 
         if js_files:
-            return  # has JS files — not empty
+            return  # has JS files - not empty
 
         has_install_hook = any(
             hook in (self.package_profile.scripts or {})
@@ -636,7 +636,7 @@ class StructuralAnalyzer:
             severity=severity,
             evidence=_build_evidence(
                 signal="Package contains no JavaScript files"
-                       + (" (install hook present — payload may be remote)"
+                       + (" (install hook present - payload may be remote)"
                           if has_install_hook else ""),
                 location="package file_structure",
                 code=file_summary,
@@ -661,7 +661,7 @@ class StructuralAnalyzer:
         self._check_empty_package()
 
         logger.info(
-            f"[Layer 1] Complete: {len(self.risks)} finding(s) — "
+            f"[Layer 1] Complete: {len(self.risks)} finding(s) - "
             f"{self.package_profile.package_name}"
         )
         return self.risks

@@ -1,5 +1,5 @@
 """
-SEMANTIC ANALYSIS TEST — v2
+SEMANTIC ANALYSIS TEST - v2
 Full pipeline: Structural (Layer 1 + 2 + Aggregator) → SemanticPromptAnalysis → DeepSeekAdapter
 
 """
@@ -39,7 +39,7 @@ except ImportError as e:
 
 
 # ---------------------------------------------------------------------------
-# JSON extraction — returns (parsed_dict, end_position)
+# JSON extraction - returns (parsed_dict, end_position)
 # end_position is used to extract analyst_note from text AFTER the JSON block
 # ---------------------------------------------------------------------------
 
@@ -63,7 +63,7 @@ def _extract_first_json(text: str) -> Tuple[Optional[Dict[str, Any]], int]:
     """
     Extract first complete JSON object by bracket matching.
     Returns (parsed_dict, end_position) where end_position is the index
-    immediately after the closing } — used to find analyst_note prose after JSON.
+    immediately after the closing } - used to find analyst_note prose after JSON.
     Returns (None, -1) if no valid JSON found.
     """
     start = text.find('{')
@@ -110,7 +110,7 @@ def _extract_from_markdown(text: str) -> Tuple[Optional[Dict[str, Any]], int]:
 def _extract_analyst_note(raw: str, json_end_pos: int) -> Optional[str]:
     """
     Extract model's free-form prose written AFTER the JSON block.
-    This is the model's natural cross-behavior reasoning — valuable for
+    This is the model's natural cross-behavior reasoning - valuable for
     attack chain reconstruction without polluting the JSON schema.
 
     Returns None if:
@@ -130,7 +130,7 @@ def _extract_analyst_note(raw: str, json_end_pos: int) -> Optional[str]:
     if len(tail) < 30:
         return None
 
-    # Detect refusal patterns — don't capture as analyst note
+    # Detect refusal patterns - don't capture as analyst note
     refusal_signals = [
         "i'm sorry", "i cannot", "i can't assist",
         "i'm not able", "i won't", "as an ai",
@@ -193,7 +193,7 @@ def _classify_output(
     """
     raw_lower = raw.lower()
 
-    # Check refusal first — highest priority
+    # Check refusal first - highest priority
     refusal_signals = [
         "i'm sorry", "i cannot", "i can't assist",
         "i'm not able", "i won't", "as an ai",
@@ -205,7 +205,7 @@ def _classify_output(
     if parse_success and parsed is not None:
         return "success"
 
-    # Parse failed — check if model actually analyzed but violated schema
+    # Parse failed - check if model actually analyzed but violated schema
     analysis_keywords = [
         "malicious", "exfiltrat", "backdoor", "suspicious",
         "install hook", "risk vector", "confidence", "network request",
@@ -252,7 +252,7 @@ def run_semantic_analysis(
     adapter: DeepSeekAdapter,
 ) -> List[Dict]:
     print("=" * 60)
-    print("RUNNING SEMANTIC ANALYSIS — Structural → LLM")
+    print("RUNNING SEMANTIC ANALYSIS - Structural → LLM")
     print("=" * 60)
 
     mal_packages = [p for p in packages if p.label == "malicious"]
@@ -340,7 +340,7 @@ def run_semantic_analysis(
                 logger.warning(f"save_parsed_output failed for {package.package_name}: {e}")
             
             behaviors = parsed.get("behaviors", [])
-            print(f"  Success — {len(behaviors)} behavior(s)")
+            print(f"  Success - {len(behaviors)} behavior(s)")
             if behaviors:
                 for b in behaviors:
                     print(f"     [{b.get('confidence',0):.2f}] "
@@ -462,7 +462,7 @@ def print_semantic_summary(results: List[Dict]):
           and r["parsed"]
           and r["parsed"].get("behaviors")]
     if fp:
-        print(f"\n⚠️  False positives — benign with behaviors ({len(fp)}):")
+        print(f"\n⚠️  False positives - benign with behaviors ({len(fp)}):")
         for r in fp:
             cats = [b.get("category") for b in r["parsed"].get("behaviors", [])]
             print(f"   - {r['package']} v{r['version']}: {cats}")
@@ -476,7 +476,7 @@ def print_semantic_summary(results: List[Dict]):
 
 def main():
     print("=" * 60)
-    print("SEMANTIC ANALYSIS TEST — Full Pipeline v2")
+    print("SEMANTIC ANALYSIS TEST - Full Pipeline v2")
     print("=" * 60)
 
     NUM_PACKAGES = 246

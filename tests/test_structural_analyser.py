@@ -37,7 +37,7 @@ except ImportError as e:
 
 def run_structural_analysis(packages: list) -> list:
     print("=" * 60)
-    print("RUNNING STRUCTURAL ANALYSIS — Layer 1 + Layer 2 + Aggregator")
+    print("RUNNING STRUCTURAL ANALYSIS - Layer 1 + Layer 2 + Aggregator")
     print("=" * 60)
 
     mal_packages = [p for p in packages if p.label == "malicious"]
@@ -116,7 +116,7 @@ def run_structural_analysis(packages: list) -> list:
 
 def generate_llm_context(results: list) -> str:
     """
-    Show to_llm_prompt_block() output — đây là thứ LLM thực sự nhận được.
+    Show to_llm_prompt_block() output - đây là thứ LLM thực sự nhận được.
     In 3 packages đầu: 1 malicious, 1 benign, 1 bất kỳ.
     """
     print("\n" + "=" * 60)
@@ -241,7 +241,7 @@ def print_detailed_summary(results: list):
     false_negatives = [r for r in mal if r["context"].routing == "skip"]
     if false_negatives:
         print(
-            f"\n  False Negatives — malicious packages routed SKIP ({len(false_negatives)}):"
+            f"\n  False Negatives - malicious packages routed SKIP ({len(false_negatives)}):"
         )
         for r in false_negatives:
             print(
@@ -253,7 +253,7 @@ def print_detailed_summary(results: list):
     false_positives = [r for r in ben if r["context"].routing == "flag"]
     if false_positives:
         print(
-            f"\n  False Positives — benign packages routed FLAG ({len(false_positives)}):"
+            f"\n  False Positives - benign packages routed FLAG ({len(false_positives)}):"
         )
         for r in false_positives:
             ctx = r["context"]
@@ -271,7 +271,7 @@ def print_detailed_summary(results: list):
 
 def main():
     print("=" * 60)
-    print("STRUCTURAL ANALYSIS TEST — Full Pipeline")
+    print("STRUCTURAL ANALYSIS TEST - Full Pipeline")
     print("=" * 60)
 
     NUM_PACKAGES = 20

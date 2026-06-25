@@ -333,7 +333,7 @@ class ASTAnalyzer:
     LAYER 2: AST-LEVEL STATIC ANALYSIS
 
     Analyzes all available JS sources in priority order:
-        1. install_script_files  (files called from install hooks — highest risk)
+        1. install_script_files  (files called from install hooks - highest risk)
         2. entry_point_code      (main entry point)
 
     Each source is parsed and analyzed independently via _analyze_source().
@@ -395,7 +395,7 @@ class ASTAnalyzer:
         self.risks = []
 
         try:
-            # HIGH confidence — AST-based
+            # HIGH confidence - AST-based
             self._check_obfuscator_signatures()
             self._check_encoded_require()
             self._check_indirect_eval()
@@ -413,7 +413,7 @@ class ASTAnalyzer:
             findings = self.risks
 
         finally:
-            # Always restore — even if a check raises
+            # Always restore - even if a check raises
             self._source = prev_source
             self._root = prev_root
             self._source_label = prev_label
@@ -430,8 +430,8 @@ class ASTAnalyzer:
         Analyze all JS sources available in PackageProfile.
 
         Priority order:
-            1. install_script_files — files called from install hooks
-            2. entry_point_code     — main entry point
+            1. install_script_files - files called from install hooks
+            2. entry_point_code     - main entry point
         """
         logger.info(f"[Layer 2] AST analysis: {self.package_profile.package_name}")
 
@@ -439,7 +439,7 @@ class ASTAnalyzer:
 
         if not _TREE_SITTER_AVAILABLE:
             logger.warning(
-                f"[Layer 2] Skipped — tree-sitter unavailable: "
+                f"[Layer 2] Skipped - tree-sitter unavailable: "
                 f"{self.package_profile.package_name}"
             )
             return []
@@ -458,12 +458,12 @@ class ASTAnalyzer:
 
         if not install_files and not entry_code.strip():
             logger.warning(
-                f"[Layer 2] Skipped — no JS source available: "
+                f"[Layer 2] Skipped - no JS source available: "
                 f"{self.package_profile.package_name}"
             )
 
         logger.info(
-            f"[Layer 2] Complete: {len(all_findings)} finding(s) — "
+            f"[Layer 2] Complete: {len(all_findings)} finding(s) - "
             f"{self.package_profile.package_name}"
         )
 
@@ -474,7 +474,7 @@ class ASTAnalyzer:
     # HIGH CONFIDENCE checks
     def _check_obfuscator_signatures(self) -> None:
         """
-        _0x variable names — signature of javascript-obfuscator tool.
+        _0x variable names - signature of javascript-obfuscator tool.
         Requires >= 3 matches to avoid false positives on single hex variables.
         """
         source = self._source_text
@@ -497,7 +497,7 @@ class ASTAnalyzer:
             ))
 
     def _check_encoded_require(self) -> None:
-        """require(Buffer.from(...) / atob(...) / fromCharCode(...)) — no legitimate use."""
+        """require(Buffer.from(...) / atob(...) / fromCharCode(...)) - no legitimate use."""
         for call in _find(self._root, "call_expression"):
             fn_node = call.child_by_field_name("function")
             args_node = call.child_by_field_name("arguments")
@@ -524,9 +524,9 @@ class ASTAnalyzer:
     def _check_indirect_eval(self) -> None:
         """
         Three patterns:
-        - eval(fetch(...))  — execute remote code
-        - Function('return ...')  — string-based code execution
-        - (1, eval)(...)  — indirect eval bypass
+        - eval(fetch(...))  - execute remote code
+        - Function('return ...')  - string-based code execution
+        - (1, eval)(...)  - indirect eval bypass
         """
         network_calls = {"fetch", "axios", "http.get", "https.get", "request", "got"}
 
@@ -545,7 +545,7 @@ class ASTAnalyzer:
                     severity=Severity.CRITICAL,
                     evidence=_build_evidence(
                         call, self._source,
-                        signal="eval() executing result of network request — remote code execution",
+                        signal="eval() executing result of network request - remote code execution",
                         source_label=self._source_label,
                     ),
                     confidence=0.95,
@@ -559,14 +559,14 @@ class ASTAnalyzer:
                     severity=Severity.HIGH,
                     evidence=_build_evidence(
                         call, self._source,
-                        signal="Function constructor with string argument — dynamic code execution",
+                        signal="Function constructor with string argument - dynamic code execution",
                         source_label=self._source_label,
                     ),
                     confidence=0.88,
                     category=BehaviorCategory.DYNAMIC_CODE_EXECUTION,
                 ))
 
-        # (1, eval)(...) — indirect eval, no dedicated AST node
+        # (1, eval)(...) - indirect eval, no dedicated AST node
         m = re.search(r"\(\s*1\s*,\s*eval\s*\)", self._source_text)
         if m:
             self.risks.append(StructuralAnalysisFinding(
@@ -574,7 +574,7 @@ class ASTAnalyzer:
                 severity=Severity.HIGH,
                 evidence=_build_evidence_regex(
                     self._source_text, m.start(),
-                    signal="Indirect eval pattern (1, eval)(...) — bypasses strict mode eval restrictions",
+                    signal="Indirect eval pattern (1, eval)(...) - bypasses strict mode eval restrictions",
                     code_snippet=m.group(0),
                     source_label=self._source_label,
                 ),
@@ -738,7 +738,7 @@ class ASTAnalyzer:
             ))
 
     def _check_base64_eval_combo(self) -> None:
-        """eval(Buffer.from(...)) or eval(atob(...)) — decode + execute."""
+        """eval(Buffer.from(...)) or eval(atob(...)) - decode + execute."""
         m = re.compile(
             r"eval\s*\(\s*(?:Buffer\.from|atob)\s*\([^)]+\)", re.IGNORECASE
         ).search(self._source_text)
@@ -748,7 +748,7 @@ class ASTAnalyzer:
                 severity=Severity.HIGH,
                 evidence=_build_evidence_regex(
                     self._source_text, m.start(),
-                    signal="eval(base64_decode(...)) — decode and execute encoded payload",
+                    signal="eval(base64_decode(...)) - decode and execute encoded payload",
                     code_snippet=m.group(0)[:100],
                     source_label=self._source_label,
                 ),
@@ -759,21 +759,21 @@ class ASTAnalyzer:
     # LOW CONFIDENCE checks
     def _check_low_confidence_signals(self) -> None:
         """
-        Weak signals — contribute to score but not individually conclusive.
+        Weak signals - contribute to score but not individually conclusive.
         Filtered out in StructuralContext (noise_filtered counter).
         """
         low_signals = [
             (
                 r"\batob\s*\(|\bbtoa\s*\(",
                 "base64_encoding_standalone",
-                "atob/btoa usage — may indicate encoded payload (common in legitimate code too)",
+                "atob/btoa usage - may indicate encoded payload (common in legitimate code too)",
                 BehaviorCategory.OBFUSCATION,
                 0.30,
             ),
             (
                 r"\(\s*function\s*\([^)]*\)\s*\{",
                 "iife_wrapper",
-                "IIFE wrapper — common in bundles, occasionally used for obfuscation",
+                "IIFE wrapper - common in bundles, occasionally used for obfuscation",
                 BehaviorCategory.OBFUSCATION,
                 0.15,
             ),

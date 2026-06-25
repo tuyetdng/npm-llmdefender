@@ -131,46 +131,6 @@ class CSVLoggerConfig:
 
         self._append_to_csv("structural_analysis_log.csv", row)
 
-    # def log_semantic_analysis(
-    #     self,
-    #     package_name: str,
-    #     version: str,
-    #     raw_response: str,
-    #     parsed_json: Optional[Dict],
-    # ):
-    #     """Log LLM analysis results"""
-    #     timestamp = datetime.now().isoformat()
-
-    #     if parsed_json:
-    #         behaviors = parsed_json.get("behaviors", [])
-
-    #         for i, behavior in enumerate(behaviors):
-    #             if "id" not in behavior:
-    #                 behavior["id"] = f"BR{uuid.uuid4().hex[:8].upper()}"
-
-    #         row = {
-    #             "package_name": package_name,
-    #             "version": version,
-    #             "timestamp": timestamp,
-    #             "model_name": "DeepSeek-Coder-6.7B-Instruct",
-    #             "prompt_version": self.prompt_version,
-    #             "total_risks_found": len(behaviors),
-    #             "behavior": ";".join(
-    #                 sorted({b.get("category", "") for b in behaviors})
-    #             ),
-    #             "risk_vector": json.dumps(parsed_json.get("risk_vector", [])),
-    #             "max_confidence": max(
-    #                 (b.get("confidence", 0) for b in behaviors), default=0
-    #             ),
-    #             "raw_response": raw_response[:5000],  # Truncate
-    #             "parsed_json": json.dumps(parsed_json),
-    #         }
-    #         self._append_to_csv("semantic_analysis.csv", row)
-
-    #         for behavior in behaviors:
-    #             self._log_individual_behavior(
-    #                 package_name, version, behavior, "semantic_analysis"
-    #             )
 
     def log_semantic_analysis(
         self,

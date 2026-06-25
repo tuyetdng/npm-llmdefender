@@ -1,11 +1,11 @@
 """
-END-TO-END PIPELINE — Single Package Analysis
+END-TO-END PIPELINE - Single Package Analysis
 
     Step 0 : Load & extract package from dataset/ben/ or dataset/mal/
     Step 1 : Structural Analysis  (Layer 1 + Layer 2 + SignalAggregator)
-    Step 2 : Semantic Analysis    (LLM — DeepSeek)
-    Step 3 : Verification         (LLM — Attack Chain Reconstruction)
-    Step 4 : Final Classification (Deterministic — no LLM)
+    Step 2 : Semantic Analysis    (LLM - DeepSeek)
+    Step 3 : Verification         (LLM - Attack Chain Reconstruction)
+    Step 4 : Final Classification (Deterministic - no LLM)
 
 Usage:
     runner = PipelineRunner("1ru-cache-0.0.1")
@@ -321,7 +321,7 @@ class PipelineRunner:
     def _semantic(
         self, package: PackageProfile, context: StructuralContext
     ) -> Optional[Dict]:
-        _step(2, "SEMANTIC ANALYSIS  (LLM — Behavioral Detection)")
+        _step(2, "SEMANTIC ANALYSIS  (LLM - Behavioral Detection)")
 
         adapter = self._get_adapter()
 
@@ -356,7 +356,7 @@ class PipelineRunner:
         analyst_note = _extract_analyst_note(raw, json_end)
 
         if parsed is None:
-            _warn("Could not parse LLM output — no JSON found")
+            _warn("Could not parse LLM output - no JSON found")
             _info(f"Raw (first 200): {raw[:200]}")
             return None
 
@@ -368,7 +368,7 @@ class PipelineRunner:
                 print(f"    [{b.get('confidence',0):.2f}] "
                       f"{b.get('category','?')}: {b.get('summary','')[:70]}")
         else:
-            _info("No behaviors — package appears clean at semantic stage")
+            _info("No behaviors - package appears clean at semantic stage")
 
         # Save JSON
         try:
@@ -390,7 +390,7 @@ class PipelineRunner:
         path   = Path(SEMANTIC_DIR) / f"{safe}-{package.version}.json"
         if path.exists():
             return json.loads(path.read_text(encoding="utf-8"))
-        _warn("Semantic output file not found after save — using in-memory result")
+        _warn("Semantic output file not found after save - using in-memory result")
         return None
 
     # ------------------------------------------------------------------
@@ -403,12 +403,12 @@ class PipelineRunner:
         context: StructuralContext,
         semantic_result: Dict,
     ) -> Optional[Dict]:
-        _step(3, "VERIFICATION  (LLM — Attack Chain Reconstruction)")
+        _step(3, "VERIFICATION  (LLM - Attack Chain Reconstruction)")
 
         behaviors = semantic_result.get("behaviors", [])
 
         if not behaviors:
-            _info("No behaviors detected — verification skipped (CLEAN path)")
+            _info("No behaviors detected - verification skipped (CLEAN path)")
             return None
 
         _info(f"{len(behaviors)} behavior(s) to verify")
@@ -495,7 +495,7 @@ class PipelineRunner:
         _step(4, "FINAL CLASSIFICATION  (Confidence Calibration + Report)")
 
         if semantic_result is None:
-            _err("No semantic result — cannot classify")
+            _err("No semantic result - cannot classify")
             return
 
         try:

@@ -24,7 +24,7 @@ from src.analysis.ast_analyzer import ASTAnalyzer
 logger = setup_logger()
 
 
-# Severity weights — calculate risk_score
+# Severity weights - calculate risk_score
 _SEVERITY_WEIGHT: dict[Severity, float] = {
     Severity.CRITICAL: 1.0,
     Severity.HIGH:     0.7,
@@ -54,7 +54,7 @@ class StructuralContext:
         confirmed_signals: High-confidence findings (≥0.70) for LLM context.
         supporting_signals: Medium-confidence findings (0.40–0.69) for LLM context.
         noise_filtered: Count of low-confidence signals excluded (<0.40).
-        routing: Downstream instruction—"skip", "review", or "flag".
+        routing: Downstream instruction-"skip", "review", or "flag".
     """
     risk_score: float
     confidence: float
@@ -171,9 +171,9 @@ class SignalAggregator:
     def _route(self, risk_score: float) -> Literal["skip", "review", "flag"]:
         """
         Routing decision for downstream LLM:
-            skip   — package clean, LLM does not need to review
-            review — there are some signals, LLM reviews but without bias
-            flag   — strong signals, LLM reviews with high suspicion context
+            skip   - package clean, LLM does not need to review
+            review - there are some signals, LLM reviews but without bias
+            flag   - strong signals, LLM reviews with high suspicion context
         """
         if risk_score < 0.30:
             return "skip"

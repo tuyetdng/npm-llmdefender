@@ -1,10 +1,10 @@
 """
 ATTACK CHAIN VERIFICATION PROMPT TEMPLATES
 
-Stage 2: Verification — runs ONLY when semantic stage detected ≥1 behavior.
+Stage 2: Verification - runs ONLY when semantic stage detected ≥1 behavior.
 
-Primary  : Attack Chain Reconstruction — decompose behaviors into ordered stages
-Secondary: Context Legitimacy Check    — boolean sanity check (no scoring)
+Primary  : Attack Chain Reconstruction - decompose behaviors into ordered stages
+Secondary: Context Legitimacy Check    - boolean sanity check (no scoring)
 
 Input:
     - PackageProfile      (name, description, readme, scripts)
@@ -38,7 +38,7 @@ from logs.logging_config import setup_logger
 logger = setup_logger()
 
 VERIFICATION_OUTPUT_DIR = "./experiment_results/verification_output"
-_README_BUDGET = 400  # chars — enough for intent signal, not full doc
+_README_BUDGET = 400  # chars - enough for intent signal, not full doc
 
 
 class VerificationPromptAnalysis:
@@ -46,7 +46,7 @@ class VerificationPromptAnalysis:
     Stage 2: Attack Chain Reconstruction + Legitimacy Check.
 
     Should only be called when semantic_findings contains >=1 behavior.
-    Caller is responsible for this gate — this class does not enforce it.
+    Caller is responsible for this gate - this class does not enforce it.
     """
 
     def __init__(
@@ -102,9 +102,9 @@ class VerificationPromptAnalysis:
         return (
             "You are a malware analyst specializing in npm supply chain attacks. "
             "You will receive behaviors detected by a previous automated scan. "
-            "Your task is to reconstruct the attack chain — decompose the behaviors "
+            "Your task is to reconstruct the attack chain - decompose the behaviors "
             "into ordered stages and explain how they connect into a coherent threat. "
-            "Output ONLY valid JSON — no prose, no markdown fences."
+            "Output ONLY valid JSON - no prose, no markdown fences."
         )
 
     def _user(self) -> str:
@@ -123,7 +123,7 @@ class VerificationPromptAnalysis:
         legitimacy_hint = (
             f"Would a legitimate '{self.package.package_name}' package need this behavior?"
             if has_description else
-            "This package has no description or README — any suspicious behavior is unjustified."
+            "This package has no description or README - any suspicious behavior is unjustified."
         )
 
         output_schema = {
@@ -143,15 +143,15 @@ class VerificationPromptAnalysis:
         return f"""TASK: ATTACK CHAIN RECONSTRUCTION
 
 Given the detected behaviors below, reconstruct the attack chain step by step.
-Use ONLY the actual evidence provided — real IPs, real commands, real domains from the behaviors above.
+Use ONLY the actual evidence provided - real IPs, real commands, real domains from the behaviors above.
 Do NOT copy example text from these instructions into your output.
 
 RECONSTRUCTION GUIDE:
   - chain_narrative: 1-2 sentences summarizing the full attack using real package name and real IOCs
-  - attack_vector: short list of the key technical indicators — real IPs, domains, commands, API calls
+  - attack_vector: short list of the key technical indicators - real IPs, domains, commands, API calls
     Example of attack_vector for a reverse shell: ["postinstall hook", "bash -c", "34.x.x.x:4444", "reverse shell"]
     Use ACTUAL values from the evidence above, not the example values
-  - Only include what is clearly supported by evidence — do NOT invent
+  - Only include what is clearly supported by evidence - do NOT invent
 
 chain_score guide:
   0.7-1.0 : multiple behaviors with clear causal links (hook → exec → exfil)
@@ -169,7 +169,7 @@ confidence guide:
   +0.10 if is_justified is false
   Clamp to [0.30, 0.95]. Never output 0.0.
 
-LEGITIMACY CHECK (secondary — boolean only, no scoring):
+LEGITIMACY CHECK (secondary - boolean only, no scoring):
   {legitimacy_hint}
 
 Fill the output schema below with values derived from the detected behaviors above.
@@ -182,7 +182,7 @@ Output ONLY the JSON object. No explanation, no markdown."""
 
     # Context formatters
     def _format_package_context(self) -> str:
-        """Package identity — for legitimacy check."""
+        """Package identity - for legitimacy check."""
         pkg_json = self.package.package_json_raw or {}
         description = pkg_json.get("description", "").strip() or "No description."
         keywords = pkg_json.get("keywords", [])
@@ -205,7 +205,7 @@ Output ONLY the JSON object. No explanation, no markdown."""
         return "\n".join(lines)
 
     def _format_structural_context(self) -> str:
-        """Structural pre-analysis — ground truth anchor."""
+        """Structural pre-analysis - ground truth anchor."""
         ctx = self.ctx
         lines = [
             "STRUCTURAL PRE-ANALYSIS (rule-based, pre-LLM):",
@@ -223,7 +223,7 @@ Output ONLY the JSON object. No explanation, no markdown."""
         return "\n".join(lines)
 
     def _format_detected_behaviors(self) -> str:
-        """Semantic stage output — the input to chain reconstruction."""
+        """Semantic stage output - the input to chain reconstruction."""
         if not self._behaviors:
             return "DETECTED BEHAVIORS: None."
 
@@ -269,7 +269,7 @@ Output ONLY the JSON object. No explanation, no markdown."""
     @staticmethod
     def should_run(semantic_findings: Dict[str, Any]) -> bool:
         """
-        Gate check — only run verification when semantic found >=1 behavior.
+        Gate check - only run verification when semantic found >=1 behavior.
 
         Usage:
             if VerificationPromptAnalysis.should_run(parsed_semantic):

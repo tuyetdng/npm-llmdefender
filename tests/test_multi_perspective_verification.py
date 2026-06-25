@@ -1,5 +1,5 @@
 """
-VERIFICATION TEST — Attack Chain Reconstruction
+VERIFICATION TEST - Attack Chain Reconstruction
 Stage 2: runs after semantic analysis.
 
 Pipeline:
@@ -224,7 +224,7 @@ def run_verification(
     adapter: "DeepSeekAdapter",
 ) -> List[Dict]:
     print("=" * 60)
-    print("RUNNING VERIFICATION — Attack Chain Reconstruction")
+    print("RUNNING VERIFICATION - Attack Chain Reconstruction")
     print("=" * 60)
     print(f"\nVerifying {len(semantic_rows)} packages with detected behaviors...\n")
 
@@ -245,7 +245,7 @@ def run_verification(
             (p for p in packages_by_key.values() if p.package_name == pkg_name), None
         )
         if package is None:
-            print(f"  ⚠️  PackageProfile not found for {key} — skipping")
+            print(f"  ⚠️  PackageProfile not found for {key} - skipping")
             logger.warning(f"PackageProfile not found: {key}")
             continue
 
@@ -259,7 +259,7 @@ def run_verification(
 
         behaviors = row["parsed_json"].get("behaviors", [])
         cats = [b.get("category", "?") for b in behaviors]
-        print(f"  Behaviors    : {len(behaviors)} — {', '.join(cats)}")
+        print(f"  Behaviors    : {len(behaviors)} - {', '.join(cats)}")
         print(f"  Routing      : {row['routing'].upper()} (score={row['structural_risk_score']:.2f})")
         if row["analyst_note"]:
             print(f"  Analyst note : {row['analyst_note'][:80]}")
@@ -306,7 +306,7 @@ def run_verification(
             verdict_icon = {"MALICIOUS": "🔴", "SUSPICIOUS": "🟡", "BENIGN": "🟢"}.get(chain["verdict"], "❓")
             print(f"  {verdict_icon} Verdict      : {chain['verdict']} (conf={chain['confidence']:.2f})")
             print(f"     Chain score : {chain['chain_score']:.2f}")
-            print(f"     Justified   : {legitimacy['is_justified']} — {legitimacy['reasoning'][:80]}")
+            print(f"     Justified   : {legitimacy['is_justified']} - {legitimacy['reasoning'][:80]}")
             if chain["chain_narrative"]:
                 print(f"     Narrative   : {chain['chain_narrative'][:120]}")
             if chain["attack_vector"]:
@@ -401,7 +401,7 @@ def print_verification_summary(results: List[Dict]):
         avg_chain = sum(chain_scores) / len(chain_scores)
         print(f"\n🔗 Avg chain_score   : {avg_chain:.2f} (n={len(chain_scores)})")
 
-    # Correctness — malicious packages
+    # Correctness - malicious packages
     print(f"\n🔴 MALICIOUS ({len(mal)} sent to verification):")
     mal_success = [r for r in mal if r["output_type"] == "success"]
     mal_correct = [r for r in mal_success if r["chain"].get("verdict") in ("MALICIOUS", "SUSPICIOUS")]
@@ -412,7 +412,7 @@ def print_verification_summary(results: List[Dict]):
         for r in mal_missed:
             print(f"      - {r['package']} v{r['version']} (chain_score={r['chain'].get('chain_score', 0):.2f})")
 
-    # False positives — benign packages
+    # False positives - benign packages
     if ben:
         print(f"\n🟢 BENIGN ({len(ben)} sent to verification):")
         ben_success = [r for r in ben if r["output_type"] == "success"]
@@ -440,7 +440,7 @@ def print_verification_summary(results: List[Dict]):
 
 def main():
     print("=" * 60)
-    print("VERIFICATION TEST — Attack Chain Reconstruction")
+    print("VERIFICATION TEST - Attack Chain Reconstruction")
     print("=" * 60)
 
     SEMANTIC_DIR = "./experiment_results/semantic_output"
@@ -467,7 +467,7 @@ def main():
     ben_rows = [r for r in semantic_rows if r["label"] == "benign"]
     print(f"✅ {len(semantic_rows)} rows to verify: {len(mal_rows)} malicious / {len(ben_rows)} benign")
 
-    # Step 2: Load PackageProfiles — only packages referenced in semantic CSV
+    # Step 2: Load PackageProfiles - only packages referenced in semantic CSV
     needed_keys  = {f"{r['package_name']}@{r['version']}" for r in semantic_rows}
     needed_names = {r["package_name"] for r in semantic_rows}
     print(f"\n📦 Loading PackageProfiles (need {len(needed_keys)} packages)...")
@@ -476,7 +476,7 @@ def main():
         all_packages = loader.load_packages(
             use_cache=False, force_refresh=False, limit=None, balanced_experiment_test_only=False,
         )
-        # Filter immediately — avoid keeping full dataset in memory during inference
+        # Filter immediately - avoid keeping full dataset in memory during inference
         packages_by_key = {
             f"{p.package_name}@{p.version}": p
             for p in all_packages

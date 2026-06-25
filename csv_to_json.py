@@ -32,18 +32,14 @@ def row_to_json(row: dict) -> dict:
     """Chuyển 1 dòng CSV → dict theo format save_parsed_output."""
     parsed_data = safe_parse_json(row.get("parsed_json", ""))
 
-    # Parse các trường số
     try:
         structural_risk_score = float(row.get("structural_risk_score", 0))
     except (ValueError, TypeError):
         structural_risk_score = 0.0
 
-    # confirmed_signals_count: suy ra từ has_structural_backup nếu không có trực tiếp
-    # (CSV không lưu trường này, dùng structural_risk_score > 0 làm proxy)
     has_structural_backup = structural_risk_score > 0
     confirmed_signals_count = 1 if has_structural_backup else 0  # conservative estimate
 
-    # Dùng timestamp gốc nếu có, không thì dùng now
     created_at = row.get("timestamp", datetime.now().isoformat())
 
     result = {
@@ -95,7 +91,6 @@ def main():
             pkg  = row.get("package_name", f"unknown_{i}")
             ver  = row.get("version", "0.0.0")
 
-            # Bỏ qua dòng parse_success == False nếu parsed_json trống
             if row.get("parse_success", "True").strip().lower() == "false":
                 parsed = safe_parse_json(row.get("parsed_json", ""))
                 if not parsed:

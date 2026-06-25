@@ -22,14 +22,14 @@ SEMANTIC_OUTPUT_DIR = "./experiment_results/semantic_output"
 # DeepSeek-Coder-6.7B context = 16K tokens
 # Reserve ~3K for system + instructions + output schema → ~13K for code
 _CODE_BUDGET: Dict[str, int] = {
-    "flag":   10_000,   # chars — full context, high priority
-    "review":  7_000,   # chars — focused context
-    "skip":    4_000,   # chars — minimal, LLM does independent scan
+    "flag":   10_000,   # chars - full context, high priority
+    "review":  7_000,   # chars - focused context
+    "skip":    4_000,   # chars - minimal, LLM does independent scan
 }
 
 class SemanticPromptAnalysis:
     """Templates for semantic analysis prompts.
-    Uses StructuralContext (from SignalAggregator) as the primary anchor —
+    Uses StructuralContext (from SignalAggregator) as the primary anchor -
     LLM is asked to verify/expand on structural signals, not re-analyze from scratch.
 
     4 analysis cases based on routing × has_js_source:
@@ -113,7 +113,7 @@ class SemanticPromptAnalysis:
             "Your task is to identify malicious behaviors in npm packages "
             "based on static analysis evidence and source code. "
             "Do NOT flag standard minified code, bundlers, or legitimate third-party library usage."
-            "Output ONLY valid JSON — no prose, no markdown fences."
+            "Output ONLY valid JSON - no prose, no markdown fences."
         )
 
     def _user(self) -> str:
@@ -162,7 +162,7 @@ class SemanticPromptAnalysis:
                 "and look for any additional issues in the code."
             ),
             "skip": (
-                "The structural pre-analysis found no significant signals — "
+                "The structural pre-analysis found no significant signals - "
                 "but static analysis has limited coverage and may miss obfuscated "
                 "or novel malware. Perform an INDEPENDENT scan of the code below. "
                 "Do not assume the package is clean."
@@ -193,7 +193,7 @@ Valid categories: {", ".join(categories)}
 Output ONLY the JSON object. No explanation, no markdown."""
 
     def _format_metadata(self) -> str:
-        """Compact package identity block — always included regardless of routing."""
+        """Compact package identity block - always included regardless of routing."""
         pkg = self.package
         scripts = pkg.scripts or {}
         hook_keys = [
@@ -222,7 +222,7 @@ Output ONLY the JSON object. No explanation, no markdown."""
         """
         Format StructuralContext as LLM priming anchor.
 
-        4 cases — routing × has_js_source:
+        4 cases - routing × has_js_source:
 
         Case 1: FLAG/REVIEW + has_js_source=True
             → confirmed signals + code available below
@@ -233,7 +233,7 @@ Output ONLY the JSON object. No explanation, no markdown."""
             → no structural signals, but code available
             → independent scan, do not assume clean
         Case 4: SKIP + has_js_source=False
-            → no signals AND no code — very limited analysis possible
+            → no signals AND no code - very limited analysis possible
             → model can only reason from package metadata
         """
         ctx = self.ctx
@@ -248,16 +248,16 @@ Output ONLY the JSON object. No explanation, no markdown."""
                 "Result: No signals detected by static analysis.",
             ]
             if self._has_js_source:
-                # Case 3: code available — independent scan
+                # Case 3: code available - independent scan
                 lines += [
-                    "IMPORTANT: Static analysis has limited coverage — "
+                    "IMPORTANT: Static analysis has limited coverage - "
                     "regex/AST patterns may miss obfuscated payloads, "
                     "novel C2 patterns, or logic bombs.",
                     "Perform an INDEPENDENT scan of the code below. "
                     "Do not assume the package is clean.",
                 ]
             else:
-                # Case 4: no code either — very limited
+                # Case 4: no code either - very limited
                 lines += [
                     "NOTE: No JS source available AND no structural signals.",
                     "nalyze based on package metadata only (name, version, hooks, deps). "
@@ -293,7 +293,7 @@ Output ONLY the JSON object. No explanation, no markdown."""
             # Case 2: signals exist but no JS code to read
             lines.append(
                 "\n  NOTE: No JS source available. "
-                "This is likely a hook-based attack — payload executes at install time "
+                "This is likely a hook-based attack - payload executes at install time "
                 "via the commands listed in PACKAGE METADATA above. "
                 "Verify malicious intent from hook commands and structural signals only."
             )
@@ -333,7 +333,7 @@ Output ONLY the JSON object. No explanation, no markdown."""
             if used >= budget:
                 break
 
-        # Priority 2: Install hook command (raw string — usually short)
+        # Priority 2: Install hook command (raw string - usually short)
         install_cmd = self.package.install_script_content or ""
         if install_cmd.strip() and used < budget:
             snippet = f"INSTALL HOOK COMMANDS:\n{install_cmd}"

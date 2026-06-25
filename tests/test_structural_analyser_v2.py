@@ -51,7 +51,7 @@ def _run_with_layer_info(package: PackageProfile) -> Tuple[StructuralContext, Di
     # Layer 1
     layer1_findings: List[StructuralAnalysisFinding] = StructuralAnalyzer(package).run_all()
 
-    # Layer 2 — run separately 
+    # Layer 2 - run separately 
     ast_analyzer = ASTAnalyzer(package)
     layer2_findings: List[StructuralAnalysisFinding] = ast_analyzer.run_all()
 
@@ -66,7 +66,7 @@ def _run_with_layer_info(package: PackageProfile) -> Tuple[StructuralContext, Di
 
     has_js_source = bool(sources)
 
-    # Build context via aggregator (uses its own internal run — consistent with prod)
+    # Build context via aggregator (uses its own internal run - consistent with prod)
     context = SignalAggregator(package).aggregate()
 
     layer_info = {
@@ -85,7 +85,7 @@ def _run_with_layer_info(package: PackageProfile) -> Tuple[StructuralContext, Di
 
 def run_structural_analysis(packages: list) -> list:
     print("=" * 60)
-    print("RUNNING STRUCTURAL ANALYSIS — Layer 1 + Layer 2 + Aggregator")
+    print("RUNNING STRUCTURAL ANALYSIS - Layer 1 + Layer 2 + Aggregator")
     print("=" * 60)
 
     mal_packages = [p for p in packages if p.label == "malicious"]
@@ -162,13 +162,13 @@ def generate_llm_context(results: list) -> str:
     """
     Print to_llm_prompt_block() for 3 representative packages:
     1. Malicious with highest risk score (best case for our detector)
-    2. Malicious routed SKIP (worst case — what LLM gets for false negatives)
+    2. Malicious routed SKIP (worst case - what LLM gets for false negatives)
     3. Benign routed SKIP (what LLM gets for clean packages)
 
     This shows the full range of context quality the LLM will actually receive.
     """
     print("\n" + "=" * 60)
-    print("LLM CONTEXT SAMPLE — what the semantic analyzer receives")
+    print("LLM CONTEXT SAMPLE - what the semantic analyzer receives")
     print("=" * 60)
 
     samples: list = []
@@ -179,12 +179,12 @@ def generate_llm_context(results: list) -> str:
         best = max(mal_flagged, key=lambda r: r["context"].risk_score)
         samples.append(("BEST DETECTION (malicious, FLAG)", best))
 
-    # 2. Malicious missed (SKIP) — shows LLM what it gets for false negatives
+    # 2. Malicious missed (SKIP) - shows LLM what it gets for false negatives
     mal_skipped = [r for r in results if r["label"] == "malicious" and r["context"].routing == "skip"]
     if mal_skipped:
-        samples.append(("MISSED MALICIOUS (malicious, SKIP) — LLM must catch this alone", mal_skipped[0]))
+        samples.append(("MISSED MALICIOUS (malicious, SKIP) - LLM must catch this alone", mal_skipped[0]))
 
-    # 3. Clean benign (SKIP) — shows LLM context for normal packages
+    # 3. Clean benign (SKIP) - shows LLM context for normal packages
     ben_skipped = [r for r in results if r["label"] == "benign" and r["context"].routing == "skip"]
     if ben_skipped:
         samples.append(("CLEAN PACKAGE (benign, SKIP)", ben_skipped[0]))
@@ -201,7 +201,7 @@ def generate_llm_context(results: list) -> str:
         output_lines.append(f"  {title}")
         output_lines.append(f"  Package: {r['package']} v{r['version']}")
         output_lines.append(f"{'─'*60}")
-        # Full block — no truncation, this is exactly what LLM receives
+        # Full block - no truncation, this is exactly what LLM receives
         output_lines.append(ctx.to_llm_prompt_block())
 
     output = "\n".join(output_lines)
@@ -262,7 +262,7 @@ def print_detailed_summary(results: list):
     print(f"   Has JS source    : {len(has_source)}/{len(all_results)}  ({len(has_source)/len(all_results)*100:.0f}%)")
     print(f"   No JS source     : {len(no_source)}/{len(all_results)}  (Layer 2 skipped)")
     if mal_no_src:
-        print(f"   ⚠️  Malicious with no source: {len(mal_no_src)} — these rely on Layer 1 only:")
+        print(f"   ⚠️  Malicious with no source: {len(mal_no_src)} - these rely on Layer 1 only:")
         for r in mal_no_src:
             print(f"      - {r['package']} v{r['version']}")
 
@@ -298,7 +298,7 @@ def print_detailed_summary(results: list):
 
     false_negatives = [r for r in mal if r["context"].routing == "skip"]
     if false_negatives:
-        print(f"\n  False Negatives — malicious SKIP ({len(false_negatives)}):")
+        print(f"\n  False Negatives - malicious SKIP ({len(false_negatives)}):")
         for r in false_negatives:
             li = r["layer_info"]
             print(f"    - {r['package']} v{r['version']}")
@@ -310,7 +310,7 @@ def print_detailed_summary(results: list):
 
     false_positives = [r for r in ben if r["context"].routing == "flag"]
     if false_positives:
-        print(f"\n  False Positives — benign FLAG ({len(false_positives)}):")
+        print(f"\n  False Positives - benign FLAG ({len(false_positives)}):")
         for r in false_positives:
             ctx = r["context"]
             print(f"    - {r['package']} v{r['version']}  (score={ctx.risk_score:.2f})")
@@ -327,7 +327,7 @@ def print_detailed_summary(results: list):
 
 def main():
     print("=" * 60)
-    print("STRUCTURAL ANALYSIS TEST — Full Pipeline")
+    print("STRUCTURAL ANALYSIS TEST - Full Pipeline")
     print("=" * 60)
 
     NUM_PACKAGES = 246

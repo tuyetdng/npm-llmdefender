@@ -43,7 +43,7 @@ class DeepSeekAdapter:
             trust_remote_code=True
         )
 
-        # Quantization config — priority 4-bit, fallback 8-bit, fallback none
+        # Quantization config - priority 4-bit, fallback 8-bit, fallback none
         quant_config = None
         if self.config.get("load_in_4bit"):
             quant_config = BitsAndBytesConfig(
