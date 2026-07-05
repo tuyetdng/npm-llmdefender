@@ -260,7 +260,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## 11. Data Availability
 
-The SEMAD source code is publicly available in this repository and archived on Zenodo (DOI: [FILL IN after Zenodo deposit]).
+The SEMAD source code is publicly available in this repository and archived on Zenodo (DOI:https://doi.org/10.5281/zenodo.21205974).
 
 The evaluation dataset is derived from **MalnpmDB**, introduced by Wang et al. in *"MalPacDetector: An LLM-based Malicious NPM Package Detector"* (IEEE Transactions on Information Forensics and Security, 2025; [repository](https://github.com/CGCL-codes/MalPacDetector-core)). In accordance with the original authors' data-sharing policy, the malicious package samples are **not redistributed in this repository** for security reasons. Researchers who wish to obtain the dataset for academic purposes should contact the original authors directly at `hust_jianw@hust.edu.cn`, as instructed in the MalPacDetector repository. 
 
